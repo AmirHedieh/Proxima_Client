@@ -16,8 +16,11 @@
     "releaseAndroid": "cd android && ./gradlew assembleRelease && cd .."
   },
   "dependencies": {
+    "lottie-ios": "^3.0.3",
+    "lottie-react-native": "^3.0.2",
     "react": "16.8.3",
-    "react-native": "0.59.10"
+    "react-native": "0.59.10",
+    "react-native-router-flux": "^4.2.0"
   },
   "devDependencies": {
     "@babel/core": "7.9.0",
