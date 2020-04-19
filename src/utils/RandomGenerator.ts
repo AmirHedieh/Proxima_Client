@@ -1,0 +1,13 @@
+export class RandomGenerator {
+  public static generateObjectId() {
+    // tslint:disable-next-line:no-bitwise
+    const timestamp = (new Date().getTime() / 1000 | 0).toString(16)
+    return timestamp + 'xxxxxxxxxxxxxxxx'.replace(/[x]/g, () => {
+    // tslint:disable-next-line:no-bitwise
+      return (Math.random() * 16 | 0).toString(16)
+    }).toLowerCase()
+  }
+  public static generateRandomNumber(minimum: number, maximum: number): number {
+    return Math.round(Math.random() * (maximum - minimum)) + minimum
+  }
+}
