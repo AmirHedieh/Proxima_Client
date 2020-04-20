@@ -1,13 +1,13 @@
 import * as React from 'react'
 import { View } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import { BaseText } from '../../../components/base_text/BaseText'
 import { Localization } from '../../../text_process/Localization'
 import { StorageHelper } from '../../../utils/StorageHelper'
 import { BaseScene, IBaseSceneProps } from '../../base_scene/BaseScene'
-
-export class SplashScene<
-    SplashSceneProps extends IBaseSceneProps>
-    extends BaseScene<SplashSceneProps, null> {
+export class SplashScreen<
+    SplashScreenProps extends IBaseSceneProps>
+    extends BaseScene<SplashScreenProps, null> {
     public async componentDidMount(): Promise<void> {
         await this.init()
     }
@@ -25,7 +25,8 @@ export class SplashScene<
     protected renderSafe(): JSX.Element {
         return (
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                <BaseText text={'Welcome! This is TypeScript Template'}/>
+                <BaseText text={'Welcome! This is TypeScript Temskkkplate'}/>
+                <Icon name='rocket' size={30} color='#900' />
             </View>
         )
     }
