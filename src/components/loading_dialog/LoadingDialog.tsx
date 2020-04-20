@@ -1,4 +1,4 @@
-import LottieView = require('lottie-react-native')
+const LottieView = require('lottie-react-native')
 import * as React from 'react'
 import {BaseDialog, IBaseDialogProps, IBaseDialogState} from '../base_dialog/BaseDialog'
 import {Styles} from './LoadingDialogStyles'
