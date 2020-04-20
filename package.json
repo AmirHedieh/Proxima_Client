@@ -16,30 +16,34 @@
     "releaseAndroid": "cd android && ./gradlew assembleRelease && cd .."
   },
   "dependencies": {
-    "axios": "^0.19.2",
-    "lottie-ios": "^3.0.3",
-    "lottie-react-native": "^3.0.2",
+    "axios": "0.19.2",
+    "crypto-js": "3.1.9-1",
+    "lottie-ios": "3.0.3",
+    "lottie-react-native": "3.0.2",
     "react": "16.8.3",
     "react-native": "0.59.10",
-    "react-native-router-flux": "^4.2.0"
+    "react-native-router-flux": "4.0.6",
+    "react-native-vector-icons": "6.6.0"
   },
   "devDependencies": {
     "@babel/core": "7.9.0",
     "@babel/runtime": "7.9.2",
+    "@types/crypto-js": "3.1.40",
     "@types/jest": "25.2.1",
     "@types/react": "16.9.34",
     "@types/react-native": "0.62.2",
     "@types/react-test-renderer": "16.9.2",
+    "@types/react-native-vector-icons": "6.4.5",
     "babel-jest": "25.3.0",
     "jest": "25.3.0",
     "metro-react-native-babel-preset": "0.59.0",
-    "prettier": "^2.0.4",
+    "prettier": "2.0.4",
     "react-test-renderer": "16.8.3",
-    "tslint-plugin-prettier": "2.3.0",
-    "typescript": "3.8.3",
     "ts-jest": "22.4.6",
     "tslint": "5.11.0",
-    "tslint-react": "3.5.1"
+    "tslint-plugin-prettier": "2.3.0",
+    "tslint-react": "3.5.1",
+    "typescript": "3.8.3"
   },
   "jest": {
     "automock": false,
