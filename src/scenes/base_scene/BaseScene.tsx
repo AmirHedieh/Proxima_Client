@@ -14,19 +14,14 @@ import { Logger } from '../../utils/Logger'
 import { Styles } from './BaseSceneStyles'
 
 // tslint:disable-next-line: no-empty-interface
-export interface IBaseSceneProps {
-
-}
+export interface IBaseSceneProps {}
 // tslint:disable-next-line: no-empty-interface
-export interface IBaseSceneState {
-
-}
+export interface IBaseSceneState {}
 
 export abstract class BaseScene<
     PassedProps extends IBaseSceneProps,
     PassedState extends IBaseSceneState
-    > extends React.PureComponent<PassedProps, PassedState> {
-
+> extends React.PureComponent<PassedProps, PassedState> {
     protected static navigationOptions = ({ navigation }) => {
         return {
             header: null
@@ -99,8 +94,8 @@ export abstract class BaseScene<
      * @returns void
      */
     protected abstract onBackPress(): void
-    protected sceneDidMount(): void { }
-    protected sceneWillUnmount(): void { }
+    protected sceneDidMount(): void {}
+    protected sceneWillUnmount(): void {}
     /**
      * Validates back button press and calls @function onBackPress
      * if its valid
@@ -114,44 +109,24 @@ export abstract class BaseScene<
     }
 
     private renderStatusBar() {
-        if (EnvironmentVariables.isIos) { // IOS OS
-            return (
-                <StatusBar
-                    hidden={this.hideStatusBarIOS}
-                />
-            )
-        } else { // Android OS
-            return (
-                <StatusBar
-                    hidden={this.hideStatusBarAndroid}
-                />
-            )
+        if (EnvironmentVariables.isIos) {
+            // IOS OS
+            return <StatusBar hidden={this.hideStatusBarIOS} />
+        } else {
+            // Android OS
+            return <StatusBar hidden={this.hideStatusBarAndroid} />
         }
     }
     private renderDialogs(): JSX.Element {
         return (
             <>
-                <OkDialog
-                    ref={(ref: OkDialog) => this.okDialog = ref}
-                />
-                <YesNoDialog
-                    ref={(ref: YesNoDialog) => this.yesNoDialog = ref}
-                />
-                <SelectDialog
-                    ref={(ref: SelectDialog) => this.selectDialog = ref}
-                />
-                <ScrollSelectDialog
-                    ref={(ref: ScrollSelectDialog) => this.scrollSelectDialog = ref}
-                />
-                <LoadingDialog
-                    ref={(ref: LoadingDialog) => this.loadingDialog = ref}
-                />
-                <PasswordDialog
-                    ref={(ref: PasswordDialog) => this.passwordDialog = ref}
-                />
-                <CustomDialog
-                    ref={(ref) => this.customDialog = ref}
-                />
+                <OkDialog ref={(ref: OkDialog) => (this.okDialog = ref)} />
+                <YesNoDialog ref={(ref: YesNoDialog) => (this.yesNoDialog = ref)} />
+                <SelectDialog ref={(ref: SelectDialog) => (this.selectDialog = ref)} />
+                <ScrollSelectDialog ref={(ref: ScrollSelectDialog) => (this.scrollSelectDialog = ref)} />
+                <LoadingDialog ref={(ref: LoadingDialog) => (this.loadingDialog = ref)} />
+                <PasswordDialog ref={(ref: PasswordDialog) => (this.passwordDialog = ref)} />
+                <CustomDialog ref={(ref) => (this.customDialog = ref)} />
             </>
         )
     }
