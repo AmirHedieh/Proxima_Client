@@ -20,6 +20,8 @@
     "crypto-js": "3.1.9-1",
     "lottie-ios": "3.0.3",
     "lottie-react-native": "3.0.2",
+    "mobx": "^5.15.4",
+    "mobx-react": "^6.2.2",
     "react": "16.8.3",
     "react-native": "0.59.10",
     "react-native-router-flux": "4.0.6",
