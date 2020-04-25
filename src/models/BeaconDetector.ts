@@ -4,7 +4,8 @@ import Beacons from 'react-native-beacons-manager'
 import { EnvironmentVariables } from '../Constants'
 import { Logger } from '../utils/Logger'
 import { BeaconFactory, IBeacon, IRawBeacon } from './Beacon'
-interface IBeaconDetector {
+export interface IBeaconDetector {
+    onBeaconFetch: (data: IBeacon[]) => void
     startDetecting: (region?: string) => Promise<boolean>
     stopDetecting: (region?: string) => Promise<boolean>
     init: (period: number) => void
