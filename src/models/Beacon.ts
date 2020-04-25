@@ -1,26 +1,23 @@
-import { observable } from 'mobx'
+export interface IBeacon {
+    uuid: string
+    major: number
+    minor: number
+    rssi: number
+}
+export interface IRawBeacon {
+    uuid: string
+    major: number
+    minor: number
+    rssi: number
+}
 
-export class Beacon {
-    private uuid: string
-    @observable private major: number
-    @observable private minor: number
-    @observable private rssi: number
-
-    // Getter
-    public getUUID() {
-        return this.uuid
-    }
-    public getMajor() {
-        return this.major
-    }
-    public getMinor() {
-        return this.minor
-    }
-    public getRSSI() {
-        return this.rssi
-    }
-    // Setter
-    public setRSSI(rssi) {
-        this.rssi = rssi
+export class BeaconFactory {
+    public static generateBeacon(beacon: IRawBeacon): IBeacon {
+        return {
+            uuid: beacon.uuid,
+            major: beacon.major,
+            minor: beacon.minor,
+            rssi: beacon.rssi
+        }
     }
 }
