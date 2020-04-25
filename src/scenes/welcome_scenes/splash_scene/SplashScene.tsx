@@ -1,16 +1,23 @@
 import * as React from 'react'
-import { View } from 'react-native'
+import { View, FlatList } from 'react-native'
 // @ts-ignore
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { BaseText } from '../../../components/base_text/BaseText'
-import { IBeaconDetector } from '../../../models/IBeaconDetector'
+import { BeaconDetector } from '../../../models/BeaconDetector'
 import { Localization } from '../../../text_process/Localization'
 import { Logger } from '../../../utils/Logger'
 import { StorageHelper } from '../../../utils/StorageHelper'
 import { BaseScene, IBaseSceneProps } from '../../base_scene/BaseScene'
+import { inject, observer } from 'mobx-react'
+@inject('AppState')
+@observer
 export class SplashScreen<SplashScreenProps extends IBaseSceneProps> extends BaseScene<SplashScreenProps, null> {
-    private beaconDetector = new IBeaconDetector()
+    private beaconDetector = new BeaconDetector()
     public async componentDidMount(): Promise<void> {
+        // this.beaconDetector.init(100)
+        this.beaconDetector.onBeaconFetch = (data) => {
+            Logger.log(data)
+        }
         if (await this.beaconDetector.startDetecting('')) {
             Logger.log('started listening...')
         }
@@ -37,7 +44,13 @@ export class SplashScreen<SplashScreenProps extends IBaseSceneProps> extends Bas
                 }}
             >
                 <BaseText text={'Welcome! This is TypeScript template'} />
-                <Icon name='rocket' size={30} color='#900' />
+                <FlatList
+                    data={this.props.AppState.beacons}
+                    renderItem={(item) => {
+                        return <BaseText text={item.rssi} />
+                        return <BaseText text={item.rssi} />
+                    }}
+                />
             </View>
         )
     }

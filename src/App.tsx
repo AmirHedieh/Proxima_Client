@@ -4,7 +4,8 @@ import { Actions, Router, Scene } from 'react-native-router-flux'
 import { Animations } from './Animations'
 import { SceneParams } from './SceneParams'
 import { SplashScreen } from './scenes/welcome_scenes/splash_scene/SplashScene'
-
+import { AppState } from './models/AppState'
+import { Provider, inject, observer } from 'mobx-react'
 const animate = () => Animations.zoomIn()
 
 // React native itself uses is mounted ,So for avoiding this warning popup every time I added this suppressor
@@ -43,22 +44,17 @@ I18nManager.allowRTL(false)
 I18nManager.forceRTL(false)
 
 const scenes = Actions.create(
-    <Scene
-        key='root'
-        hideNavBar={true}
-        transitionConfig={animate}
-    >
-        <Scene
-            key={SceneParams.SplashScreen.name}
-            component={SplashScreen}
-        />
+    <Scene key='root' hideNavBar={true} transitionConfig={animate}>
+        <Scene key={SceneParams.SplashScreen.name} component={SplashScreen} />
     </Scene>
 )
 
 export class App extends React.Component {
     public render() {
         return (
-          <Router scenes={scenes} />
+            <Provider AppState={new AppState()}>
+                <Router scenes={scenes} />
+            </Provider>
         )
     }
 }
