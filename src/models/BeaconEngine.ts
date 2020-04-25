@@ -2,10 +2,13 @@ import { IBeacon } from './Beacon'
 import { IBeaconDetector } from './BeaconDetector'
 
 export class BeaconEngine {
+    public onMajorChange: (major: number) => void = null
+    public onMinorChange: (minor: number) => void = null
     private beaconDetector: IBeaconDetector = null
     private beacons: IBeacon[] = []
     private major: number
     private minor: number
+
     public constructor(beaconDetector: IBeaconDetector) {
         this.beaconDetector = beaconDetector
     }
@@ -28,7 +31,7 @@ export class BeaconEngine {
     }
 
     private processLoop(): void {
-        this.major = this.beacons[0] ? this.beacons[0].major : null
-        this.minor = this.beacons[0] ? this.beacons[0].minor : null
+        this.onMajorChange(this.beacons[0].major)
+        this.onMinorChange(this.beacons[0].minor)
     }
 }
