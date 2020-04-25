@@ -20,6 +20,7 @@ export class IBeaconDetector {
         }
         return false
     }
+    // TODO: ask if return type must be bool
     public async stopDetecting(region: string): Promise<void> {
         try {
             await Beacons.stopRangingBeaconsInRegion(region)
