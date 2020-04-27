@@ -16,9 +16,8 @@ export class ViewModel {
     public addProduct(product: Product) {
         this.appEngine.products.push(product)
     }
-
     @computed
-    public getProductsLength() {
+    public get getProductsLength() {
         return this.appEngine.products.length
     }
 }
