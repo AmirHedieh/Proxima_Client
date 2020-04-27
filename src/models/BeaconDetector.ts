@@ -46,13 +46,14 @@ export class BeaconDetector implements IBeaconDetector {
         DeviceEventEmitter.addListener(type, callback)
     }
     private onBeaconDidRange(data: IRawBeacon[]) {
-        Logger.log('on beacon did range called')
         // parse data
         const beacons: IBeacon[] = []
         for (const element of data) {
             beacons.push(BeaconFactory.generateBeacon(element))
         }
-        this.onBeaconFetch(beacons)
+        if (this.onBeaconFetch) {
+            this.onBeaconFetch(beacons)
+        }
     }
     // TODO: beacon manager package linking for IOS
     private configForIOS() {
