@@ -4,7 +4,7 @@ import { FlatList, I18nManager, ScrollView, YellowBox } from 'react-native'
 import { Actions, Router, Scene } from 'react-native-router-flux'
 import { Animations } from './Animations'
 import { AppEngine } from './models/AppEngine'
-import { ViewModel } from './models/ViewModeL'
+import { ViewModel } from './models/ViewModel'
 import { SceneParams } from './SceneParams'
 import { SplashScreen } from './scenes/welcome_scenes/splash_scene/SplashScene'
 const animate = () => Animations.zoomIn()

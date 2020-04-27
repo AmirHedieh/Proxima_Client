@@ -1,21 +1,21 @@
+import { inject, observer } from 'mobx-react'
 import * as React from 'react'
-import { View, FlatList } from 'react-native'
+import { View } from 'react-native'
 // @ts-ignore
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { BaseText } from '../../../components/base_text/BaseText'
-import { BeaconDetector } from '../../../models/BeaconDetector'
+import { NormalButton } from '../../../components/normal_button/NormalButton'
+import { ViewModel } from '../../../models/ViewModel'
 import { Localization } from '../../../text_process/Localization'
-import { Logger } from '../../../utils/Logger'
 import { StorageHelper } from '../../../utils/StorageHelper'
 import { BaseScene, IBaseSceneProps } from '../../base_scene/BaseScene'
-import { inject, observer } from 'mobx-react'
-import { AppEngine } from '../../../models/AppEngine'
+interface ISplashScreenProps extends IBaseSceneProps {
+    AppState: ViewModel
+}
 @inject('AppState')
 @observer
-export class SplashScreen<SplashScreenProps extends IBaseSceneProps> extends BaseScene<SplashScreenProps, null> {
-    private appEngine = new AppEngine()
+export class SplashScreen<Props extends ISplashScreenProps> extends BaseScene<Props, null> {
     public async componentDidMount(): Promise<void> {
-        await this.appEngine.init()
         await this.init()
     }
     protected async init(): Promise<void> {
@@ -39,13 +39,8 @@ export class SplashScreen<SplashScreenProps extends IBaseSceneProps> extends Bas
                 }}
             >
                 <BaseText text={'Welcome! This is TypeScript template'} />
-                <FlatList
-                    data={this.props.AppState.beacons}
-                    renderItem={(item) => {
-                        return <BaseText text={item.rssi} />
-                        return <BaseText text={item.rssi} />
-                    }}
-                />
+                <NormalButton text={'Add Product'} onPress={() => this.props.AppState.addProduct({})} />
+                <BaseText text={this.props.AppState.getProductsLength} />
             </View>
         )
     }
