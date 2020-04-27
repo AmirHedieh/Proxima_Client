@@ -9,18 +9,13 @@ import { Logger } from '../../../utils/Logger'
 import { StorageHelper } from '../../../utils/StorageHelper'
 import { BaseScene, IBaseSceneProps } from '../../base_scene/BaseScene'
 import { inject, observer } from 'mobx-react'
+import { AppEngine } from '../../../models/AppEngine'
 @inject('AppState')
 @observer
 export class SplashScreen<SplashScreenProps extends IBaseSceneProps> extends BaseScene<SplashScreenProps, null> {
-    private beaconDetector = new BeaconDetector()
+    private appEngine = new AppEngine()
     public async componentDidMount(): Promise<void> {
-        // this.beaconDetector.init(100)
-        this.beaconDetector.onBeaconFetch = (data) => {
-            Logger.log(data)
-        }
-        if (await this.beaconDetector.startDetecting('')) {
-            Logger.log('started listening...')
-        }
+        await this.appEngine.init()
         await this.init()
     }
     protected async init(): Promise<void> {
