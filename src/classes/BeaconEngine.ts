@@ -1,5 +1,6 @@
 import { IBeacon } from '../models/Beacon'
 import { IBeaconDetector } from './BeaconDetector'
+import { RepeatDetector } from './RepeatDetector'
 
 export class BeaconEngine {
     public onMajorChange: (major: number) => void = null
@@ -8,9 +9,11 @@ export class BeaconEngine {
     private beacons: IBeacon[] = []
     private major: number
     private minor: number
+    private minorRepeatDetector: RepeatDetector
 
     public constructor(beaconDetector: IBeaconDetector) {
         this.beaconDetector = beaconDetector
+        this.minorRepeatDetector = new RepeatDetector(3)
     }
 
     public getActiveMajor(): number {
@@ -31,13 +34,30 @@ export class BeaconEngine {
     }
 
     private processLoop(): void {
-        if (this.beacons[0]) {
-            if (this.onMajorChange) {
-                this.onMajorChange(this.beacons[0].major)
-            }
+        // console.log(this.beacons)
+        if (this.beacons.length === 0) {
+            return
+        }
+        const closestBeacon = this.findClosestBeacon()
+        this.minorRepeatDetector.addToData(closestBeacon.minor)
+        if (this.onMajorChange) {
+            this.onMajorChange(this.beacons[0].major)
+        }
+        console.log(this.minorRepeatDetector.isDataRepeated())
+        if (this.minorRepeatDetector.isDataRepeated()) {
             if (this.onMinorChange) {
-                this.onMinorChange(this.beacons[0].minor)
+                this.onMinorChange(closestBeacon.minor)
             }
         }
+    }
+
+    private findClosestBeacon(): IBeacon {
+        let closestBeacon = this.beacons[0]
+        for (const element of this.beacons) {
+            if (Math.abs(element.rssi) >= Math.abs(closestBeacon.rssi)) {
+                closestBeacon = element
+            }
+        }
+        return closestBeacon
     }
 }
