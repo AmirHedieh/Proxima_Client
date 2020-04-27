@@ -31,7 +31,13 @@ export class BeaconEngine {
     }
 
     private processLoop(): void {
-        this.onMajorChange(this.beacons[0].major)
-        this.onMinorChange(this.beacons[0].minor)
+        if (this.beacons[0]) {
+            if (this.onMajorChange) {
+                this.onMajorChange(this.beacons[0].major)
+            }
+            if (this.onMinorChange) {
+                this.onMinorChange(this.beacons[0].minor)
+            }
+        }
     }
 }
