@@ -1,11 +1,12 @@
+import { Provider } from 'mobx-react'
 import * as React from 'react'
 import { FlatList, I18nManager, ScrollView, YellowBox } from 'react-native'
 import { Actions, Router, Scene } from 'react-native-router-flux'
 import { Animations } from './Animations'
+import { AppEngine } from './models/AppEngine'
+import { ViewModel } from './models/ViewModeL'
 import { SceneParams } from './SceneParams'
 import { SplashScreen } from './scenes/welcome_scenes/splash_scene/SplashScene'
-import { AppState } from './models/AppState'
-import { Provider, inject, observer } from 'mobx-react'
 const animate = () => Animations.zoomIn()
 
 // React native itself uses is mounted ,So for avoiding this warning popup every time I added this suppressor
@@ -50,9 +51,18 @@ const scenes = Actions.create(
 )
 
 export class App extends React.Component {
+    private viewModel
+    public constructor(props) {
+        super(props)
+        const model = new AppEngine()
+        this.viewModel = new ViewModel(model)
+    }
+    public async componentDidMount(): Promise<void> {
+        await this.viewModel.init()
+    }
     public render() {
         return (
-            <Provider AppState={new AppState()}>
+            <Provider AppState={this.viewModel}>
                 <Router scenes={scenes} />
             </Provider>
         )
