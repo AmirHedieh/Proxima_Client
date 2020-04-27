@@ -1,4 +1,4 @@
-import { IBeacon } from './Beacon'
+import { IBeacon } from '../models/Beacon'
 import { IBeaconDetector } from './BeaconDetector'
 
 export class BeaconEngine {

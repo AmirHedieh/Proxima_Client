@@ -1,6 +1,6 @@
 import { action, computed } from 'mobx'
+import { Product } from '../models/Product'
 import { AppEngine } from './AppEngine'
-import { Product } from './Product'
 
 export class ViewModel {
     private appEngine: AppEngine
@@ -18,6 +18,18 @@ export class ViewModel {
     }
     @computed
     public get getProductsLength() {
+        // TODO: its optional and can be removed
         return this.appEngine.products.length
+    }
+    public getProductList() {
+        return this.appEngine.products
+    }
+
+    public getCategoryList() {
+        return this.appEngine.currentProduct
+    }
+
+    public getCurrentProduct() {
+        return this.appEngine.currentProduct
     }
 }

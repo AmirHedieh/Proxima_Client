@@ -2,8 +2,8 @@ import { DeviceEventEmitter } from 'react-native'
 // @ts-ignore
 import Beacons from 'react-native-beacons-manager'
 import { EnvironmentVariables } from '../Constants'
+import { BeaconFactory, IBeacon, IRawBeacon } from '../models/Beacon'
 import { Logger } from '../utils/Logger'
-import { BeaconFactory, IBeacon, IRawBeacon } from './Beacon'
 export interface IBeaconDetector {
     onBeaconFetch: (data: IBeacon[]) => void
     startDetecting: (region?: string) => Promise<boolean>

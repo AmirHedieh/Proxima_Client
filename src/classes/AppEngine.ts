@@ -1,7 +1,7 @@
 import { observable } from 'mobx'
+import { Product } from '../models/Product'
 import { BeaconDetector, IBeaconDetector } from './BeaconDetector'
 import { BeaconEngine } from './BeaconEngine'
-import { Product } from './Product'
 export class AppEngine {
     @observable public products: Product[] = []
     @observable public categories: any[] = [] // TODO: implement DTO
