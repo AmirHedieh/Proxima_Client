@@ -34,6 +34,7 @@ export class BeaconEngine {
     }
 
     private processLoop(): void {
+        console.log(this.beacons)
         for (const element of this.beacons) {
             console.log(`minor: ${element.minor} rssi: ${element.rssi}`)
         }
@@ -45,6 +46,7 @@ export class BeaconEngine {
         if (this.onMajorChange) {
             this.onMajorChange(this.beacons[0].major)
         }
+        // TODO: prevent to invoke minor change when closest beacon is what was chosen last time as well
         if (this.minorRepeatDetector.isDataRepeated()) {
             if (this.onMinorChange) {
                 this.onMinorChange(closestBeacon.minor)
