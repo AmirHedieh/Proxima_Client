@@ -1,5 +1,6 @@
 import { observable } from 'mobx'
 import { Product } from '../models/Product'
+import { HttpManager } from '../network/HttpManager'
 import { BeaconDetector, IBeaconDetector } from './BeaconDetector'
 import { BeaconEngine } from './BeaconEngine'
 export class AppEngine {
@@ -12,7 +13,19 @@ export class AppEngine {
         this.beaconDetector = new BeaconDetector()
         this.beaconEngine = new BeaconEngine(this.beaconDetector)
         this.beaconEngine.onMajorChange = (major) => {
-            console.log(this.products)
+            // console.log('store changed')
+        }
+        this.beaconEngine.onMinorChange = async (minor) => {
+            // fetch product data corresponding to beacon with minor
+            try {
+                const response = await HttpManager.getInstance().getProduct({ product: minor })
+                if (response.isSuccessful()) {
+                    this.currentProduct = response.getData()
+                    console.log('product set')
+                }
+            } catch (e) {
+                console.log(e.message)
+            }
         }
     }
     public async init(): Promise<boolean> {
