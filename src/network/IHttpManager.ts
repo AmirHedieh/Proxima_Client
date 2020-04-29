@@ -1,11 +1,11 @@
-export interface IPromise {
+export interface INetworkPromise {
     data: {
         status: {
-            code: number,
+            code: number
             message: string
-        },
+        }
         result?: any
     }
 }
 
-export type IResolve = (value: IPromise) => void
+export type IResolve = (value: INetworkPromise) => void
