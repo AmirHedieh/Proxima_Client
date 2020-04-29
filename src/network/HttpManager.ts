@@ -26,7 +26,7 @@ export class HttpManager {
     */
     public getProduct = async (params: { product: number }): Promise<CustomResponse> => {
         return new CustomResponse(
-            await new Promise((resolve, reject) => {
+            await new Promise((resolve) => {
                 resolve(FakeResponseGenerator.getProduct(params.product))
             })
         )
