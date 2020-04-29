@@ -1,3 +1,4 @@
+import { INetworkPromise } from './IHttpManager'
 import { StatusCodes } from './NetworkConstants'
 
 export class CustomResponse {
@@ -5,7 +6,7 @@ export class CustomResponse {
     private message
     private data
 
-    constructor(response) {
+    constructor(response: INetworkPromise) {
         this.code = response.data.status.code
         this.message = response.data.status.message
         this.data = response.data.result
