@@ -34,7 +34,9 @@ export class BeaconEngine {
     }
 
     private processLoop(): void {
-        // console.log(this.beacons)
+        for (const element of this.beacons) {
+            console.log(`minor: ${element.minor} rssi: ${element.rssi}`)
+        }
         if (this.beacons.length === 0) {
             return
         }
@@ -43,7 +45,6 @@ export class BeaconEngine {
         if (this.onMajorChange) {
             this.onMajorChange(this.beacons[0].major)
         }
-        console.log(this.minorRepeatDetector.isDataRepeated())
         if (this.minorRepeatDetector.isDataRepeated()) {
             if (this.onMinorChange) {
                 this.onMinorChange(closestBeacon.minor)
@@ -54,7 +55,7 @@ export class BeaconEngine {
     private findClosestBeacon(): IBeacon {
         let closestBeacon = this.beacons[0]
         for (const element of this.beacons) {
-            if (Math.abs(element.rssi) >= Math.abs(closestBeacon.rssi)) {
+            if (Math.abs(element.rssi) <= Math.abs(closestBeacon.rssi)) {
                 closestBeacon = element
             }
         }
