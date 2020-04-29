@@ -1,4 +1,5 @@
 import { axiosFactory } from '../network/AxiosWrapper'
+import { FakeResponseGenerator } from '../resources/fake_responses/FakeResponseGenerator'
 import { CustomResponse } from './CustomResponse'
 
 export class HttpManager {
@@ -23,4 +24,11 @@ export class HttpManager {
         }))
     }
     */
+    public getProduct = async (params: { product: number }): Promise<CustomResponse> => {
+        return new CustomResponse(
+            await new Promise((resolve, reject) => {
+                resolve(FakeResponseGenerator.getProduct(params.product))
+            })
+        )
+    }
 }
