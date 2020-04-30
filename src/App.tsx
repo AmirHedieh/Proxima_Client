@@ -6,6 +6,7 @@ import { Animations } from './Animations'
 import { AppEngine } from './classes/AppEngine'
 import { ViewModel } from './classes/ViewModel'
 import { SceneParams } from './SceneParams'
+import { FakeScene } from './scenes/FakeScene/FakeScene'
 import { SplashScreen } from './scenes/welcome_scenes/splash_scene/SplashScene'
 const animate = () => Animations.zoomIn()
 
@@ -47,6 +48,7 @@ I18nManager.forceRTL(false)
 const scenes = Actions.create(
     <Scene key='root' hideNavBar={true} transitionConfig={animate}>
         <Scene key={SceneParams.SplashScreen.name} component={SplashScreen} />
+        <Scene key={'fake'} component={FakeScene} />
     </Scene>
 )
 
