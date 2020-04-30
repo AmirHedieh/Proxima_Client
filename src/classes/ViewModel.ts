@@ -21,6 +21,7 @@ export class ViewModel {
         // TODO: its optional and can be removed
         return this.appEngine.products.length
     }
+
     public getProductList() {
         return this.appEngine.products
     }
@@ -31,5 +32,9 @@ export class ViewModel {
 
     public getCurrentProduct() {
         return this.appEngine.currentProduct
+    }
+
+    public getDetectionState() {
+        return this.appEngine.detectionState
     }
 }
