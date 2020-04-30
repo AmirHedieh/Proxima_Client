@@ -1,14 +1,18 @@
 import { observable } from 'mobx'
 import { Product } from '../models/Product'
 import { HttpManager } from '../network/HttpManager'
+import { DetectionState } from '../Types'
 import { BeaconDetector, IBeaconDetector } from './BeaconDetector'
 import { BeaconEngine } from './BeaconEngine'
+
 export class AppEngine {
     @observable public products: Product[] = []
     @observable public categories: any[] = [] // TODO: implement DTO
     @observable public currentProduct: Product = null
+    @observable public detectionState: DetectionState
     private beaconDetector: IBeaconDetector = null
     private beaconEngine: BeaconEngine = null
+
     public constructor() {
         this.beaconDetector = new BeaconDetector()
         this.beaconEngine = new BeaconEngine(this.beaconDetector)
@@ -28,6 +32,7 @@ export class AppEngine {
             }
         }
     }
+
     public async init(): Promise<boolean> {
         return this.beaconEngine.init()
     }
