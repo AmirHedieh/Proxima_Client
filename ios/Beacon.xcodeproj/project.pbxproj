@@ -44,6 +44,8 @@
 		303C5C9AC8F348DBAC0B1387 /* libLottie.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA8DDF49D8D4B2EB4C6445D /* libLottie.a */; };
 		F2BF48F4949F4ABF83EDF91E /* libLottieReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31CEC4E649AA493C8CB2C53C /* libLottieReactNative.a */; };
 		E00ECB5081FF459EB2783952 /* libRNiBeacon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BEC02E225ED462BBD07DF54 /* libRNiBeacon.a */; };
+		B8DD9CA21EF64D0B8039033F /* libRNCNetInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3346286368904DE78410D809 /* libRNCNetInfo.a */; };
+		44CBADB79DC84E7FBC8E104A /* libRNCNetInfo-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C92CB0D3FC6449B5B557BAD0 /* libRNCNetInfo-tvOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -358,6 +360,9 @@
 		31CEC4E649AA493C8CB2C53C /* libLottieReactNative.a */ = {isa = PBXFileReference; name = "libLottieReactNative.a"; path = "libLottieReactNative.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		9EE9C0E80D7D4A069006982A /* RNiBeacon.xcodeproj */ = {isa = PBXFileReference; name = "RNiBeacon.xcodeproj"; path = "../node_modules/react-native-beacons-manager/ios/RNiBeacon/RNiBeacon.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		4BEC02E225ED462BBD07DF54 /* libRNiBeacon.a */ = {isa = PBXFileReference; name = "libRNiBeacon.a"; path = "libRNiBeacon.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		90AD49C1DDB247708CBCB8C3 /* RNCNetInfo.xcodeproj */ = {isa = PBXFileReference; name = "RNCNetInfo.xcodeproj"; path = "../node_modules/@react-native-community/netinfo/ios/RNCNetInfo.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		3346286368904DE78410D809 /* libRNCNetInfo.a */ = {isa = PBXFileReference; name = "libRNCNetInfo.a"; path = "libRNCNetInfo.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		C92CB0D3FC6449B5B557BAD0 /* libRNCNetInfo-tvOS.a */ = {isa = PBXFileReference; name = "libRNCNetInfo-tvOS.a"; path = "libRNCNetInfo-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -390,6 +395,7 @@
 				303C5C9AC8F348DBAC0B1387 /* libLottie.a in Frameworks */,
 				F2BF48F4949F4ABF83EDF91E /* libLottieReactNative.a in Frameworks */,
 				E00ECB5081FF459EB2783952 /* libRNiBeacon.a in Frameworks */,
+				B8DD9CA21EF64D0B8039033F /* libRNCNetInfo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +412,7 @@
 				2D02E4C61E0B4AEC006451C7 /* libRCTSettings-tvOS.a in Frameworks */,
 				2D02E4C71E0B4AEC006451C7 /* libRCTText-tvOS.a in Frameworks */,
 				2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */,
+				44CBADB79DC84E7FBC8E104A /* libRNCNetInfo-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,6 +589,7 @@
 				A605CC7E430E4C3DA02C6E2D /* Lottie.xcodeproj */,
 				25796FE6D6994B59A070E6F5 /* LottieReactNative.xcodeproj */,
 				9EE9C0E80D7D4A069006982A /* RNiBeacon.xcodeproj */,
+				90AD49C1DDB247708CBCB8C3 /* RNCNetInfo.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1213,11 +1221,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\lottie-react-native\src\ios\LottieReactNative",
 					"$(SRCROOT)\..\node_modules\react-native-beacons-manager\ios\RNiBeacon\RNiBeacon",
+					"$(SRCROOT)\..\node_modules\@react-native-community\netinfo\ios",
 				);
 			};
 			name = Debug;
@@ -1243,11 +1254,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\lottie-react-native\src\ios\LottieReactNative",
 					"$(SRCROOT)\..\node_modules\react-native-beacons-manager\ios\RNiBeacon\RNiBeacon",
+					"$(SRCROOT)\..\node_modules\@react-native-community\netinfo\ios",
 				);
 			};
 			name = Release;
@@ -1272,6 +1286,7 @@
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\lottie-react-native\src\ios\LottieReactNative",
 					"$(SRCROOT)\..\node_modules\react-native-beacons-manager\ios\RNiBeacon\RNiBeacon",
+					"$(SRCROOT)\..\node_modules\@react-native-community\netinfo\ios",
 				);
 			};
 			name = Debug;
@@ -1295,6 +1310,7 @@
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\lottie-react-native\src\ios\LottieReactNative",
 					"$(SRCROOT)\..\node_modules\react-native-beacons-manager\ios\RNiBeacon\RNiBeacon",
+					"$(SRCROOT)\..\node_modules\@react-native-community\netinfo\ios",
 				);
 			};
 			name = Release;
@@ -1328,11 +1344,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\lottie-react-native\src\ios\LottieReactNative",
 					"$(SRCROOT)\..\node_modules\react-native-beacons-manager\ios\RNiBeacon\RNiBeacon",
+					"$(SRCROOT)\..\node_modules\@react-native-community\netinfo\ios",
 				);
 			};
 			name = Debug;
@@ -1366,11 +1385,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\lottie-react-native\src\ios\LottieReactNative",
 					"$(SRCROOT)\..\node_modules\react-native-beacons-manager\ios\RNiBeacon\RNiBeacon",
+					"$(SRCROOT)\..\node_modules\@react-native-community\netinfo\ios",
 				);
 			};
 			name = Release;
@@ -1403,11 +1425,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\lottie-react-native\src\ios\LottieReactNative",
 					"$(SRCROOT)\..\node_modules\react-native-beacons-manager\ios\RNiBeacon\RNiBeacon",
+					"$(SRCROOT)\..\node_modules\@react-native-community\netinfo\ios",
 				);
 			};
 			name = Debug;
@@ -1440,11 +1465,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\lottie-react-native\src\ios\LottieReactNative",
 					"$(SRCROOT)\..\node_modules\react-native-beacons-manager\ios\RNiBeacon\RNiBeacon",
+					"$(SRCROOT)\..\node_modules\@react-native-community\netinfo\ios",
 				);
 			};
 			name = Release;

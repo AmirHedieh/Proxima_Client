@@ -1,86 +1,87 @@
 {
-  "name": "Beacon",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "tsc": "tsc",
-    "build": "npm run build-ts && npm run tslint ",
-    "watch": "npm run watch-ts",
-    "test": "jest --forceExit --verbose --coverage --env=jsdom --runInBand",
-    "build-ts": "tsc",
-    "watch-ts": "tsc -w",
-    "tslint": "tslint -c tslint.json -p tsconfig.json",
-    "recycle": "rm -r build && npm run watch",
-    "build-test": "npm run build && npm run test",
-    "releaseAndroid": "cd android && ./gradlew assembleRelease && cd .."
-  },
-  "dependencies": {
-    "axios": "0.19.2",
-    "crypto-js": "3.1.9-1",
-    "lottie-ios": "3.0.3",
-    "lottie-react-native": "3.0.2",
-    "mobx": "^5.15.4",
-    "mobx-react": "^6.2.2",
-    "react": "16.8.3",
-    "react-native": "0.59.10",
-    "react-native-beacons-manager": "^1.0.7",
-    "react-native-router-flux": "4.0.6",
-    "react-native-vector-icons": "6.6.0"
-  },
-  "devDependencies": {
-    "@babel/core": "7.9.0",
-    "@babel/plugin-proposal-decorators": "^7.8.3",
-    "@babel/runtime": "7.9.2",
-    "@types/crypto-js": "3.1.40",
-    "@types/jest": "25.2.1",
-    "@types/react": "16.9.34",
-    "@types/react-native": "0.62.2",
-    "@types/react-native-vector-icons": "6.4.5",
-    "@types/react-test-renderer": "16.9.2",
-    "babel-jest": "25.3.0",
-    "jest": "25.3.0",
-    "metro-react-native-babel-preset": "0.59.0",
-    "prettier": "2.0.4",
-    "react-test-renderer": "16.8.3",
-    "ts-jest": "22.4.6",
-    "tslint": "5.11.0",
-    "tslint-plugin-prettier": "2.3.0",
-    "tslint-react": "3.5.1",
-    "typescript": "3.8.3"
-  },
-  "jest": {
-    "automock": false,
-    "preset": "react-native",
-    "moduleFileExtensions": [
-      "js"
-    ],
-    "setupFiles": [],
-    "globals": {
-      "__DEV__": true,
-      "ts-jest": {
-        "babelConfig": true
-      }
+    "name": "Beacon",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "node node_modules/react-native/local-cli/cli.js start",
+        "tsc": "tsc",
+        "build": "npm run build-ts && npm run tslint ",
+        "watch": "npm run watch-ts",
+        "test": "jest --forceExit --verbose --coverage --env=jsdom --runInBand",
+        "build-ts": "tsc",
+        "watch-ts": "tsc -w",
+        "tslint": "tslint -c tslint.json -p tsconfig.json",
+        "recycle": "rm -r build && npm run watch",
+        "build-test": "npm run build && npm run test",
+        "releaseAndroid": "cd android && ./gradlew assembleRelease && cd .."
     },
-    "transform": {
-      "^.+\\.(js)$": "<rootDir>/node_modules/babel-jest",
-      "\\.(ts|tsx)$": "ts-jest"
+    "dependencies": {
+        "@react-native-community/netinfo": "3.2.1",
+        "axios": "0.19.2",
+        "crypto-js": "3.1.9-1",
+        "lottie-ios": "3.0.3",
+        "lottie-react-native": "3.0.2",
+        "mobx": "5.15.4",
+        "mobx-react": "6.2.2",
+        "react": "16.8.3",
+        "react-native": "0.59.10",
+        "react-native-beacons-manager": "1.0.7",
+        "react-native-router-flux": "4.0.6",
+        "react-native-vector-icons": "6.6.0"
     },
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-    "testPathIgnorePatterns": [
-      "\\.snap$",
-      "<rootDir>/node_modules/",
-      "<rootDir>/lib/"
-    ],
-    "cacheDirectory": ".jest/cache",
-    "moduleNameMapper": {
-      "^image![a-zA-Z0-9$_-]+$": "GlobalImageStub",
-      "^[@./a-zA-Z0-9$_-]+\\.(png|jpg|gif)$": "RelativeImageStub"
+    "devDependencies": {
+        "@babel/core": "7.9.0",
+        "@babel/plugin-proposal-decorators": "7.8.3",
+        "@babel/runtime": "7.9.2",
+        "@types/crypto-js": "3.1.40",
+        "@types/jest": "25.2.1",
+        "@types/react": "16.9.34",
+        "@types/react-native": "0.62.2",
+        "@types/react-native-vector-icons": "6.4.5",
+        "@types/react-test-renderer": "16.9.2",
+        "babel-jest": "25.3.0",
+        "jest": "25.3.0",
+        "metro-react-native-babel-preset": "0.59.0",
+        "prettier": "2.0.4",
+        "react-test-renderer": "16.8.3",
+        "ts-jest": "22.4.6",
+        "tslint": "5.11.0",
+        "tslint-plugin-prettier": "2.3.0",
+        "tslint-react": "3.5.1",
+        "typescript": "3.8.3"
+    },
+    "jest": {
+        "automock": false,
+        "preset": "react-native",
+        "moduleFileExtensions": [
+            "js"
+        ],
+        "setupFiles": [],
+        "globals": {
+            "__DEV__": true,
+            "ts-jest": {
+                "babelConfig": true
+            }
+        },
+        "transform": {
+            ".+\\.(js)$": "<rootDir>/node_modules/babel-jest",
+            "\\.(ts|tsx)$": "ts-jest"
+        },
+        "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+        "testPathIgnorePatterns": [
+            "\\.snap$",
+            "<rootDir>/node_modules/",
+            "<rootDir>/lib/"
+        ],
+        "cacheDirectory": ".jest/cache",
+        "moduleNameMapper": {
+            "^image![a-zA-Z0-9$_-]+$": "GlobalImageStub",
+            "^[@./a-zA-Z0-9$_-]+\\.(png|jpg|gif)$": "RelativeImageStub"
+        }
+    },
+    "rnpm": {
+        "assets": [
+            "./assets/fonts/"
+        ]
     }
-  },
-  "rnpm": {
-    "assets": [
-      "./assets/fonts/"
-    ]
-  }
 }
