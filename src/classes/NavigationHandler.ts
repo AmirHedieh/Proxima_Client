@@ -1,4 +1,5 @@
 import { NavigationActions } from '../NavigationActions'
+import { SceneParams } from '../SceneParams'
 import { DetectionState } from '../Types'
 
 export interface INavigationHandler {
@@ -6,16 +7,17 @@ export interface INavigationHandler {
 }
 export class NavigationHandler implements INavigationHandler {
     public navigate(detectionState: DetectionState) {
+        NavigationActions.popTo(SceneParams.SplashScreen.name)
         switch (detectionState) {
             case 'FOUND_STORE_FOUND_BEACON': {
                 NavigationActions.push('fake', {
-                    detectionState: 'FOUND_STORE_FOUND_BEACON'
+                    detectionState: 'Store is found'
                 })
                 break
             }
             case 'FOUND_STORE_NO_BEACON': {
                 NavigationActions.push('fake', {
-                    detectionState: 'FOUND_STORE_NO_BEACON'
+                    detectionState: 'Beacon is found'
                 })
             }
         }
