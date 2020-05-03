@@ -3,6 +3,7 @@ package com.beacon;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import it.innove.BleManagerPackage;
 import com.reactnativecommunity.netinfo.NetInfoPackage;
 import com.mackentoch.beaconsandroid.BeaconsAndroidPackage;
 import com.airbnb.android.react.lottie.LottiePackage;
@@ -26,6 +27,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new BleManagerPackage(),
             new NetInfoPackage(),
             new BeaconsAndroidPackage(),
             new LottiePackage()
