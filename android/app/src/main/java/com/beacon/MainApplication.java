@@ -3,6 +3,7 @@ package com.beacon;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.levelasquez.androidopensettings.AndroidOpenSettingsPackage;
 import it.innove.BleManagerPackage;
 import com.reactnativecommunity.netinfo.NetInfoPackage;
 import com.mackentoch.beaconsandroid.BeaconsAndroidPackage;
@@ -27,6 +28,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new AndroidOpenSettingsPackage(),
             new BleManagerPackage(),
             new NetInfoPackage(),
             new BeaconsAndroidPackage(),
