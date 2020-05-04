@@ -1,12 +1,13 @@
 import * as React from 'react'
 import { View } from 'react-native'
-import {GlobalState} from '../../models/GlobalState'
+import { GlobalState } from '../../models/GlobalState'
 import { StyleType } from '../../Types'
+import { stores } from '../../mobx/RootStore'
 
 interface IRtlAwareProps {
-    autoJustifyContent?: boolean,
-    reverseJustifyContent?: boolean,
-    autoReverseChildren?: boolean,
+    autoJustifyContent?: boolean
+    reverseJustifyContent?: boolean
+    autoReverseChildren?: boolean
     style?: StyleType
 }
 
@@ -20,7 +21,8 @@ export class RTLAwareView extends React.PureComponent<IRtlAwareProps> {
     public render(): JSX.Element {
         let childrenArray = React.Children.toArray(this.props.children)
         let startDirection = this.props.reverseJustifyContent ? 'flex-end' : 'flex-start' // (ltr) default: flex-start
-        if (GlobalState.getInstance().getIsRtl() === true) {
+        if (stores.UIState.getLanguage() === 'fa') {
+            console.log('in if')
             if (this.props.autoJustifyContent) {
                 startDirection = this.props.reverseJustifyContent ? 'flex-start' : 'flex-end'
             }
@@ -32,14 +34,6 @@ export class RTLAwareView extends React.PureComponent<IRtlAwareProps> {
             flexDirection: 'row',
             justifyContent: startDirection
         }
-        return (
-            <View
-                style={[style, this.props.style]}
-            >
-                {
-                    childrenArray
-                }
-            </View>
-        )
+        return <View style={[style, this.props.style]}>{childrenArray}</View>
     }
 }

@@ -1,5 +1,5 @@
 import { AsyncStorage } from 'react-native'
-import { GlobalState } from '../models/GlobalState'
+import { stores } from '../mobx/RootStore'
 import { KeySessionStorage } from '../storage/KeySessionStorage'
 import { LanguageStorage } from '../storage/LanguageStorage'
 import { PasswordStorage } from '../storage/PasswordStorage'
@@ -23,7 +23,7 @@ export class StorageHelper {
         try {
             const language = await LanguageStorage.get()
             if (!CommonValidator.isNullOrEmpty(language)) {
-                GlobalState.getInstance().setLanguage(language as LocalizationLanguages)
+                stores.UIState.changeLanguage(language as LocalizationLanguages)
             }
             const token = await KeySessionStorage.get()
             // set token to any global object
