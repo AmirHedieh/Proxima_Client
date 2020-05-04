@@ -1,11 +1,12 @@
 import { autorun, observable } from 'mobx'
 import { Product } from '../models/Product'
 import { HttpManager } from '../network/HttpManager'
+import { UserIdStorage } from '../storage/UserIdStorage'
 import { DetectionState } from '../Types'
+import { RandomGenerator } from '../utils/RandomGenerator'
 import { BeaconDetector, IBeaconDetector } from './BeaconDetector'
 import { BeaconEngine } from './BeaconEngine'
 import { INavigationHandler, NavigationHandler } from './NavigationHandler'
-import { RandomGenerator } from '../utils/RandomGenerator'
 
 export class AppEngine {
     @observable public products: Product[] = []
@@ -15,7 +16,7 @@ export class AppEngine {
     private beaconDetector: IBeaconDetector = null
     private beaconEngine: BeaconEngine = null
     private navHandler: INavigationHandler = null
-
+    private userId: string = null
     public constructor() {
         this.navHandler = new NavigationHandler()
         // will be called just when detectionState changes not any other observable
@@ -43,8 +44,26 @@ export class AppEngine {
             }
         }
     }
-
     public async init(): Promise<boolean> {
+        this.registerUser()
         return this.beaconEngine.init()
+    }
+    private registerUser = async () => {
+        const timerId = setInterval(async () => {
+            const userId = await UserIdStorage.get()
+            if (userId) {
+                console.log('in if')
+                this.userId = userId
+            } else {
+                console.log('in else')
+                const response = await HttpManager.getInstance().register()
+                if (response.isSuccessful()) {
+                    await UserIdStorage.set(response.getData().userId)
+                    this.userId = response.getData().userId
+                    clearTimeout(timerId)
+                    console.log('registered successfully')
+                }
+            }
+        }, 500)
     }
 }
