@@ -45,25 +45,18 @@ export class AppEngine {
         }
     }
     public async init(): Promise<boolean> {
-        this.registerUser()
+        const userId = await UserIdStorage.get()
+        userId ? (this.userId = userId) : this.registerUser()
         return this.beaconEngine.init()
     }
     private registerUser = async () => {
         const timerId = setInterval(async () => {
-            const userId = await UserIdStorage.get()
-            if (userId) {
-                console.log('in if')
-                this.userId = userId
-            } else {
-                console.log('in else')
-                const response = await HttpManager.getInstance().register()
-                if (response.isSuccessful()) {
-                    await UserIdStorage.set(response.getData().userId)
-                    this.userId = response.getData().userId
-                    clearTimeout(timerId)
-                    console.log('registered successfully')
-                }
+            const response = await HttpManager.getInstance().register()
+            if (response.isSuccessful()) {
+                await UserIdStorage.set(response.getData().userId)
+                this.userId = response.getData().userId
+                clearTimeout(timerId)
             }
-        }, 500)
+        }, 2000)
     }
 }
