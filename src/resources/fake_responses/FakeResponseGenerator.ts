@@ -21,4 +21,15 @@ export class FakeResponseGenerator {
             }
         }
     }
+    public static register(): INetworkPromise {
+        return {
+            data: {
+                status: {
+                    code: 1,
+                    message: 'success'
+                },
+                result: 'fakeUserId'
+            }
+        }
+    }
 }

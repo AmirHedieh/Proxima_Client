@@ -31,4 +31,11 @@ export class HttpManager {
             })
         )
     }
+    public register = async () => {
+        return new CustomResponse(
+            await new Promise((resolve) => {
+                resolve(FakeResponseGenerator.register())
+            })
+        )
+    }
 }
