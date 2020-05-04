@@ -28,7 +28,9 @@ export class FakeResponseGenerator {
                     code: 1,
                     message: 'success'
                 },
-                result: 'fakeUserId'
+                result: {
+                    userId: 'fakeUserId'
+                }
             }
         }
     }
