@@ -9,11 +9,11 @@ describe('Localization', () => {
         expect(Localization.translate('test')).toEqual('Test $arg0')
     })
     it('translate persian with arg', () => {
-        stores.UIState.changeLanguage('fa')
+        stores.UIState.setLanguage('fa')
         expect(Localization.translate('test', ['معین'])).toEqual('تست معین')
     })
     it('translate persian without arg', () => {
-        stores.UIState.changeLanguage('fa')
+        stores.UIState.setLanguage('fa')
         expect(Localization.translate('test')).toEqual('تست $arg0')
     })
 })

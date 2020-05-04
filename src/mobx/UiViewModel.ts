@@ -9,7 +9,7 @@ export class UiViewModel {
     }
 
     @action
-    public changeLanguage(language: LocalizationLanguages) {
+    public setLanguage(language: LocalizationLanguages) {
         this.uiStore.language = language
     }
 

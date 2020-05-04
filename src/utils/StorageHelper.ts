@@ -23,7 +23,7 @@ export class StorageHelper {
         try {
             const language = await LanguageStorage.get()
             if (!CommonValidator.isNullOrEmpty(language)) {
-                stores.UIState.changeLanguage(language as LocalizationLanguages)
+                stores.UIState.setLanguage(language as LocalizationLanguages)
             }
             const token = await KeySessionStorage.get()
             // set token to any global object
