@@ -21,7 +21,7 @@ export interface IBaseSceneState {}
 export abstract class BaseScene<
     PassedProps extends IBaseSceneProps,
     PassedState extends IBaseSceneState
-> extends React.PureComponent<PassedProps, PassedState> {
+> extends React.Component<PassedProps, PassedState> {
     protected static navigationOptions = ({ navigation }) => {
         return {
             header: null
