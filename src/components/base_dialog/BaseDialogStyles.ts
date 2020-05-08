@@ -4,15 +4,19 @@ import { Dimension } from '../../GlobalStyles'
 
 export const Styles = StyleSheet.create({
     centerContainerStyle: {
-        maxWidth: Dimension.deviceWidth * 0.85,
+        width: Dimension.deviceWidth,
+        minHeight: Dimension.deviceHeight * 0.3,
         maxHeight: Dimension.deviceHeight * 0.85,
-        padding: 16 * Dimension.scaleX,
-        borderRadius: 3 * Dimension.scaleX
+        borderTopLeftRadius: 50 * Dimension.scaleX,
+        borderTopRightRadius: 10 * Dimension.scaleX,
+        paddingTop: 12 * Dimension.scaleX,
+        paddingHorizontal: 12 * Dimension.scaleX,
+        backgroundColor: Colors.pureWhite
     },
     safeTouchStyle: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
         backgroundColor: Colors.dialogOverlay
     }
 })
