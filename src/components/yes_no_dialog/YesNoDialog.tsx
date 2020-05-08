@@ -1,17 +1,17 @@
 import * as React from 'react'
-import {ScrollView, View} from 'react-native'
+import { ScrollView, View } from 'react-native'
 import { CommonValidator } from '../../utils/Validator'
 import { BaseDialog, IBaseDialogProps, IBaseDialogState } from '../base_dialog/BaseDialog'
 import { BaseText } from '../base_text/BaseText'
 import { NormalButton } from '../normal_button/NormalButton'
 import { RTLAwareView } from '../rtl_aware/RTLAwareView'
-import {Styles} from './YesNoDialogStyles'
+import { Styles } from './YesNoDialogStyles'
 
 interface IYesNoDialogState extends IBaseDialogState {
-    title: string,
-    message: string,
-    noButtonText: string,
-    yesButtonText: string,
+    title: string
+    message: string
+    noButtonText: string
+    yesButtonText: string
 }
 
 export class YesNoDialog extends BaseDialog<IBaseDialogProps, IYesNoDialogState> {
@@ -28,20 +28,20 @@ export class YesNoDialog extends BaseDialog<IBaseDialogProps, IYesNoDialogState>
 
     constructor(props: IBaseDialogProps) {
         super(props)
-        this.centerContainerStyle =  Styles.centerContainerStyle
+        this.contentContainerStyle = Styles.centerContainerStyle
         this.show = this.show.bind(this)
         this.hide = this.hide.bind(this)
     }
 
     public show(params: {
-        title: string,
-        message: string,
-        noButtonText: string,
-        yesButtonText: string,
-        isCancellable?: boolean,
+        title: string
+        message: string
+        noButtonText: string
+        yesButtonText: string
+        isCancellable?: boolean
         onShow?: () => void
         onDismiss?: () => void
-        onNoButtonPressedCallback?: () => void,
+        onNoButtonPressedCallback?: () => void
         onYesButtonPressedCallback?: () => void
     }): void {
         // yesNo dialog properties
@@ -49,12 +49,10 @@ export class YesNoDialog extends BaseDialog<IBaseDialogProps, IYesNoDialogState>
         this.state.message = CommonValidator.isNullOrEmpty(params.message) ? '' : params.message
         this.state.noButtonText = CommonValidator.isNullOrEmpty(params.noButtonText) ? '' : params.noButtonText
         this.state.yesButtonText = CommonValidator.isNullOrEmpty(params.yesButtonText) ? '' : params.yesButtonText
-        this.onNoButtonPressCallback = params.onNoButtonPressedCallback != null
-            ? params.onNoButtonPressedCallback
-            : null
-        this.onYesButtonPressedCallback = params.onYesButtonPressedCallback != null
-            ? params.onYesButtonPressedCallback
-            : null
+        this.onNoButtonPressCallback =
+            params.onNoButtonPressedCallback != null ? params.onNoButtonPressedCallback : null
+        this.onYesButtonPressedCallback =
+            params.onYesButtonPressedCallback != null ? params.onYesButtonPressedCallback : null
         // base dialog properties
         this.state.isCancellable = params.isCancellable ? params.isCancellable : true
         this.onShow = params.onShow ? params.onShow : () => {}
@@ -70,36 +68,20 @@ export class YesNoDialog extends BaseDialog<IBaseDialogProps, IYesNoDialogState>
         // this is used to divide ReactNative Touchable and ScrollView Touching
         const onStartShouldSetResponder = () => true
         return (
-        <View style={Styles.mainContainerStyle}>
-                <BaseText
-                    style={Styles.titleStyle}
-                    text={this.state.title}
-                />
+            <View style={Styles.mainContainerStyle}>
+                <BaseText style={Styles.titleStyle} text={this.state.title} />
                 <View style={Styles.messageContainerStyle}>
                     <ScrollView>
                         <View onStartShouldSetResponder={onStartShouldSetResponder}>
-                            <BaseText
-                                style={Styles.messageTextStyle}
-                                text={this.state.message}
-                            />
+                            <BaseText style={Styles.messageTextStyle} text={this.state.message} />
                         </View>
                     </ScrollView>
                 </View>
-                <View style={Styles.buttonsSpacer}/>
+                <View style={Styles.buttonsSpacer} />
                 <View style={Styles.buttonsContainerStyle}>
-                    <RTLAwareView
-                        reverseJustifyContent={true}
-                    >
-                        <NormalButton
-                            onPress={onYesButtonPressed}
-                            text={this.state.yesButtonText}
-                            isFilled={false}
-                        />
-                        <NormalButton
-                            onPress={onNoButtonPressed}
-                            text={this.state.noButtonText}
-                            isFilled={false}
-                        />
+                    <RTLAwareView reverseJustifyContent={true}>
+                        <NormalButton onPress={onYesButtonPressed} text={this.state.yesButtonText} isFilled={false} />
+                        <NormalButton onPress={onNoButtonPressed} text={this.state.noButtonText} isFilled={false} />
                     </RTLAwareView>
                 </View>
             </View>

@@ -17,7 +17,7 @@ export abstract class BaseDialog<
     PassedState extends IBaseDialogState
 > extends React.PureComponent<PassedProps, PassedState> {
     protected isModalTransparent: boolean = true
-    protected centerContainerStyle: StyleType = null
+    protected contentContainerStyle: StyleType = null
     protected safeTouchStyle: StyleType = null
 
     public constructor(props: PassedProps) {
@@ -25,7 +25,7 @@ export abstract class BaseDialog<
         this.onRequestClose = this.onRequestClose.bind(this)
     }
     public render(): JSX.Element {
-        const centerContainerStyle = [Styles.contentContainerStyle, this.centerContainerStyle]
+        const centerContainerStyle = [Styles.contentContainerStyle, this.contentContainerStyle]
         const safeTouchStyle = [Styles.safeTouchStyle, this.safeTouchStyle]
         return (
             <Modal // onDismiss is handled in onRequestClose function
