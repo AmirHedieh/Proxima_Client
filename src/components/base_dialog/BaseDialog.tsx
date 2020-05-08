@@ -25,7 +25,7 @@ export abstract class BaseDialog<
         this.onRequestClose = this.onRequestClose.bind(this)
     }
     public render(): JSX.Element {
-        const centerContainerStyle = [Styles.centerContainerStyle, this.centerContainerStyle]
+        const centerContainerStyle = [Styles.contentContainerStyle, this.centerContainerStyle]
         const safeTouchStyle = [Styles.safeTouchStyle, this.safeTouchStyle]
         return (
             <Modal // onDismiss is handled in onRequestClose function

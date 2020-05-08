@@ -3,7 +3,7 @@ import { Colors } from '../../Constants'
 import { Dimension } from '../../GlobalStyles'
 
 export const Styles = StyleSheet.create({
-    centerContainerStyle: {
+    contentContainerStyle: {
         width: Dimension.deviceWidth,
         minHeight: Dimension.deviceHeight * 0.3,
         maxHeight: Dimension.deviceHeight * 0.85,
