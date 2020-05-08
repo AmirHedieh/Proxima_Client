@@ -4,6 +4,7 @@ import { Localization } from '../../text_process/Localization'
 import { CommonValidator } from '../../utils/Validator'
 import { BaseDialog, IBaseDialogProps, IBaseDialogState } from '../base_dialog/BaseDialog'
 import { BaseText } from '../base_text/BaseText'
+import { NormalButton } from '../normal_button/NormalButton'
 
 interface IRequirementDialogState extends IBaseDialogState {
     message: string
@@ -15,7 +16,7 @@ export class RequirementDialog extends BaseDialog<IBaseDialogProps, IRequirement
         message: '',
         buttonText: '',
         isVisible: false,
-        isCancellable: true
+        isCancellable: false
     }
     private onButtonPressedCallback: () => void = null
     public constructor(props: IBaseDialogProps) {
@@ -28,7 +29,6 @@ export class RequirementDialog extends BaseDialog<IBaseDialogProps, IRequirement
         }
     }
     public show(params: {
-        title: string
         message: string
         buttonText?: string
         isCancellable?: boolean
@@ -52,7 +52,8 @@ export class RequirementDialog extends BaseDialog<IBaseDialogProps, IRequirement
     protected renderInside(): JSX.Element {
         return (
             <View>
-                <BaseText text={'what a requirement'} />
+                <BaseText text={this.state.message} />
+                <NormalButton text={this.state.buttonText} onPress={this.onButtonPressedCallback} />
             </View>
         )
     }
