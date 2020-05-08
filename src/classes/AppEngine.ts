@@ -1,12 +1,12 @@
-import { autorun, observable } from 'mobx'
+import { observable } from 'mobx'
 import { Product } from '../models/Product'
 import { HttpManager } from '../network/HttpManager'
+import { SocketManager } from '../network/SocketManager'
 import { UserIdStorage } from '../storage/UserIdStorage'
 import { DetectionState } from '../Types'
 import { RandomGenerator } from '../utils/RandomGenerator'
 import { BeaconDetector, IBeaconDetector } from './BeaconDetector'
 import { BeaconEngine } from './BeaconEngine'
-import { INavigationHandler, NavigationHandler } from './NavigationHandler'
 
 export class AppEngine {
     @observable public products: Product[] = []
@@ -15,12 +15,9 @@ export class AppEngine {
     @observable public detectionState: DetectionState = 'NO_STORE_NO_BEACON'
     private beaconDetector: IBeaconDetector = null
     private beaconEngine: BeaconEngine = null
-    private navHandler: INavigationHandler = null
     private userId: string = null
+    private socketManager: SocketManager = SocketManager.getInstance()
     public constructor() {
-        this.navHandler = new NavigationHandler()
-        // will be called just when detectionState changes not any other observable
-        autorun(() => this.navHandler.navigate(this.detectionState))
         this.beaconDetector = new BeaconDetector()
         this.beaconEngine = new BeaconEngine(this.beaconDetector)
         this.beaconEngine.onMajorChange = (major) => {
@@ -45,9 +42,16 @@ export class AppEngine {
         }
     }
     public async init(): Promise<boolean> {
-        const userId = await UserIdStorage.get()
-        userId ? (this.userId = userId) : this.registerUser()
+        this.socketManager.onConnect(this.onConnect)
+        this.socketManager.onReconnect(this.onReconnect)
+        this.socketManager.onReconnect(() => console.log('sssdsdsd'))
         return this.beaconEngine.init()
+    }
+    private onConnect = () => {
+        console.log('connected')
+    }
+    private onReconnect = () => {
+        console.log('Reconnected')
     }
     private registerUser = async () => {
         const timerId = setInterval(async () => {
