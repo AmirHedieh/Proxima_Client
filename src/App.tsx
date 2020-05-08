@@ -6,6 +6,7 @@ import { Animations } from './Animations'
 import { stores } from './mobx/RootStore'
 import { SceneParams } from './SceneParams'
 import { FakeScene } from './scenes/FakeScene/FakeScene'
+import { HomeScene } from './scenes/home_scene/HomeScene'
 import { SplashScreen } from './scenes/welcome_scenes/splash_scene/SplashScene'
 const animate = () => Animations.zoomIn()
 
@@ -47,6 +48,7 @@ I18nManager.forceRTL(false)
 const scenes = Actions.create(
     <Scene key='root' hideNavBar={true} transitionConfig={animate}>
         <Scene key={SceneParams.SplashScreen.name} component={SplashScreen} />
+        <Scene key={SceneParams.HomeScene.name} component={HomeScene} />
         <Scene key={'fake'} component={FakeScene} />
     </Scene>
 )

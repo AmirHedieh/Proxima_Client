@@ -6,5 +6,11 @@ export const SceneParams = {
         navigate: () => {
             NavigationActions.push(SceneParams.SplashScreen.name)
         }
+    },
+    HomeScene: {
+        name: 'HomeScene',
+        navigate: () => {
+            NavigationActions.push(SceneParams.SplashScreen.name)
+        }
     }
 }
