@@ -1,12 +1,18 @@
 import * as React from 'react'
-import { View } from 'react-native'
+import { Linking, View } from 'react-native'
+// @ts-ignore
+import AndroidOpenSettings from 'react-native-android-open-settings'
+import { BluetoothManager, IBluetoothManager } from '../../classes/BluetoothManager'
+import { ILocationManager, LocationManager } from '../../classes/LocationManager'
+import { INetManager, NetManager } from '../../classes/NetManager'
+import { BaseText } from '../../components/base_text/BaseText'
+import { NormalButton } from '../../components/normal_button/NormalButton'
+import { RequirementDialog } from '../../components/requirement_dialog/RequirementDialog'
+import { EnvironmentVariables } from '../../Constants'
+import { Localization } from '../../text_process/Localization'
+import { PermissionsHandler } from '../../utils/PermissionsHandler'
 import { BaseScene, IBaseSceneProps } from '../base_scene/BaseScene'
 import { Styles } from './HomeSceneStyles'
-import { RequirementDialog } from '../../components/requirement_dialog/RequirementDialog'
-import { BaseText } from '../../components/base_text/BaseText'
-import { Localization } from '../../text_process/Localization'
-import { BluetoothManager } from '../../classes/BluetoothManager'
-import { NetManager } from '../../classes/NetManager'
 interface IHomeSceneState {
     requirements: {
         isConnected: boolean
@@ -15,8 +21,10 @@ interface IHomeSceneState {
     }
 }
 export class HomeScene extends BaseScene<IBaseSceneProps, IHomeSceneState> {
-    private netManager: NetManager = null
-    private bluetoothManager: BluetoothManager = null
+    private netManager: INetManager = null
+    private bluetoothManager: IBluetoothManager = null
+    private locationManager: ILocationManager = null
+
     private requirementDialog: RequirementDialog = null
     private requirements = {
         isConnected: true,
@@ -38,18 +46,32 @@ export class HomeScene extends BaseScene<IBaseSceneProps, IHomeSceneState> {
             this.requirements.isBluetoothOn = isEnabled
             this.checkRequirements()
         }
+
+        this.locationManager = new LocationManager()
+        this.locationManager.onLocationStatusChange = (isEnabled) => {
+            this.requirements.isLocationOn = isEnabled
+            this.checkRequirements()
+        }
     }
 
     protected async sceneDidMount() {
-        this.netManager.init()
-        await this.bluetoothManager.init()
+        this.netManager.subscribe() // event get called on subscribe once
+        await this.bluetoothManager.subscribe() // event get called on subscribe once
+        await this.locationManager.subscribe() //
         this.checkRequirements()
+    }
+
+    protected sceneWillUnmount() {
+        this.netManager.unSubscribe()
+        this.bluetoothManager.unSubscribe()
+        this.locationManager.unSubscribe()
     }
 
     protected renderSafe(): JSX.Element {
         return (
             <View>
                 <BaseText text={'homescene'} />
+                <NormalButton text='sss' onPress={() => Linking.openURL('App-Prefs:LOCATION_SERVICES')} />
                 <RequirementDialog ref={(ref) => (this.requirementDialog = ref)} />
             </View>
         )
@@ -67,6 +89,33 @@ export class HomeScene extends BaseScene<IBaseSceneProps, IHomeSceneState> {
         if (this.requirements.isBluetoothOn === false) {
             this.requirementDialog.show({
                 message: 'BLE'
+            })
+            return
+        }
+        if ((await PermissionsHandler.isLocationPermissionAllowed()) === false) {
+            this.requirementDialog.show({
+                // android
+                message: 'Give the app location permission',
+                buttonText: 'Give access',
+                onButtonPressedCallback: async () => {
+                    await PermissionsHandler.requestLocationPermission()
+                    this.checkRequirements()
+                }
+            })
+            return
+        }
+        if (this.requirements.isLocationOn === false) {
+            // check location is off
+            this.requirementDialog.show({
+                message: 'turn on location',
+                buttonText: 'Turn on',
+                onButtonPressedCallback: () => {
+                    if (EnvironmentVariables.isIos) {
+                        Linking.openURL('App-Prefs:LOCATION_SERVICES')
+                    } else {
+                        AndroidOpenSettings.locationSourceSettings()
+                    }
+                }
             })
             return
         }
