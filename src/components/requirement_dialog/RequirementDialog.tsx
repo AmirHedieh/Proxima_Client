@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { View } from 'react-native'
-import { Localization } from '../../text_process/Localization'
 import { CommonValidator } from '../../utils/Validator'
 import { BaseDialog, IBaseDialogProps, IBaseDialogState } from '../base_dialog/BaseDialog'
 import { BaseText } from '../base_text/BaseText'
@@ -9,16 +8,17 @@ import { NormalButton } from '../normal_button/NormalButton'
 interface IRequirementDialogState extends IBaseDialogState {
     message: string
     buttonText: string
+    onButtonPressedCallback: () => void
     // TODO: add other needed properties
 }
 export class RequirementDialog extends BaseDialog<IBaseDialogProps, IRequirementDialogState> {
     public state: IRequirementDialogState = {
         message: '',
         buttonText: '',
+        onButtonPressedCallback: null,
         isVisible: false,
         isCancellable: false
     }
-    private onButtonPressedCallback: () => void = null
     public constructor(props: IBaseDialogProps) {
         super(props)
         {
@@ -32,20 +32,13 @@ export class RequirementDialog extends BaseDialog<IBaseDialogProps, IRequirement
         message: string
         buttonText?: string
         isCancellable?: boolean
-        onShow?: () => void
-        onDismiss?: () => void
         onButtonPressedCallback?: () => void
     }): void {
         this.setState({
             message: CommonValidator.isNullOrEmpty(params.message) ? '' : params.message,
-            buttonText: params.buttonText ? params.buttonText : Localization.translate('OK')
+            buttonText: params.buttonText ? params.buttonText : '',
+            onButtonPressedCallback: params.onButtonPressedCallback !== null ? params.onButtonPressedCallback : null
         })
-        // ok dialog properties
-        this.onButtonPressedCallback = params.onButtonPressedCallback !== null ? params.onButtonPressedCallback : null
-        // base dialog properties
-        this.state.isCancellable = params.isCancellable ? params.isCancellable : false
-        this.onShow = params.onShow ? params.onShow : () => {}
-        this.onDismiss = params.onDismiss ? params.onDismiss : () => {}
         this.superShow()
     }
     public hide() {
@@ -55,14 +48,15 @@ export class RequirementDialog extends BaseDialog<IBaseDialogProps, IRequirement
         return (
             <View>
                 <BaseText text={this.state.message} />
-                <NormalButton text={this.state.buttonText} onPress={this.onButtonPressedCallback} />
+                {this.state.buttonText !== '' && (
+                    <NormalButton text={this.state.buttonText} onPress={this.onPressEvent} />
+                )}
             </View>
         )
     }
     private onPressEvent(): void {
-        this.hide()
-        if (this.onButtonPressedCallback != null) {
-            this.onButtonPressedCallback()
+        if (this.state.onButtonPressedCallback != null) {
+            this.state.onButtonPressedCallback()
         }
     }
 }
