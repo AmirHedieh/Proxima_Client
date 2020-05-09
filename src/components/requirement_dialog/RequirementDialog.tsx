@@ -36,12 +36,14 @@ export class RequirementDialog extends BaseDialog<IBaseDialogProps, IRequirement
         onDismiss?: () => void
         onButtonPressedCallback?: () => void
     }): void {
+        this.setState({
+            message: CommonValidator.isNullOrEmpty(params.message) ? '' : params.message,
+            buttonText: params.buttonText ? params.buttonText : Localization.translate('OK')
+        })
         // ok dialog properties
-        this.state.message = CommonValidator.isNullOrEmpty(params.message) ? '' : params.message
-        this.state.buttonText = params.buttonText ? params.buttonText : Localization.translate('OK')
         this.onButtonPressedCallback = params.onButtonPressedCallback !== null ? params.onButtonPressedCallback : null
         // base dialog properties
-        this.state.isCancellable = params.isCancellable ? params.isCancellable : true
+        this.state.isCancellable = params.isCancellable ? params.isCancellable : false
         this.onShow = params.onShow ? params.onShow : () => {}
         this.onDismiss = params.onDismiss ? params.onDismiss : () => {}
         this.superShow()
