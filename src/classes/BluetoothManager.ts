@@ -5,7 +5,9 @@ import { EnvironmentVariables } from '../Constants'
 
 type BleManagerBleState = 'on' | 'off' | 'turning_on' | 'turning_off'
 
-interface IBluetoothManager {
+export interface IBluetoothManager {
+    subscribe: () => void
+    unSubscribe: () => void
     enableAndroidBluetooth: (onSuccess?: () => void, onFail?: () => void) => void
     onBluetoothStateChange: (isEnabled: boolean) => void
 }
@@ -15,11 +17,11 @@ export class BluetoothManager implements IBluetoothManager {
     private BleManagerModule = NativeModules.BleManager
     private bleManagerEmitter = new NativeEventEmitter(this.BleManagerModule)
 
-    public async init() {
+    public async subscribe() {
         try {
             await BleManager.start()
             this.bleManagerEmitter.addListener('BleManagerDidUpdateState', this.onBleStateChange)
-            BleManager.checkState() // triggers the listener for once(called to set initial value)
+            BleManager.checkState() // execute listener on subscribe(called to set initial value)
         } catch (e) {
             console.log(e)
         }
@@ -39,6 +41,10 @@ export class BluetoothManager implements IBluetoothManager {
                 console.log(e)
             }
         }
+    }
+
+    public unSubscribe() {
+        BleManager.stopScan()
     }
 
     private onBleStateChange = (args: { state: BleManagerBleState }): void => {
