@@ -1,5 +1,6 @@
 import { observable } from 'mobx'
 import { Product } from '../models/Product'
+import { CustomResponse } from '../network/CustomResponse'
 import { HttpManager } from '../network/HttpManager'
 import { SocketManager } from '../network/SocketManager'
 import { UserIdStorage } from '../storage/UserIdStorage'
@@ -54,11 +55,35 @@ export class AppEngine {
     public async init(): Promise<boolean> {
         this.socketManager.onConnect(this.onConnect)
         this.socketManager.onReconnect(this.onReconnect)
+        this.socketManager.onRegister(this.onRegister)
+        this.socketManager.onCategory(this.onCategory)
         return this.beaconEngine.init()
     }
 
-    private onConnect = () => {
+    private onConnect = async () => {
         console.log('connected')
+        const userId = await UserIdStorage.get()
+        console.log('userId: ', userId)
+        if (userId) {
+            // authorize
+            console.log('authorize')
+            this.socketManager.authorize({ id: Number(userId) })
+        } else {
+            console.log('registering')
+            this.socketManager.register()
+        }
+    }
+
+    private onRegister = async (response: CustomResponse) => {
+        console.log('on register called', response)
+        await UserIdStorage.set(response.getData().id)
+    }
+
+    private onCategory = (response: CustomResponse) => {
+        for (const element of response.getData()) {
+            this.categories.push(element)
+        }
+        console.log('categories', this.categories)
     }
 
     private onReconnect = () => {
