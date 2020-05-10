@@ -41,7 +41,14 @@ export class SocketManager {
     }
 
     public onCategory(callback: (result: CustomResponse) => void) {
-        this.socket.on('onCategory', (response) => {
+        this.socket.on('category', (response) => {
+            const customResponse = new CustomResponse(response)
+            callback(customResponse)
+        })
+    }
+
+    public onVersion(callback: (result: CustomResponse) => void) {
+        this.socket.on('version', (response) => {
             const customResponse = new CustomResponse(response)
             callback(customResponse)
         })

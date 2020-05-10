@@ -4,6 +4,7 @@ import { CustomResponse } from '../network/CustomResponse'
 import { HttpManager } from '../network/HttpManager'
 import { SocketManager } from '../network/SocketManager'
 import { UserIdStorage } from '../storage/UserIdStorage'
+import { VersionStorage } from '../storage/VersionStorage'
 import { DetectionState } from '../Types'
 import { RandomGenerator } from '../utils/RandomGenerator'
 import { BeaconDetector, IBeaconDetector } from './BeaconDetector'
@@ -57,6 +58,7 @@ export class AppEngine {
         this.socketManager.onReconnect(this.onReconnect)
         this.socketManager.onRegister(this.onRegister)
         this.socketManager.onCategory(this.onCategory)
+        this.socketManager.onVersion(this.onVersion)
         return this.beaconEngine.init()
     }
 
@@ -80,12 +82,20 @@ export class AppEngine {
     }
 
     private onCategory = (response: CustomResponse) => {
-        for (const element of response.getData()) {
+        for (const element of response.getData().categories) {
             this.categories.push(element)
         }
         console.log('categories', this.categories)
     }
 
+    private onVersion = async (response: CustomResponse) => {
+        const version = await VersionStorage.get()
+        if (version !== response.getData().version) {
+            // update app
+            await VersionStorage.set(response.getData().version)
+        }
+        console.log(response)
+    }
     private onReconnect = () => {
         console.log('Reconnected')
     }
