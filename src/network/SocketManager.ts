@@ -75,4 +75,15 @@ export class SocketManager {
             callback(customResponse)
         })
     }
+
+    public getProduct(params: { category: number; offset: number; limit: number }) {
+        this.socket.emit('product', params)
+    }
+
+    public onGetProduct(callback: (result: CustomResponse) => void) {
+        this.socket.on('product', (response) => {
+            const customResponse = new CustomResponse(response)
+            callback(customResponse)
+        })
+    }
 }

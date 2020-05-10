@@ -49,6 +49,7 @@ export class AppEngine {
         this.socketManager.onRegister(this.onRegister)
         this.socketManager.onCategory(this.onCategory)
         this.socketManager.onVersion(this.onVersion)
+        this.socketManager.onGetProduct(this.onGetProduct)
         return this.beaconEngine.init()
     }
 
@@ -98,14 +99,11 @@ export class AppEngine {
         console.log('Reconnected')
     }
 
-    private registerUser = async () => {
-        const timerId = setInterval(async () => {
-            const response = await HttpManager.getInstance().register()
-            if (response.isSuccessful()) {
-                await UserIdStorage.set(response.getData().userId)
-                this.userId = response.getData().userId
-                clearTimeout(timerId)
-            }
-        }, 2000)
+    private onGetProduct = (response: CustomResponse) => {
+        const products: Product[] = []
+        for (const element of response.getData().products) {
+            products.push(new Product(element))
+        }
+        this.products = products
     }
 }
