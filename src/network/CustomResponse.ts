@@ -7,9 +7,9 @@ export class CustomResponse {
     private data
 
     constructor(response: INetworkPromise) {
-        this.code = response.data.status.code
-        this.message = response.data.status.message
-        this.data = response.data.result
+        this.code = response.status.code
+        this.message = response.status.message
+        this.data = response.result
     }
 
     public isSuccessful() {
