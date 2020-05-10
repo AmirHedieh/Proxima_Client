@@ -87,16 +87,24 @@ export class HomeScene extends BaseScene<IBaseSceneProps, IHomeSceneState> {
             return
         }
         if (this.requirements.isBluetoothOn === false) {
+            const buttonText = EnvironmentVariables.isIos
+                ? ''
+                : Localization.translate('enableAndroidBluetoothHomeScene')
             this.requirementDialog.show({
-                message: 'BLE'
+                message: Localization.translate('bluetoothErrorHomeScene'),
+                buttonText,
+                onButtonPressedCallback: () => {
+                    // button is only appeared in android
+                    console.log('jjjjjjjjjj')
+                    this.bluetoothManager.enableAndroidBluetooth()
+                }
             })
             return
         }
         if ((await PermissionsHandler.isLocationPermissionAllowed()) === false) {
             this.requirementDialog.show({
-                // android
-                message: 'Give the app location permission',
-                buttonText: 'Give access',
+                message: Localization.translate('locationPermissionErrorHomeScene'),
+                buttonText: Localization.translate('giveLocationPermissionHomeScene'),
                 onButtonPressedCallback: async () => {
                     await PermissionsHandler.requestLocationPermission()
                     this.checkRequirements()
@@ -105,10 +113,11 @@ export class HomeScene extends BaseScene<IBaseSceneProps, IHomeSceneState> {
             return
         }
         if (this.requirements.isLocationOn === false) {
-            // check location is off
+            // TODO: check if opening setting works for ios, if not change the flow
+            const buttonText = Localization.translate('goToLocationSettingHomeScene')
             this.requirementDialog.show({
-                message: 'turn on location',
-                buttonText: 'Turn on',
+                message: Localization.translate('locationErrorHomeScene'),
+                buttonText,
                 onButtonPressedCallback: () => {
                     if (EnvironmentVariables.isIos) {
                         Linking.openURL('App-Prefs:LOCATION_SERVICES')
