@@ -53,4 +53,26 @@ export class SocketManager {
             callback(customResponse)
         })
     }
+
+    public majorChange(params: { major: number }) {
+        this.socket.emit('majorChange', params)
+    }
+
+    public minorChange(params: { minor: number }) {
+        this.socket.emit('minorChange', params)
+    }
+
+    public onMajorChange(callback: (result: CustomResponse) => void) {
+        this.socket.on('majorChange', (response) => {
+            const customResponse = new CustomResponse(response)
+            callback(customResponse)
+        })
+    }
+
+    public onMinorChange(callback: (result: CustomResponse) => void) {
+        this.socket.on('minorChange', (response) => {
+            const customResponse = new CustomResponse(response)
+            callback(customResponse)
+        })
+    }
 }

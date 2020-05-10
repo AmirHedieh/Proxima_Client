@@ -25,41 +25,39 @@ export class AppEngine {
         this.beaconEngine = new BeaconEngine(this.beaconDetector)
         this.beaconEngine.onMajorChange = (major) => {
             if (!major) {
+                this.socketManager.majorChange({ major })
                 this.detectionState = 'NO_STORE_NO_BEACON'
                 return
             }
             // change state to store found
         }
         this.beaconEngine.onMinorChange = async (minor) => {
+            console.log('minor change')
             if (!minor) {
+                this.socketManager.minorChange({ minor })
                 this.detectionState = 'FOUND_STORE_NO_BEACON'
                 return
-            }
-            // fetch product data corresponding to beacon with minor
-            try {
-                const response = await HttpManager.getInstance().getProduct({ product: minor })
-                if (response.isSuccessful()) {
-                    this.currentProduct = response.getData()
-                    if (RandomGenerator.generateRandomNumber(1, 100) % 2 === 0) {
-                        this.detectionState = 'FOUND_STORE_FOUND_BEACON'
-                    } else {
-                        this.detectionState = 'FOUND_STORE_NO_BEACON'
-                    }
-                    console.log('product set')
-                }
-            } catch (e) {
-                console.log(e.message)
             }
         }
     }
 
     public async init(): Promise<boolean> {
+        this.socketManager.onMajorChange(this.onMajorChange)
+        this.socketManager.onMinorChange(this.onMinorChange)
         this.socketManager.onConnect(this.onConnect)
         this.socketManager.onReconnect(this.onReconnect)
         this.socketManager.onRegister(this.onRegister)
         this.socketManager.onCategory(this.onCategory)
         this.socketManager.onVersion(this.onVersion)
         return this.beaconEngine.init()
+    }
+
+    private onMajorChange = (response: CustomResponse) => {
+        console.log('major', response)
+    }
+
+    private onMinorChange = (response: CustomResponse) => {
+        console.log('minor', response)
     }
 
     private onConnect = async () => {
