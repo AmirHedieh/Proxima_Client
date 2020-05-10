@@ -17,6 +17,7 @@ export class AppEngine {
     private beaconEngine: BeaconEngine = null
     private userId: string = null
     private socketManager: SocketManager = SocketManager.getInstance()
+
     public constructor() {
         this.beaconDetector = new BeaconDetector()
         this.beaconEngine = new BeaconEngine(this.beaconDetector)
@@ -41,18 +42,21 @@ export class AppEngine {
             }
         }
     }
+
     public async init(): Promise<boolean> {
         this.socketManager.onConnect(this.onConnect)
         this.socketManager.onReconnect(this.onReconnect)
-        this.socketManager.onReconnect(() => console.log('sssdsdsd'))
         return this.beaconEngine.init()
     }
+
     private onConnect = () => {
         console.log('connected')
     }
+
     private onReconnect = () => {
         console.log('Reconnected')
     }
+
     private registerUser = async () => {
         const timerId = setInterval(async () => {
             const response = await HttpManager.getInstance().register()
