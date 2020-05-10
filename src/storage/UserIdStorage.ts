@@ -3,8 +3,8 @@ import { EnvironmentVariables } from '../Constants'
 
 export class UserIdStorage {
     public static key = EnvironmentVariables.defaultDbName + ':userId'
-    public static set = (token: string): Promise<any> => {
-        return AsyncStorage.setItem(UserIdStorage.key, token)
+    public static set = (id: number): Promise<any> => {
+        return AsyncStorage.setItem(UserIdStorage.key, String(id))
     }
     public static get = (): Promise<string> => {
         return AsyncStorage.getItem(UserIdStorage.key)
