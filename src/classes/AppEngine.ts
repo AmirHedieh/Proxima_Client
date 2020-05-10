@@ -22,9 +22,17 @@ export class AppEngine {
         this.beaconDetector = new BeaconDetector()
         this.beaconEngine = new BeaconEngine(this.beaconDetector)
         this.beaconEngine.onMajorChange = (major) => {
-            // console.log('store changed')
+            if (!major) {
+                this.detectionState = 'NO_STORE_NO_BEACON'
+                return
+            }
+            // change state to store found
         }
         this.beaconEngine.onMinorChange = async (minor) => {
+            if (!minor) {
+                this.detectionState = 'FOUND_STORE_NO_BEACON'
+                return
+            }
             // fetch product data corresponding to beacon with minor
             try {
                 const response = await HttpManager.getInstance().getProduct({ product: minor })
