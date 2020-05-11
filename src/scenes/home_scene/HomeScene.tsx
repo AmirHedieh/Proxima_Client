@@ -95,7 +95,6 @@ export class HomeScene extends BaseScene<IBaseSceneProps, IHomeSceneState> {
                 buttonText,
                 onButtonPressedCallback: () => {
                     // button is only appeared in android
-                    console.log('jjjjjjjjjj')
                     this.bluetoothManager.enableAndroidBluetooth()
                 }
             })
