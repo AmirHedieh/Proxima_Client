@@ -9,6 +9,7 @@ import { DetectionState } from '../Types'
 import { RandomGenerator } from '../utils/RandomGenerator'
 import { BeaconDetector, IBeaconDetector } from './BeaconDetector'
 import { BeaconEngine } from './BeaconEngine'
+import { Category } from '../models/Category'
 
 export class AppEngine {
     @observable public products: Product[] = []
@@ -84,7 +85,7 @@ export class AppEngine {
 
     private onCategories = (response: CustomResponse) => {
         for (const element of response.getData().categories) {
-            this.categories.push(element)
+            this.categories.push(new Category(element))
         }
         console.log('categories', this.categories)
     }
