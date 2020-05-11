@@ -40,7 +40,7 @@ export class SocketManager {
         this.socket.emit('authorize', params)
     }
 
-    public onCategory(callback: (result: CustomResponse) => void) {
+    public onCategories(callback: (result: CustomResponse) => void) {
         this.socket.on('category', (response) => {
             const customResponse = new CustomResponse(response)
             callback(customResponse)
