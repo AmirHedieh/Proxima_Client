@@ -44,13 +44,13 @@ export class AppEngine {
 
     public async init(): Promise<boolean> {
         this.socketManager.onConnect(this.onConnect)
-        this.socketManager.onMajorChange(this.onMajorChange)
-        this.socketManager.onMinorChange(this.onMinorChange)
         this.socketManager.onReconnect(this.onReconnect)
         this.socketManager.onRegister(this.onRegister)
-        this.socketManager.onCategories(this.onCategories)
         this.socketManager.onVersion(this.onVersion)
-        this.socketManager.onGetProduct(this.onGetProduct)
+        this.socketManager.onCategories(this.onCategories)
+        this.socketManager.onMajorChange(this.onMajorChange)
+        this.socketManager.onMinorChange(this.onMinorChange)
+        this.socketManager.onGetProducts(this.onGetProducts)
         return this.beaconEngine.init()
     }
 
@@ -69,25 +69,14 @@ export class AppEngine {
         }
     }
 
-    private onMajorChange = (response: CustomResponse) => {
-        console.log('major', response)
-    }
-
-    private onMinorChange = (response: CustomResponse) => {
-        console.log('minor', response)
+    private onReconnect = () => {
+        console.log('Reconnected')
     }
 
     private onRegister = async (response: CustomResponse) => {
         console.log('on register called', response)
         await UserIdStorage.set(response.getData().id)
         this.userId = response.getData().id
-    }
-
-    private onCategories = (response: CustomResponse) => {
-        for (const element of response.getData().categories) {
-            this.categories.push(new Category(element))
-        }
-        console.log('categories', this.categories)
     }
 
     private onVersion = async (response: CustomResponse) => {
@@ -98,11 +87,23 @@ export class AppEngine {
         }
         console.log(response)
     }
-    private onReconnect = () => {
-        console.log('Reconnected')
+
+    private onCategories = (response: CustomResponse) => {
+        for (const element of response.getData().categories) {
+            this.categories.push(new Category(element))
+        }
+        console.log('categories', this.categories)
     }
 
-    private onGetProduct = (response: CustomResponse) => {
+    private onMajorChange = (response: CustomResponse) => {
+        console.log('major', response)
+    }
+
+    private onMinorChange = (response: CustomResponse) => {
+        console.log('minor', response)
+    }
+
+    private onGetProducts = (response: CustomResponse) => {
         const products: Product[] = []
         for (const element of response.getData().products) {
             products.push(new Product(element))

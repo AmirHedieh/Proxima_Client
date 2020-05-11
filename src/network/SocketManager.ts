@@ -80,7 +80,7 @@ export class SocketManager {
         this.socket.emit('product', params)
     }
 
-    public onGetProduct(callback: (result: CustomResponse) => void) {
+    public onGetProducts(callback: (result: CustomResponse) => void) {
         this.socket.on('product', (response) => {
             const customResponse = new CustomResponse(response)
             callback(customResponse)
