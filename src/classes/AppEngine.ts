@@ -1,10 +1,10 @@
 import { observable } from 'mobx'
+import { EnvironmentVariables } from '../Constants'
 import { Category } from '../models/Category'
 import { Product } from '../models/Product'
 import { CustomResponse } from '../network/CustomResponse'
 import { SocketManager } from '../network/SocketManager'
 import { UserIdStorage } from '../storage/UserIdStorage'
-import { VersionStorage } from '../storage/VersionStorage'
 import { DetectionState } from '../Types'
 import { BeaconDetector, IBeaconDetector } from './BeaconDetector'
 import { BeaconEngine } from './BeaconEngine'
@@ -78,12 +78,11 @@ export class AppEngine {
     }
 
     private onVersion = async (response: CustomResponse) => {
-        const version = await VersionStorage.get()
-        if (version !== response.getData().version) {
+        if (EnvironmentVariables.version !== response.getData().version) {
             // update app
-            await VersionStorage.set(response.getData().version)
+            return
         }
-        console.log(response)
+        console.log('app is up-to-date')
     }
 
     private onCategories = (response: CustomResponse) => {
