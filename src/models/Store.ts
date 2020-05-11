@@ -9,7 +9,7 @@ export interface IRawStore {
     info: string
 }
 export class Store {
-    public store: number
+    public id: number
     public picture: string
     public name: string
     public phoneNumber: string
@@ -18,7 +18,7 @@ export class Store {
     public telegram: string
     public info: string
     public constructor(rawStore: IRawStore) {
-        this.store = rawStore.store
+        this.id = rawStore.store
         this.picture = rawStore.picture
         this.name = rawStore.name
         this.phoneNumber = rawStore.phone_number
