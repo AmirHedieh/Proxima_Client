@@ -1,15 +1,13 @@
 import { observable } from 'mobx'
+import { Category } from '../models/Category'
 import { Product } from '../models/Product'
 import { CustomResponse } from '../network/CustomResponse'
-import { HttpManager } from '../network/HttpManager'
 import { SocketManager } from '../network/SocketManager'
 import { UserIdStorage } from '../storage/UserIdStorage'
 import { VersionStorage } from '../storage/VersionStorage'
 import { DetectionState } from '../Types'
-import { RandomGenerator } from '../utils/RandomGenerator'
 import { BeaconDetector, IBeaconDetector } from './BeaconDetector'
 import { BeaconEngine } from './BeaconEngine'
-import { Category } from '../models/Category'
 
 export class AppEngine {
     @observable public products: Product[] = []
