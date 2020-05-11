@@ -42,15 +42,30 @@ export class AppEngine {
     }
 
     public async init(): Promise<boolean> {
+        this.socketManager.onConnect(this.onConnect)
         this.socketManager.onMajorChange(this.onMajorChange)
         this.socketManager.onMinorChange(this.onMinorChange)
-        this.socketManager.onConnect(this.onConnect)
         this.socketManager.onReconnect(this.onReconnect)
         this.socketManager.onRegister(this.onRegister)
-        this.socketManager.onCategory(this.onCategory)
+        this.socketManager.onCategories(this.onCategories)
         this.socketManager.onVersion(this.onVersion)
         this.socketManager.onGetProduct(this.onGetProduct)
         return this.beaconEngine.init()
+    }
+
+    private onConnect = async () => {
+        console.log('connected')
+        const userId = await UserIdStorage.get()
+        console.log('userId: ', userId)
+        if (userId) {
+            // authorize
+            console.log('authorize')
+            this.userId = userId
+            this.socketManager.authorize({ id: Number(userId) })
+        } else {
+            console.log('registering')
+            this.socketManager.register()
+        }
     }
 
     private onMajorChange = (response: CustomResponse) => {
@@ -61,26 +76,13 @@ export class AppEngine {
         console.log('minor', response)
     }
 
-    private onConnect = async () => {
-        console.log('connected')
-        const userId = await UserIdStorage.get()
-        console.log('userId: ', userId)
-        if (userId) {
-            // authorize
-            console.log('authorize')
-            this.socketManager.authorize({ id: Number(userId) })
-        } else {
-            console.log('registering')
-            this.socketManager.register()
-        }
-    }
-
     private onRegister = async (response: CustomResponse) => {
         console.log('on register called', response)
         await UserIdStorage.set(response.getData().id)
+        this.userId = response.getData().id
     }
 
-    private onCategory = (response: CustomResponse) => {
+    private onCategories = (response: CustomResponse) => {
         for (const element of response.getData().categories) {
             this.categories.push(element)
         }
