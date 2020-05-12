@@ -1,3 +1,4 @@
+import { inject } from 'mobx-react'
 import * as React from 'react'
 import { Linking, View } from 'react-native'
 // @ts-ignore
@@ -11,16 +12,16 @@ import { RequirementDialog } from '../../components/requirement_dialog/Requireme
 import { EnvironmentVariables } from '../../Constants'
 import { Localization } from '../../text_process/Localization'
 import { PermissionsHandler } from '../../utils/PermissionsHandler'
-import { BaseScene, IBaseSceneProps } from '../base_scene/BaseScene'
+import { BaseScene } from '../base_scene/BaseScene'
 import { Styles } from './HomeSceneStyles'
-interface IHomeSceneState {
-    requirements: {
-        isConnected: boolean
-        isBluetoothOn: boolean
-        isLocationOn: boolean
-    }
+
+interface IHomeSceneProps {
+    AppState
 }
-export class HomeScene extends BaseScene<IBaseSceneProps, IHomeSceneState> {
+interface IHomeSceneState {}
+
+@inject('AppState')
+export class HomeScene extends BaseScene<IHomeSceneProps, IHomeSceneState> {
     private netManager: INetManager = null
     private bluetoothManager: IBluetoothManager = null
     private locationManager: ILocationManager = null
