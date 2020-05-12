@@ -2,7 +2,7 @@ import { action, computed } from 'mobx'
 import { Product } from '../models/Product'
 import { AppEngine } from './AppEngine'
 
-export class ViewModel {
+export class DomainViewModel {
     private appEngine: AppEngine
     public constructor(appEngine: AppEngine) {
         this.appEngine = appEngine

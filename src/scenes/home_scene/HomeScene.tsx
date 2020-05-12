@@ -4,6 +4,7 @@ import { Linking, View } from 'react-native'
 // @ts-ignore
 import AndroidOpenSettings from 'react-native-android-open-settings'
 import { BluetoothManager, IBluetoothManager } from '../../classes/BluetoothManager'
+import { DomainViewModel } from '../../classes/DomainViewModel'
 import { ILocationManager, LocationManager } from '../../classes/LocationManager'
 import { INetManager, NetManager } from '../../classes/NetManager'
 import { BaseText } from '../../components/base_text/BaseText'
@@ -16,7 +17,7 @@ import { BaseScene } from '../base_scene/BaseScene'
 import { Styles } from './HomeSceneStyles'
 
 interface IHomeSceneProps {
-    AppState
+    AppState: DomainViewModel
 }
 interface IHomeSceneState {}
 
