@@ -11,7 +11,7 @@ import { BeaconEngine } from './BeaconEngine'
 
 export class AppEngine {
     @observable public products: Product[] = []
-    @observable public categories: any[] = [] // TODO: implement DTO
+    @observable public categories: Category[] = []
     @observable public currentProduct: Product = null
     @observable public detectionState: DetectionState = 'NO_STORE_NO_BEACON'
     private beaconDetector: IBeaconDetector = null
