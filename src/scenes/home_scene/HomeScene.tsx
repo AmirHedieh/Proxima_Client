@@ -72,9 +72,8 @@ export class HomeScene extends BaseScene<IHomeSceneProps, IHomeSceneState> {
     protected renderSafe(): JSX.Element {
         return (
             <View>
-                <BaseText text={'homescene'} />
-                <NormalButton text='sss' onPress={() => Linking.openURL('App-Prefs:LOCATION_SERVICES')} />
                 <RequirementDialog ref={(ref) => (this.requirementDialog = ref)} />
+                {this.renderContent()}
             </View>
         )
     }
@@ -130,5 +129,25 @@ export class HomeScene extends BaseScene<IHomeSceneProps, IHomeSceneState> {
             return
         }
         this.requirementDialog.hide()
+    }
+    private renderContent(): JSX.Element {
+        switch (this.props.AppState.getDetectionState()) {
+            case 'NO_STORE_NO_BEACON':
+                return this.renderSearchingStore()
+
+            case 'FOUND_STORE_NO_BEACON':
+                return this.renderShowProducts()
+
+            case 'FOUND_STORE_FOUND_BEACON':
+                return <BaseText text={'Beacon found'} />
+            // TODO: decide if this must get handled from this page or from outside
+        }
+    }
+    private renderSearchingStore(): JSX.Element {
+        return <BaseText text={'Please enter an store'} />
+    }
+
+    private renderShowProducts(): JSX.Element {
+        return <BaseText text={'list of products'} />
     }
 }
