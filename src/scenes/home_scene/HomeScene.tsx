@@ -1,4 +1,4 @@
-import { inject } from 'mobx-react'
+import { inject, observer } from 'mobx-react'
 import * as React from 'react'
 import { Linking, View } from 'react-native'
 // @ts-ignore
@@ -8,7 +8,6 @@ import { DomainViewModel } from '../../classes/DomainViewModel'
 import { ILocationManager, LocationManager } from '../../classes/LocationManager'
 import { INetManager, NetManager } from '../../classes/NetManager'
 import { BaseText } from '../../components/base_text/BaseText'
-import { NormalButton } from '../../components/normal_button/NormalButton'
 import { RequirementDialog } from '../../components/requirement_dialog/RequirementDialog'
 import { EnvironmentVariables } from '../../Constants'
 import { Localization } from '../../text_process/Localization'
@@ -22,6 +21,7 @@ interface IHomeSceneProps {
 interface IHomeSceneState {}
 
 @inject('AppState')
+@observer
 export class HomeScene extends BaseScene<IHomeSceneProps, IHomeSceneState> {
     private netManager: INetManager = null
     private bluetoothManager: IBluetoothManager = null
@@ -58,9 +58,9 @@ export class HomeScene extends BaseScene<IHomeSceneProps, IHomeSceneState> {
 
     protected async sceneDidMount() {
         this.netManager.subscribe() // event get called on subscribe once
-        await this.bluetoothManager.subscribe() // event get called on subscribe once
-        await this.locationManager.subscribe() //
-        this.checkRequirements()
+        // await this.bluetoothManager.subscribe() // event get called on subscribe once
+        // await this.locationManager.subscribe() //
+        // this.checkRequirements()
     }
 
     protected sceneWillUnmount() {
@@ -73,6 +73,7 @@ export class HomeScene extends BaseScene<IHomeSceneProps, IHomeSceneState> {
         return (
             <View>
                 <RequirementDialog ref={(ref) => (this.requirementDialog = ref)} />
+                <BaseText text={this.props.AppState.getDetectionState()} />
                 {this.renderContent()}
             </View>
         )
