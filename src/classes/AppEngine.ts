@@ -91,6 +91,7 @@ export class AppEngine {
     }
 
     private onCategories = (response: CustomResponse) => {
+        console.log(response)
         for (const element of response.getData().categories) {
             this.categories.push(new Category(element))
         }
@@ -99,12 +100,12 @@ export class AppEngine {
 
     private onMajorChange = (response: CustomResponse) => {
         console.log('on major', response)
-        this.store = response.getData().store
+        this.store = new Store(response.getData().store)
     }
 
     private onMinorChange = (response: CustomResponse) => {
         console.log('on minor', response)
-        this.currentProduct = response.getData().product
+        this.currentProduct = new Product(response.getData().product)
     }
 
     private onGetProducts = (response: CustomResponse) => {
