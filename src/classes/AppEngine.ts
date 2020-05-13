@@ -2,6 +2,7 @@ import { observable } from 'mobx'
 import { EnvironmentVariables } from '../Constants'
 import { Category } from '../models/Category'
 import { Product } from '../models/Product'
+import { Store } from '../models/Store'
 import { CustomResponse } from '../network/CustomResponse'
 import { SocketManager } from '../network/SocketManager'
 import { UserIdStorage } from '../storage/UserIdStorage'
@@ -10,6 +11,7 @@ import { BeaconDetector, IBeaconDetector } from './BeaconDetector'
 import { BeaconEngine } from './BeaconEngine'
 
 export class AppEngine {
+    @observable public store: Store = null
     @observable public products: Product[] = []
     @observable public categories: Category[] = []
     @observable public currentProduct: Product = null
@@ -23,20 +25,23 @@ export class AppEngine {
         this.beaconDetector = new BeaconDetector()
         this.beaconEngine = new BeaconEngine(this.beaconDetector)
         this.beaconEngine.onMajorChange = (major) => {
+            console.log('major changed')
             if (!major) {
                 this.socketManager.majorChange({ major })
                 this.detectionState = 'NO_STORE_NO_BEACON'
                 return
             }
+            this.detectionState = 'FOUND_STORE_NO_BEACON'
             // change state to store found
         }
         this.beaconEngine.onMinorChange = async (minor) => {
-            console.log('minor change')
+            console.log('minor changed')
             if (!minor) {
                 this.socketManager.minorChange({ minor })
                 this.detectionState = 'FOUND_STORE_NO_BEACON'
                 return
             }
+            this.detectionState = 'FOUND_STORE_FOUND_BEACON'
         }
     }
 
@@ -93,11 +98,13 @@ export class AppEngine {
     }
 
     private onMajorChange = (response: CustomResponse) => {
-        console.log('major', response)
+        console.log('on major', response)
+        this.store = response.getData().store
     }
 
     private onMinorChange = (response: CustomResponse) => {
-        console.log('minor', response)
+        console.log('on minor', response)
+        this.currentProduct = response.getData().product
     }
 
     private onGetProducts = (response: CustomResponse) => {
