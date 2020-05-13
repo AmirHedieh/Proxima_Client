@@ -25,12 +25,13 @@ export class AppEngine {
         this.beaconDetector = new BeaconDetector()
         this.beaconEngine = new BeaconEngine(this.beaconDetector)
         this.beaconEngine.onMajorChange = (major) => {
-            console.log('major changed')
             if (!major) {
-                this.socketManager.majorChange({ major })
+                this.store = null
                 this.detectionState = 'NO_STORE_NO_BEACON'
                 return
             }
+            console.log('major changed')
+            this.socketManager.majorChange({ major })
             this.detectionState = 'FOUND_STORE_NO_BEACON'
             // change state to store found
         }
