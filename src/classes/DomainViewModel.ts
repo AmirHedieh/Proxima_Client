@@ -37,4 +37,8 @@ export class DomainViewModel {
     public getDetectionState() {
         return this.appEngine.detectionState
     }
+
+    public getStore() {
+        return this.appEngine.store
+    }
 }
