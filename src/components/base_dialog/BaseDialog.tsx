@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { Modal, TouchableWithoutFeedback, View } from 'react-native'
+import * as Animatable from 'react-native-animatable'
 import { StyleType } from '../../Types'
 import { SafeTouch } from '../safe_touch/SafeTouch'
 import { Styles } from './BaseDialogStyles'
-
 // tslint:disable-next-line: no-empty-interface
 export interface IBaseDialogProps {}
 
@@ -37,7 +37,9 @@ export abstract class BaseDialog<
             >
                 <SafeTouch style={safeTouchStyle} activeOpacity={1} onPress={this.onRequestClose}>
                     <TouchableWithoutFeedback>
-                        <View style={centerContainerStyle}>{this.renderInside()}</View>
+                        <Animatable.View useNativeDriver={true} animation='slideInUp' iterationCount={1}>
+                            <View style={centerContainerStyle}>{this.renderInside()}</View>
+                        </Animatable.View>
                     </TouchableWithoutFeedback>
                 </SafeTouch>
             </Modal>
