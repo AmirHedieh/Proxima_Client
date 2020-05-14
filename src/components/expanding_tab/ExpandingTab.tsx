@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { View } from 'react-native'
-import { Dimension } from '../../GlobalStyles'
 import { BaseText } from '../base_text/BaseText'
 import { SafeTouch } from '../safe_touch/SafeTouch'
 import { Styles } from './ExpandingTabStyles'
@@ -13,6 +12,7 @@ interface IProps {
     collapsedTitle: string
     expandedContent: JSX.Element
 }
+
 export class ExpandingTab extends React.Component<IProps, IState> {
     public state: IState = {
         isExpanded: false
@@ -31,6 +31,7 @@ export class ExpandingTab extends React.Component<IProps, IState> {
                 <SafeTouch onPress={this.collapse}>
                     <BaseText text={'collapse'} />
                 </SafeTouch>
+                {this.props.expandedContent}
             </View>
         )
     }
