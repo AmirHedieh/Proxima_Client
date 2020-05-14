@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { View } from 'react-native'
+import * as Animatable from 'react-native-animatable'
 import { BaseText } from '../base_text/BaseText'
 import { SafeTouch } from '../safe_touch/SafeTouch'
 import { Styles } from './ExpandingTabStyles'
-
 interface IState {
     isExpanded: boolean
 }
@@ -18,31 +18,23 @@ export class ExpandingTab extends React.Component<IProps, IState> {
         isExpanded: false
     }
 
+    private collapsedStyle = [Styles.container, Styles.collapsedContainer]
+    private expandedStyle = [Styles.container, Styles.expandedContainer]
     public render(): JSX.Element {
-        if (this.state.isExpanded === false) {
-            return (
-                <SafeTouch onPress={this.expand} style={Styles.collapsedContainer}>
-                    <BaseText text={this.props.collapsedTitle} />
-                </SafeTouch>
-            )
-        }
         return (
-            <View style={Styles.expandedContainer}>
-                <SafeTouch onPress={this.collapse}>
-                    <BaseText text={'collapse'} />
+            <Animatable.View
+                transition={'height'}
+                style={[Styles.container, this.state.isExpanded ? Styles.expandedContainer : Styles.collapsedContainer]}
+            >
+                <SafeTouch style={{ flex: 1, backgroundColor: '#0ff' }} onPress={this.switchExpansionState}>
+                    <BaseText text='touch me' />
                 </SafeTouch>
-                {this.props.expandedContent}
-            </View>
+            </Animatable.View>
         )
     }
-    private expand = () => {
+    private switchExpansionState = () => {
         this.setState({
-            isExpanded: true
-        })
-    }
-    private collapse = () => {
-        this.setState({
-            isExpanded: false
+            isExpanded: !this.state.isExpanded
         })
     }
 }
