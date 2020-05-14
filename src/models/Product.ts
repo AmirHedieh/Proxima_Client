@@ -11,6 +11,10 @@ export interface IRawProduct {
 }
 
 export class Product {
+    public static keyExtractor(product: Product): string {
+        return String(product.id)
+    }
+
     public id: number
     public name: string
     public info: string
@@ -19,6 +23,7 @@ export class Product {
     public clothMaterial: string
     public picture: string[]
     public category: number
+
     constructor(rawProduct: IRawProduct) {
         this.id = rawProduct.product
         this.name = rawProduct.name
