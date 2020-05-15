@@ -18,8 +18,6 @@ export class ExpandingTab extends React.Component<IProps, IState> {
         isExpanded: false
     }
 
-    private collapsedStyle = [Styles.container, Styles.collapsedContainer]
-    private expandedStyle = [Styles.container, Styles.expandedContainer]
     public render(): JSX.Element {
         return (
             <Animatable.View
