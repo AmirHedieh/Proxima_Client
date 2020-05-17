@@ -32,7 +32,7 @@ export class ExpandingTab extends React.Component<IProps, IState> {
                     onPress={this.switchExpansionState}
                 >
                     {this.state.isExpanded ? (
-                        <Icon size={40} name='sort-down' />
+                        <Icon size={32} name='chevron-down' />
                     ) : (
                         <BaseText text={this.props.collapsedTitle} />
                     )}
