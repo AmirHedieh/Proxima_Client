@@ -7,6 +7,7 @@ import { stores } from './mobx/RootStore'
 import { SceneParams } from './SceneParams'
 import { FakeScene } from './scenes/FakeScene/FakeScene'
 import { HomeScene } from './scenes/home_scene/HomeScene'
+import { MinimalProductScene } from './scenes/minimal_product_scene/MinimalProductScene'
 import { SplashScreen } from './scenes/welcome_scenes/splash_scene/SplashScene'
 const animate = () => Animations.zoomIn()
 
@@ -49,6 +50,7 @@ const scenes = Actions.create(
     <Scene key='root' hideNavBar={true} transitionConfig={animate}>
         <Scene initial={true} key={SceneParams.HomeScene.name} component={HomeScene} />
         <Scene key={SceneParams.SplashScreen.name} component={SplashScreen} />
+        <Scene key={SceneParams.MinimalProductScene.name} component={MinimalProductScene} />
         <Scene key={'fake'} component={FakeScene} />
     </Scene>
 )
