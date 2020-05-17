@@ -20,8 +20,7 @@ export const Styles = StyleSheet.create({
     safeTouch: {
         width: '100%',
         alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#0ff'
+        justifyContent: 'center'
     },
     safeTouchCollapsed: {
         flex: 1

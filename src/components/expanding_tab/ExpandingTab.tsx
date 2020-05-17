@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { View } from 'react-native'
 import * as Animatable from 'react-native-animatable'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import { BaseText } from '../base_text/BaseText'
 import { SafeTouch } from '../safe_touch/SafeTouch'
 import { Styles } from './ExpandingTabStyles'
@@ -31,8 +31,13 @@ export class ExpandingTab extends React.Component<IProps, IState> {
                     ]}
                     onPress={this.switchExpansionState}
                 >
-                    <BaseText text={this.props.collapsedTitle} />
+                    {this.state.isExpanded ? (
+                        <Icon size={40} name='sort-down' />
+                    ) : (
+                        <BaseText text={this.props.collapsedTitle} />
+                    )}
                 </SafeTouch>
+                {this.state.isExpanded ? this.props.expandedContent : null}
             </Animatable.View>
         )
     }
