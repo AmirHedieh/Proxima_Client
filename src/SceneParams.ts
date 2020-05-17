@@ -12,5 +12,11 @@ export const SceneParams = {
         navigate: () => {
             NavigationActions.push(SceneParams.SplashScreen.name)
         }
+    },
+    MinimalProductScene: {
+        name: 'MinimalProductScene',
+        navigate: (params: { productId: number }) => {
+            NavigationActions.push(SceneParams.MinimalProductScene.name, params)
+        }
     }
 }
