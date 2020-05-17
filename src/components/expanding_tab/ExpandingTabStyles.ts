@@ -16,5 +16,17 @@ export const Styles = StyleSheet.create({
     },
     expandedContainer: {
         height: Dimension.deviceHeight * 0.8
+    },
+    safeTouch: {
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#0ff'
+    },
+    safeTouchCollapsed: {
+        flex: 1
+    },
+    safeTouchExpanded: {
+        height: 40 * Dimension.scaleX
     }
 })

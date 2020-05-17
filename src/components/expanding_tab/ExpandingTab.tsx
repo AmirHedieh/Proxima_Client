@@ -24,8 +24,14 @@ export class ExpandingTab extends React.Component<IProps, IState> {
                 transition={'height'}
                 style={[Styles.container, this.state.isExpanded ? Styles.expandedContainer : Styles.collapsedContainer]}
             >
-                <SafeTouch style={{ flex: 1, backgroundColor: '#0ff' }} onPress={this.switchExpansionState}>
-                    <BaseText text='touch me' />
+                <SafeTouch
+                    style={[
+                        Styles.safeTouch,
+                        this.state.isExpanded ? Styles.safeTouchExpanded : Styles.safeTouchCollapsed
+                    ]}
+                    onPress={this.switchExpansionState}
+                >
+                    <BaseText text={this.props.collapsedTitle} />
                 </SafeTouch>
             </Animatable.View>
         )
