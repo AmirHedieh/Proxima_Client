@@ -15,7 +15,7 @@ interface IMinimalProductSceneProps {
 @observer
 export class MinimalProductScene extends BaseScene<IMinimalProductSceneProps, IBaseSceneState> {
     public renderSafe(): JSX.Element {
-        const product = this.props.AppState.getProductList()[this.props.productId]
+        const product = this.props.AppState.getProductList().get(this.props.productId)
         return (
             <View>
                 <BaseText text={product.id} />
