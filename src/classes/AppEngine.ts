@@ -13,7 +13,7 @@ import { BeaconEngine } from './BeaconEngine'
 export class AppEngine {
     @observable public store: Store = null
     @observable public products: Map<number, Product> = new Map<number, Product>()
-    @observable public categories: Category[] = []
+    @observable public categories: Map<number, Category> = new Map<number, Category>()
     @observable public currentProduct: Product = null
     @observable public detectionState: DetectionState = 'NO_STORE_NO_BEACON'
     private beaconDetector: IBeaconDetector = null
@@ -92,9 +92,9 @@ export class AppEngine {
     }
 
     private onCategories = (response: CustomResponse) => {
-        console.log(response)
         for (const element of response.getData().categories) {
-            this.categories.push(new Category(element))
+            const category = new Category(element)
+            this.categories.set(category.id, category)
         }
         console.log('categories', this.categories)
     }
@@ -110,9 +110,9 @@ export class AppEngine {
     }
 
     private onGetProducts = (response: CustomResponse) => {
-        const products: Product[] = response.getData().products // just to make types available
-        for (const element of products) {
-            this.products.set(element.id, element)
+        for (const element of response.getData().products) {
+            const product = new Product(element)
+            this.products.set(product.id, product)
         }
     }
 }
