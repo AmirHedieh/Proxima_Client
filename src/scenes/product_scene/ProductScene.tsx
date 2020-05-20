@@ -7,7 +7,7 @@ import { NavigationActions } from '../../NavigationActions'
 import { BaseScene, IBaseSceneState } from '../base_scene/BaseScene'
 
 interface IProductSceneProps {
-    AppState: DomainViewModel
+    AppState?: DomainViewModel
     productId: number
 }
 
