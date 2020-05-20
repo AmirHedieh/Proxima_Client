@@ -18,6 +18,7 @@ export class ProductScene extends BaseScene<IProductSceneProps, IBaseSceneState>
         const product = this.props.AppState.getCurrentProduct()
         return (
             <View>
+                <BaseText text={'Found beacon!'} />
                 <BaseText text={`id: ${product?.id}`} />
                 <BaseText text={`name: ${product?.name}`} />
             </View>
