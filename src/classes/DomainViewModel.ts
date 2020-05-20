@@ -14,12 +14,13 @@ export class DomainViewModel {
 
     @action
     public addProduct(product: Product) {
-        this.appEngine.products.push(product)
+        this.appEngine.products.set(product.id, product)
     }
+
     @computed
     public get getProductsLength() {
         // TODO: its optional and can be removed
-        return this.appEngine.products.length
+        return this.appEngine.products.size
     }
 
     public getProductList() {
