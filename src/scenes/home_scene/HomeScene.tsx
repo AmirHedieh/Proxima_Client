@@ -11,9 +11,11 @@ import { BaseText } from '../../components/base_text/BaseText'
 import { ExpandingTab } from '../../components/expanding_tab/ExpandingTab'
 import { NormalButton } from '../../components/normal_button/NormalButton'
 import { RequirementDialog } from '../../components/requirement_dialog/RequirementDialog'
+import { SafeTouch } from '../../components/safe_touch/SafeTouch'
 import { EnvironmentVariables } from '../../Constants'
 import { GlobalStyles } from '../../GlobalStyles'
 import { Product } from '../../models/Product'
+import { SceneParams } from '../../SceneParams'
 import { Localization } from '../../text_process/Localization'
 import { PermissionsHandler } from '../../utils/PermissionsHandler'
 import { RandomGenerator } from '../../utils/RandomGenerator'
@@ -191,6 +193,10 @@ export class HomeScene extends BaseScene<IHomeSceneProps, IHomeSceneState> {
     // it seems flatList item doesn't observe changes, so maybe it wont be reactive
     private renderProductFlatListItem = (event: { item: Product }) => {
         const product = event.item
-        return <BaseText text={product.name} />
+        return (
+            <SafeTouch onPress={() => SceneParams.MinimalProductScene.navigate({ productId: product.id })}>
+                <BaseText text={product.name} />
+            </SafeTouch>
+        )
     }
 }
