@@ -20,6 +20,7 @@ import { Localization } from '../../text_process/Localization'
 import { PermissionsHandler } from '../../utils/PermissionsHandler'
 import { RandomGenerator } from '../../utils/RandomGenerator'
 import { BaseScene } from '../base_scene/BaseScene'
+import { ProductScene } from '../product_scene/ProductScene'
 import { Styles } from './HomeSceneStyles'
 
 interface IHomeSceneProps {
@@ -138,7 +139,7 @@ export class HomeScene extends BaseScene<IHomeSceneProps, IHomeSceneState> {
         this.requirementDialog.hide()
     }
     private renderContent(): JSX.Element {
-        return this.renderShowProducts()
+        return this.renderCurrentProduct()
         switch (this.props.AppState.getDetectionState()) {
             case 'NO_STORE_NO_BEACON':
                 return this.renderSearchingStore()
@@ -160,14 +161,14 @@ export class HomeScene extends BaseScene<IHomeSceneProps, IHomeSceneState> {
             <View style={{ flex: 1, backgroundColor: '#39f' }}>
                 <NormalButton
                     text={'Add product'}
-                    onPress={() =>
+                    onPress={() => {
                         this.props.AppState.addProduct(
                             new Product({
                                 product: RandomGenerator.generateRandomNumber(0, 1000),
                                 name: `Product ${RandomGenerator.generateRandomNumber(0, 1000)}`
                             })
                         )
-                    }
+                    }}
                 />
                 <View style={{ backgroundColor: '#f00', flexDirection: 'row', justifyContent: 'center' }}>
                     <BaseText text={'LOGO'} />
@@ -180,9 +181,13 @@ export class HomeScene extends BaseScene<IHomeSceneProps, IHomeSceneState> {
     }
 
     private renderProductList(): JSX.Element {
+        const products = []
+        for (const element of this.props.AppState.getProductList().values()) {
+            products.push(element)
+        }
         return (
             <FlatList
-                data={this.props.AppState.getProductList().slice()}
+                data={products}
                 renderItem={this.renderProductFlatListItem}
                 keyExtractor={Product.keyExtractor}
                 numColumns={2}
@@ -194,9 +199,19 @@ export class HomeScene extends BaseScene<IHomeSceneProps, IHomeSceneState> {
     private renderProductFlatListItem = (event: { item: Product }) => {
         const product = event.item
         return (
-            <SafeTouch onPress={() => SceneParams.MinimalProductScene.navigate({ productId: product.id })}>
+            <SafeTouch
+                onPress={() =>
+                    SceneParams.MinimalProductScene.navigate({
+                        productId: event.item.id
+                    })
+                }
+            >
                 <BaseText text={product.name} />
             </SafeTouch>
         )
+    }
+
+    private renderCurrentProduct(): JSX.Element {
+        return <ProductScene productId={1} />
     }
 }
