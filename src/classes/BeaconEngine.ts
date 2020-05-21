@@ -39,7 +39,7 @@ export class BeaconEngine {
     }
 
     public stopDetecting(): Promise<boolean> {
-        return this.beaconDetector.stopDetecting()
+        return this.beaconDetector.stopDetecting('')
     }
 
     private processLoop(): void {
