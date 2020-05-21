@@ -8,6 +8,10 @@ export class DomainViewModel {
         this.appEngine = appEngine
     }
 
+    public async init(): Promise<boolean> {
+        return this.appEngine.init()
+    }
+
     @action
     public addProduct(product: Product) {
         this.appEngine.products.set(product.id, product)
