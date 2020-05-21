@@ -28,8 +28,7 @@ export class AppEngine {
         this.socketManager.onConnect(this.onConnect)
         this.socketManager.onReconnect(this.onReconnect)
         this.socketManager.onRegister(this.onRegister)
-        this.socketManager.onVersion(this.onVersion)
-        this.socketManager.onCategories(this.onCategories)
+        this.socketManager.onStaticData(this.onStaticData)
         this.socketManager.onMajorChange(this.onMajorChange)
         this.socketManager.onMinorChange(this.onMinorChange)
         this.socketManager.onGetProducts(this.onGetProducts)
@@ -38,7 +37,7 @@ export class AppEngine {
         this.beaconEngine.onMinorChange = this.emitMinorChange
     }
 
-    public async init(): Promise<boolean> {
+    public init(): void {
         return this.beaconEngine.init()
     }
 
@@ -89,20 +88,20 @@ export class AppEngine {
         this.userId = response.getData().id
     }
 
-    private onVersion = async (response: CustomResponse) => {
-        if (EnvironmentVariables.version !== response.getData().version) {
-            // update app
-            return
-        }
-        console.log('app is up-to-date')
-    }
+    private onStaticData = async (response: CustomResponse) => {
+        // if (EnvironmentVariables.version !== response.getData().version) {
+        //     // update app
+        //     return
+        // }
+        // console.log('app is up-to-date')
 
-    private onCategories = (response: CustomResponse) => {
-        for (const element of response.getData().categories) {
-            const category = new Category(element)
-            this.categories.set(category.id, category)
-        }
-        console.log('categories', this.categories)
+        // for (const element of response.getData().categories) {
+        //     const category = new Category(element)
+        //     this.categories.set(category.id, category)
+        // }
+        // console.log('categories', this.categories)
+
+        await this.beaconEngine.startDetecting()
     }
 
     private onMajorChange = (response: CustomResponse) => {
