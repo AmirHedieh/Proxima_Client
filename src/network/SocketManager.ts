@@ -25,6 +25,10 @@ export class SocketManager {
         this.socket.on('reconnect', onReconnect)
     }
 
+    public onDisconnect(onDisconnect: () => void) {
+        this.socket.on('disconnect', onDisconnect)
+    }
+
     public register() {
         this.socket.emit('register')
     }
@@ -40,15 +44,8 @@ export class SocketManager {
         this.socket.emit('authorize', params)
     }
 
-    public onCategories(callback: (result: CustomResponse) => void) {
-        this.socket.on('category', (response) => {
-            const customResponse = new CustomResponse(response)
-            callback(customResponse)
-        })
-    }
-
-    public onVersion(callback: (result: CustomResponse) => void) {
-        this.socket.on('version', (response) => {
+    public onStaticData(callback: (result: CustomResponse) => void) {
+        this.socket.on('staticData', (response) => {
             const customResponse = new CustomResponse(response)
             callback(customResponse)
         })
