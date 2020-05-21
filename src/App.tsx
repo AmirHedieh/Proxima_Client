@@ -56,8 +56,8 @@ const scenes = Actions.create(
 )
 
 export class App extends React.Component {
-    public async componentDidMount(): Promise<void> {
-        await stores.AppState.init()
+    public componentDidMount(): void {
+        stores.AppState.init()
     }
     public render() {
         return (
