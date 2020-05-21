@@ -24,29 +24,7 @@ export class AppEngine {
     public constructor() {
         this.beaconDetector = new BeaconDetector()
         this.beaconEngine = new BeaconEngine(this.beaconDetector)
-        this.beaconEngine.onMajorChange = (major) => {
-            if (!major) {
-                this.store = null
-                this.detectionState = 'NO_STORE_NO_BEACON'
-                return
-            }
-            console.log('major changed')
-            this.socketManager.majorChange({ major })
-            this.detectionState = 'FOUND_STORE_NO_BEACON'
-            // change state to store found
-        }
-        this.beaconEngine.onMinorChange = async (minor) => {
-            console.log('minor changed')
-            if (!minor) {
-                this.socketManager.minorChange({ minor })
-                this.detectionState = 'FOUND_STORE_NO_BEACON'
-                return
-            }
-            this.detectionState = 'FOUND_STORE_FOUND_BEACON'
-        }
-    }
 
-    public async init(): Promise<boolean> {
         this.socketManager.onConnect(this.onConnect)
         this.socketManager.onReconnect(this.onReconnect)
         this.socketManager.onRegister(this.onRegister)
@@ -55,7 +33,35 @@ export class AppEngine {
         this.socketManager.onMajorChange(this.onMajorChange)
         this.socketManager.onMinorChange(this.onMinorChange)
         this.socketManager.onGetProducts(this.onGetProducts)
+
+        this.beaconEngine.onMajorChange = this.emitMajorChange
+        this.beaconEngine.onMinorChange = this.emitMinorChange
+    }
+
+    public async init(): Promise<boolean> {
         return this.beaconEngine.init()
+    }
+
+    private emitMajorChange = (major) => {
+        if (!major) {
+            this.store = null
+            this.detectionState = 'NO_STORE_NO_BEACON'
+            return
+        }
+        console.log('major changed')
+        this.socketManager.majorChange({ major })
+        this.detectionState = 'FOUND_STORE_NO_BEACON'
+        // change state to store found
+    }
+
+    private emitMinorChange = (minor) => {
+        console.log('minor changed')
+        if (!minor) {
+            this.socketManager.minorChange({ minor })
+            this.detectionState = 'FOUND_STORE_NO_BEACON'
+            return
+        }
+        this.detectionState = 'FOUND_STORE_FOUND_BEACON'
     }
 
     private onConnect = async () => {
@@ -66,7 +72,7 @@ export class AppEngine {
             // authorize
             console.log('authorize')
             this.userId = userId
-            this.socketManager.authorize({ id: Number(userId) })
+            this.socketManager.authorize({ id: userId })
         } else {
             console.log('registering')
             this.socketManager.register()
