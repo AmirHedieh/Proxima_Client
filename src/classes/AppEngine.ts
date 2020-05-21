@@ -27,6 +27,7 @@ export class AppEngine {
 
         this.socketManager.onConnect(this.onConnect)
         this.socketManager.onReconnect(this.onReconnect)
+        this.socketManager.onDisconnect(this.onDisconnect)
         this.socketManager.onRegister(this.onRegister)
         this.socketManager.onStaticData(this.onStaticData)
         this.socketManager.onMajorChange(this.onMajorChange)
@@ -80,6 +81,12 @@ export class AppEngine {
 
     private onReconnect = () => {
         console.log('Reconnected')
+    }
+
+    private onDisconnect = async () => {
+        console.log('Disconnected')
+        await this.beaconEngine.stopDetecting()
+        console.log('stopped detecting')
     }
 
     private onRegister = async (response: CustomResponse) => {
