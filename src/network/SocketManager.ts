@@ -36,7 +36,7 @@ export class SocketManager {
         })
     }
 
-    public authorize(params: { id: number }) {
+    public authorize(params: { id: string }) {
         this.socket.emit('authorize', params)
     }
 
