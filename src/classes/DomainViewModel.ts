@@ -8,7 +8,7 @@ export class DomainViewModel {
         this.appEngine = appEngine
     }
 
-    public async init(): Promise<boolean> {
+    public init(): void {
         return this.appEngine.init()
     }
 
