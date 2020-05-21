@@ -7,8 +7,8 @@ export class BeaconEngine {
     public onMinorChange: (minor: number) => void = null
     private beaconDetector: IBeaconDetector = null
     private beacons: IBeacon[] = []
-    private major: number
-    private minor: number
+    private major: number = -1
+    private minor: number = -1
     private minorRepeatDetector: RepeatDetector
 
     public constructor(beaconDetector: IBeaconDetector) {
@@ -24,13 +24,22 @@ export class BeaconEngine {
         return this.minor
     }
 
-    public async init(): Promise<boolean> {
+    public init(): void {
         this.beaconDetector.init(500)
         this.beaconDetector.onBeaconFetch = (beacons) => {
             this.beacons = beacons
             this.processLoop()
         }
+    }
+
+    public startDetecting(): Promise<boolean> {
+        this.major = -1
+        this.minor = -1
         return this.beaconDetector.startDetecting('')
+    }
+
+    public stopDetecting(): Promise<boolean> {
+        return this.beaconDetector.stopDetecting()
     }
 
     private processLoop(): void {
