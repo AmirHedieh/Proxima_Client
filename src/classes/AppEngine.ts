@@ -43,12 +43,12 @@ export class AppEngine {
     }
 
     private emitMajorChange = (major) => {
+        console.log('major changed')
         if (!major) {
             this.store = null
             this.detectionState = 'NO_STORE_NO_BEACON'
             return
         }
-        console.log('major changed')
         this.socketManager.majorChange({ major })
         this.detectionState = 'FOUND_STORE_NO_BEACON'
         // change state to store found
