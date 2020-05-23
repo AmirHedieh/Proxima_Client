@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 import { Colors } from '../../Constants'
-import { Dimension, GlobalStyles } from '../../GlobalStyles'
+import { Dimension, Fonts, GlobalStyles } from '../../GlobalStyles'
 
 export const Styles = StyleSheet.create({
     container: {
@@ -27,5 +27,8 @@ export const Styles = StyleSheet.create({
     },
     safeTouchExpanded: {
         height: 40 * Dimension.scaleX
+    },
+    collapsedTitle: {
+        fontFamily: Fonts.persian.vazirBold
     }
 })
