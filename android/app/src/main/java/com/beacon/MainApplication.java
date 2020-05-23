@@ -3,6 +3,7 @@ package com.beacon;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.nearit.connectivity.RNConnectivityStatusPackage;
 import com.levelasquez.androidopensettings.AndroidOpenSettingsPackage;
 import it.innove.BleManagerPackage;
@@ -29,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new VectorIconsPackage(),
             new RNConnectivityStatusPackage(),
             new AndroidOpenSettingsPackage(),
             new BleManagerPackage(),
