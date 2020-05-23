@@ -1,22 +1,27 @@
 import { inject, observer } from 'mobx-react'
 import * as React from 'react'
-import { FlatList, View, Image, ScrollView } from 'react-native'
+import { FlatList, Image, ScrollView, View } from 'react-native'
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome'
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
+import { DomainViewModel } from '../../classes/DomainViewModel'
 import { BaseText } from '../../components/base_text/BaseText'
 import { ExpandingTab } from '../../components/expanding_tab/ExpandingTab'
 import { NormalButton } from '../../components/normal_button/NormalButton'
 import { SafeTouch } from '../../components/safe_touch/SafeTouch'
-import { Product } from '../../models/Product'
-import { NavigationActions } from '../../NavigationActions'
-import { SceneParams } from '../../SceneParams'
-import { RandomGenerator } from '../../utils/RandomGenerator'
-import { BaseScene, IBaseSceneState } from '../base_scene/BaseScene'
 import { Colors } from '../../Constants'
-import { Styles } from './StoreInfoSceneStyles'
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { Dimension, GlobalStyles } from '../../GlobalStyles'
+import { MinimalProduct } from '../../models/MinimalProduct'
+import { Product } from '../../models/Product'
 import { IStore } from '../../models/Store'
+import { NavigationActions } from '../../NavigationActions'
+import { MinimalProductCard } from '../../RFC/MinimalProductCard'
+import { SceneParams } from '../../SceneParams'
+import { BaseScene, IBaseSceneState } from '../base_scene/BaseScene'
+import { Styles } from './StoreInfoSceneStyles'
 
-interface IProductSceneProps extends IStore {}
+interface IProductSceneProps extends IStore {
+    AppState?: DomainViewModel
+}
 
 @inject('AppState')
 @observer
@@ -25,17 +30,6 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IBaseSceneStat
     public renderSafe(): JSX.Element {
         return (
             <View style={Styles.root}>
-                {/* <NormalButton
-                    text={'Add product'}
-                    onPress={() => {
-                        this.props.AppState.addProduct(
-                            new Product({
-                                product: RandomGenerator.generateRandomNumber(0, 1000),
-                                name: `Product ${RandomGenerator.generateRandomNumber(0, 1000)}`
-                            })
-                        )
-                    }}
-                /> */}
                 <View style={Styles.topBar}>
                     <MaterialIcon name='weekend' size={59} />
                 </View>
@@ -71,7 +65,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IBaseSceneStat
 
                         {this.props.whatsapp && (
                             <View style={Styles.rowCenterView}>
-                                {/* <Icon name='rocket' size={25} /> */}
+                                <FontAwesomeIcon name='whatsapp' size={this.infoIconSize} />
                                 <View style={GlobalStyles.spacer} />
                                 <BaseText style={Styles.contactText} text={this.props.whatsapp} />
                             </View>
@@ -81,7 +75,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IBaseSceneStat
 
                         {this.props.instagram && (
                             <View style={Styles.rowCenterView}>
-                                {/* <Icon name='rocket' size={25} /> */}
+                                <FontAwesomeIcon name='instagram' size={this.infoIconSize} />
                                 <View style={GlobalStyles.spacer} />
                                 <BaseText style={Styles.contactText} text={this.props.instagram} />
                             </View>
@@ -91,14 +85,14 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IBaseSceneStat
 
                         {this.props.telegram && (
                             <View style={Styles.rowCenterView}>
-                                {/* <Icon name='rocket' size={25} /> */}
+                                <FontAwesomeIcon name='telegram' size={this.infoIconSize} />
                                 <View style={GlobalStyles.spacer} />
                                 <BaseText style={Styles.contactText} text={this.props.telegram} />
                             </View>
                         )}
                     </View>
                 </ScrollView>
-                <ExpandingTab collapsedTitle={'products'} expandedContent={this.renderProductList()} />
+                <ExpandingTab collapsedTitle={'محصولات'} expandedContent={this.renderProductList()} />
             </View>
         )
     }
@@ -109,33 +103,33 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IBaseSceneStat
     }
 
     private renderProductList(): JSX.Element {
-        // const products = []
-        // for (const element of this.props.AppState.getProductList().values()) {
-        //     products.push(element)
-        // }
-        // return (
-        //     <FlatList
-        //         data={products}
-        //         renderItem={this.renderProductFlatListItem}
-        //         keyExtractor={Product.keyExtractor}
-        //         numColumns={2}
-        //     />
-        // )
+        const products = []
+        for (const element of this.props.AppState.getProductList().values()) {
+            products.push(element)
+        }
+        return (
+            <FlatList
+                data={products}
+                renderItem={this.renderProductFlatListItem}
+                keyExtractor={Product.keyExtractor}
+                numColumns={2}
+            />
+        )
     }
 
     // it seems flatList item doesn't observe changes, so maybe it wont be reactive
-    private renderProductFlatListItem = (event: { item: Product }) => {
-        const product = event.item
+    private renderProductFlatListItem = (event: { item: MinimalProduct; index }) => {
+        const onPress = () => SceneParams.MinimalProductScene.navigate({ productId: event.item.id })
+        const style = event.index % 2 === 1 ? { marginTop: 24 * Dimension.scaleX } : null
         return (
-            <SafeTouch
-                onPress={() =>
-                    SceneParams.MinimalProductScene.navigate({
-                        productId: event.item.id
-                    })
-                }
-            >
-                <BaseText text={product.name} />
-            </SafeTouch>
+            <View style={style}>
+                <MinimalProductCard
+                    onPress={onPress}
+                    image={event.item.picture}
+                    title={event.item.name}
+                    price={event.item.price}
+                />
+            </View>
         )
     }
 }
