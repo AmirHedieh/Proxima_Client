@@ -8,7 +8,7 @@ export const Styles = StyleSheet.create({
         flexDirection: 'row',
         minWidth: 32 * Dimension.scaleX,
         height: 28 * Dimension.scaleX,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.milky,
         justifyContent: 'center',
         alignItems: 'center',
         padding: 4 * Dimension.scaleX,

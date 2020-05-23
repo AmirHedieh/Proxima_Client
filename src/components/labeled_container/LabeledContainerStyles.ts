@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native'
+import { StyleSheet } from 'react-native'
 import { Colors } from '../../Constants'
 import { Dimension, Fonts, FontSizes, GlobalStyles } from '../../GlobalStyles'
 
@@ -12,7 +12,7 @@ export const Styles = StyleSheet.create({
         marginBottom: 2 * Dimension.scaleX,
         fontSize: FontSizes.extraSmall,
         fontFamily: Fonts.persian.vazirBold,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.milky,
         color: Colors.greenDark,
         zIndex: 1
     },
@@ -27,7 +27,7 @@ export const Styles = StyleSheet.create({
         ...GlobalStyles.shadow
     },
     errorStyle: {
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.milky,
         marginHorizontal: 14 * Dimension.scaleX,
         fontSize: FontSizes.extraSmall,
         color: Colors.red,

@@ -12,7 +12,7 @@ export const Styles = StyleSheet.create({
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: Colors.pureWhite,
+        backgroundColor: Colors.milky,
         borderBottomRightRadius: 40 * Dimension.scaleX
     },
     centerContainer: {

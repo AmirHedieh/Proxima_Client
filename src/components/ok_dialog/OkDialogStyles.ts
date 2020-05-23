@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native'
+import { StyleSheet } from 'react-native'
 import { Colors } from '../../Constants'
-import {Dimension, FontSizes} from '../../GlobalStyles'
+import { Dimension, FontSizes } from '../../GlobalStyles'
 
 export const Styles = StyleSheet.create({
     mainContainerStyle: {
@@ -8,7 +8,7 @@ export const Styles = StyleSheet.create({
         minHeight: Dimension.deviceHeight * 0.3
     },
     centerContainerStyle: {
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.milky,
         paddingBottom: 0 * Dimension.scaleX,
         paddingHorizontal: 4 * Dimension.scaleX
     },

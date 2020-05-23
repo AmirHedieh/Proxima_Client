@@ -16,7 +16,7 @@ export const Styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         padding: 1 * Dimension.scaleX,
-        backgroundColor: Colors.backgroundColor,
+        backgroundColor: Colors.milky,
         borderTopLeftRadius: 8 * Dimension.scaleX,
         borderBottomRightRadius: 8 * Dimension.scaleX
     },

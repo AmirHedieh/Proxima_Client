@@ -15,6 +15,6 @@ export const Styles = StyleSheet.create({
         right: 10 * Dimension.scaleX
     },
     icon: {
-        color: Colors.white
+        color: Colors.milky
     }
 })

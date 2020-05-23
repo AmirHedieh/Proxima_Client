@@ -4,6 +4,6 @@ import { Colors } from '../../Constants'
 export const Styles = StyleSheet.create({
     root: {
         flex: 1,
-        backgroundColor: Colors.white
+        backgroundColor: Colors.milky
     }
 })

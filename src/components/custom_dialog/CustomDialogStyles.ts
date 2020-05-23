@@ -13,7 +13,7 @@ export const Styles = StyleSheet.create({
         fontSize: FontSizes.h2
     },
     centerContainerStyle: {
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.milky,
         paddingHorizontal: 4 * Dimension.scaleX
     }
 })

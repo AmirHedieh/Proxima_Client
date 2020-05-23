@@ -12,7 +12,7 @@ export const Styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderColor: Colors.lightGray,
-        backgroundColor: Colors.white
+        backgroundColor: Colors.milky
     },
     imageStyle: {
         width: 40 * Dimension.scaleX,

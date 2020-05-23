@@ -6,7 +6,7 @@ export const Styles = StyleSheet.create({
     mainContainerStyle: {
         minWidth: Dimension.deviceWidth * 0.8,
         minHeight: Dimension.deviceHeight * 0.3,
-        backgroundColor: Colors.backgroundColor
+        backgroundColor: Colors.milky
     },
     angleDown: {
         fontSize: FontSizes.h2,
@@ -23,7 +23,7 @@ export const Styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 20,
         marginBottom: 7 * Dimension.scaleY,
-        color: Colors.textGreenColor
+        color: Colors.green
     },
     itemText: {
         alignSelf: 'center',
@@ -42,8 +42,7 @@ export const Styles = StyleSheet.create({
     scrollView: {
         alignItems: 'center'
     },
-    scrollViewWrapper:
-    {
+    scrollViewWrapper: {
         flex: 1
     },
     unit: {
