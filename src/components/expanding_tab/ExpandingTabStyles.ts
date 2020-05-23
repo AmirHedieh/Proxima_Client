@@ -8,6 +8,7 @@ export const Styles = StyleSheet.create({
         position: 'absolute',
         bottom: 0,
         backgroundColor: Colors.pureWhite,
+        borderTopLeftRadius: 40 * Dimension.scaleX,
         alignItems: 'center'
     },
     collapsedContainer: {
@@ -15,7 +16,7 @@ export const Styles = StyleSheet.create({
         justifyContent: 'center'
     },
     expandedContainer: {
-        height: Dimension.deviceHeight * 0.8
+        height: Dimension.deviceHeight * 0.7
     },
     safeTouch: {
         width: '100%',

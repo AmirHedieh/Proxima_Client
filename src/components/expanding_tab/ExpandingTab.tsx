@@ -34,7 +34,7 @@ export class ExpandingTab extends React.Component<IProps, IState> {
                     {this.state.isExpanded ? (
                         <Icon size={32} name='chevron-down' />
                     ) : (
-                        <BaseText text={this.props.collapsedTitle} />
+                        <BaseText style={Styles.collapsedTitle} text={this.props.collapsedTitle} />
                     )}
                 </SafeTouch>
                 {this.state.isExpanded ? this.props.expandedContent : null}
