@@ -96,17 +96,16 @@ export class AppEngine {
     }
 
     private onStaticData = async (response: CustomResponse) => {
-        // if (EnvironmentVariables.version !== response.getData().version) {
-        //     // update app
-        //     return
-        // }
-        // console.log('app is up-to-date')
+        console.log(response)
+        if (EnvironmentVariables.version !== response.getData().version) {
+            console.log('app needs to update')
+        }
 
-        // for (const element of response.getData().categories) {
-        //     const category = new Category(element)
-        //     this.categories.set(category.id, category)
-        // }
-        // console.log('categories', this.categories)
+        for (const element of response.getData().categories) {
+            const category = new Category(element)
+            this.categories.set(category.id, category)
+        }
+        console.log('categories', this.categories)
 
         await this.beaconEngine.startDetecting()
     }
