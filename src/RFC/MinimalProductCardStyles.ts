@@ -7,7 +7,7 @@ const width: number = 140
 
 export const Styles = StyleSheet.create({
     root: {
-        padding: 8 * Dimension.scaleX
+        paddingHorizontal: 12 * Dimension.scaleX
     },
     image: {
         width,
