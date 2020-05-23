@@ -1,6 +1,7 @@
 import { observable } from 'mobx'
 import { EnvironmentVariables } from '../Constants'
 import { Category } from '../models/Category'
+import { MinimalProduct } from '../models/MinimalProduct'
 import { Product } from '../models/Product'
 import { Store } from '../models/Store'
 import { CustomResponse } from '../network/CustomResponse'
@@ -12,7 +13,7 @@ import { BeaconEngine } from './BeaconEngine'
 
 export class AppEngine {
     @observable public store: Store = null
-    @observable public products: Map<number, Product> = new Map<number, Product>()
+    @observable public products: Map<number, MinimalProduct> = new Map<number, MinimalProduct>()
     @observable public categories: Map<number, Category> = new Map<number, Category>()
     @observable public currentProduct: Product = null
     @observable public detectionState: DetectionState = 'NO_STORE_NO_BEACON'
