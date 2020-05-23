@@ -1,6 +1,6 @@
 import { inject, observer } from 'mobx-react'
 import * as React from 'react'
-import { FlatList, View, Image } from 'react-native'
+import { FlatList, View, Image, ScrollView } from 'react-native'
 import { BaseText } from '../../components/base_text/BaseText'
 import { ExpandingTab } from '../../components/expanding_tab/ExpandingTab'
 import { NormalButton } from '../../components/normal_button/NormalButton'
@@ -39,65 +39,65 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IBaseSceneStat
                 <View style={Styles.topBar}>
                     <MaterialIcon name='weekend' size={59} />
                 </View>
+                <ScrollView>
+                    <View style={Styles.centerContainer}>
+                        <BaseText style={Styles.name} text={this.props.name} />
 
-                <View style={Styles.centerContainer}>
-                    <BaseText style={Styles.name} text={this.props.name} />
+                        <View style={Styles.mediumSpacer} />
 
-                    <View style={Styles.mediumSpacer} />
+                        <Image style={Styles.image} source={{ uri: 'https://i.picsum.photos/id/826/200/200.jpg' }} />
 
-                    <Image style={Styles.image} source={{ uri: 'https://i.picsum.photos/id/826/200/200.jpg' }} />
+                        <View style={Styles.largeSpacer} />
 
-                    <View style={Styles.largeSpacer} />
+                        <View style={Styles.rowCenterView}>
+                            <MaterialIcon name='home' size={this.infoIconSize} />
+                            <View style={GlobalStyles.spacer} />
+                            <BaseText text={this.props.address} />
+                        </View>
 
-                    <View style={Styles.rowCenterView}>
-                        <MaterialIcon name='home' size={this.infoIconSize} />
-                        <View style={GlobalStyles.spacer} />
-                        <BaseText text={this.props.address} />
+                        <View style={Styles.smallSpacer} />
+
+                        <View style={Styles.rowCenterView}>
+                            <MaterialIcon name='phone' size={this.infoIconSize} />
+                            <View style={GlobalStyles.spacer} />
+                            <BaseText style={Styles.phoneNumber} text={this.props.phoneNumber} />
+                        </View>
+
+                        <View style={Styles.mediumSpacer} />
+
+                        <BaseText style={Styles.info} text={this.props.info} />
+
+                        <View style={Styles.mediumSpacer} />
+
+                        {this.props.whatsapp && (
+                            <View style={Styles.rowCenterView}>
+                                {/* <Icon name='rocket' size={25} /> */}
+                                <View style={GlobalStyles.spacer} />
+                                <BaseText style={Styles.contactText} text={this.props.whatsapp} />
+                            </View>
+                        )}
+
+                        <View style={Styles.smallSpacer} />
+
+                        {this.props.instagram && (
+                            <View style={Styles.rowCenterView}>
+                                {/* <Icon name='rocket' size={25} /> */}
+                                <View style={GlobalStyles.spacer} />
+                                <BaseText style={Styles.contactText} text={this.props.instagram} />
+                            </View>
+                        )}
+
+                        <View style={Styles.smallSpacer} />
+
+                        {this.props.telegram && (
+                            <View style={Styles.rowCenterView}>
+                                {/* <Icon name='rocket' size={25} /> */}
+                                <View style={GlobalStyles.spacer} />
+                                <BaseText style={Styles.contactText} text={this.props.telegram} />
+                            </View>
+                        )}
                     </View>
-
-                    <View style={Styles.smallSpacer} />
-
-                    <View style={Styles.rowCenterView}>
-                        <MaterialIcon name='phone' size={this.infoIconSize} />
-                        <View style={GlobalStyles.spacer} />
-                        <BaseText style={Styles.phoneNumber} text={this.props.phoneNumber} />
-                    </View>
-
-                    <View style={Styles.mediumSpacer} />
-
-                    <BaseText style={Styles.info} text={this.props.info} />
-
-                    <View style={Styles.mediumSpacer} />
-
-                    {this.props.whatsapp && (
-                        <View style={Styles.rowCenterView}>
-                            {/* <Icon name='rocket' size={25} /> */}
-                            <View style={GlobalStyles.spacer} />
-                            <BaseText text={this.props.whatsapp} />
-                        </View>
-                    )}
-
-                    <View style={Styles.smallSpacer} />
-
-                    {this.props.instagram && (
-                        <View style={Styles.rowCenterView}>
-                            {/* <Icon name='rocket' size={25} /> */}
-                            <View style={GlobalStyles.spacer} />
-                            <BaseText text={this.props.instagram} />
-                        </View>
-                    )}
-
-                    <View style={Styles.smallSpacer} />
-
-                    {this.props.telegram && (
-                        <View style={Styles.rowCenterView}>
-                            {/* <Icon name='rocket' size={25} /> */}
-                            <View style={GlobalStyles.spacer} />
-                            <BaseText text={this.props.telegram} />
-                        </View>
-                    )}
-                </View>
-
+                </ScrollView>
                 <ExpandingTab collapsedTitle={'products'} expandedContent={this.renderProductList()} />
             </View>
         )

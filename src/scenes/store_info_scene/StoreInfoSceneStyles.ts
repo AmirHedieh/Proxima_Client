@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 import { Colors } from '../../Constants'
-import { Dimension, Fonts, FontSizes } from '../../GlobalStyles'
+import { Dimension, Fonts, FontSizes, GlobalStyles } from '../../GlobalStyles'
 
 export const Styles = StyleSheet.create({
     root: {
@@ -19,7 +19,10 @@ export const Styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         paddingHorizontal: 28 * Dimension.scaleX,
-        paddingVertical: 16 * Dimension.scaleX
+        paddingTop: 16 * Dimension.scaleX,
+        // expanding tab height is added to bottom padding to fix ScrollView bug, which is center container content
+        // would go under expanding tab because its absolute positioned
+        paddingBottom: GlobalStyles.expandingTabCollapsedHeight + 33 * Dimension.scaleX
     },
     name: {
         fontSize: FontSizes.h2,
@@ -41,8 +44,11 @@ export const Styles = StyleSheet.create({
         fontSize: FontSizes.h2
     },
     info: {
-        // width: '100%',
-        backgroundColor: '#ff0'
+        width: '100%'
+    },
+    contactText: {
+        fontFamily: Fonts.persian.vazirMedium,
+        fontSize: FontSizes.h2
     },
     /** height: 8 */
     smallSpacer: {

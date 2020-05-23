@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 import { Colors } from '../../Constants'
-import { Dimension } from '../../GlobalStyles'
+import { Dimension, GlobalStyles } from '../../GlobalStyles'
 
 export const Styles = StyleSheet.create({
     container: {
@@ -11,7 +11,7 @@ export const Styles = StyleSheet.create({
         alignItems: 'center'
     },
     collapsedContainer: {
-        height: 60,
+        height: GlobalStyles.expandingTabCollapsedHeight,
         justifyContent: 'center'
     },
     expandedContainer: {
