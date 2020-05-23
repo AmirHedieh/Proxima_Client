@@ -17,10 +17,10 @@ export const Styles = StyleSheet.create({
     },
     bottomContainer: {
         width,
-        height: 68 * Dimension.scaleX,
         borderBottomRightRadius: borderRadius,
         borderBottomLeftRadius: borderRadius,
         paddingHorizontal: 12 * Dimension.scaleX,
+        paddingVertical: 12 * Dimension.scaleX,
         backgroundColor: Colors.pureWhite,
         ...GlobalStyles.shadow
     },
