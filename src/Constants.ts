@@ -25,10 +25,20 @@ export const Colors = {
     dialogOverlay: '#0000008C',
     pink: '#FF1744',
     greenDark: '#388E3C',
-    milky: '#FAFAFA',
     pureWhite: '#ffffff',
     grayContent: '#424242',
-    yellowLight: '#f2dc83'
+    yellowLight: '#f2dc83',
+    // primary
+    creamLight: '#FFE7D4',
+    creamMedium: '#FFCDA3',
+    creamDark: '#B2855E',
+    // secondary
+    primaryLight: '#3C4159',
+    primaryMedium: '#A2440',
+    primaryDark: '#091126',
+    greenSuccess: '#388E3C',
+    blueInfo: '#1976D2',
+    redWarn: '#F44336'
 }
 
 export const NetworkConfig = {
