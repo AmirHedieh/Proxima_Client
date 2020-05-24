@@ -19,7 +19,7 @@ export class BaseText extends React.PureComponent<IBaseTextProps> {
         const firstChar = this.props.text !== '' && this.props.text != null ? this.props.text[0] : 'ا'
         const fontFamily = CommonValidator.isPersian(firstChar) ? Fonts.persian.vazir : Fonts.english.openSansRegular
         const fontSize = FontSizes.h3
-        const color = Colors.grayContent
+        const color = Colors.primaryMedium
         const style = [{ fontFamily, fontSize, color }, this.props.style]
         return <Text style={style}>{String(this.props.text)}</Text>
     }
