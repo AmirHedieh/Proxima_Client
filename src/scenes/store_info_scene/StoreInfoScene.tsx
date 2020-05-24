@@ -2,6 +2,7 @@ import { inject, observer } from 'mobx-react'
 import * as React from 'react'
 import { FlatList, Image, ScrollView, View } from 'react-native'
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { DomainViewModel } from '../../classes/DomainViewModel'
 import { BaseText } from '../../components/base_text/BaseText'
@@ -85,7 +86,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IBaseSceneStat
 
                         {this.props.telegram && (
                             <View style={Styles.rowCenterView}>
-                                <FontAwesomeIcon name='telegram' size={this.infoIconSize} />
+                                <FontAwesome5 name='telegram-plane' size={this.infoIconSize} />
                                 <View style={GlobalStyles.spacer} />
                                 <BaseText style={Styles.contactText} text={this.props.telegram} />
                             </View>
