@@ -2,7 +2,8 @@
 export const En = {
     /** HomeScene */
     error: 'Error',
-    // requirements
+    topBarTitleHomeScene: 'Proxima',
+    // requirements S
     connectionErrorHomeScene: 'Plz connect to internet',
     bluetoothErrorHomeScene: 'Plz enable your bluetooth',
     enableAndroidBluetoothHomeScene: 'Enable Bluetooth',
@@ -10,4 +11,5 @@ export const En = {
     giveLocationPermissionHomeScene: 'Give Access',
     locationErrorHomeScene: 'Plz turn on location',
     goToLocationSettingHomeScene: 'Enable location'
+    // requirements E
 }
