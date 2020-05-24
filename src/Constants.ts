@@ -34,7 +34,7 @@ export const Colors = {
     creamDark: '#B2855E',
     // secondary
     primaryLight: '#3C4159',
-    primaryMedium: '#A2440',
+    primaryMedium: '#1A2440',
     primaryDark: '#091126',
     greenSuccess: '#388E3C',
     blueInfo: '#1976D2',
