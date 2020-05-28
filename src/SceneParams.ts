@@ -1,4 +1,5 @@
 import { NavigationActions } from './NavigationActions'
+import { IMinimalProductSceneProps } from './scenes/minimal_product_scene/MinimalProductScene'
 
 export const SceneParams = {
     SplashScreen: {
@@ -15,7 +16,7 @@ export const SceneParams = {
     },
     MinimalProductScene: {
         name: 'MinimalProductScene',
-        navigate: (params: { productId: number }) => {
+        navigate: (params: IMinimalProductSceneProps) => {
             NavigationActions.push(SceneParams.MinimalProductScene.name, params)
         }
     }

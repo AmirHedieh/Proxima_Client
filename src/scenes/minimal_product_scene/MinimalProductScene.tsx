@@ -5,17 +5,14 @@ import { DomainViewModel } from '../../classes/DomainViewModel'
 import { BaseText } from '../../components/base_text/BaseText'
 import { NavigationActions } from '../../NavigationActions'
 import { BaseScene, IBaseSceneState } from '../base_scene/BaseScene'
+import { IMinimalProduct } from '../../models/MinimalProduct'
 
-interface IMinimalProductSceneProps {
-    AppState: DomainViewModel
-    productId: number
-}
+export interface IMinimalProductSceneProps extends IMinimalProduct {}
 
 @inject('AppState')
 @observer
 export class MinimalProductScene extends BaseScene<IMinimalProductSceneProps, IBaseSceneState> {
     public renderSafe(): JSX.Element {
-        const product = this.props.AppState.getProductList().get(this.props.productId)
         return (
             <View>
                 <BaseText text={product.id} />
