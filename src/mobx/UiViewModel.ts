@@ -16,4 +16,13 @@ export class UiViewModel {
     public getLanguage(): LocalizationLanguages {
         return this.uiStore.language
     }
+
+    @action
+    public setRTL(isRTL: boolean) {
+        this.uiStore.isRTL = isRTL
+    }
+
+    public isRTL(): boolean {
+        return this.uiStore.isRTL
+    }
 }
