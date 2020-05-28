@@ -17,5 +17,9 @@ export const En = {
 
     /** Store info scene */
     topBarTitleStoreInfoScene: 'Proxima',
-    expandingTabTitleStoreInfoScene: 'Products'
+    expandingTabTitleStoreInfoScene: 'Products',
+
+    /** MinimalProductScene */
+    noteTitleMinimalProductScene: 'Note',
+    noteMessageMinimalProductScene: 'To see further information of this product, get close to it.'
 }

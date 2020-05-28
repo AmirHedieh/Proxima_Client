@@ -17,5 +17,9 @@ export const Fa = {
 
     /** Store info scene */
     topBarTitleStoreInfoScene: 'پراکسیما',
-    expandingTabTitleStoreInfoScene: 'محصولات'
+    expandingTabTitleStoreInfoScene: 'محصولات',
+
+    /** MinimalProductScene */
+    noteTitleMinimalProductScene: 'توجه',
+    noteMessageMinimalProductScene: 'برای مشاهده اطلاعات کامل محصول، به نزدیکی آن بروید.'
 }
