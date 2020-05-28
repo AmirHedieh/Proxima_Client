@@ -31,6 +31,7 @@ export const Colors = {
     // primary
     creamLight: '#FFE7D4',
     creamMedium: '#FFCDA3',
+    creamMedium2: '#df9659',
     creamDark: '#B2855E',
     // secondary
     primaryLight: '#3C4159',

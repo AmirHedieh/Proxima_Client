@@ -30,6 +30,7 @@ export const Styles = StyleSheet.create({
     },
     price: {
         fontSize: FontSizes.p,
-        fontFamily: Fonts.persian.vazirMedium
+        fontFamily: Fonts.persian.vazirMedium,
+        color: Colors.creamMedium2
     }
 })
