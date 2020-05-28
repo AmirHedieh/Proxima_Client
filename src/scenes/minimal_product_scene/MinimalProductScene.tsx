@@ -1,11 +1,12 @@
 import { inject, observer } from 'mobx-react'
 import * as React from 'react'
-import { View } from 'react-native'
-import { DomainViewModel } from '../../classes/DomainViewModel'
+import { View, ImageBackground } from 'react-native'
 import { BaseText } from '../../components/base_text/BaseText'
 import { NavigationActions } from '../../NavigationActions'
 import { BaseScene, IBaseSceneState } from '../base_scene/BaseScene'
 import { IMinimalProduct } from '../../models/MinimalProduct'
+import { Styles } from './MinimalProductSceneStyles'
+import { BackButton } from '../../components/back_button/BackButton'
 
 export interface IMinimalProductSceneProps extends IMinimalProduct {}
 
@@ -14,14 +15,17 @@ export interface IMinimalProductSceneProps extends IMinimalProduct {}
 export class MinimalProductScene extends BaseScene<IMinimalProductSceneProps, IBaseSceneState> {
     public renderSafe(): JSX.Element {
         return (
-            <View>
-                <BaseText text={product.id} />
-                <BaseText text={product.info} />
-                <BaseText text={product.name} />
+            <View style={Styles.root}>
+                <ImageBackground style={Styles.image} source={{ uri: this.props.picture }}>
+                    <BackButton style={Styles.backButton} onPress={this.onBackPress} />
+                </ImageBackground>
+                <BaseText text={this.props.productName} />
+                <BaseText text={this.props.price} />
             </View>
         )
     }
-    protected onBackPress(): boolean {
+
+    protected onBackPress() {
         NavigationActions.pop()
         return true
     }
