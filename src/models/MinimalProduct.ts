@@ -1,10 +1,17 @@
-interface IRawMinimalProduct {
+export interface IRawMinimalProduct {
     product: number
     name: string
     picture: string
     price: number
 }
-export class MinimalProduct {
+
+export interface IMinimalProduct {
+    id: number
+    name: string
+    picture: string
+    price: number
+}
+export class MinimalProduct implements IMinimalProduct {
     public id: number
     public name: string
     public picture: string
