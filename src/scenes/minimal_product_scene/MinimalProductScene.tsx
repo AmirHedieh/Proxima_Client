@@ -8,6 +8,7 @@ import { NavigationActions } from '../../NavigationActions'
 import { Localization } from '../../text_process/Localization'
 import { BaseScene, IBaseSceneState } from '../base_scene/BaseScene'
 import { Styles } from './MinimalProductSceneStyles'
+import { GlobalStyles } from '../../GlobalStyles'
 
 export interface IMinimalProductSceneProps extends IMinimalProduct {}
 
@@ -26,11 +27,12 @@ export class MinimalProductScene extends BaseScene<IMinimalProductSceneProps, IB
                         style={Styles.price}
                         text={`${this.props.price} ${Localization.translate('moneyUnit')}`}
                     />
+                    <View style={GlobalStyles.spacer} />
                     <BaseText
                         style={Styles.note}
                         text={
                             Localization.translate('noteTitleMinimalProductScene') +
-                            ' :' +
+                            '\n' +
                             Localization.translate('noteMessageMinimalProductScene')
                         }
                     />

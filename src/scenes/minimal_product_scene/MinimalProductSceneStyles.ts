@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native'
 import { Colors } from '../../Constants'
 import { Dimension, Fonts, FontSizes } from '../../GlobalStyles'
-import { stores } from '../../mobx/RootStore'
 
 export const Styles = StyleSheet.create({
     root: {
@@ -18,8 +17,11 @@ export const Styles = StyleSheet.create({
         height: 270 * Dimension.scaleX
     },
     bottomContainer: {
-        paddingRight: stores.UIState.isRTL() ? 56 * Dimension.scaleX : 28 * Dimension.scaleX,
-        paddingLeft: stores.UIState.isRTL() ? 28 * Dimension.scaleX : 56 * Dimension.scaleX
+        flex: 1,
+        alignItems: 'center',
+        paddingTop: 40 * Dimension.scaleX,
+        paddingBottom: 16 * Dimension.scaleX,
+        paddingHorizontal: 28 * Dimension.scaleX
     },
     name: {
         fontSize: FontSizes.h1,
@@ -30,6 +32,7 @@ export const Styles = StyleSheet.create({
         color: Colors.creamMedium2
     },
     note: {
+        textAlign: 'center',
         color: Colors.red
     }
 })
