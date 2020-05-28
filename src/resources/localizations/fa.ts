@@ -1,7 +1,10 @@
 // tslint:disable: max-line-length
 export const Fa = {
-    /** HomeScene */
+    /** common */
     error: 'خطا',
+    moneyUnit: 'تومان',
+
+    /** HomeScene */
     // requirements S
     connectionErrorHomeScene: 'لطفا اتصال خود به اینترنت را بررسی کنید.',
     bluetoothErrorHomeScene: 'لطفا بلوتوث خود را روشن کنید.',

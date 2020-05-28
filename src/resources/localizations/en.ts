@@ -1,7 +1,10 @@
 // tslint:disable: max-line-length
 export const En = {
-    /** HomeScene */
+    /** common */
     error: 'Error',
+    moneyUnit: 'Toman',
+
+    /** HomeScene */
     // requirements S
     connectionErrorHomeScene: 'Plz connect to internet',
     bluetoothErrorHomeScene: 'Plz enable your bluetooth',
