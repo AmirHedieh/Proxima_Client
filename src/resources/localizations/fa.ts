@@ -2,7 +2,6 @@
 export const Fa = {
     /** HomeScene */
     error: 'خطا',
-    topBarTitleHomeScene: 'پروکسیما',
     // requirements S
     connectionErrorHomeScene: 'لطفا اتصال خود به اینترنت را بررسی کنید.',
     bluetoothErrorHomeScene: 'لطفا بلوتوث خود را روشن کنید.',
@@ -10,6 +9,10 @@ export const Fa = {
     locationPermissionErrorHomeScene: 'لطفا اجازه دسترسی به لوکیشن را بدهید.',
     giveLocationPermissionHomeScene: 'اجازه دادن',
     locationErrorHomeScene: 'لطفا لوکیشن را روشن کنید',
-    goToLocationSettingHomeScene: 'روشن کردن لوکیشن'
+    goToLocationSettingHomeScene: 'روشن کردن لوکیشن',
     // requirements E
+
+    /** Store info scene */
+    topBarTitleStoreInfoScene: 'پراکسیما',
+    expandingTabTitleStoreInfoScene: 'محصولات'
 }

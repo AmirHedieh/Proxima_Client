@@ -17,6 +17,7 @@ import { IStore } from '../../models/Store'
 import { NavigationActions } from '../../NavigationActions'
 import { MinimalProductCard } from '../../RFC/MinimalProductCard'
 import { SceneParams } from '../../SceneParams'
+import { Localization } from '../../text_process/Localization'
 import { BaseScene, IBaseSceneState } from '../base_scene/BaseScene'
 import { Styles } from './StoreInfoSceneStyles'
 
@@ -32,7 +33,9 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IBaseSceneStat
         return (
             <View style={Styles.root}>
                 <View style={Styles.topBar}>
-                    <MaterialIcon name='weekend' size={59} />
+                    <MaterialIcon name='weekend' size={55} color={Colors.primaryMedium} />
+                    <View style={Styles.smallSpacer} />
+                    <BaseText style={Styles.topBarTitle} text={Localization.translate('topBarTitleHomeScene')} />
                 </View>
                 <ScrollView>
                     <View style={Styles.centerContainer}>
@@ -93,7 +96,10 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IBaseSceneStat
                         )}
                     </View>
                 </ScrollView>
-                <ExpandingTab collapsedTitle={'محصولات'} expandedContent={this.renderProductList()} />
+                <ExpandingTab
+                    collapsedTitle={Localization.translate('expandingTabTitleStoreInfoScene')}
+                    expandedContent={this.renderProductList()}
+                />
             </View>
         )
     }
