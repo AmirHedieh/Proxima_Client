@@ -13,7 +13,7 @@ interface IBackButtonProps {
 export const BackButton: React.FunctionComponent<IBackButtonProps> = (props: IBackButtonProps) => {
     return (
         <SafeTouch style={[Styles.root, props.style]} onPress={props.onPress}>
-            <MaterialIcon name='arrow_back' size={16} color={Colors.black} />
+            <MaterialIcon name='arrow-back' size={24} color={Colors.black} />
         </SafeTouch>
     )
 }
