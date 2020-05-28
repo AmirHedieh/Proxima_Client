@@ -66,9 +66,9 @@ export const Dimension = {
 
 export const FontSizes = {
     /** 50 */
-    h0: 50 * scaleX,
+    h0: 30 * scaleX,
     /** 30 */
-    h1: 30 * scaleX,
+    h1: 24 * scaleX,
     /** 20 */
     h2: 20 * scaleX,
     /** 16 */
