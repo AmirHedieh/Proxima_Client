@@ -1,12 +1,13 @@
 import { inject, observer } from 'mobx-react'
 import * as React from 'react'
-import { View, ImageBackground } from 'react-native'
-import { BaseText } from '../../components/base_text/BaseText'
-import { NavigationActions } from '../../NavigationActions'
-import { BaseScene, IBaseSceneState } from '../base_scene/BaseScene'
-import { IMinimalProduct } from '../../models/MinimalProduct'
-import { Styles } from './MinimalProductSceneStyles'
+import { ImageBackground, View } from 'react-native'
 import { BackButton } from '../../components/back_button/BackButton'
+import { BaseText } from '../../components/base_text/BaseText'
+import { IMinimalProduct } from '../../models/MinimalProduct'
+import { NavigationActions } from '../../NavigationActions'
+import { Localization } from '../../text_process/Localization'
+import { BaseScene, IBaseSceneState } from '../base_scene/BaseScene'
+import { Styles } from './MinimalProductSceneStyles'
 
 export interface IMinimalProductSceneProps extends IMinimalProduct {}
 
@@ -19,8 +20,21 @@ export class MinimalProductScene extends BaseScene<IMinimalProductSceneProps, IB
                 <ImageBackground style={Styles.image} source={{ uri: this.props.picture }}>
                     <BackButton style={Styles.backButton} onPress={this.onBackPress} />
                 </ImageBackground>
-                <BaseText text={this.props.productName} />
-                <BaseText text={this.props.price} />
+                <View style={Styles.bottomContainer}>
+                    <BaseText style={Styles.name} text={this.props.productName} />
+                    <BaseText
+                        style={Styles.price}
+                        text={`${this.props.price} ${Localization.translate('moneyUnit')}`}
+                    />
+                    <BaseText
+                        style={Styles.note}
+                        text={
+                            Localization.translate('noteTitleMinimalProductScene') +
+                            ' :' +
+                            Localization.translate('noteMessageMinimalProductScene')
+                        }
+                    />
+                </View>
             </View>
         )
     }
