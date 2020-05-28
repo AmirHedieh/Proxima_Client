@@ -7,19 +7,19 @@ export interface IRawMinimalProduct {
 
 export interface IMinimalProduct {
     id: number
-    name: string
+    productName: string
     picture: string
     price: number
 }
 export class MinimalProduct implements IMinimalProduct {
     public id: number
-    public name: string
+    public productName: string
     public picture: string
     public price: number
 
     public constructor(rawMinimalProduct: IRawMinimalProduct) {
         this.id = rawMinimalProduct.product
-        this.name = rawMinimalProduct.name
+        this.productName = rawMinimalProduct.name
         this.picture = rawMinimalProduct.picture
         this.price = rawMinimalProduct.price
     }
