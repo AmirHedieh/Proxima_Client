@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as Animatable from 'react-native-animatable'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { BaseText } from '../base_text/BaseText'
 import { SafeTouch } from '../safe_touch/SafeTouch'
 import { Styles } from './ExpandingTabStyles'
@@ -32,7 +32,7 @@ export class ExpandingTab extends React.Component<IProps, IState> {
                     onPress={this.switchExpansionState}
                 >
                     {this.state.isExpanded ? (
-                        <Icon size={32} name='chevron-down' />
+                        <MaterialIcon size={52} name='expand-more' color='#000' />
                     ) : (
                         <BaseText style={Styles.collapsedTitle} text={this.props.collapsedTitle} />
                     )}
