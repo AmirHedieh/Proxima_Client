@@ -20,7 +20,7 @@ export class ProductScene extends BaseScene<IProductSceneProps, IBaseSceneState>
             <View>
                 <BaseText text={'Found beacon!'} />
                 <BaseText text={`id: ${product?.id}`} />
-                <BaseText text={`name: ${product?.name}`} />
+                <BaseText text={`name: ${product?.productName}`} />
             </View>
         )
     }
