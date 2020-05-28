@@ -13,7 +13,7 @@ export interface IRawStore {
 export interface IStore {
     id: number
     picture: string
-    name: string
+    storeName: string
     phoneNumber: string
     whatsapp: string
     instagram: string
@@ -24,7 +24,7 @@ export interface IStore {
 export class Store implements IStore {
     public id: number
     public picture: string
-    public name: string
+    public storeName: string
     public phoneNumber: string
     public whatsapp: string
     public instagram: string
@@ -34,7 +34,7 @@ export class Store implements IStore {
     public constructor(rawStore: IRawStore) {
         this.id = rawStore.store
         this.picture = rawStore.picture
-        this.name = rawStore.name
+        this.storeName = rawStore.name
         this.phoneNumber = rawStore.phone_number
         this.whatsapp = rawStore.whatsapp
         this.instagram = rawStore.instagram
