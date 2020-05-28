@@ -16,7 +16,7 @@ export class Product {
     }
 
     public id: number
-    public name: string
+    public productName: string
     public info: string
     public price: number
     public bodyMaterial: string
@@ -26,7 +26,7 @@ export class Product {
 
     constructor(rawProduct: IRawProduct) {
         this.id = rawProduct.product
-        this.name = rawProduct.name
+        this.productName = rawProduct.name
         this.info = rawProduct.info
         this.price = rawProduct.price
         this.bodyMaterial = rawProduct.bodyMaterial
