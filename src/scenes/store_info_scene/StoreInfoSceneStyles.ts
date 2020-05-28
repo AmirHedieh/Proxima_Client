@@ -5,15 +5,20 @@ import { Dimension, Fonts, FontSizes, GlobalStyles } from '../../GlobalStyles'
 export const Styles = StyleSheet.create({
     root: {
         flex: 1,
-        backgroundColor: '#df0'
+        backgroundColor: Colors.creamMedium
     },
     topBar: {
         height: 72 * Dimension.scaleX,
         width: '100%',
+        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: Colors.milky,
+        backgroundColor: Colors.creamLight,
         borderBottomRightRadius: 40 * Dimension.scaleX
+    },
+    topBarTitle: {
+        fontSize: FontSizes.h2,
+        fontFamily: Fonts.persian.vazirBold
     },
     centerContainer: {
         flex: 1,
