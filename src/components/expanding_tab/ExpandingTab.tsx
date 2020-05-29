@@ -44,8 +44,17 @@ export class ExpandingTab extends React.Component<IProps, IState> {
         )
     }
     private switchExpansionState = () => {
-        this.setState({
-            isExpanded: !this.state.isExpanded
-        })
+        this.setState(
+            {
+                isExpanded: !this.state.isExpanded
+            },
+            () => {
+                if (this.state.isExpanded) {
+                    this.props.onExpand()
+                    return
+                }
+                this.props.onCollapse()
+            }
+        )
     }
 }
