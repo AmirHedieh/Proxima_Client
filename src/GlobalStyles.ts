@@ -1,4 +1,4 @@
-import { Dimensions } from 'react-native'
+import { Dimensions, StatusBar } from 'react-native'
 import { Colors } from './Constants'
 
 const targetWidth = 360
@@ -44,10 +44,12 @@ export const GlobalStyles = {
         minWidth: 24 * scaleX,
         minHeight: 24 * scaleX
     },
-    expandingTabCollapsedHeight: 72 * scaleX
+    expandingTabCollapsedHeight: 72 * scaleX,
+    expandingTabExpandedHeight: deviceHeight * 0.85
 }
 
 export const Dimension = {
+    statusBarHeight: StatusBar.currentHeight,
     deviceWidth,
     deviceHeight,
     fullSizeMenuItemWidth: 320 * scaleX,

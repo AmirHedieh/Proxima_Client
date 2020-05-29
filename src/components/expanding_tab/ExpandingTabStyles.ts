@@ -16,7 +16,7 @@ export const Styles = StyleSheet.create({
         justifyContent: 'center'
     },
     expandedContainer: {
-        height: Dimension.deviceHeight * 0.85
+        height: GlobalStyles.expandingTabExpandedHeight
     },
     safeTouch: {
         width: '100%',
