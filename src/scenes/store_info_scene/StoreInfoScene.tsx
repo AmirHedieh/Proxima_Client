@@ -35,13 +35,6 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
     }
     private infoIconSize: number = 29
 
-    public componentDidMount() {
-        const height = Dimension.deviceHeight - GlobalStyles.expandingTabExpandedHeight
-        console.log('top height', height)
-        console.log('stat height', Dimension.statusBarHeight)
-        console.log('device height', Dimension.deviceHeight)
-        console.log('expanding height', GlobalStyles.expandingTabExpandedHeight)
-    }
     public renderSafe(): JSX.Element {
         return (
             <View style={this.state.isExpanded ? [Styles.root, Styles.rootExpandedState] : Styles.root}>
