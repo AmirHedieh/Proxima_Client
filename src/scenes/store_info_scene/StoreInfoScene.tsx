@@ -136,7 +136,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
         }
         return (
             <View style={Styles.topBarExpandedState}>
-                <MaterialIcon name='weekend' size={55} color={Colors.black} />
+                <MaterialIcon name='weekend' size={42} color={Colors.black} />
                 <View style={GlobalStyles.spacer} />
                 <BaseText style={Styles.expandedStateTitle} text={this.props.storeName} />
             </View>
