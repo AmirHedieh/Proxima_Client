@@ -7,8 +7,6 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { DomainViewModel } from '../../classes/DomainViewModel'
 import { BaseText } from '../../components/base_text/BaseText'
 import { ExpandingTab } from '../../components/expanding_tab/ExpandingTab'
-import { NormalButton } from '../../components/normal_button/NormalButton'
-import { SafeTouch } from '../../components/safe_touch/SafeTouch'
 import { Colors } from '../../Constants'
 import { Dimension, GlobalStyles } from '../../GlobalStyles'
 import { MinimalProduct } from '../../models/MinimalProduct'
@@ -18,87 +16,40 @@ import { NavigationActions } from '../../NavigationActions'
 import { MinimalProductCard } from '../../RFC/MinimalProductCard'
 import { SceneParams } from '../../SceneParams'
 import { Localization } from '../../text_process/Localization'
-import { BaseScene, IBaseSceneState } from '../base_scene/BaseScene'
+import { BaseScene } from '../base_scene/BaseScene'
 import { Styles } from './StoreInfoSceneStyles'
 
 interface IProductSceneProps extends IStore {
     AppState?: DomainViewModel
 }
 
+interface IProductSceneState {
+    isExpanded: boolean
+}
+
 @inject('AppState')
 @observer
-export class StoreInfoScene extends BaseScene<IProductSceneProps, IBaseSceneState> {
+export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneState> {
+    public state: IProductSceneState = {
+        isExpanded: false
+    }
     private infoIconSize: number = 29
+
+    public componentDidMount() {
+        const height = Dimension.deviceHeight - GlobalStyles.expandingTabExpandedHeight
+        console.log('top height', height)
+        console.log('stat height', Dimension.statusBarHeight)
+        console.log('device height', Dimension.deviceHeight)
+        console.log('expanding height', GlobalStyles.expandingTabExpandedHeight)
+    }
     public renderSafe(): JSX.Element {
         return (
-            <View style={Styles.root}>
-                <View style={Styles.topBar}>
-                    <MaterialIcon name='weekend' size={55} color={Colors.primaryMedium} />
-                    <View style={Styles.smallSpacer} />
-                    <BaseText style={Styles.topBarTitle} text={Localization.translate('topBarTitleHomeScene')} />
-                </View>
-                <ScrollView>
-                    <View style={Styles.centerContainer}>
-                        <BaseText style={Styles.name} text={this.props.storeName} />
-
-                        <View style={Styles.mediumSpacer} />
-
-                        <Image style={Styles.image} source={{ uri: 'https://i.picsum.photos/id/826/200/200.jpg' }} />
-
-                        <View style={Styles.largeSpacer} />
-
-                        <View style={Styles.rowCenterView}>
-                            <MaterialIcon name='home' size={this.infoIconSize} />
-                            <View style={GlobalStyles.spacer} />
-                            <BaseText text={this.props.address} />
-                        </View>
-
-                        <View style={Styles.smallSpacer} />
-
-                        <View style={Styles.rowCenterView}>
-                            <MaterialIcon name='phone' size={this.infoIconSize} />
-                            <View style={GlobalStyles.spacer} />
-                            <BaseText style={Styles.phoneNumber} text={this.props.phoneNumber} />
-                        </View>
-
-                        <View style={Styles.mediumSpacer} />
-
-                        <BaseText style={Styles.info} text={this.props.info} />
-
-                        <View style={Styles.mediumSpacer} />
-
-                        {this.props.whatsapp && (
-                            <View style={Styles.rowCenterView}>
-                                <FontAwesomeIcon name='whatsapp' size={this.infoIconSize} />
-                                <View style={GlobalStyles.spacer} />
-                                <BaseText style={Styles.contactText} text={this.props.whatsapp} />
-                            </View>
-                        )}
-
-                        <View style={Styles.smallSpacer} />
-
-                        {this.props.instagram && (
-                            <View style={Styles.rowCenterView}>
-                                <FontAwesomeIcon name='instagram' size={this.infoIconSize} />
-                                <View style={GlobalStyles.spacer} />
-                                <BaseText style={Styles.contactText} text={this.props.instagram} />
-                            </View>
-                        )}
-
-                        <View style={Styles.smallSpacer} />
-
-                        {this.props.telegram && (
-                            <View style={Styles.rowCenterView}>
-                                <FontAwesome5 name='telegram-plane' size={this.infoIconSize} />
-                                <View style={GlobalStyles.spacer} />
-                                <BaseText style={Styles.contactText} text={this.props.telegram} />
-                            </View>
-                        )}
-                    </View>
-                </ScrollView>
+            <View style={this.state.isExpanded ? [Styles.root, Styles.rootExpandedState] : Styles.root}>
+                {this.renderContainer()}
                 <ExpandingTab
                     collapsedTitle={Localization.translate('expandingTabTitleStoreInfoScene')}
                     expandedContent={this.renderProductList()}
+                    onStateChange={this.onStateChange}
                 />
             </View>
         )
@@ -107,6 +58,89 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IBaseSceneStat
     protected onBackPress(): boolean {
         NavigationActions.pop()
         return true
+    }
+
+    private renderContainer(): JSX.Element {
+        if (!this.state.isExpanded) {
+            return (
+                <View>
+                    <View style={Styles.topBar}>
+                        <MaterialIcon name='weekend' size={55} color={Colors.primaryMedium} />
+                        <View style={Styles.smallSpacer} />
+                        <BaseText style={Styles.topBarTitle} text={Localization.translate('topBarTitleHomeScene')} />
+                    </View>
+                    <ScrollView>
+                        <View style={Styles.centerContainer}>
+                            <BaseText style={Styles.name} text={this.props.storeName} />
+
+                            <View style={Styles.mediumSpacer} />
+
+                            <Image
+                                style={Styles.image}
+                                source={{ uri: 'https://i.picsum.photos/id/826/200/200.jpg' }}
+                            />
+
+                            <View style={Styles.largeSpacer} />
+
+                            <View style={Styles.rowCenterView}>
+                                <MaterialIcon name='home' size={this.infoIconSize} />
+                                <View style={GlobalStyles.spacer} />
+                                <BaseText text={this.props.address} />
+                            </View>
+
+                            <View style={Styles.smallSpacer} />
+
+                            <View style={Styles.rowCenterView}>
+                                <MaterialIcon name='phone' size={this.infoIconSize} />
+                                <View style={GlobalStyles.spacer} />
+                                <BaseText style={Styles.phoneNumber} text={this.props.phoneNumber} />
+                            </View>
+
+                            <View style={Styles.mediumSpacer} />
+
+                            <BaseText style={Styles.info} text={this.props.info} />
+
+                            <View style={Styles.mediumSpacer} />
+
+                            {this.props.whatsapp && (
+                                <View style={Styles.rowCenterView}>
+                                    <FontAwesomeIcon name='whatsapp' size={this.infoIconSize} />
+                                    <View style={GlobalStyles.spacer} />
+                                    <BaseText style={Styles.contactText} text={this.props.whatsapp} />
+                                </View>
+                            )}
+
+                            <View style={Styles.smallSpacer} />
+
+                            {this.props.instagram && (
+                                <View style={Styles.rowCenterView}>
+                                    <FontAwesomeIcon name='instagram' size={this.infoIconSize} />
+                                    <View style={GlobalStyles.spacer} />
+                                    <BaseText style={Styles.contactText} text={this.props.instagram} />
+                                </View>
+                            )}
+
+                            <View style={Styles.smallSpacer} />
+
+                            {this.props.telegram && (
+                                <View style={Styles.rowCenterView}>
+                                    <FontAwesome5 name='telegram-plane' size={this.infoIconSize} />
+                                    <View style={GlobalStyles.spacer} />
+                                    <BaseText style={Styles.contactText} text={this.props.telegram} />
+                                </View>
+                            )}
+                        </View>
+                    </ScrollView>
+                </View>
+            )
+        }
+        return (
+            <View style={Styles.topBarExpandedState}>
+                <MaterialIcon name='weekend' size={55} color={Colors.black} />
+                <View style={GlobalStyles.spacer} />
+                <BaseText style={Styles.expandedStateTitle} text={this.props.storeName} />
+            </View>
+        )
     }
 
     private renderProductList(): JSX.Element {
@@ -138,5 +172,9 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IBaseSceneStat
                 />
             </View>
         )
+    }
+
+    private onStateChange = (isExpanded: boolean) => {
+        this.setState({ isExpanded })
     }
 }

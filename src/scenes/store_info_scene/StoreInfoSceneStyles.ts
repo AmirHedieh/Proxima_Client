@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { Colors } from '../../Constants'
+import { Colors, EnvironmentVariables } from '../../Constants'
 import { Dimension, Fonts, FontSizes, GlobalStyles } from '../../GlobalStyles'
 
 export const Styles = StyleSheet.create({
@@ -7,8 +7,11 @@ export const Styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.creamMedium
     },
+    rootExpandedState: {
+        backgroundColor: Colors.primaryMedium
+    },
     topBar: {
-        height: 72 * Dimension.scaleX,
+        height: Dimension.deviceHeight * 0.1,
         width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
@@ -66,5 +69,19 @@ export const Styles = StyleSheet.create({
     /** height: 24 */
     largeSpacer: {
         height: 24 * Dimension.scaleX
+    },
+    topBarExpandedState: {
+        width: '100%',
+        height: EnvironmentVariables.isIos
+            ? Dimension.deviceHeight - GlobalStyles.expandingTabExpandedHeight
+            : Dimension.deviceHeight - Dimension.statusBarHeight - GlobalStyles.expandingTabExpandedHeight,
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingRight: 28 * Dimension.scaleX,
+        paddingLeft: 48 * Dimension.scaleX
+    },
+    expandedStateTitle: {
+        color: Colors.creamLight,
+        fontFamily: Fonts.persian.vazirMedium
     }
 })
