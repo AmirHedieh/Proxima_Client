@@ -16,7 +16,7 @@ export const Styles = StyleSheet.create({
         justifyContent: 'center'
     },
     expandedContainer: {
-        height: Dimension.deviceHeight * 0.7
+        height: Dimension.deviceHeight * 0.85
     },
     safeTouch: {
         width: '100%',

@@ -9,8 +9,7 @@ interface IState {
 }
 
 interface IProps {
-    onExpand?: () => void
-    onCollapse?: () => void
+    onStateChange: (isExpanded: boolean) => void
     collapsedTitle: string
     expandedContent: JSX.Element
 }
@@ -44,17 +43,9 @@ export class ExpandingTab extends React.Component<IProps, IState> {
         )
     }
     private switchExpansionState = () => {
-        this.setState(
-            {
-                isExpanded: !this.state.isExpanded
-            },
-            () => {
-                if (this.state.isExpanded) {
-                    this.props.onExpand()
-                    return
-                }
-                this.props.onCollapse()
-            }
-        )
+        this.props.onStateChange(!this.state.isExpanded)
+        this.setState({
+            isExpanded: !this.state.isExpanded
+        })
     }
 }
