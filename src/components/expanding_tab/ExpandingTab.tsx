@@ -9,6 +9,8 @@ interface IState {
 }
 
 interface IProps {
+    onExpand?: () => void
+    onCollapse?: () => void
     collapsedTitle: string
     expandedContent: JSX.Element
 }
