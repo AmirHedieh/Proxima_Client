@@ -39,7 +39,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IBaseSceneStat
                 </View>
                 <ScrollView>
                     <View style={Styles.centerContainer}>
-                        <BaseText style={Styles.name} text={this.props.name} />
+                        <BaseText style={Styles.name} text={this.props.storeName} />
 
                         <View style={Styles.mediumSpacer} />
 
@@ -126,14 +126,14 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IBaseSceneStat
 
     // it seems flatList item doesn't observe changes, so maybe it wont be reactive
     private renderProductFlatListItem = (event: { item: MinimalProduct; index }) => {
-        const onPress = () => SceneParams.MinimalProductScene.navigate({ productId: event.item.id })
+        const onPress = () => SceneParams.MinimalProductScene.navigate({ ...event.item })
         const style = event.index % 2 === 1 ? { marginTop: 24 * Dimension.scaleX } : null
         return (
             <View style={style}>
                 <MinimalProductCard
                     onPress={onPress}
                     image={event.item.picture}
-                    title={event.item.name}
+                    title={event.item.productName}
                     price={event.item.price}
                 />
             </View>
