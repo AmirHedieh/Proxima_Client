@@ -20,7 +20,7 @@ export const Styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         paddingTop: 40 * Dimension.scaleX,
-        paddingBottom: 16 * Dimension.scaleX,
+        paddingBottom: 32 * Dimension.scaleX,
         paddingHorizontal: 28 * Dimension.scaleX
     },
     name: {
@@ -31,7 +31,12 @@ export const Styles = StyleSheet.create({
         fontSize: FontSizes.h3,
         color: Colors.creamMedium2
     },
-    note: {
+    noteTitle: {
+        fontFamily: Fonts.persian.vazirBold,
+        textAlign: 'center',
+        color: Colors.red
+    },
+    noteMessage: {
         textAlign: 'center',
         color: Colors.red
     }

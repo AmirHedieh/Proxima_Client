@@ -28,13 +28,10 @@ export class MinimalProductScene extends BaseScene<IMinimalProductSceneProps, IB
                         text={`${this.props.price} ${Localization.translate('moneyUnit')}`}
                     />
                     <View style={GlobalStyles.spacer} />
+                    <BaseText style={Styles.noteTitle} text={Localization.translate('noteTitleMinimalProductScene')} />
                     <BaseText
-                        style={Styles.note}
-                        text={
-                            Localization.translate('noteTitleMinimalProductScene') +
-                            '\n' +
-                            Localization.translate('noteMessageMinimalProductScene')
-                        }
+                        style={Styles.noteMessage}
+                        text={Localization.translate('noteMessageMinimalProductScene')}
                     />
                 </View>
             </View>
