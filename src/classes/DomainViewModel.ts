@@ -1,5 +1,5 @@
 import { action, computed } from 'mobx'
-import { Product } from '../models/Product'
+import { MinimalProduct } from '../models/MinimalProduct'
 import { AppEngine } from './AppEngine'
 
 export class DomainViewModel {
@@ -13,7 +13,7 @@ export class DomainViewModel {
     }
 
     @action
-    public addProduct(product: Product) {
+    public addProduct(product: MinimalProduct) {
         this.appEngine.products.set(product.id, product)
     }
 
