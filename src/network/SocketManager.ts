@@ -74,11 +74,11 @@ export class SocketManager {
     }
 
     public getProduct(params: { category: number; offset: number; limit: number }) {
-        this.socket.emit('product', params)
+        this.socket.emit('getProduct', params)
     }
 
     public onGetProducts(callback: (result: CustomResponse) => void) {
-        this.socket.on('product', (response) => {
+        this.socket.on('getProduct', (response) => {
             const customResponse = new CustomResponse(response)
             callback(customResponse)
         })
