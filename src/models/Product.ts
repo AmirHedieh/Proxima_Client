@@ -1,13 +1,11 @@
 export interface IRawProduct {
-    product: number
+    id: number
     name: string
-    info: string
+    information: string
     price: number
     bodyMaterial: string
     clothMaterial: string
-    picture: string[]
-    active: boolean
-    category: number
+    pictures: string[]
 }
 
 export class Product {
@@ -25,13 +23,12 @@ export class Product {
     public category: number
 
     constructor(rawProduct: IRawProduct) {
-        this.id = rawProduct.product
+        this.id = rawProduct.id
         this.productName = rawProduct.name
-        this.info = rawProduct.info
+        this.info = rawProduct.information
         this.price = rawProduct.price
         this.bodyMaterial = rawProduct.bodyMaterial
         this.clothMaterial = rawProduct.clothMaterial
-        this.picture = rawProduct.picture
-        this.category = rawProduct.category
+        this.picture = rawProduct.pictures
     }
 }
