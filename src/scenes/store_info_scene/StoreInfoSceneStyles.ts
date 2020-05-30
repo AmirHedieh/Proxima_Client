@@ -83,5 +83,34 @@ export const Styles = StyleSheet.create({
     expandedStateTitle: {
         color: Colors.creamLight,
         fontFamily: Fonts.persian.vazirMedium
+    },
+    expandingTabContainer: {
+        width: '100%',
+        position: 'absolute',
+        bottom: 0,
+        backgroundColor: Colors.creamLight,
+        borderTopLeftRadius: 40 * Dimension.scaleX,
+        alignItems: 'center'
+    },
+    expandingTabExpandedContainer: {
+        height: GlobalStyles.expandingTabExpandedHeight
+    },
+    expandingTabCollapsedContainer: {
+        height: GlobalStyles.expandingTabCollapsedHeight,
+        justifyContent: 'center'
+    },
+    expandingTabSafeTouch: {
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    expandingTabSafeTouchExpanded: {
+        height: 40 * Dimension.scaleX
+    },
+    expandingTabSafeTouchCollapsed: {
+        flex: 1
+    },
+    expandingTabCollapsedTitle: {
+        fontFamily: Fonts.persian.vazirBold
     }
 })

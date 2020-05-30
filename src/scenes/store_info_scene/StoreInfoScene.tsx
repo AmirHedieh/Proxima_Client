@@ -1,5 +1,6 @@
 import { inject, observer } from 'mobx-react'
 import * as React from 'react'
+import * as Animatable from 'react-native-animatable'
 import { FlatList, Image, ScrollView, View } from 'react-native'
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
@@ -18,6 +19,7 @@ import { SceneParams } from '../../SceneParams'
 import { Localization } from '../../text_process/Localization'
 import { BaseScene } from '../base_scene/BaseScene'
 import { Styles } from './StoreInfoSceneStyles'
+import { SafeTouch } from '../../components/safe_touch/SafeTouch'
 
 interface IProductSceneProps extends IStore {
     AppState?: DomainViewModel
@@ -37,14 +39,13 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
 
     public renderSafe(): JSX.Element {
         return (
-            <View style={this.state.isExpanded ? [Styles.root, Styles.rootExpandedState] : Styles.root}>
+            <Animatable.View
+                transition={'backgroundColor'}
+                style={this.state.isExpanded ? [Styles.root, Styles.rootExpandedState] : Styles.root}
+            >
                 {this.renderContainer()}
-                <ExpandingTab
-                    collapsedTitle={Localization.translate('expandingTabTitleStoreInfoScene')}
-                    expandedContent={this.renderProductList()}
-                    onStateChange={this.onStateChange}
-                />
-            </View>
+                {/* {this.renderExpandingTab()} */}
+            </Animatable.View>
         )
     }
 
@@ -59,8 +60,9 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                 <View>
                     <View style={Styles.topBar}>
                         <MaterialIcon name='weekend' size={55} color={Colors.primaryMedium} />
-                        <View style={Styles.smallSpacer} />
-                        <BaseText style={Styles.topBarTitle} text={Localization.translate('topBarTitleHomeScene')} />
+                        <SafeTouch onPress={() => this.onExpandingTabPress()}>
+                            <BaseText text='switch' />
+                        </SafeTouch>
                     </View>
                     <ScrollView>
                         <View style={Styles.centerContainer}>
@@ -68,10 +70,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
 
                             <View style={Styles.mediumSpacer} />
 
-                            <Image
-                                style={Styles.image}
-                                source={{ uri: 'https://i.picsum.photos/id/826/200/200.jpg' }}
-                            />
+                            <Image style={Styles.image} source={{ uri: this.props.picture }} />
 
                             <View style={Styles.largeSpacer} />
 
@@ -136,6 +135,38 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
         )
     }
 
+    private renderExpandingTab() {
+        return (
+            <Animatable.View
+                transition={'height'}
+                style={[
+                    Styles.expandingTabContainer,
+                    this.state.isExpanded ? Styles.expandingTabExpandedContainer : Styles.expandingTabCollapsedContainer
+                ]}
+            >
+                <SafeTouch
+                    style={[
+                        Styles.expandingTabSafeTouch,
+                        this.state.isExpanded
+                            ? Styles.expandingTabSafeTouchExpanded
+                            : Styles.expandingTabSafeTouchCollapsed
+                    ]}
+                    onPress={this.onExpandingTabPress}
+                >
+                    {this.state.isExpanded ? (
+                        <MaterialIcon size={52} name='expand-more' color='#000' />
+                    ) : (
+                        <BaseText
+                            style={Styles.expandingTabCollapsedTitle}
+                            text={Localization.translate('expandingTabTitleStoreInfoScene')}
+                        />
+                    )}
+                </SafeTouch>
+                {this.state.isExpanded ? this.renderProductList() : null}
+            </Animatable.View>
+        )
+    }
+
     private renderProductList(): JSX.Element {
         const products = []
         for (const element of this.props.AppState.getProductList().values()) {
@@ -147,6 +178,9 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                 renderItem={this.renderProductFlatListItem}
                 keyExtractor={Product.keyExtractor}
                 numColumns={2}
+                // tslint:disable-next-line: jsx-no-lambda
+                onEndReached={() => this.props.AppState.fetchProducts({ category: null })}
+                onEndThreshold={0}
             />
         )
     }
@@ -167,7 +201,9 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
         )
     }
 
-    private onStateChange = (isExpanded: boolean) => {
-        this.setState({ isExpanded })
+    private onExpandingTabPress = () => {
+        this.setState({
+            isExpanded: !this.state.isExpanded
+        })
     }
 }
