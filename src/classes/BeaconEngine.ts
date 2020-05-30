@@ -53,7 +53,10 @@ export class BeaconEngine {
         const closestBeacon = this.findClosestBeacon()
         this.minorRepeatDetector.addToData(closestBeacon.minor)
         if (this.onMajorChange) {
-            this.onMajorChange(this.beacons[0].major)
+            if (this.major !== this.beacons[0].major) {
+                this.major = this.beacons[0].major
+                this.onMajorChange(this.beacons[0].major)
+            }
         }
         // TODO: prevent to invoke minor change when closest beacon is what was chosen last time as well
         if (this.minorRepeatDetector.isDataRepeated()) {
