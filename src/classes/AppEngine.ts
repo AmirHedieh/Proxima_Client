@@ -45,24 +45,13 @@ export class AppEngine {
 
     private emitMajorChange = (major) => {
         console.log('major changed')
-        if (!major) {
-            this.store = null
-            this.detectionState = 'NO_STORE_NO_BEACON'
-            return
-        }
         this.socketManager.majorChange({ major })
-        this.detectionState = 'FOUND_STORE_NO_BEACON'
         // change state to store found
     }
 
     private emitMinorChange = (minor) => {
         console.log('minor changed')
-        if (!minor) {
-            this.socketManager.minorChange({ minor })
-            this.detectionState = 'FOUND_STORE_NO_BEACON'
-            return
-        }
-        this.detectionState = 'FOUND_STORE_FOUND_BEACON'
+        // this.socketManager.minorChange({ minor })
     }
 
     private onConnect = async () => {
@@ -113,17 +102,29 @@ export class AppEngine {
 
     private onMajorChange = (response: CustomResponse) => {
         console.log('on major', response)
-        this.store = new Store(response.getData().store)
+        if (response.getData().store) {
+            this.store = new Store(response.getData().store)
+            this.detectionState = 'FOUND_STORE_NO_BEACON'
+            return
+        }
+        this.store = null
+        this.detectionState = 'NO_STORE_NO_BEACON'
     }
 
     private onMinorChange = (response: CustomResponse) => {
         console.log('on minor', response)
-        this.currentProduct = new Product(response.getData().product)
+        if (response.getData().product) {
+            this.currentProduct = new Product(response.getData().product)
+            this.detectionState = 'FOUND_STORE_FOUND_BEACON'
+            return
+        }
+        this.currentProduct = null
+        this.detectionState = 'FOUND_STORE_NO_BEACON'
     }
 
     private onGetProducts = (response: CustomResponse) => {
         for (const element of response.getData().products) {
-            const product = new Product(element)
+            const product = new MinimalProduct(element)
             this.products.set(product.id, product)
         }
     }
