@@ -8,7 +8,6 @@ import { BaseScene, IBaseSceneState } from '../base_scene/BaseScene'
 
 interface IProductSceneProps {
     AppState?: DomainViewModel
-    productId: number
 }
 
 @inject('AppState')

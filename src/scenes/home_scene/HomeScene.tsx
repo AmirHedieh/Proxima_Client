@@ -133,7 +133,6 @@ export class HomeScene extends BaseScene<IHomeSceneProps, IHomeSceneState> {
         this.requirementDialog.hide()
     }
     private renderContent(): JSX.Element {
-        return this.renderShowProducts()
         switch (this.props.AppState.getDetectionState()) {
             case 'NO_STORE_NO_BEACON':
                 return this.renderSearchingStore()
@@ -142,7 +141,7 @@ export class HomeScene extends BaseScene<IHomeSceneProps, IHomeSceneState> {
                 return this.renderShowProducts()
 
             case 'FOUND_STORE_FOUND_BEACON':
-                return <BaseText text={'Beacon found'} />
+                return this.renderCurrentProduct()
             // TODO: decide if this must get handled from this page or from outside
         }
     }
@@ -155,6 +154,6 @@ export class HomeScene extends BaseScene<IHomeSceneProps, IHomeSceneState> {
     }
 
     private renderCurrentProduct(): JSX.Element {
-        return <ProductScene productId={1} />
+        return <ProductScene />
     }
 }
