@@ -10,20 +10,9 @@ import { UserIdStorage } from '../storage/UserIdStorage'
 import { DetectionState } from '../Types'
 import { BeaconDetector, IBeaconDetector } from './BeaconDetector'
 import { BeaconEngine } from './BeaconEngine'
-import { RandomGenerator } from '../utils/RandomGenerator'
 
 export class AppEngine {
-    @observable public store: Store = new Store({
-        store: 1,
-        name: 'نام فروشنده',
-        info: 'اطلاعات فروشگاه',
-        instagram: 'Instagram',
-        whatsapp: 'whatsapp',
-        telegram: 'telegram',
-        address: 'آدرس فروشگاه',
-        phone_number: '09905226632',
-        picture: 'https://i.picsum.photos/id/826/200/200.jpg'
-    })
+    @observable public store: Store = null
     @observable public products: Map<number, MinimalProduct> = new Map<number, MinimalProduct>()
     @observable public categories: Map<number, Category> = new Map<number, Category>()
     @observable public currentProduct: Product = null
@@ -48,17 +37,6 @@ export class AppEngine {
 
         this.beaconEngine.onMajorChange = this.emitMajorChange
         this.beaconEngine.onMinorChange = this.emitMinorChange
-
-        for (let i = 0; i < 15; i++) {
-            const product = new MinimalProduct({
-                product: RandomGenerator.generateRandomNumber(0, 1000),
-                price: RandomGenerator.generateRandomNumber(0, 10000),
-                name: `کالای ${RandomGenerator.generateRandomNumber(0, 100)}`,
-                picture:
-                    'https://cdn.zeplin.io/5ec7b8d67dec494ba300ad8f/assets/1723cc0a-9fd0-4b75-8c9c-8422beb77147.png'
-            })
-            this.products.set(product.id, product)
-        }
     }
 
     public init(): void {
