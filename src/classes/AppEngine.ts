@@ -21,6 +21,7 @@ export class AppEngine {
     private beaconEngine: BeaconEngine = null
     private userId: string = null
     private socketManager: SocketManager = SocketManager.getInstance()
+    private minimalProductOffset: number = 0
 
     public constructor() {
         this.beaconDetector = new BeaconDetector()
@@ -43,6 +44,15 @@ export class AppEngine {
         return this.beaconEngine.init()
     }
 
+    public emitMinimalProductFetch = (params: { category: number }) => {
+        console.log('emitting fetch product')
+        this.socketManager.getProduct({
+            category: params.category,
+            offset: this.minimalProductOffset,
+            limit: 10
+        })
+    }
+
     private emitMajorChange = (major) => {
         console.log('major changed')
         this.socketManager.majorChange({ major })
@@ -50,8 +60,8 @@ export class AppEngine {
     }
 
     private emitMinorChange = (minor) => {
-        console.log('minor changed')
-        // this.socketManager.minorChange({ minor })
+        // console.log('minor changed')
+        this.socketManager.minorChange({ minor })
     }
 
     private onConnect = async () => {
@@ -105,6 +115,7 @@ export class AppEngine {
         if (response.getData().store) {
             this.store = new Store(response.getData().store)
             this.detectionState = 'FOUND_STORE_NO_BEACON'
+            this.emitMinimalProductFetch({ category: null })
             return
         }
         this.store = null
@@ -123,7 +134,9 @@ export class AppEngine {
     }
 
     private onGetProducts = (response: CustomResponse) => {
+        console.log('fetched products', response.getData().products)
         for (const element of response.getData().products) {
+            this.minimalProductOffset++
             const product = new MinimalProduct(element)
             this.products.set(product.id, product)
         }

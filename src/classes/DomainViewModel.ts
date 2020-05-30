@@ -17,6 +17,11 @@ export class DomainViewModel {
         this.appEngine.products.set(product.id, product)
     }
 
+    @action
+    public fetchProducts(params: { category: number }) {
+        this.appEngine.emitMinimalProductFetch(params)
+    }
+
     @computed
     public get getProductsLength() {
         // TODO: its optional and can be removed
