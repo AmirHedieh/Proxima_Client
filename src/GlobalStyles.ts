@@ -43,9 +43,7 @@ export const GlobalStyles = {
         justifyContent: 'center',
         minWidth: 24 * scaleX,
         minHeight: 24 * scaleX
-    },
-    expandingTabCollapsedHeight: 72 * scaleX,
-    expandingTabExpandedHeight: deviceHeight * 0.85
+    }
 }
 
 export const Dimension = {
