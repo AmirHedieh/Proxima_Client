@@ -150,7 +150,7 @@ export class HomeScene extends BaseScene<IHomeSceneProps, IHomeSceneState> {
     }
 
     private renderShowProducts(): JSX.Element {
-        return <StoreInfoScene {...this.props.AppState.getStore()} />
+        return <StoreInfoScene />
     }
 
     private renderCurrentProduct(): JSX.Element {
