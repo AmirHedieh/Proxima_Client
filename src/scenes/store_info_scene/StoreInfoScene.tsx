@@ -57,18 +57,18 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                     <MaterialIcon name='weekend' size={55} color={Colors.primaryMedium} />
                 </View>
                 <ScrollView contentContainerStyle={Styles.centerScrollViewContainer}>
-                    <BaseText style={Styles.name} text={this.props.AppState.getStore().storeName} />
+                    <BaseText style={Styles.name} text={this.props.AppState.getStore()?.storeName} />
 
                     <View style={Styles.mediumSpacer} />
 
-                    <Image style={Styles.image} source={{ uri: this.props.AppState.getStore().picture }} />
+                    <Image style={Styles.image} source={{ uri: this.props.AppState.getStore()?.picture }} />
 
                     <View style={Styles.largeSpacer} />
 
                     <View style={Styles.rowCenterView}>
                         <MaterialIcon name='home' size={this.infoIconSize} />
                         <View style={GlobalStyles.spacer} />
-                        <BaseText text={this.props.AppState.getStore().address} />
+                        <BaseText text={this.props.AppState.getStore()?.address} />
                     </View>
 
                     <View style={Styles.smallSpacer} />
@@ -76,40 +76,40 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                     <View style={Styles.rowCenterView}>
                         <MaterialIcon name='phone' size={this.infoIconSize} />
                         <View style={GlobalStyles.spacer} />
-                        <BaseText style={Styles.phoneNumber} text={this.props.AppState.getStore().phoneNumber} />
+                        <BaseText style={Styles.phoneNumber} text={this.props.AppState.getStore()?.phoneNumber} />
                     </View>
 
                     <View style={Styles.mediumSpacer} />
 
-                    <BaseText style={Styles.info} text={this.props.AppState.getStore().info} />
+                    <BaseText style={Styles.info} text={this.props.AppState.getStore()?.info} />
 
                     <View style={Styles.mediumSpacer} />
 
-                    {this.props.AppState.getStore().whatsapp && (
+                    {this.props.AppState.getStore()?.whatsapp && (
                         <View style={Styles.rowCenterView}>
                             <FontAwesomeIcon name='whatsapp' size={this.infoIconSize} />
                             <View style={GlobalStyles.spacer} />
-                            <BaseText style={Styles.contactText} text={this.props.AppState.getStore().whatsapp} />
+                            <BaseText style={Styles.contactText} text={this.props.AppState.getStore()?.whatsapp} />
                         </View>
                     )}
 
                     <View style={Styles.smallSpacer} />
 
-                    {this.props.AppState.getStore().instagram && (
+                    {this.props.AppState.getStore()?.instagram && (
                         <View style={Styles.rowCenterView}>
                             <FontAwesomeIcon name='instagram' size={this.infoIconSize} />
                             <View style={GlobalStyles.spacer} />
-                            <BaseText style={Styles.contactText} text={this.props.AppState.getStore().instagram} />
+                            <BaseText style={Styles.contactText} text={this.props.AppState.getStore()?.instagram} />
                         </View>
                     )}
 
                     <View style={Styles.smallSpacer} />
 
-                    {this.props.AppState.getStore().telegram && (
+                    {this.props.AppState.getStore()?.telegram && (
                         <View style={Styles.rowCenterView}>
                             <FontAwesome5 name='telegram-plane' size={this.infoIconSize} />
                             <View style={GlobalStyles.spacer} />
-                            <BaseText style={Styles.contactText} text={this.props.AppState.getStore().telegram} />
+                            <BaseText style={Styles.contactText} text={this.props.AppState.getStore()?.telegram} />
                         </View>
                     )}
                 </ScrollView>
@@ -140,7 +140,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                         <Animatable.View animation={'fadeInRight'} useNativeDriver={true}>
                             <BaseText
                                 style={Styles.expandingTabBackgroundTitle}
-                                text={this.props.AppState.getStore().storeName}
+                                text={this.props.AppState.getStore()?.storeName}
                             />
                         </Animatable.View>
                     </View>
