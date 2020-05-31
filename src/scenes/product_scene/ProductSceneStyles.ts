@@ -3,18 +3,24 @@ import { Colors } from '../../Constants'
 import { Dimension, Fonts, FontSizes } from '../../GlobalStyles'
 
 export const Styles = StyleSheet.create({
+    /** height: 8 */
+    smallSpacer: {
+        height: 8 * Dimension.scaleX
+    },
+    /** height: 16 */
+    mediumSpacer: {
+        height: 16 * Dimension.scaleX
+    },
+    /** height: 24 */
+    largeSpacer: {
+        height: 24 * Dimension.scaleX
+    },
     root: {
         flex: 1,
         backgroundColor: Colors.milky
     },
-    backButton: {
-        position: 'absolute',
-        left: 20,
-        top: 16
-    },
     image: {
-        width: '100%',
-        height: 270 * Dimension.scaleX
+        flex: 1
     },
     bottomContainer: {
         flex: 1,
