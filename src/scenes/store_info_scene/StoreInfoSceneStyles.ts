@@ -1,14 +1,14 @@
 import { StyleSheet } from 'react-native'
-import { Colors, EnvironmentVariables } from '../../Constants'
-import { Dimension, Fonts, FontSizes, GlobalStyles } from '../../GlobalStyles'
+import { Colors } from '../../Constants'
+import { Dimension, Fonts, FontSizes } from '../../GlobalStyles'
+
+const expandingTabExpandedHeight: number = Dimension.deviceHeight * 0.85
+const expandingTabCollapsedHeight: number = 72 * Dimension.scaleX
 
 export const Styles = StyleSheet.create({
     root: {
         flex: 1,
         backgroundColor: Colors.creamMedium
-    },
-    rootExpandedState: {
-        backgroundColor: Colors.primaryMedium
     },
     topBar: {
         height: Dimension.deviceHeight * 0.1,
@@ -23,14 +23,13 @@ export const Styles = StyleSheet.create({
         fontSize: FontSizes.h2,
         fontFamily: Fonts.persian.vazirBold
     },
-    centerContainer: {
-        flex: 1,
+    centerScrollViewContainer: {
         alignItems: 'center',
         paddingHorizontal: 28 * Dimension.scaleX,
         paddingTop: 16 * Dimension.scaleX,
         // expanding tab height is added to bottom padding to fix ScrollView bug, which is center container content
         // would go under expanding tab because its absolute positioned
-        paddingBottom: GlobalStyles.expandingTabCollapsedHeight + 33 * Dimension.scaleX
+        paddingBottom: expandingTabCollapsedHeight + 33 * Dimension.scaleX
     },
     name: {
         fontSize: FontSizes.h2,
@@ -70,16 +69,6 @@ export const Styles = StyleSheet.create({
     largeSpacer: {
         height: 24 * Dimension.scaleX
     },
-    topBarExpandedState: {
-        width: '100%',
-        height: EnvironmentVariables.isIos
-            ? Dimension.deviceHeight - GlobalStyles.expandingTabExpandedHeight
-            : Dimension.deviceHeight - Dimension.statusBarHeight - GlobalStyles.expandingTabExpandedHeight,
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingRight: 28 * Dimension.scaleX,
-        paddingLeft: 48 * Dimension.scaleX
-    },
     expandedStateTitle: {
         color: Colors.creamLight,
         fontFamily: Fonts.persian.vazirMedium
@@ -93,10 +82,10 @@ export const Styles = StyleSheet.create({
         alignItems: 'center'
     },
     expandingTabExpandedContainer: {
-        height: GlobalStyles.expandingTabExpandedHeight
+        height: expandingTabExpandedHeight
     },
     expandingTabCollapsedContainer: {
-        height: GlobalStyles.expandingTabCollapsedHeight,
+        height: expandingTabCollapsedHeight,
         justifyContent: 'center'
     },
     expandingTabSafeTouch: {
@@ -112,5 +101,12 @@ export const Styles = StyleSheet.create({
     },
     expandingTabCollapsedTitle: {
         fontFamily: Fonts.persian.vazirBold
+    },
+    expandingTabBackgroundContainer: {
+        flexDirection: 'row',
+        height: Dimension.deviceHeight - expandingTabExpandedHeight - Dimension.statusBarHeight,
+        alignItems: 'center',
+        paddingRight: 28 * Dimension.scaleX,
+        paddingLeft: 48 * Dimension.scaleX
     }
 })
