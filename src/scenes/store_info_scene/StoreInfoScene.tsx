@@ -139,7 +139,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                         <View style={GlobalStyles.spacer} />
                         <Animatable.View animation={'fadeInRight'} useNativeDriver={true}>
                             <BaseText
-                                style={Styles.expandedStateTitle}
+                                style={Styles.expandingTabBackgroundTitle}
                                 text={this.props.AppState.getStore().storeName}
                             />
                         </Animatable.View>
@@ -189,6 +189,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
         }
         return (
             <FlatList
+                contentContainerStyle={Styles.expandingTabFlatListContainer}
                 data={products}
                 renderItem={this.renderProductFlatListItem}
                 keyExtractor={Product.keyExtractor}

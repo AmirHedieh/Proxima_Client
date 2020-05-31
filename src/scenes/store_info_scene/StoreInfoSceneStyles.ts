@@ -69,10 +69,6 @@ export const Styles = StyleSheet.create({
     largeSpacer: {
         height: 24 * Dimension.scaleX
     },
-    expandedStateTitle: {
-        color: Colors.creamLight,
-        fontFamily: Fonts.persian.vazirMedium
-    },
     expandingTabContainer: {
         width: '100%',
         position: 'absolute',
@@ -108,5 +104,13 @@ export const Styles = StyleSheet.create({
         alignItems: 'center',
         paddingRight: 28 * Dimension.scaleX,
         paddingLeft: 48 * Dimension.scaleX
+    },
+    expandingTabBackgroundTitle: {
+        color: Colors.creamLight,
+        fontFamily: Fonts.persian.vazirMedium
+    },
+    expandingTabFlatListContainer: {
+        paddingTop: 4 * Dimension.scaleX,
+        paddingBottom: 16 * Dimension.scaleX
     }
 })
