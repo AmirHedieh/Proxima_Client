@@ -56,9 +56,6 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
             <View style={{ flex: 1 }}>
                 <View style={Styles.topBar}>
                     <MaterialIcon name='weekend' size={55} color={Colors.primaryMedium} />
-                    <SafeTouch onPress={() => this.onExpandingTabPress()}>
-                        <BaseText text='switch' />
-                    </SafeTouch>
                 </View>
                 <ScrollView contentContainerStyle={Styles.centerScrollViewContainer}>
                     <BaseText style={Styles.name} text={this.props.storeName} />
