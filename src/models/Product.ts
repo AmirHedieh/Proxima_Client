@@ -19,7 +19,7 @@ export class Product {
     public price: number
     public bodyMaterial: string
     public clothMaterial: string
-    public picture: string[]
+    public pictures: string[]
     public category: number
 
     constructor(rawProduct: IRawProduct) {
@@ -29,6 +29,6 @@ export class Product {
         this.price = rawProduct.price
         this.bodyMaterial = rawProduct.bodyMaterial
         this.clothMaterial = rawProduct.clothMaterial
-        this.picture = rawProduct.pictures
+        this.pictures = rawProduct.pictures
     }
 }
