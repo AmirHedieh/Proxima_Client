@@ -193,10 +193,11 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                 data={products}
                 renderItem={this.renderProductFlatListItem}
                 keyExtractor={Product.keyExtractor}
+                initialNumToRender={12}
                 numColumns={2}
                 // tslint:disable-next-line: jsx-no-lambda
                 onEndReached={() => this.props.AppState.fetchProducts({ category: null })}
-                onEndThreshold={0}
+                onEndReachedThreshold={0.5}
             />
         )
     }
