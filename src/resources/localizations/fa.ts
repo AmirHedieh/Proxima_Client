@@ -21,5 +21,9 @@ export const Fa = {
 
     /** MinimalProductScene */
     noteTitleMinimalProductScene: 'توجه',
-    noteMessageMinimalProductScene: 'برای مشاهده اطلاعات کامل محصول، به نزدیکی آن بروید.'
+    noteMessageMinimalProductScene: 'برای مشاهده اطلاعات کامل محصول، به نزدیکی آن بروید.',
+
+    /** ProductScene */
+    bodyMaterialProductScene: 'بدنه',
+    clothMaterialProductScene: 'پوشش'
 }

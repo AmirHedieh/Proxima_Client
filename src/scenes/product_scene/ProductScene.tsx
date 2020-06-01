@@ -44,14 +44,20 @@ export class ProductScene extends BaseScene<IProductSceneProps, IBaseSceneState>
                     <View style={Styles.largeSpacer} />
                     <RTLAwareView style={Styles.materialsContainer}>
                         <View>
-                            <BaseText style={Styles.bodyMaterialTitleText} text={'بدنه'} />
+                            <BaseText
+                                style={Styles.bodyMaterialTitleText}
+                                text={Localization.translate('bodyMaterialProductScene')}
+                            />
                             <BaseText style={Styles.bodyMaterialText} text={'گردو'} />
                         </View>
                         <View style={Styles.bodyClothSpacer} />
                         <View style={Styles.bodyClothSeparator} />
                         <View style={Styles.bodyClothSpacer} />
                         <View>
-                            <BaseText style={Styles.clothMaterialTitleText} text={'پوشش'} />
+                            <BaseText
+                                style={Styles.clothMaterialTitleText}
+                                text={Localization.translate('clothMaterialProductScene')}
+                            />
                             <BaseText style={Styles.clothMaterialText} text={'مخمل'} />
                         </View>
                     </RTLAwareView>

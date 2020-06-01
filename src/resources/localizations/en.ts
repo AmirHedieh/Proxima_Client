@@ -21,5 +21,9 @@ export const En = {
 
     /** MinimalProductScene */
     noteTitleMinimalProductScene: 'Note',
-    noteMessageMinimalProductScene: 'To see further information of this product, get close to it.'
+    noteMessageMinimalProductScene: 'To see further information of this product, get close to it.',
+
+    /** ProductScene */
+    bodyMaterialProductScene: 'Body',
+    clothMaterialProductScene: 'Cloth'
 }
