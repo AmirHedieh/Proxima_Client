@@ -1,3 +1,8 @@
+interface IRepeated {
+    isRepeated: boolean
+    repeatedValue: number
+}
+
 export class RepeatDetector {
     private data: number[] = []
     private numberOfRepeats: number = 0
@@ -5,9 +10,11 @@ export class RepeatDetector {
     public constructor(numberOfRepeats: number) {
         this.numberOfRepeats = numberOfRepeats
     }
+
     public setNumberOfRepeats(numberOfRepeats: number) {
         this.numberOfRepeats = numberOfRepeats
     }
+
     public addToData(value: number) {
         if (this.data.length < this.numberOfRepeats) {
             this.data.unshift(value)
@@ -17,10 +24,18 @@ export class RepeatDetector {
         }
     }
 
-    public isDataRepeated(): boolean {
+    public isDataRepeated(): IRepeated {
         if (this.data.length < this.numberOfRepeats) {
-            return false
+            return {
+                isRepeated: false,
+                repeatedValue: null
+            }
         }
-        return !this.data.some((val, i, arr) => val !== arr[0]) // check if any inequality was found (if found => false)
+        // check if any inequality was found (if found => false)
+        const isRepeated = !this.data.some((val, i, arr) => val !== arr[0])
+        return {
+            isRepeated,
+            repeatedValue: isRepeated ? this.data[0] : null
+        }
     }
 }
