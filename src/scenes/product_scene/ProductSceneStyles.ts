@@ -32,7 +32,8 @@ export const Styles = StyleSheet.create({
     },
     bottomContainer: {
         paddingRight: 56 * Dimension.scaleX,
-        paddingLeft: 28 * Dimension.scaleX
+        paddingLeft: 28 * Dimension.scaleX,
+        paddingBottom: 32 * Dimension.scaleX
     },
     name: {
         fontSize: FontSizes.h1,

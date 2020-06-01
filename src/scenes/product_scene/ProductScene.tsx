@@ -69,10 +69,6 @@ export class ProductScene extends BaseScene<IProductSceneProps, IBaseSceneState>
                     </RTLAwareView>
                     <View style={Styles.mediumSpacer} />
                     <BaseText text={this.props.AppState.getCurrentProduct().info} />
-                    <BaseText text={this.props.AppState.getCurrentProduct().info} />
-                    <BaseText text={this.props.AppState.getCurrentProduct().info} />
-                    <BaseText text={this.props.AppState.getCurrentProduct().info} />
-                    <BaseText text={this.props.AppState.getCurrentProduct().info} />
                 </View>
             </ScrollView>
         )
