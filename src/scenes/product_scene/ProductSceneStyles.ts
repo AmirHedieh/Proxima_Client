@@ -20,16 +20,17 @@ export const Styles = StyleSheet.create({
         height: 24 * Dimension.scaleX
     },
     root: {
-        flex: 1,
-        backgroundColor: Colors.milky
-    },
-    image: {
         flex: 1
     },
+    swiper: {
+        width: '100%',
+        height: 288 * Dimension.scaleX // image height + 18
+    },
+    image: {
+        width: '100%',
+        height: 270 * Dimension.scaleX
+    },
     bottomContainer: {
-        flex: 1,
-        paddingTop: 24 * Dimension.scaleX,
-        paddingBottom: 32 * Dimension.scaleX,
         paddingRight: 56 * Dimension.scaleX,
         paddingLeft: 28 * Dimension.scaleX
     },

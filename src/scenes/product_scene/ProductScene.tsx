@@ -1,15 +1,15 @@
 import { inject, observer } from 'mobx-react'
 import * as React from 'react'
-import { Image, View, ScrollView } from 'react-native'
+import { Image, ScrollView, View } from 'react-native'
 import Swiper from 'react-native-swiper'
 import { DomainViewModel } from '../../classes/DomainViewModel'
 import { BaseText } from '../../components/base_text/BaseText'
+import { RTLAwareView } from '../../components/rtl_aware/RTLAwareView'
 import { Colors } from '../../Constants'
 import { NavigationActions } from '../../NavigationActions'
 import { Localization } from '../../text_process/Localization'
 import { BaseScene, IBaseSceneState } from '../base_scene/BaseScene'
 import { Styles } from './ProductSceneStyles'
-import { RTLAwareView } from '../../components/rtl_aware/RTLAwareView'
 
 export interface IProductSceneProps {
     AppState?: DomainViewModel
@@ -20,20 +20,20 @@ export interface IProductSceneProps {
 export class ProductScene extends BaseScene<IProductSceneProps, IBaseSceneState> {
     protected renderSafe(): JSX.Element {
         return (
-            <View style={Styles.root}>
+            <ScrollView>
                 <Swiper
+                    containerStyle={Styles.swiper}
                     paginationStyle={{
                         position: 'absolute',
-                        bottom: -Styles.largeSpacer.height
+                        bottom: 0
                     }}
                     activeDotColor={Colors.black}
                     dotColor={Colors.creamLight}
                 >
                     {this.renderPictures()}
                 </Swiper>
-                {/* add padding because of Swiper pagination dots absolute position */}
                 <View style={Styles.largeSpacer} />
-                <ScrollView contentContainerStyle={Styles.bottomContainer}>
+                <View style={Styles.bottomContainer}>
                     <BaseText style={Styles.name} text={this.props.AppState.getCurrentProduct().productName} />
                     <View style={Styles.superSmallSpacer} />
                     <BaseText
@@ -48,7 +48,10 @@ export class ProductScene extends BaseScene<IProductSceneProps, IBaseSceneState>
                                 style={Styles.bodyMaterialTitleText}
                                 text={Localization.translate('bodyMaterialProductScene')}
                             />
-                            <BaseText style={Styles.bodyMaterialText} text={'گردو'} />
+                            <BaseText
+                                style={Styles.bodyMaterialText}
+                                text={this.props.AppState.getCurrentProduct().bodyMaterial}
+                            />
                         </View>
                         <View style={Styles.bodyClothSpacer} />
                         <View style={Styles.bodyClothSeparator} />
@@ -58,11 +61,20 @@ export class ProductScene extends BaseScene<IProductSceneProps, IBaseSceneState>
                                 style={Styles.clothMaterialTitleText}
                                 text={Localization.translate('clothMaterialProductScene')}
                             />
-                            <BaseText style={Styles.clothMaterialText} text={'مخمل'} />
+                            <BaseText
+                                style={Styles.clothMaterialText}
+                                text={this.props.AppState.getCurrentProduct().clothMaterial}
+                            />
                         </View>
                     </RTLAwareView>
-                </ScrollView>
-            </View>
+                    <View style={Styles.mediumSpacer} />
+                    <BaseText text={this.props.AppState.getCurrentProduct().info} />
+                    <BaseText text={this.props.AppState.getCurrentProduct().info} />
+                    <BaseText text={this.props.AppState.getCurrentProduct().info} />
+                    <BaseText text={this.props.AppState.getCurrentProduct().info} />
+                    <BaseText text={this.props.AppState.getCurrentProduct().info} />
+                </View>
+            </ScrollView>
         )
     }
 
