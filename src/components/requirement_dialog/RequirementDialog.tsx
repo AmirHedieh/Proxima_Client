@@ -2,7 +2,7 @@ import * as React from 'react'
 import { View } from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { Colors } from '../../Constants'
-import { GlobalStyles } from '../../GlobalStyles'
+import { Dimension, GlobalStyles } from '../../GlobalStyles'
 import { CommonValidator } from '../../utils/Validator'
 import { BaseDialog, IBaseDialogProps, IBaseDialogState } from '../base_dialog/BaseDialog'
 import { BaseText } from '../base_text/BaseText'
@@ -59,14 +59,22 @@ export class RequirementDialog extends BaseDialog<IBaseDialogProps, IRequirement
                 <RTLAwareView style={Styles.messageContainer}>
                     <BaseText style={Styles.messageText} text={this.state.message} />
                     <View style={GlobalStyles.spacer} />
-                    <MaterialIcon name='error-outline' size={36} color={Colors.red} />
+                    <MaterialIcon name='error-outline' size={36 * Dimension.scaleX} color={Colors.red} />
                 </RTLAwareView>
                 {this.state.buttonText !== '' && (
-                    <NormalButton text={this.state.buttonText} onPress={this.onPressEvent} />
+                    <View style={Styles.buttonContainer}>
+                        <View style={{ height: 24 * Dimension.scaleX }} />
+                        <NormalButton text={this.state.buttonText} onPress={this.onPressEvent}>
+                            {this.state.buttonText && (
+                                <MaterialIcon name={this.state.icon} size={22} color={Colors.creamMedium2} />
+                            )}
+                        </NormalButton>
+                        <View style={{ height: 28 * Dimension.scaleX }} />
+                    </View>
                 )}
                 <View style={Styles.bottomContainer}>
                     <View style={Styles.iconContainer}>
-                        <MaterialIcon name={this.state.icon} size={80} color={Colors.creamMedium2} />
+                        <MaterialIcon name={this.state.icon} size={80 * Dimension.scaleX} color={Colors.creamMedium2} />
                     </View>
                 </View>
             </View>

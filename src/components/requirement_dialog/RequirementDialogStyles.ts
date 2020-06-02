@@ -30,5 +30,10 @@ export const Styles = StyleSheet.create({
         borderColor: Colors.black,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    buttonContainer: {
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 })
