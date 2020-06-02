@@ -5,13 +5,15 @@ import { Dimension } from '../../GlobalStyles'
 export const Styles = StyleSheet.create({
     contentContainerStyle: {
         width: Dimension.deviceWidth,
-        minHeight: Dimension.deviceHeight * 0.3,
-        maxHeight: Dimension.deviceHeight * 0.85,
-        borderTopLeftRadius: 50 * Dimension.scaleX,
-        borderTopRightRadius: 10 * Dimension.scaleX,
-        paddingTop: 12 * Dimension.scaleX,
-        paddingHorizontal: 12 * Dimension.scaleX,
-        backgroundColor: Colors.pureWhite
+        height: 360 * Dimension.scaleX,
+        minHeight: Dimension.deviceHeight * 0.4,
+        maxHeight: Dimension.deviceHeight * 0.7,
+        borderTopLeftRadius: 48 * Dimension.scaleX,
+        borderTopRightRadius: 12 * Dimension.scaleX,
+        paddingTop: 32 * Dimension.scaleX,
+        paddingRight: 28 * Dimension.scaleX,
+        paddingLeft: 30 * Dimension.scaleX,
+        backgroundColor: Colors.creamLight
     },
     safeTouchStyle: {
         flex: 1,
