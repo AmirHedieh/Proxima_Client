@@ -1,27 +1,26 @@
 import * as React from 'react'
 import { FontSizes } from '../../GlobalStyles'
 import { StyleType } from '../../Types'
-import { HeaderText } from '../header_text/HeaderText'
+import { BaseText } from '../base_text/BaseText'
+import { RTLAwareView } from '../rtl_aware/RTLAwareView'
 import { SafeTouch } from '../safe_touch/SafeTouch'
 import { Styles } from './NormalButtonStyle'
 
 interface INormalButtonProps {
     onPress: any
     text: string
-    isFilled?: boolean,
-    disabled?: boolean,
-    containerStyle?: StyleType,
-    fontSize?: number,
-    width?: number | string,
-    height?: number | string,
+    disabled?: boolean
+    containerStyle?: StyleType
+    fontSize?: number
+    width?: number | string
+    height?: number | string
     textStyle?: StyleType
 }
 
 export class NormalButton extends React.PureComponent<INormalButtonProps> {
     public static defaultProps: INormalButtonProps = {
-        onPress: () => { },
+        onPress: () => {},
         text: '',
-        isFilled: true,
         disabled: false,
         containerStyle: null,
         fontSize: FontSizes.h3,
@@ -39,26 +38,18 @@ export class NormalButton extends React.PureComponent<INormalButtonProps> {
             extraStyle.height = this.props.height
         }
         return (
-            <SafeTouch
-                onPress={this.props.onPress}
-                disabled={this.props.disabled}
-                style={[
-                    Styles.containerStyle,
-                    this.props.isFilled ? Styles.filledButtonContainerStyle : Styles.notFilledButtonContainerStyle,
-                    this.props.containerStyle,
-                    this.props.disabled ? Styles.disabledStyle : null,
-                    extraStyle
-                ]}
-            >
-                <HeaderText
-                    text={this.props.text}
+            <SafeTouch onPress={this.props.onPress} disabled={this.props.disabled}>
+                <RTLAwareView
                     style={[
-                        Styles.textStyle,
-                        this.props.isFilled ? Styles.filledButtonTextStyle : Styles.notFilledButtonTextStyle,
-                        this.props.textStyle
+                        Styles.containerStyle,
+                        this.props.containerStyle,
+                        this.props.disabled ? Styles.disabledStyle : null,
+                        extraStyle
                     ]}
-                    fontSize={this.props.fontSize}
-                />
+                >
+                    <BaseText text={this.props.text} style={[Styles.textStyle, this.props.textStyle]} />
+                    {this.props.children}
+                </RTLAwareView>
             </SafeTouch>
         )
     }
