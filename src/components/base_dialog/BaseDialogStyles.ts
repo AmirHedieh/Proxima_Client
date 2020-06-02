@@ -10,9 +10,6 @@ export const Styles = StyleSheet.create({
         maxHeight: Dimension.deviceHeight * 0.7,
         borderTopLeftRadius: 48 * Dimension.scaleX,
         borderTopRightRadius: 12 * Dimension.scaleX,
-        paddingTop: 32 * Dimension.scaleX,
-        paddingRight: 28 * Dimension.scaleX,
-        paddingLeft: 30 * Dimension.scaleX,
         backgroundColor: Colors.creamLight
     },
     safeTouchStyle: {
