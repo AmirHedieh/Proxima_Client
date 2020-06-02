@@ -20,7 +20,6 @@ export const Styles = StyleSheet.create({
     textStyle: {
         textAlign: 'center',
         fontSize: FontSizes.h3,
-        backgroundColor: '#fd0',
         fontFamily: Fonts.persian.vazirMedium,
         color: Colors.creamLight
     }
