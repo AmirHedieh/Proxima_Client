@@ -66,7 +66,11 @@ export class RequirementDialog extends BaseDialog<IBaseDialogProps, IRequirement
                         <View style={{ height: 24 * Dimension.scaleX }} />
                         <NormalButton text={this.state.buttonText} onPress={this.onPressEvent}>
                             {this.state.buttonText && (
-                                <MaterialIcon name={this.state.icon} size={22} color={Colors.creamMedium2} />
+                                <MaterialIcon
+                                    name={this.state.icon}
+                                    size={22 * Dimension.scaleX}
+                                    color={Colors.creamMedium2}
+                                />
                             )}
                         </NormalButton>
                         <View style={{ height: 28 * Dimension.scaleX }} />

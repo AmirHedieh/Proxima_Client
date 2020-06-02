@@ -33,7 +33,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
     public state: IProductSceneState = {
         isExpanded: false
     }
-    private infoIconSize: number = 29
+    private infoIconSize: number = 29 * Dimension.scaleX
 
     public renderSafe(): JSX.Element {
         return (
@@ -54,7 +54,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
         return (
             <View style={{ flex: 1 }}>
                 <View style={Styles.topBar}>
-                    <MaterialIcon name='weekend' size={55} color={Colors.primaryMedium} />
+                    <MaterialIcon name='weekend' size={55 * Dimension.scaleX} color={Colors.primaryMedium} />
                 </View>
                 <ScrollView contentContainerStyle={Styles.centerScrollViewContainer}>
                     <BaseText style={Styles.name} text={this.props.AppState.getStore()?.storeName} />
