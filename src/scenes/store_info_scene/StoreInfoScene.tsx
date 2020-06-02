@@ -169,7 +169,10 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                     onPress={this.onExpandingTabPress}
                 >
                     {this.state.isExpanded ? (
-                        <MaterialIcon size={52} name='expand-more' color='#000' />
+                        <Image
+                            style={{ transform: [{ rotate: '180deg' }] }}
+                            source={require('../../resources/images/arrow_up.png')}
+                        />
                     ) : (
                         <BaseText
                             style={Styles.expandingTabCollapsedTitle}
