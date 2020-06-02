@@ -1,12 +1,18 @@
 import * as React from 'react'
 import { View } from 'react-native'
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
+import { Colors } from '../../Constants'
+import { GlobalStyles } from '../../GlobalStyles'
 import { CommonValidator } from '../../utils/Validator'
 import { BaseDialog, IBaseDialogProps, IBaseDialogState } from '../base_dialog/BaseDialog'
 import { BaseText } from '../base_text/BaseText'
 import { NormalButton } from '../normal_button/NormalButton'
+import { RTLAwareView } from '../rtl_aware/RTLAwareView'
+import { Styles } from './RequirementDialogStyles'
 
 interface IRequirementDialogState extends IBaseDialogState {
     message: string
+    icon: string
     buttonText: string
     onButtonPressedCallback: () => void
     // TODO: add other needed properties
@@ -14,6 +20,7 @@ interface IRequirementDialogState extends IBaseDialogState {
 export class RequirementDialog extends BaseDialog<IBaseDialogProps, IRequirementDialogState> {
     public state: IRequirementDialogState = {
         message: '',
+        icon: null,
         buttonText: '',
         onButtonPressedCallback: null,
         isVisible: false,
@@ -30,12 +37,14 @@ export class RequirementDialog extends BaseDialog<IBaseDialogProps, IRequirement
     }
     public show(params: {
         message: string
+        icon: string
         buttonText?: string
         isCancellable?: boolean
         onButtonPressedCallback?: () => void
     }): void {
         this.setState({
             message: CommonValidator.isNullOrEmpty(params.message) ? '' : params.message,
+            icon: params.icon,
             buttonText: params.buttonText ? params.buttonText : '',
             onButtonPressedCallback: params.onButtonPressedCallback !== null ? params.onButtonPressedCallback : null
         })
@@ -46,16 +55,25 @@ export class RequirementDialog extends BaseDialog<IBaseDialogProps, IRequirement
     }
     protected renderInside(): JSX.Element {
         return (
-            <View>
-                <BaseText text={this.state.message} />
+            <View style={Styles.container}>
+                <RTLAwareView style={Styles.messageContainer}>
+                    <BaseText style={Styles.messageText} text={this.state.message} />
+                    <View style={GlobalStyles.spacer} />
+                    <MaterialIcon name='error-outline' size={36} color={Colors.red} />
+                </RTLAwareView>
                 {this.state.buttonText !== '' && (
                     <NormalButton text={this.state.buttonText} onPress={this.onPressEvent} />
                 )}
+                <View style={Styles.bottomContainer}>
+                    <View style={Styles.iconContainer}>
+                        <MaterialIcon name={this.state.icon} size={80} color={Colors.creamMedium2} />
+                    </View>
+                </View>
             </View>
         )
     }
     private onPressEvent(): void {
-        if (this.state.onButtonPressedCallback != null) {
+        if (this.state.onButtonPressedCallback) {
             this.state.onButtonPressedCallback()
         }
     }
