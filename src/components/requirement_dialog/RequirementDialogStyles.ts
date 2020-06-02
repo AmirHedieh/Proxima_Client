@@ -5,7 +5,7 @@ import { Dimension, Fonts, FontSizes } from '../../GlobalStyles'
 export const Styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 32 * Dimension.scaleX,
+        paddingTop: 32 * Dimension.scaleY,
         paddingRight: 28 * Dimension.scaleX,
         paddingLeft: 30 * Dimension.scaleX
     },
@@ -23,9 +23,9 @@ export const Styles = StyleSheet.create({
         justifyContent: 'center'
     },
     iconContainer: {
-        width: 160 * Dimension.scaleX,
-        height: 160 * Dimension.scaleX,
-        borderRadius: 160 * Dimension.scaleX,
+        width: 160 * Dimension.scaleY,
+        height: 160 * Dimension.scaleY,
+        borderRadius: 160 * Dimension.scaleY,
         borderWidth: 4 * Dimension.scaleX,
         borderColor: Colors.black,
         alignItems: 'center',

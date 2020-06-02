@@ -63,7 +63,7 @@ export class RequirementDialog extends BaseDialog<IBaseDialogProps, IRequirement
                 </RTLAwareView>
                 {this.state.buttonText !== '' && (
                     <View style={Styles.buttonContainer}>
-                        <View style={{ height: 24 * Dimension.scaleX }} />
+                        <View style={{ height: 24 * Dimension.scaleY }} />
                         <NormalButton text={this.state.buttonText} onPress={this.onPressEvent}>
                             {this.state.buttonText && (
                                 <MaterialIcon
@@ -73,7 +73,7 @@ export class RequirementDialog extends BaseDialog<IBaseDialogProps, IRequirement
                                 />
                             )}
                         </NormalButton>
-                        <View style={{ height: 28 * Dimension.scaleX }} />
+                        <View style={{ height: 28 * Dimension.scaleY }} />
                     </View>
                 )}
                 <View style={Styles.bottomContainer}>
