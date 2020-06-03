@@ -73,7 +73,6 @@ export class RequirementDialog extends BaseDialog<IBaseDialogProps, IRequirement
                                 />
                             )}
                         </NormalButton>
-                        <View style={{ height: 28 * Dimension.scaleY }} />
                     </View>
                 )}
                 <View style={Styles.bottomContainer}>
