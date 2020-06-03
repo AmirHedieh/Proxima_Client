@@ -22,7 +22,6 @@ export class RTLAwareView extends React.PureComponent<IRtlAwareProps> {
         let childrenArray = React.Children.toArray(this.props.children)
         let startDirection = this.props.reverseJustifyContent ? 'flex-end' : 'flex-start' // (ltr) default: flex-start
         if (stores.UIState.getLanguage() === 'fa') {
-            console.log('in if')
             if (this.props.autoJustifyContent) {
                 startDirection = this.props.reverseJustifyContent ? 'flex-start' : 'flex-end'
             }
