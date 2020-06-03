@@ -55,11 +55,49 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
 
     private renderAppInfoTab(): JSX.Element {
         return (
-            <View style={Styles.topBar}>
+            <View style={Styles.appInfoTab}>
                 <MaterialIcon name='weekend' size={55 * Dimension.scaleX} color={Colors.primaryMedium} />
             </View>
         )
     }
+
+    private renderAppInfoTab() {
+        return (
+            <Animatable.View
+                transition={'height'}
+                style={[
+                    Styles.productsTabContainer,
+                    this.state.isShowingProducts
+                        ? Styles.productsTabExpandedContainer
+                        : Styles.productsTabCollapsedContainer
+                ]}
+            >
+                <SafeTouch
+                    style={[
+                        Styles.productsTabSafeTouch,
+                        this.state.isShowingProducts
+                            ? Styles.productsTabSafeTouchExpanded
+                            : Styles.productsTabSafeTouchCollapsed
+                    ]}
+                    onPress={this.onExpandingTabPress}
+                >
+                    {this.state.isShowingProducts ? (
+                        <Image
+                            style={{ transform: [{ rotate: '180deg' }] }}
+                            source={require('../../resources/images/arrow_up.png')}
+                        />
+                    ) : (
+                        <BaseText
+                            style={Styles.expandingTabCollapsedTitle}
+                            text={Localization.translate('expandingTabTitleStoreInfoScene')}
+                        />
+                    )}
+                </SafeTouch>
+                {this.state.isShowingProducts ? this.renderProductList() : null}
+            </Animatable.View>
+        )
+    }
+
     private renderContainer(): JSX.Element {
         return (
             <ScrollView contentContainerStyle={Styles.centerScrollViewContainer}>
@@ -137,14 +175,14 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                         backgroundColor: Colors.primaryMedium
                     }}
                 >
-                    <View style={Styles.expandingTabBackgroundContainer}>
+                    <View style={Styles.productsTabBackgroundContainer}>
                         <Animatable.View animation={'fadeInLeft'} useNativeDriver={true}>
                             <MaterialIcon name='weekend' size={42} color={Colors.black} />
                         </Animatable.View>
                         <View style={GlobalStyles.spacer} />
                         <Animatable.View animation={'fadeInRight'} useNativeDriver={true}>
                             <BaseText
-                                style={Styles.expandingTabBackgroundTitle}
+                                style={Styles.productsTabBackgroundTitle}
                                 text={this.props.AppState.getStore()?.storeName}
                             />
                         </Animatable.View>
@@ -160,18 +198,18 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
             <Animatable.View
                 transition={'height'}
                 style={[
-                    Styles.expandingTabContainer,
+                    Styles.productsTabContainer,
                     this.state.isShowingProducts
-                        ? Styles.expandingTabExpandedContainer
-                        : Styles.expandingTabCollapsedContainer
+                        ? Styles.productsTabExpandedContainer
+                        : Styles.productsTabCollapsedContainer
                 ]}
             >
                 <SafeTouch
                     style={[
-                        Styles.expandingTabSafeTouch,
+                        Styles.productsTabSafeTouch,
                         this.state.isShowingProducts
-                            ? Styles.expandingTabSafeTouchExpanded
-                            : Styles.expandingTabSafeTouchCollapsed
+                            ? Styles.productsTabSafeTouchExpanded
+                            : Styles.productsTabSafeTouchCollapsed
                     ]}
                     onPress={this.onExpandingTabPress}
                 >
@@ -199,7 +237,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
         }
         return (
             <FlatList
-                contentContainerStyle={Styles.expandingTabFlatListContainer}
+                contentContainerStyle={Styles.productsTabFlatListContainer}
                 data={products}
                 renderItem={this.renderProductFlatListItem}
                 keyExtractor={Product.keyExtractor}

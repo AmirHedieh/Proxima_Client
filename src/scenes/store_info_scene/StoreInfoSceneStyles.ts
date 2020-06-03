@@ -10,7 +10,7 @@ export const Styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.creamMedium
     },
-    topBar: {
+    appInfoTab: {
         height: expandingTabCollapsedHeight,
         width: '100%',
         flexDirection: 'row',
@@ -70,7 +70,7 @@ export const Styles = StyleSheet.create({
     largeSpacer: {
         height: 24 * Dimension.scaleY
     },
-    expandingTabContainer: {
+    productsTabContainer: {
         width: '100%',
         position: 'absolute',
         bottom: 0,
@@ -79,39 +79,39 @@ export const Styles = StyleSheet.create({
         borderTopRightRadius: 12 * Dimension.scaleX,
         alignItems: 'center'
     },
-    expandingTabExpandedContainer: {
+    productsTabExpandedContainer: {
         height: expandingTabExpandedHeight
     },
-    expandingTabCollapsedContainer: {
+    productsTabCollapsedContainer: {
         height: expandingTabCollapsedHeight,
         justifyContent: 'center'
     },
-    expandingTabSafeTouch: {
+    productsTabSafeTouch: {
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center'
     },
-    expandingTabSafeTouchExpanded: {
+    productsTabSafeTouchExpanded: {
         height: 40 * Dimension.scaleY
     },
-    expandingTabSafeTouchCollapsed: {
+    productsTabSafeTouchCollapsed: {
         flex: 1
     },
     expandingTabCollapsedTitle: {
         fontFamily: Fonts.persian.vazirBold
     },
-    expandingTabBackgroundContainer: {
+    productsTabBackgroundContainer: {
         flexDirection: 'row',
         height: Dimension.deviceHeight - expandingTabExpandedHeight - Dimension.statusBarHeight,
         alignItems: 'center',
         paddingRight: 28 * Dimension.scaleX,
         paddingLeft: 48 * Dimension.scaleX
     },
-    expandingTabBackgroundTitle: {
+    productsTabBackgroundTitle: {
         color: Colors.creamLight,
         fontFamily: Fonts.persian.vazirMedium
     },
-    expandingTabFlatListContainer: {
+    productsTabFlatListContainer: {
         paddingTop: 4 * Dimension.scaleY,
         paddingBottom: 16 * Dimension.scaleY
     }
