@@ -7,7 +7,6 @@ import { BluetoothManager, IBluetoothManager } from '../../classes/BluetoothMana
 import { DomainViewModel } from '../../classes/DomainViewModel'
 import { ILocationManager, LocationManager } from '../../classes/LocationManager'
 import { INetManager, NetManager } from '../../classes/NetManager'
-import { BaseText } from '../../components/base_text/BaseText'
 import { RequirementDialog } from '../../components/requirement_dialog/RequirementDialog'
 import { EnvironmentVariables } from '../../Constants'
 import { Localization } from '../../text_process/Localization'
@@ -59,7 +58,7 @@ export class HomeScene extends BaseScene<IHomeSceneProps, IHomeSceneState> {
     }
 
     protected async sceneDidMount() {
-        this.netManager.subscribe() // event get called on subscribe once
+        // this.netManager.subscribe() // event get called on subscribe once
         // await this.bluetoothManager.subscribe() // event get called on subscribe once
         // await this.locationManager.subscribe() //
         // this.checkRequirements()
@@ -85,7 +84,8 @@ export class HomeScene extends BaseScene<IHomeSceneProps, IHomeSceneState> {
     private async checkRequirements() {
         if (this.requirements.isConnected === false) {
             this.requirementDialog.show({
-                message: Localization.translate('connectionErrorHomeScene')
+                message: Localization.translate('connectionErrorHomeScene'),
+                icon: 'wifi'
             })
             return
         }
@@ -95,6 +95,7 @@ export class HomeScene extends BaseScene<IHomeSceneProps, IHomeSceneState> {
                 : Localization.translate('enableAndroidBluetoothHomeScene')
             this.requirementDialog.show({
                 message: Localization.translate('bluetoothErrorHomeScene'),
+                icon: 'bluetooth',
                 buttonText,
                 onButtonPressedCallback: () => {
                     // button is only appeared in android
@@ -106,6 +107,7 @@ export class HomeScene extends BaseScene<IHomeSceneProps, IHomeSceneState> {
         if ((await PermissionsHandler.isLocationPermissionAllowed()) === false) {
             this.requirementDialog.show({
                 message: Localization.translate('locationPermissionErrorHomeScene'),
+                icon: 'location-on',
                 buttonText: Localization.translate('giveLocationPermissionHomeScene'),
                 onButtonPressedCallback: async () => {
                     await PermissionsHandler.requestLocationPermission()
@@ -119,6 +121,7 @@ export class HomeScene extends BaseScene<IHomeSceneProps, IHomeSceneState> {
             const buttonText = Localization.translate('goToLocationSettingHomeScene')
             this.requirementDialog.show({
                 message: Localization.translate('locationErrorHomeScene'),
+                icon: 'location-on',
                 buttonText,
                 onButtonPressedCallback: () => {
                     if (EnvironmentVariables.isIos) {
@@ -133,23 +136,17 @@ export class HomeScene extends BaseScene<IHomeSceneProps, IHomeSceneState> {
         this.requirementDialog.hide()
     }
     private renderContent(): JSX.Element {
+        // return this.renderCurrentProduct()
         switch (this.props.AppState.getDetectionState()) {
-            case 'NO_STORE_NO_BEACON':
-                return this.renderSearchingStore()
-
-            case 'FOUND_STORE_NO_BEACON':
-                return this.renderShowProducts()
-
             case 'FOUND_STORE_FOUND_BEACON':
                 return this.renderCurrentProduct()
-            // TODO: decide if this must get handled from this page or from outside
+            default:
+                // states: no store found | store found but no beacon
+                return this.renderStoreInfo()
         }
     }
-    private renderSearchingStore(): JSX.Element {
-        return <BaseText text={'Please enter an store'} />
-    }
 
-    private renderShowProducts(): JSX.Element {
+    private renderStoreInfo(): JSX.Element {
         return <StoreInfoScene />
     }
 
