@@ -1,8 +1,7 @@
 import * as React from 'react'
 import { View } from 'react-native'
-import { GlobalState } from '../../models/GlobalState'
-import { StyleType } from '../../Types'
 import { stores } from '../../mobx/RootStore'
+import { StyleType } from '../../Types'
 
 interface IRtlAwareProps {
     autoJustifyContent?: boolean
