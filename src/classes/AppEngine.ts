@@ -10,12 +10,31 @@ import { UserIdStorage } from '../storage/UserIdStorage'
 import { DetectionState } from '../Types'
 import { BeaconDetector, IBeaconDetector } from './BeaconDetector'
 import { BeaconEngine } from './BeaconEngine'
+import { RandomGenerator } from '../utils/RandomGenerator'
 
 export class AppEngine {
-    @observable public store: Store = null
+    @observable public store: Store = new Store({
+        id: 1,
+        name: 'نام فروشنده',
+        information: 'اطلاعات فروشگاه',
+        instagramContact: 'Instagram',
+        whatsappContact: 'whatsapp',
+        telegramContact: 'telegram',
+        address: 'آدرس فروشگاه',
+        phoneNumber: '09905226632',
+        picture: 'https://i.picsum.photos/id/826/200/200.jpg'
+    })
     @observable public products: Map<number, MinimalProduct> = new Map<number, MinimalProduct>()
     @observable public categories: Map<number, Category> = new Map<number, Category>()
-    @observable public currentProduct: Product = null
+    @observable public currentProduct: Product = new Product({
+        id: 10,
+        information: 'اطلاعات محصول',
+        clothMaterial: 'مخمل',
+        bodyMaterial: 'آهن',
+        price: 10000,
+        name: 'محصول عالی ۹ نفره',
+        pictures: []
+    })
     @observable public detectionState: DetectionState = 'NO_STORE_NO_BEACON'
     private beaconDetector: IBeaconDetector = null
     private beaconEngine: BeaconEngine = null
@@ -27,17 +46,28 @@ export class AppEngine {
         this.beaconDetector = new BeaconDetector()
         this.beaconEngine = new BeaconEngine(this.beaconDetector)
 
-        this.socketManager.onConnect(this.onConnect)
-        this.socketManager.onReconnect(this.onReconnect)
-        this.socketManager.onDisconnect(this.onDisconnect)
-        this.socketManager.onRegister(this.onRegister)
-        this.socketManager.onStaticData(this.onStaticData)
-        this.socketManager.onMajorChange(this.onMajorChange)
-        this.socketManager.onMinorChange(this.onMinorChange)
-        this.socketManager.onGetProducts(this.onGetProducts)
+        // this.socketManager.onConnect(this.onConnect)
+        // this.socketManager.onReconnect(this.onReconnect)
+        // this.socketManager.onDisconnect(this.onDisconnect)
+        // this.socketManager.onRegister(this.onRegister)
+        // this.socketManager.onStaticData(this.onStaticData)
+        // this.socketManager.onMajorChange(this.onMajorChange)
+        // this.socketManager.onMinorChange(this.onMinorChange)
+        // this.socketManager.onGetProducts(this.onGetProducts)
 
-        this.beaconEngine.onMajorChange = this.emitMajorChange
-        this.beaconEngine.onMinorChange = this.emitMinorChange
+        // this.beaconEngine.onMajorChange = this.emitMajorChange
+        // this.beaconEngine.onMinorChange = this.emitMinorChange
+
+        for (let i = 0; i < 15; i++) {
+            const product = new MinimalProduct({
+                id: RandomGenerator.generateRandomNumber(0, 1000),
+                price: RandomGenerator.generateRandomNumber(0, 10000),
+                name: `کالای ${RandomGenerator.generateRandomNumber(0, 100)}`,
+                picture:
+                    'https://cdn.zeplin.io/5ec7b8d67dec494ba300ad8f/assets/1723cc0a-9fd0-4b75-8c9c-8422beb77147.png'
+            })
+            this.products.set(product.id, product)
+        }
     }
 
     public init(): void {
@@ -45,7 +75,7 @@ export class AppEngine {
     }
 
     public emitMinimalProductFetch = (params: { category: number }) => {
-        console.log('emitting fetch product')
+        // console.log('emitting fetch product')
         this.socketManager.getProduct({
             category: params.category,
             offset: this.minimalProductOffset,
@@ -54,13 +84,13 @@ export class AppEngine {
     }
 
     private emitMajorChange = (major) => {
-        console.log('major changed')
+        // console.log('major changed')
         this.socketManager.majorChange({ major })
         // change state to store found
     }
 
     private emitMinorChange = (minor) => {
-        // console.log('minor changed')
+        console.log('minor changed with: ', minor)
         this.socketManager.minorChange({ minor })
     }
 
@@ -111,15 +141,15 @@ export class AppEngine {
     }
 
     private onMajorChange = (response: CustomResponse) => {
-        console.log('on major', response)
+        // console.log('on major', response)
         if (response.getData().store) {
             this.store = new Store(response.getData().store)
             this.detectionState = 'FOUND_STORE_NO_BEACON'
             this.emitMinimalProductFetch({ category: null })
             return
         }
-        this.store = null
         this.detectionState = 'NO_STORE_NO_BEACON'
+        this.store = null
     }
 
     private onMinorChange = (response: CustomResponse) => {
@@ -129,8 +159,8 @@ export class AppEngine {
             this.detectionState = 'FOUND_STORE_FOUND_BEACON'
             return
         }
-        this.currentProduct = null
         this.detectionState = 'FOUND_STORE_NO_BEACON'
+        this.currentProduct = null
     }
 
     private onGetProducts = (response: CustomResponse) => {
