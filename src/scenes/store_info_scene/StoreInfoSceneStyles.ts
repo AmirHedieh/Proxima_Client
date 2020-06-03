@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native'
 import { Colors } from '../../Constants'
 import { Dimension, Fonts, FontSizes } from '../../GlobalStyles'
 
-const expandingTabExpandedHeight: number = Dimension.deviceHeight * 0.85
+const expandingTabExpandedHeight: number = 560 * Dimension.scaleY
 const expandingTabCollapsedHeight: number = 72 * Dimension.scaleY
 
 export const Styles = StyleSheet.create({
@@ -10,19 +10,31 @@ export const Styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.creamMedium
     },
-    appInfoTab: {
-        height: expandingTabCollapsedHeight,
+    appInfoTabContainer: {
         width: '100%',
-        flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
         backgroundColor: Colors.creamLight,
         borderBottomRightRadius: 48 * Dimension.scaleX,
         borderBottomLeftRadius: 12 * Dimension.scaleX
     },
-    topBarTitle: {
-        fontSize: FontSizes.h2,
-        fontFamily: Fonts.persian.vazirBold
+    appInfoTabExpandedContainer: {
+        height: expandingTabExpandedHeight
+    },
+    appInfoTabCollapsedContainer: {
+        height: expandingTabCollapsedHeight,
+        justifyContent: 'center'
+    },
+    appInfoTabSafeTouch: {
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    appInfoTabSafeTouchExpanded: {
+        height: 40 * Dimension.scaleY,
+        alignSelf: 'flex-end'
+    },
+    appInfoTabSafeTouchCollapsed: {
+        flex: 1
     },
     centerScrollViewContainer: {
         alignItems: 'center',

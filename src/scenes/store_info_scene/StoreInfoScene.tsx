@@ -53,47 +53,34 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
         return true
     }
 
-    private renderAppInfoTab(): JSX.Element {
-        return (
-            <View style={Styles.appInfoTab}>
-                <MaterialIcon name='weekend' size={55 * Dimension.scaleX} color={Colors.primaryMedium} />
-            </View>
-        )
-    }
-
     private renderAppInfoTab() {
         return (
             <Animatable.View
                 transition={'height'}
                 style={[
-                    Styles.productsTabContainer,
-                    this.state.isShowingProducts
-                        ? Styles.productsTabExpandedContainer
-                        : Styles.productsTabCollapsedContainer
+                    Styles.appInfoTabContainer,
+                    this.state.isShowingAppInfo
+                        ? Styles.appInfoTabExpandedContainer
+                        : Styles.appInfoTabCollapsedContainer
                 ]}
             >
+                {this.state.isShowingAppInfo ? <BaseText text='app info' /> : null}
+                {this.state.isShowingAppInfo ? <View style={GlobalStyles.spacer} /> : null}
                 <SafeTouch
                     style={[
-                        Styles.productsTabSafeTouch,
-                        this.state.isShowingProducts
-                            ? Styles.productsTabSafeTouchExpanded
-                            : Styles.productsTabSafeTouchCollapsed
+                        Styles.appInfoTabSafeTouch,
+                        this.state.isShowingAppInfo
+                            ? Styles.appInfoTabSafeTouchExpanded
+                            : Styles.appInfoTabSafeTouchCollapsed
                     ]}
-                    onPress={this.onExpandingTabPress}
+                    onPress={this.onAppInfoTabPress}
                 >
-                    {this.state.isShowingProducts ? (
-                        <Image
-                            style={{ transform: [{ rotate: '180deg' }] }}
-                            source={require('../../resources/images/arrow_up.png')}
-                        />
+                    {this.state.isShowingAppInfo ? (
+                        <Image source={require('../../resources/images/arrow_up.png')} />
                     ) : (
-                        <BaseText
-                            style={Styles.expandingTabCollapsedTitle}
-                            text={Localization.translate('expandingTabTitleStoreInfoScene')}
-                        />
+                        <MaterialIcon name='weekend' size={55 * Dimension.scaleX} color={Colors.primaryMedium} />
                     )}
                 </SafeTouch>
-                {this.state.isShowingProducts ? this.renderProductList() : null}
             </Animatable.View>
         )
     }
@@ -211,7 +198,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                             ? Styles.productsTabSafeTouchExpanded
                             : Styles.productsTabSafeTouchCollapsed
                     ]}
-                    onPress={this.onExpandingTabPress}
+                    onPress={this.onProductTabPress}
                 >
                     {this.state.isShowingProducts ? (
                         <Image
@@ -266,7 +253,13 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
         )
     }
 
-    private onExpandingTabPress = () => {
+    private onAppInfoTabPress = () => {
+        this.setState({
+            isShowingAppInfo: !this.state.isShowingAppInfo
+        })
+    }
+
+    private onProductTabPress = () => {
         this.setState({
             isShowingProducts: !this.state.isShowingProducts
         })
