@@ -3,7 +3,7 @@ import { Colors } from '../../Constants'
 import { Dimension, Fonts, FontSizes } from '../../GlobalStyles'
 
 const expandingTabExpandedHeight: number = Dimension.deviceHeight * 0.85
-const expandingTabCollapsedHeight: number = 72 * Dimension.scaleX
+const expandingTabCollapsedHeight: number = 72 * Dimension.scaleY
 
 export const Styles = StyleSheet.create({
     root: {
@@ -11,13 +11,14 @@ export const Styles = StyleSheet.create({
         backgroundColor: Colors.creamMedium
     },
     topBar: {
-        height: Dimension.deviceHeight * 0.1,
+        height: expandingTabCollapsedHeight,
         width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: Colors.creamLight,
-        borderBottomRightRadius: 40 * Dimension.scaleX
+        borderBottomRightRadius: 48 * Dimension.scaleX,
+        borderBottomLeftRadius: 12 * Dimension.scaleX
     },
     topBarTitle: {
         fontSize: FontSizes.h2,
@@ -26,10 +27,10 @@ export const Styles = StyleSheet.create({
     centerScrollViewContainer: {
         alignItems: 'center',
         paddingHorizontal: 28 * Dimension.scaleX,
-        paddingTop: 16 * Dimension.scaleX,
+        paddingTop: 16 * Dimension.scaleY,
         // expanding tab height is added to bottom padding to fix ScrollView bug, which is center container content
         // would go under expanding tab because its absolute positioned
-        paddingBottom: expandingTabCollapsedHeight + 33 * Dimension.scaleX
+        paddingBottom: expandingTabCollapsedHeight + 33 * Dimension.scaleY
     },
     name: {
         fontSize: FontSizes.h2,
@@ -39,11 +40,11 @@ export const Styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: 16 * Dimension.scaleX,
-        paddingVertical: 8 * Dimension.scaleX
+        paddingVertical: 8 * Dimension.scaleY
     },
     image: {
         width: 304 * Dimension.scaleX,
-        height: 228 * Dimension.scaleX,
+        height: 228 * Dimension.scaleY,
         borderRadius: 12 * Dimension.scaleX
     },
     phoneNumber: {
@@ -59,22 +60,23 @@ export const Styles = StyleSheet.create({
     },
     /** height: 8 */
     smallSpacer: {
-        height: 8 * Dimension.scaleX
+        height: 8 * Dimension.scaleY
     },
     /** height: 16 */
     mediumSpacer: {
-        height: 16 * Dimension.scaleX
+        height: 16 * Dimension.scaleY
     },
     /** height: 24 */
     largeSpacer: {
-        height: 24 * Dimension.scaleX
+        height: 24 * Dimension.scaleY
     },
     expandingTabContainer: {
         width: '100%',
         position: 'absolute',
         bottom: 0,
         backgroundColor: Colors.creamLight,
-        borderTopLeftRadius: 40 * Dimension.scaleX,
+        borderTopLeftRadius: 48 * Dimension.scaleX,
+        borderTopRightRadius: 12 * Dimension.scaleX,
         alignItems: 'center'
     },
     expandingTabExpandedContainer: {
@@ -90,7 +92,7 @@ export const Styles = StyleSheet.create({
         justifyContent: 'center'
     },
     expandingTabSafeTouchExpanded: {
-        height: 40 * Dimension.scaleX
+        height: 40 * Dimension.scaleY
     },
     expandingTabSafeTouchCollapsed: {
         flex: 1
@@ -110,7 +112,7 @@ export const Styles = StyleSheet.create({
         fontFamily: Fonts.persian.vazirMedium
     },
     expandingTabFlatListContainer: {
-        paddingTop: 4 * Dimension.scaleX,
-        paddingBottom: 16 * Dimension.scaleX
+        paddingTop: 4 * Dimension.scaleY,
+        paddingBottom: 16 * Dimension.scaleY
     }
 })
