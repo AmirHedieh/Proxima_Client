@@ -24,20 +24,23 @@ interface IProductSceneProps {
 }
 
 interface IProductSceneState {
-    isExpanded: boolean
+    isShowingAppInfo: boolean
+    isShowingProducts: boolean
 }
 
 @inject('AppState')
 @observer
 export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneState> {
     public state: IProductSceneState = {
-        isExpanded: false
+        isShowingAppInfo: false,
+        isShowingProducts: false
     }
     private infoIconSize: number = 29 * Dimension.scaleX
 
     public renderSafe(): JSX.Element {
         return (
             <View style={Styles.root}>
+                {this.renderAppInfoTab()}
                 {this.renderContainer()}
                 {this.renderExpandingTabBackground()}
                 {this.renderExpandingTab()}
@@ -50,75 +53,77 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
         return true
     }
 
+    private renderAppInfoTab(): JSX.Element {
+        return (
+            <View style={Styles.topBar}>
+                <MaterialIcon name='weekend' size={55 * Dimension.scaleX} color={Colors.primaryMedium} />
+            </View>
+        )
+    }
     private renderContainer(): JSX.Element {
         return (
-            <View style={{ flex: 1 }}>
-                <View style={Styles.topBar}>
-                    <MaterialIcon name='weekend' size={55 * Dimension.scaleX} color={Colors.primaryMedium} />
+            <ScrollView contentContainerStyle={Styles.centerScrollViewContainer}>
+                <BaseText style={Styles.name} text={this.props.AppState.getStore()?.storeName} />
+
+                <View style={Styles.mediumSpacer} />
+
+                <Image style={Styles.image} source={{ uri: this.props.AppState.getStore()?.picture }} />
+
+                <View style={Styles.largeSpacer} />
+
+                <View style={Styles.rowCenterView}>
+                    <MaterialIcon name='home' size={this.infoIconSize} />
+                    <View style={GlobalStyles.spacer} />
+                    <BaseText text={this.props.AppState.getStore()?.address} />
                 </View>
-                <ScrollView contentContainerStyle={Styles.centerScrollViewContainer}>
-                    <BaseText style={Styles.name} text={this.props.AppState.getStore()?.storeName} />
 
-                    <View style={Styles.mediumSpacer} />
+                <View style={Styles.smallSpacer} />
 
-                    <Image style={Styles.image} source={{ uri: this.props.AppState.getStore()?.picture }} />
+                <View style={Styles.rowCenterView}>
+                    <MaterialIcon name='phone' size={this.infoIconSize} />
+                    <View style={GlobalStyles.spacer} />
+                    <BaseText style={Styles.phoneNumber} text={this.props.AppState.getStore()?.phoneNumber} />
+                </View>
 
-                    <View style={Styles.largeSpacer} />
+                <View style={Styles.mediumSpacer} />
 
+                <BaseText style={Styles.info} text={this.props.AppState.getStore()?.info} />
+
+                <View style={Styles.mediumSpacer} />
+
+                {this.props.AppState.getStore()?.whatsapp && (
                     <View style={Styles.rowCenterView}>
-                        <MaterialIcon name='home' size={this.infoIconSize} />
+                        <FontAwesomeIcon name='whatsapp' size={this.infoIconSize} />
                         <View style={GlobalStyles.spacer} />
-                        <BaseText text={this.props.AppState.getStore()?.address} />
+                        <BaseText style={Styles.contactText} text={this.props.AppState.getStore()?.whatsapp} />
                     </View>
+                )}
 
-                    <View style={Styles.smallSpacer} />
+                <View style={Styles.smallSpacer} />
 
+                {this.props.AppState.getStore()?.instagram && (
                     <View style={Styles.rowCenterView}>
-                        <MaterialIcon name='phone' size={this.infoIconSize} />
+                        <FontAwesomeIcon name='instagram' size={this.infoIconSize} />
                         <View style={GlobalStyles.spacer} />
-                        <BaseText style={Styles.phoneNumber} text={this.props.AppState.getStore()?.phoneNumber} />
+                        <BaseText style={Styles.contactText} text={this.props.AppState.getStore()?.instagram} />
                     </View>
+                )}
 
-                    <View style={Styles.mediumSpacer} />
+                <View style={Styles.smallSpacer} />
 
-                    <BaseText style={Styles.info} text={this.props.AppState.getStore()?.info} />
-
-                    <View style={Styles.mediumSpacer} />
-
-                    {this.props.AppState.getStore()?.whatsapp && (
-                        <View style={Styles.rowCenterView}>
-                            <FontAwesomeIcon name='whatsapp' size={this.infoIconSize} />
-                            <View style={GlobalStyles.spacer} />
-                            <BaseText style={Styles.contactText} text={this.props.AppState.getStore()?.whatsapp} />
-                        </View>
-                    )}
-
-                    <View style={Styles.smallSpacer} />
-
-                    {this.props.AppState.getStore()?.instagram && (
-                        <View style={Styles.rowCenterView}>
-                            <FontAwesomeIcon name='instagram' size={this.infoIconSize} />
-                            <View style={GlobalStyles.spacer} />
-                            <BaseText style={Styles.contactText} text={this.props.AppState.getStore()?.instagram} />
-                        </View>
-                    )}
-
-                    <View style={Styles.smallSpacer} />
-
-                    {this.props.AppState.getStore()?.telegram && (
-                        <View style={Styles.rowCenterView}>
-                            <FontAwesome5 name='telegram-plane' size={this.infoIconSize} />
-                            <View style={GlobalStyles.spacer} />
-                            <BaseText style={Styles.contactText} text={this.props.AppState.getStore()?.telegram} />
-                        </View>
-                    )}
-                </ScrollView>
-            </View>
+                {this.props.AppState.getStore()?.telegram && (
+                    <View style={Styles.rowCenterView}>
+                        <FontAwesome5 name='telegram-plane' size={this.infoIconSize} />
+                        <View style={GlobalStyles.spacer} />
+                        <BaseText style={Styles.contactText} text={this.props.AppState.getStore()?.telegram} />
+                    </View>
+                )}
+            </ScrollView>
         )
     }
 
     private renderExpandingTabBackground(): JSX.Element {
-        if (this.state.isExpanded) {
+        if (this.state.isShowingProducts) {
             return (
                 <Animatable.View
                     animation={'fadeIn'}
@@ -156,19 +161,21 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                 transition={'height'}
                 style={[
                     Styles.expandingTabContainer,
-                    this.state.isExpanded ? Styles.expandingTabExpandedContainer : Styles.expandingTabCollapsedContainer
+                    this.state.isShowingProducts
+                        ? Styles.expandingTabExpandedContainer
+                        : Styles.expandingTabCollapsedContainer
                 ]}
             >
                 <SafeTouch
                     style={[
                         Styles.expandingTabSafeTouch,
-                        this.state.isExpanded
+                        this.state.isShowingProducts
                             ? Styles.expandingTabSafeTouchExpanded
                             : Styles.expandingTabSafeTouchCollapsed
                     ]}
                     onPress={this.onExpandingTabPress}
                 >
-                    {this.state.isExpanded ? (
+                    {this.state.isShowingProducts ? (
                         <Image
                             style={{ transform: [{ rotate: '180deg' }] }}
                             source={require('../../resources/images/arrow_up.png')}
@@ -180,7 +187,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                         />
                     )}
                 </SafeTouch>
-                {this.state.isExpanded ? this.renderProductList() : null}
+                {this.state.isShowingProducts ? this.renderProductList() : null}
             </Animatable.View>
         )
     }
@@ -223,7 +230,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
 
     private onExpandingTabPress = () => {
         this.setState({
-            isExpanded: !this.state.isExpanded
+            isShowingProducts: !this.state.isShowingProducts
         })
     }
 }
