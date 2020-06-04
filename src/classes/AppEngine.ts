@@ -35,7 +35,7 @@ export class AppEngine {
         name: 'محصول عالی ۹ نفره',
         pictures: []
     })
-    @observable public detectionState: DetectionState = 'NO_STORE_NO_BEACON'
+    @observable public detectionState: DetectionState = 'FOUND_STORE_NO_BEACON'
     private beaconDetector: IBeaconDetector = null
     private beaconEngine: BeaconEngine = null
     private userId: string = null
@@ -67,6 +67,31 @@ export class AppEngine {
                     'https://cdn.zeplin.io/5ec7b8d67dec494ba300ad8f/assets/1723cc0a-9fd0-4b75-8c9c-8422beb77147.png'
             })
             this.products.set(product.id, product)
+        }
+
+        const mainOne = new Category({
+            category: 1,
+            parent: null,
+            name: `اول`,
+            children: [2]
+        })
+        const mainCat = new Category({
+            category: 2,
+            parent: 1,
+            name: `دوم`,
+            children: [3, 4, 5, 6, 7]
+        })
+        this.categories.set(mainOne.id, mainOne)
+        this.categories.set(mainCat.id, mainCat)
+
+        for (let i = 3; i < 3 + mainCat.children.length; i++) {
+            const category = new Category({
+                category: i,
+                parent: mainCat.id,
+                name: `دسته ${RandomGenerator.generateRandomNumber(0, 100)}`,
+                children: []
+            })
+            this.categories.set(category.id, category)
         }
     }
 
