@@ -7,7 +7,7 @@ import { SafeTouch } from '../safe_touch/SafeTouch'
 import { Styles } from './CategoryFilterStyles'
 import { FlatList, View } from 'react-native'
 import { BaseText } from '../base_text/BaseText'
-import { Dimension } from '../../GlobalStyles'
+import { Dimension, GlobalStyles } from '../../GlobalStyles'
 import { Localization } from '../../text_process/Localization'
 
 interface IProps {
@@ -42,11 +42,24 @@ export class CategoryFilter<IPassedProps extends IProps> extends React.Component
 
     private renderContainer(): JSX.Element {
         // render an icon to open tab
-        if (this.state.isOpen === false) {
+        if (this.state.isOpen === false && this.state.selectedCategory == null) {
             return (
                 <SafeTouch style={Styles.rootSafeTouch} onPress={this.onIconPress}>
                     <MaterialIcon name='tune' size={36 * Dimension.scaleX} color={Colors.creamLight} />
                 </SafeTouch>
+            )
+        }
+        // render close but with selected items
+        if (this.state.isOpen === false && this.state.selectedCategory) {
+            return (
+                <View style={Styles.expandedContainer}>
+                    <SafeTouch style={{ padding: 12 * Dimension.scaleX }} onPress={this.onIconPress}>
+                        <MaterialIcon name='tune' size={36 * Dimension.scaleX} color={Colors.creamLight} />
+                    </SafeTouch>
+                    <View style={Styles.selectedCategoriesFlatListContainer}>
+                        {this.renderSelectedCategoriesFlatList(this.findCategoryParents(this.state.selectedCategory))}
+                    </View>
+                </View>
             )
         }
         // render no selection state
@@ -65,6 +78,7 @@ export class CategoryFilter<IPassedProps extends IProps> extends React.Component
                 subCategories.push(this.props.categories.get(element))
             }
             if (subCategories.length === 0) {
+                // no more category to show
                 subCategoriesContent = (
                     <View style={Styles.noMoreCategoryContainer}>
                         <BaseText
@@ -78,23 +92,16 @@ export class CategoryFilter<IPassedProps extends IProps> extends React.Component
                     subCategoriesContent = this.renderCategoriesFlatList(subCategories)
                 }
             }
-
-            const selectedCategories: Category[] = [this.props.categories.get(this.state.selectedCategory)]
-            let currentCategory: Category = this.props.categories.get(this.state.selectedCategory)
-            while (true) {
-                const parentId = currentCategory.parent
-                if (!parentId) {
-                    break
-                }
-                currentCategory = this.props.categories.get(parentId)
-                selectedCategories.push(currentCategory)
-            }
             return (
                 <View style={Styles.expandedContainer}>
                     <SafeTouch onPress={this.onIconPress}>{this.collapseIcon}</SafeTouch>
                     <View style={{ flex: 1 }}>
                         {subCategoriesContent}
-                        {this.renderSelectedCategoriesFlatList(selectedCategories)}
+                        <View style={Styles.selectedCategoriesFlatListContainer}>
+                            {this.renderSelectedCategoriesFlatList(
+                                this.findCategoryParents(this.state.selectedCategory)
+                            )}
+                        </View>
                     </View>
                 </View>
             )
@@ -106,8 +113,9 @@ export class CategoryFilter<IPassedProps extends IProps> extends React.Component
     private renderCategoriesFlatList(data: Category[]): JSX.Element {
         return (
             <FlatList
+                inverted={true}
                 keyExtractor={this.categoryKeyExtractor}
-                data={data}
+                data={data} // reverse to make first index appear right
                 horizontal={true}
                 renderItem={this.renderCategoriesFlatListItem}
                 ItemSeparatorComponent={this.renderCategoriesFlatListItemsSeparator}
@@ -129,10 +137,9 @@ export class CategoryFilter<IPassedProps extends IProps> extends React.Component
         )
     }
 
-    private renderSelectedCategoriesFlatList(data: Category[]): JSX.Element {
+    private renderSelectedCategoriesFlatList(data: Category[], style?: any): JSX.Element {
         return (
             <FlatList
-                style={{ flex: 1 }}
                 keyExtractor={this.categoryKeyExtractor}
                 data={data}
                 horizontal={true}
@@ -153,14 +160,34 @@ export class CategoryFilter<IPassedProps extends IProps> extends React.Component
         )
     }
 
+    private findCategoryParents(id: number): Category[] {
+        if (id == null) {
+            return []
+        }
+        const selectedCategories: Category[] = [this.props.categories.get(id)]
+        let currentCategory: Category = this.props.categories.get(id)
+        while (true) {
+            const parentId = currentCategory.parent
+            if (!parentId) {
+                break
+            }
+            currentCategory = this.props.categories.get(parentId)
+            selectedCategories.push(currentCategory)
+        }
+        return selectedCategories
+    }
+
     private getRootStyle(): any {
-        if (this.state.isOpen === false) {
+        if (this.state.isOpen === false && this.state.selectedCategory == null) {
             return Styles.root
         }
+        if (this.state.isOpen === false && this.state.selectedCategory) {
+            return [Styles.root, Styles.rootCloseWithSelection]
+        }
         if (this.state.selectedCategory) {
-            return [Styles.root, Styles.rootExpandedWithSelection]
+            return [Styles.root, Styles.rootOpenWithSelection]
         } else {
-            return [Styles.root, Styles.rootExpandedNoSelection]
+            return [Styles.root, Styles.rootOpenNoSelection]
         }
     }
 

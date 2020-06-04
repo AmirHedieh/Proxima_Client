@@ -14,12 +14,15 @@ export const Styles = StyleSheet.create({
         borderTopLeftRadius: 48 * Dimension.scaleX,
         borderBottomLeftRadius: 12 * Dimension.scaleX
     },
-    rootExpandedNoSelection: {
+    rootOpenNoSelection: {
         width: 312 * Dimension.scaleX
     },
-    rootExpandedWithSelection: {
+    rootOpenWithSelection: {
         width: 312 * Dimension.scaleX,
         height: 152 * Dimension.scaleY
+    },
+    rootCloseWithSelection: {
+        width: 312 * Dimension.scaleX
     },
     rootSafeTouch: {
         flex: 1,
@@ -32,6 +35,10 @@ export const Styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingLeft: 16 * Dimension.scaleX
+    },
+    selectedCategoriesFlatListContainer: {
+        flex: 1,
+        alignItems: 'flex-end' //start from right
     },
     categoryItemContainer: {
         alignItems: 'center',
