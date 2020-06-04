@@ -67,7 +67,9 @@ export class CategoryFilter<IPassedProps extends IProps> extends React.Component
             return (
                 <View style={Styles.expandedContainer}>
                     <SafeTouch onPress={this.onIconPress}>{this.collapseIcon}</SafeTouch>
-                    {this.renderCategoriesFlatList([...this.props.categories.values()])}
+                    {this.renderCategoriesFlatList(
+                        [...this.props.categories.values()].filter((item) => item.parent == null)
+                    )}
                 </View>
             )
         } else if (this.state.selectedCategory) {
@@ -90,7 +92,9 @@ export class CategoryFilter<IPassedProps extends IProps> extends React.Component
             } else {
                 {
                     subCategoriesContent = (
-                        <View style={[Styles.expandedContainer, { paddingLeft: 0 }]}>
+                        <View
+                            style={[Styles.expandedContainer, { paddingLeft: 0, paddingRight: 8 * Dimension.scaleX }]}
+                        >
                             {this.renderCategoriesFlatList(subCategories)}
                         </View>
                     )
