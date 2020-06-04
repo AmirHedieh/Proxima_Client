@@ -8,6 +8,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { DomainViewModel } from '../../classes/DomainViewModel'
 import { BaseText } from '../../components/base_text/BaseText'
+import { CategoryFilter } from '../../components/category_filter/CategoryFilter'
 import { SafeTouch } from '../../components/safe_touch/SafeTouch'
 import { Colors } from '../../Constants'
 import { Dimension, GlobalStyles } from '../../GlobalStyles'
@@ -29,7 +30,6 @@ interface IProductSceneProps {
 interface IProductSceneState {
     isShowingAppInfo: boolean
     isShowingProducts: boolean
-    isShowingCategories: boolean
 }
 
 @inject('AppState')
@@ -37,10 +37,11 @@ interface IProductSceneState {
 export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneState> {
     public state: IProductSceneState = {
         isShowingAppInfo: false,
-        isShowingProducts: false,
-        isShowingCategories: false
+        isShowingProducts: false
     }
     private infoIconSize: number = 29 * Dimension.scaleX
+    private categoryTabRef: CategoryFilter = null
+    private showCategoryTab: boolean = false // prevent initial render of category tab
 
     public renderSafe(): JSX.Element {
         return (
@@ -49,10 +50,14 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                 {this.renderContainer()}
                 {this.renderProductsExpandingTabBackground()}
                 {this.renderProductsExpandingTab()}
+                {this.renderCategoryTab()}
             </View>
         )
     }
 
+    protected sceneDidMount(): void {
+        this.showCategoryTab = true // after initial render(scene mounted), categories tab can be shown
+    }
     protected onBackPress(): boolean {
         NavigationActions.pop()
         return true
@@ -301,7 +306,17 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
         )
     }
 
-    private renderCategoryTab() {}
+    private renderCategoryTab(): JSX.Element {
+        if (this.showCategoryTab === false) {
+            return null
+        }
+        return (
+            <CategoryFilter
+                categories={this.props.AppState.getCategoryList()}
+                ref={(ref) => (this.categoryTabRef = ref)}
+            />
+        )
+    }
     private onAppInfoTabPress = () => {
         this.setState({
             isShowingAppInfo: !this.state.isShowingAppInfo
@@ -309,8 +324,17 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
     }
 
     private onProductTabPress = () => {
-        this.setState({
-            isShowingProducts: !this.state.isShowingProducts
-        })
+        this.setState(
+            {
+                isShowingProducts: !this.state.isShowingProducts
+            },
+            () => {
+                if (this.state.isShowingProducts) {
+                    this.categoryTabRef.tabAnimatable.fadeInRight(200)
+                } else {
+                    this.categoryTabRef.tabAnimatable.fadeOutRight(200)
+                }
+            }
+        )
     }
 }
