@@ -38,7 +38,10 @@ export const Styles = StyleSheet.create({
     },
     selectedCategoriesFlatListContainer: {
         flex: 1,
-        alignItems: 'flex-end' //start from right
+        alignItems: 'flex-end' // start from right
+    },
+    selectedCategoriesFlatListContentContainer: {
+        alignItems: 'center'
     },
     categoryItemContainer: {
         alignItems: 'center',
@@ -53,7 +56,12 @@ export const Styles = StyleSheet.create({
         fontFamily: Fonts.persian.vazirMedium,
         color: Colors.creamLight
     },
+    selectedFlatListContentContainer: {
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     selectedCategoryItemContainer: {
+        height: 48,
         alignItems: 'center',
         justifyContent: 'center',
         paddingHorizontal: 12 * Dimension.scaleX,

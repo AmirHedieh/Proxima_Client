@@ -140,6 +140,8 @@ export class CategoryFilter<IPassedProps extends IProps> extends React.Component
     private renderSelectedCategoriesFlatList(data: Category[], style?: any): JSX.Element {
         return (
             <FlatList
+                contentContainerStyle={Styles.selectedCategoriesFlatListContentContainer}
+                ListFooterComponent={this.renderClearSelection}
                 keyExtractor={this.categoryKeyExtractor}
                 data={data}
                 horizontal={true}
@@ -148,7 +150,7 @@ export class CategoryFilter<IPassedProps extends IProps> extends React.Component
         )
     }
 
-    private renderSelectedCategoriesFlatListItem(event: { item: Category }): JSX.Element {
+    private renderSelectedCategoriesFlatListItem(event: { index: number; item: Category }): JSX.Element {
         const onPress = () =>
             this.setState({
                 selectedCategory: event.item.id
@@ -156,6 +158,17 @@ export class CategoryFilter<IPassedProps extends IProps> extends React.Component
         return (
             <SafeTouch style={Styles.selectedCategoryItemContainer} onPress={onPress}>
                 <BaseText style={Styles.selectedCategoryItemText} text={event.item.name} />
+            </SafeTouch>
+        )
+    }
+
+    private renderClearSelection(): JSX.Element {
+        return (
+            <SafeTouch
+                style={[Styles.selectedCategoryItemContainer, { marginLeft: 4, elevation: 5 }]}
+                onPress={this.onIconPress}
+            >
+                <MaterialIcon name='clear' size={26} color={Colors.primaryDark} />
             </SafeTouch>
         )
     }
