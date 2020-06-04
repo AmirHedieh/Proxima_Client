@@ -27,6 +27,12 @@ export const Styles = StyleSheet.create({
         paddingRight: 18 * Dimension.scaleX,
         paddingVertical: 28 * Dimension.scaleY
     },
+    expandedContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingLeft: 16 * Dimension.scaleX
+    },
     categoryItemContainer: {
         alignItems: 'center',
         justifyContent: 'center',
@@ -38,6 +44,27 @@ export const Styles = StyleSheet.create({
     categoryItemText: {
         fontSize: FontSizes.h3,
         fontFamily: Fonts.persian.vazirMedium,
+        color: Colors.creamLight
+    },
+    selectedCategoryItemContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingHorizontal: 12 * Dimension.scaleX,
+        paddingVertical: 16 * Dimension.scaleY,
+        backgroundColor: Colors.creamMedium
+    },
+    selectedCategoryItemText: {
+        fontSize: FontSizes.h3,
+        fontFamily: Fonts.persian.vazirMedium,
+        color: Colors.primaryDark
+    },
+    noMoreCategoryContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    noMoreCategoryText: {
+        fontSize: FontSizes.h2,
         color: Colors.creamLight
     }
 })

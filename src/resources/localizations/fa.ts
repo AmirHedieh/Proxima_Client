@@ -27,5 +27,8 @@ export const Fa = {
 
     /** ProductScene */
     bodyMaterialProductScene: 'بدنه',
-    clothMaterialProductScene: 'پوشش'
+    clothMaterialProductScene: 'پوشش',
+
+    /** CategoryFilter */
+    noMoreCategoriesCategoryFilter: 'دسته‌بندی دیگری موجود نیست'
 }

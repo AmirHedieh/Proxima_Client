@@ -8,6 +8,7 @@ import { Styles } from './CategoryFilterStyles'
 import { FlatList, View } from 'react-native'
 import { BaseText } from '../base_text/BaseText'
 import { Dimension } from '../../GlobalStyles'
+import { Localization } from '../../text_process/Localization'
 
 interface IProps {
     categories: Map<number, Category>
@@ -51,11 +52,50 @@ export class CategoryFilter<IPassedProps extends IProps> extends React.Component
         // render no selection state
         if (this.state.selectedCategory == null) {
             return (
-                <View
-                    style={{ flex: 1, flexDirection: 'row', alignItems: 'center', paddingLeft: 16 * Dimension.scaleX }}
-                >
+                <View style={Styles.expandedContainer}>
                     <SafeTouch onPress={this.onIconPress}>{this.collapseIcon}</SafeTouch>
-                    {this.renderCategoriesFlatList()}
+                    {this.renderCategoriesFlatList([...this.props.categories.values()])}
+                </View>
+            )
+        } else if (this.state.selectedCategory) {
+            // render selected state
+            const subCategories: Category[] = []
+            let subCategoriesContent: JSX.Element = null
+            for (const element of this.props.categories.get(this.state.selectedCategory).children) {
+                subCategories.push(this.props.categories.get(element))
+            }
+            if (subCategories.length === 0) {
+                subCategoriesContent = (
+                    <View style={Styles.noMoreCategoryContainer}>
+                        <BaseText
+                            style={Styles.noMoreCategoryText}
+                            text={Localization.translate('noMoreCategoriesCategoryFilter')}
+                        />
+                    </View>
+                )
+            } else {
+                {
+                    subCategoriesContent = this.renderCategoriesFlatList(subCategories)
+                }
+            }
+
+            const selectedCategories: Category[] = [this.props.categories.get(this.state.selectedCategory)]
+            let currentCategory: Category = this.props.categories.get(this.state.selectedCategory)
+            while (true) {
+                const parentId = currentCategory.parent
+                if (!parentId) {
+                    break
+                }
+                currentCategory = this.props.categories.get(parentId)
+                selectedCategories.push(currentCategory)
+            }
+            return (
+                <View style={Styles.expandedContainer}>
+                    <SafeTouch onPress={this.onIconPress}>{this.collapseIcon}</SafeTouch>
+                    <View style={{ flex: 1 }}>
+                        {subCategoriesContent}
+                        {this.renderSelectedCategoriesFlatList(selectedCategories)}
+                    </View>
                 </View>
             )
         }
@@ -63,14 +103,14 @@ export class CategoryFilter<IPassedProps extends IProps> extends React.Component
 
     private categoryKeyExtractor = (item: Category) => String(item.id)
 
-    private renderCategoriesFlatList(): JSX.Element {
+    private renderCategoriesFlatList(data: Category[]): JSX.Element {
         return (
             <FlatList
                 keyExtractor={this.categoryKeyExtractor}
-                ItemSeparatorComponent={this.renderCategoriesFlatListItemsSeparator}
-                data={[...this.props.categories.values()]}
+                data={data}
                 horizontal={true}
                 renderItem={this.renderCategoriesFlatListItem}
+                ItemSeparatorComponent={this.renderCategoriesFlatListItemsSeparator}
             />
         )
     }
@@ -78,9 +118,37 @@ export class CategoryFilter<IPassedProps extends IProps> extends React.Component
     private renderCategoriesFlatListItemsSeparator = () => <View style={{ width: 8 * Dimension.scaleX }} />
 
     private renderCategoriesFlatListItem = (event: { item: Category }): JSX.Element => {
+        const onPress = () =>
+            this.setState({
+                selectedCategory: event.item.id
+            })
         return (
-            <SafeTouch style={Styles.categoryItemContainer}>
+            <SafeTouch style={Styles.categoryItemContainer} onPress={onPress}>
                 <BaseText style={Styles.categoryItemText} text={event.item.name} />
+            </SafeTouch>
+        )
+    }
+
+    private renderSelectedCategoriesFlatList(data: Category[]): JSX.Element {
+        return (
+            <FlatList
+                style={{ flex: 1 }}
+                keyExtractor={this.categoryKeyExtractor}
+                data={data}
+                horizontal={true}
+                renderItem={this.renderSelectedCategoriesFlatListItem}
+            />
+        )
+    }
+
+    private renderSelectedCategoriesFlatListItem(event: { item: Category }): JSX.Element {
+        const onPress = () =>
+            this.setState({
+                selectedCategory: event.item.id
+            })
+        return (
+            <SafeTouch style={Styles.selectedCategoryItemContainer} onPress={onPress}>
+                <BaseText style={Styles.selectedCategoryItemText} text={event.item.name} />
             </SafeTouch>
         )
     }

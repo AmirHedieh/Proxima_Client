@@ -27,5 +27,8 @@ export const En = {
 
     /** ProductScene */
     bodyMaterialProductScene: 'Body',
-    clothMaterialProductScene: 'Cloth'
+    clothMaterialProductScene: 'Cloth',
+
+    /** CategoryFilter */
+    noMoreCategoriesCategoryFilter: 'No More Category'
 }
