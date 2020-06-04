@@ -29,6 +29,7 @@ interface IProductSceneProps {
 interface IProductSceneState {
     isShowingAppInfo: boolean
     isShowingProducts: boolean
+    isShowingCategories: boolean
 }
 
 @inject('AppState')
@@ -36,7 +37,8 @@ interface IProductSceneState {
 export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneState> {
     public state: IProductSceneState = {
         isShowingAppInfo: false,
-        isShowingProducts: false
+        isShowingProducts: false,
+        isShowingCategories: false
     }
     private infoIconSize: number = 29 * Dimension.scaleX
 
@@ -45,8 +47,8 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
             <View style={Styles.root}>
                 {this.renderAppInfoTab()}
                 {this.renderContainer()}
-                {this.renderExpandingTabBackground()}
-                {this.renderExpandingTab()}
+                {this.renderProductsExpandingTabBackground()}
+                {this.renderProductsExpandingTab()}
             </View>
         )
     }
@@ -190,7 +192,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
         )
     }
 
-    private renderExpandingTabBackground(): JSX.Element {
+    private renderProductsExpandingTabBackground(): JSX.Element {
         if (this.state.isShowingProducts) {
             return (
                 <Animatable.View
@@ -223,7 +225,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
         return null
     }
 
-    private renderExpandingTab() {
+    private renderProductsExpandingTab() {
         if (this.props.AppState.getDetectionState() === 'NO_STORE_NO_BEACON') {
             return null
         }
@@ -299,6 +301,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
         )
     }
 
+    private renderCategoryTab() {}
     private onAppInfoTabPress = () => {
         this.setState({
             isShowingAppInfo: !this.state.isShowingAppInfo
