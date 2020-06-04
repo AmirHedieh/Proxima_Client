@@ -87,7 +87,8 @@ export const Styles = StyleSheet.create({
     noMoreCategoryContainer: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: '#Ddd'
     },
     noMoreCategoryText: {
         fontSize: FontSizes.h2,

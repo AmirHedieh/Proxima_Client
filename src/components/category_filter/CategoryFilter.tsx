@@ -89,7 +89,11 @@ export class CategoryFilter<IPassedProps extends IProps> extends React.Component
                 )
             } else {
                 {
-                    subCategoriesContent = this.renderCategoriesFlatList(subCategories)
+                    subCategoriesContent = (
+                        <View style={[Styles.expandedContainer, { paddingLeft: 0 }]}>
+                            {this.renderCategoriesFlatList(subCategories)}
+                        </View>
+                    )
                 }
             }
             return (
