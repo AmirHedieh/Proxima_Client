@@ -161,6 +161,8 @@ export const Styles = StyleSheet.create({
         flexDirection: 'row',
         width: '100%',
         height: expandingTabCollapsedHeight,
+        paddingRight: 28 * Dimension.scaleX,
+        paddingLeft: 25 * Dimension.scaleX,
         alignItems: 'center',
         position: 'absolute',
         bottom: 0,
