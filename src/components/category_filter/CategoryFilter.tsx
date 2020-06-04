@@ -1,14 +1,14 @@
 import * as React from 'react'
+import { FlatList, View } from 'react-native'
 import * as Animatable from 'react-native-animatable'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { Colors } from '../../Constants'
+import { Dimension } from '../../GlobalStyles'
 import { Category } from '../../models/Category'
+import { Localization } from '../../text_process/Localization'
+import { BaseText } from '../base_text/BaseText'
 import { SafeTouch } from '../safe_touch/SafeTouch'
 import { Styles } from './CategoryFilterStyles'
-import { FlatList, View } from 'react-native'
-import { BaseText } from '../base_text/BaseText'
-import { Dimension, GlobalStyles } from '../../GlobalStyles'
-import { Localization } from '../../text_process/Localization'
 
 interface IProps {
     categories: Map<number, Category>
@@ -150,11 +150,10 @@ export class CategoryFilter<IPassedProps extends IProps> extends React.Component
         )
     }
 
-    private renderSelectedCategoriesFlatListItem = (event: { index: number; item: Category }): JSX.Element => {
+    private renderSelectedCategoriesFlatListItem = (event: { item: Category }): JSX.Element => {
         const onPress = () =>
             this.setState({
-                isOpen: false
-                // selectedCategory: event.item.id
+                selectedCategory: event.item.id
             })
         return (
             <View style={Styles.selectedItemWrapper}>
