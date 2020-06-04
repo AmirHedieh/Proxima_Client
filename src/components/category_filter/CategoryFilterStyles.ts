@@ -1,12 +1,12 @@
 import { StyleSheet } from 'react-native'
 import { Colors } from '../../Constants'
-import { Dimension, FontSizes, Fonts } from '../../GlobalStyles'
+import { Dimension, Fonts, FontSizes } from '../../GlobalStyles'
 
 export const Styles = StyleSheet.create({
     root: {
         width: 70 * Dimension.scaleX,
         height: 88 * Dimension.scaleY,
-        backgroundColor: Colors.primaryDark,
+        backgroundColor: Colors.primaryMedium,
         position: 'absolute',
         bottom: 16,
         right: 0,
@@ -44,6 +44,7 @@ export const Styles = StyleSheet.create({
         alignItems: 'center'
     },
     categoryItemContainer: {
+        height: 56 * Dimension.scaleY,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 20 * Dimension.scaleX,

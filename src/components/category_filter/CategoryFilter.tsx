@@ -155,8 +155,12 @@ export class CategoryFilter<IPassedProps extends IProps> extends React.Component
             this.setState({
                 selectedCategory: event.item.id
             })
+        let wrapperStyle: any = Styles.selectedItemWrapper
+        if (event.item.id === this.state.selectedCategory) {
+            wrapperStyle = [wrapperStyle, { backgroundColor: Colors.primaryMedium }]
+        }
         return (
-            <View style={Styles.selectedItemWrapper}>
+            <View style={wrapperStyle}>
                 <SafeTouch style={Styles.selectedCategoryItemContainer} onPress={onPress}>
                     <BaseText style={Styles.selectedCategoryItemText} text={event.item.name} />
                 </SafeTouch>
