@@ -33,7 +33,7 @@ export class DomainViewModel {
     }
 
     public getCategoryList() {
-        return this.appEngine.currentProduct
+        return this.appEngine.categories
     }
 
     public getCurrentProduct() {
