@@ -137,7 +137,7 @@ export class CategoryFilter<IPassedProps extends IProps> extends React.Component
         )
     }
 
-    private renderSelectedCategoriesFlatList(data: Category[], style?: any): JSX.Element {
+    private renderSelectedCategoriesFlatList(data: Category[]): JSX.Element {
         return (
             <FlatList
                 contentContainerStyle={Styles.selectedCategoriesFlatListContentContainer}
@@ -150,26 +150,28 @@ export class CategoryFilter<IPassedProps extends IProps> extends React.Component
         )
     }
 
-    private renderSelectedCategoriesFlatListItem(event: { index: number; item: Category }): JSX.Element {
+    private renderSelectedCategoriesFlatListItem = (event: { index: number; item: Category }): JSX.Element => {
         const onPress = () =>
             this.setState({
-                selectedCategory: event.item.id
+                isOpen: false
+                // selectedCategory: event.item.id
             })
         return (
-            <SafeTouch style={Styles.selectedCategoryItemContainer} onPress={onPress}>
-                <BaseText style={Styles.selectedCategoryItemText} text={event.item.name} />
-            </SafeTouch>
+            <View style={Styles.selectedItemWrapper}>
+                <SafeTouch style={Styles.selectedCategoryItemContainer} onPress={onPress}>
+                    <BaseText style={Styles.selectedCategoryItemText} text={event.item.name} />
+                </SafeTouch>
+            </View>
         )
     }
 
-    private renderClearSelection(): JSX.Element {
+    private renderClearSelection = (): JSX.Element => {
         return (
-            <SafeTouch
-                style={[Styles.selectedCategoryItemContainer, { marginLeft: 4, elevation: 5 }]}
-                onPress={this.onIconPress}
-            >
-                <MaterialIcon name='clear' size={26} color={Colors.primaryDark} />
-            </SafeTouch>
+            <View style={Styles.selectedItemWrapper}>
+                <SafeTouch style={Styles.selectedCategoryItemContainer} onPress={this.onClearIconPress}>
+                    <MaterialIcon name='clear' size={26} color={Colors.primaryDark} />
+                </SafeTouch>
+            </View>
         )
     }
 
@@ -208,5 +210,12 @@ export class CategoryFilter<IPassedProps extends IProps> extends React.Component
         this.setState((prevState) => ({
             isOpen: !prevState.isOpen
         }))
+    }
+
+    private onClearIconPress = () => {
+        this.setState({
+            isOpen: false,
+            selectedCategory: null
+        })
     }
 }

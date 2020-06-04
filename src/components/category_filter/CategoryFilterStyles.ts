@@ -60,13 +60,23 @@ export const Styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
+    selectedItemWrapper: {
+        backgroundColor: Colors.creamMedium,
+        borderLeftWidth: 0,
+        paddingLeft: 4
+    },
     selectedCategoryItemContainer: {
-        height: 48,
+        // minWidth: 48 * Dimension.scaleX,
+        height: 48 * Dimension.scaleY,
         alignItems: 'center',
         justifyContent: 'center',
-        paddingHorizontal: 12 * Dimension.scaleX,
+        paddingLeft: 12 * Dimension.scaleX,
+        paddingRight: 12 * Dimension.scaleX,
         paddingVertical: 16 * Dimension.scaleY,
-        backgroundColor: Colors.creamMedium
+        backgroundColor: Colors.creamMedium,
+        borderTopLeftRadius: 32 * Dimension.scaleX,
+        borderBottomLeftRadius: 32 * Dimension.scaleX,
+        elevation: 6
     },
     selectedCategoryItemText: {
         fontSize: FontSizes.h3,
