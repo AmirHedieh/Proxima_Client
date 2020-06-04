@@ -13,6 +13,13 @@ export const Styles = StyleSheet.create({
         borderTopLeftRadius: 48 * Dimension.scaleX,
         borderBottomLeftRadius: 12 * Dimension.scaleX
     },
+    rootExpandedNoSelection: {
+        width: 312 * Dimension.scaleX
+    },
+    rootExpandedWithSelection: {
+        width: 312 * Dimension.scaleX,
+        height: 152 * Dimension.scaleY
+    },
     rootSafeTouch: {
         flex: 1,
         paddingLeft: 22 * Dimension.scaleX,
