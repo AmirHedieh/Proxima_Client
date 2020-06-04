@@ -1,3 +1,4 @@
+const LottieView = require('lottie-react-native')
 import { inject, observer } from 'mobx-react'
 import * as React from 'react'
 import { FlatList, Image, ScrollView, View } from 'react-native'
@@ -18,6 +19,8 @@ import { SceneParams } from '../../SceneParams'
 import { Localization } from '../../text_process/Localization'
 import { BaseScene } from '../base_scene/BaseScene'
 import { Styles } from './StoreInfoSceneStyles'
+
+const Animation = require('resources/animations/1115-ripple.json')
 
 interface IProductSceneProps {
     AppState?: DomainViewModel
@@ -86,6 +89,46 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
     }
 
     private renderContainer(): JSX.Element {
+        switch (this.props.AppState.getDetectionState()) {
+            case 'NO_STORE_NO_BEACON':
+                return this.renderSearching()
+            case 'FOUND_STORE_NO_BEACON':
+                return this.renderStoreInfo()
+        }
+    }
+
+    private renderSearching(): JSX.Element {
+        return (
+            <View style={Styles.searchingContainer}>
+                <View style={Styles.animationAndTextContainer}>
+                    <View style={Styles.animationContainer}>
+                        <LottieView
+                            style={Styles.animation}
+                            source={Animation}
+                            autoPlay={true}
+                            loop={true}
+                            hardwareAccelerationAndroid={true}
+                            resizeMode={'contain'}
+                        />
+                    </View>
+                    <View style={Styles.mediumSpacer} />
+                    <BaseText
+                        style={Styles.searchingTitle}
+                        text={Localization.translate('searchingTitleStoreInfoScene')}
+                    />
+                </View>
+                <View style={Styles.searchingBottomTab}>
+                    <MaterialIcon name={'directions-walk'} size={30} />
+                    <BaseText
+                        style={Styles.searchingBottomTabTitle}
+                        text={Localization.translate('goToStoreBottomTabStoreInfoScene')}
+                    />
+                </View>
+            </View>
+        )
+    }
+
+    private renderStoreInfo(): JSX.Element {
         return (
             <ScrollView contentContainerStyle={Styles.centerScrollViewContainer}>
                 <BaseText style={Styles.name} text={this.props.AppState.getStore()?.storeName} />
@@ -181,6 +224,9 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
     }
 
     private renderExpandingTab() {
+        if (this.props.AppState.getDetectionState() === 'NO_STORE_NO_BEACON') {
+            return null
+        }
         return (
             <Animatable.View
                 transition={'height'}

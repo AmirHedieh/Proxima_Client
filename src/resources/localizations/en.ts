@@ -18,6 +18,8 @@ export const En = {
     /** Store info scene */
     topBarTitleStoreInfoScene: 'Proxima',
     expandingTabTitleStoreInfoScene: 'Products',
+    searchingTitleStoreInfoScene: 'Searching closest store',
+    goToStoreBottomTabStoreInfoScene: 'Get close to an store',
 
     /** MinimalProductScene */
     noteTitleMinimalProductScene: 'Note',
