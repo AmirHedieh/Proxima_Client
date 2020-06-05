@@ -12,6 +12,7 @@ import { Styles } from './CategoryFilterStyles'
 
 interface IProps {
     categories: Map<number, Category>
+    fetchData: (params: { category: number }) => void
 }
 interface IState {
     isOpen: boolean
@@ -134,10 +135,12 @@ export class CategoryFilter<IPassedProps extends IProps> extends React.Component
     private renderCategoriesFlatListItemsSeparator = () => <View style={{ width: 8 * Dimension.scaleX }} />
 
     private renderCategoriesFlatListItem = (event: { item: Category }): JSX.Element => {
-        const onPress = () =>
+        const onPress = () => {
             this.setState({
                 selectedCategory: event.item.id
             })
+            this.props.fetchData({ category: event.item.id })
+        }
         return (
             <SafeTouch style={Styles.categoryItemContainer} onPress={onPress}>
                 <BaseText style={Styles.categoryItemText} text={event.item.name} />
@@ -159,10 +162,12 @@ export class CategoryFilter<IPassedProps extends IProps> extends React.Component
     }
 
     private renderSelectedCategoriesFlatListItem = (event: { item: Category }): JSX.Element => {
-        const onPress = () =>
+        const onPress = () => {
             this.setState({
                 selectedCategory: event.item.id
             })
+            this.props.fetchData({ category: event.item.id })
+        }
         let wrapperStyle: any = Styles.selectedItemWrapper
         if (event.item.id === this.state.selectedCategory) {
             wrapperStyle = [wrapperStyle, { backgroundColor: Colors.primaryMedium }]
@@ -228,5 +233,6 @@ export class CategoryFilter<IPassedProps extends IProps> extends React.Component
             isOpen: false,
             selectedCategory: null
         })
+        this.props.fetchData({ category: null })
     }
 }
