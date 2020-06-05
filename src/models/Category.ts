@@ -1,5 +1,5 @@
 export interface IRawCategory {
-    category: number
+    id: number
     parent: number
     name: string
     children: number[]
@@ -11,7 +11,7 @@ export class Category {
     public name: string
     public children: number[]
     public constructor(rawCategory: IRawCategory) {
-        this.id = rawCategory.category
+        this.id = rawCategory.id
         this.parent = rawCategory.parent
         this.name = rawCategory.name
         this.children = rawCategory.children
