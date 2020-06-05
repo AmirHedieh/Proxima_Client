@@ -58,10 +58,10 @@ export class HomeScene extends BaseScene<IHomeSceneProps, IHomeSceneState> {
     }
 
     protected async sceneDidMount() {
-        // this.netManager.subscribe() // event get called on subscribe once
-        // await this.bluetoothManager.subscribe() // event get called on subscribe once
-        // await this.locationManager.subscribe() //
-        // this.checkRequirements()
+        this.netManager.subscribe() // event get called on subscribe once
+        await this.bluetoothManager.subscribe() // event get called on subscribe once
+        await this.locationManager.subscribe() //
+        this.checkRequirements()
     }
 
     protected sceneWillUnmount() {
