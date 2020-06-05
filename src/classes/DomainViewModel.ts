@@ -18,7 +18,7 @@ export class DomainViewModel {
     }
 
     @action
-    public fetchProducts(params: { category: number }) {
+    public fetchProducts = (params: { category: number }) => {
         this.appEngine.emitMinimalProductFetch(params)
     }
 
