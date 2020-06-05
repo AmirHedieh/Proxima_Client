@@ -40,7 +40,10 @@ export class AppEngine {
     private beaconEngine: BeaconEngine = null
     private userId: string = null
     private socketManager: SocketManager = SocketManager.getInstance()
-    private minimalProductOffset: number = 0
+    private minimalProductFetchData = {
+        offset: 0,
+        category: null
+    }
 
     public constructor() {
         this.beaconDetector = new BeaconDetector()
@@ -100,10 +103,14 @@ export class AppEngine {
     }
 
     public emitMinimalProductFetch = (params: { category: number }) => {
-        // console.log('emitting fetch product')
+        if (params.category !== this.minimalProductFetchData.category) {
+            this.minimalProductFetchData.offset = 0
+            this.minimalProductFetchData.category = params.category
+            this.products = new Map<number, MinimalProduct>()
+        }
         this.socketManager.getProduct({
             category: params.category,
-            offset: this.minimalProductOffset,
+            offset: this.minimalProductFetchData.offset,
             limit: 10
         })
     }
