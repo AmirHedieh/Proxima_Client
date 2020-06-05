@@ -11,10 +11,10 @@ export class SocketManager {
         return this.instance
     }
 
-    private socket = io.connect(NetworkConfig.apiBaseUrl) // change to (= null) later
+    private socket = null
 
     private constructor() {
-        this.socket = io.connect(NetworkConfig.apiBaseUrl)
+        this.socket = io.connect(NetworkConfig.apiBaseUrl, { transports: ['websocket'] })
     }
 
     public onConnect(onConnect: () => void) {
