@@ -10,7 +10,7 @@ import { DomainViewModel } from '../../classes/DomainViewModel'
 import { BaseText } from '../../components/base_text/BaseText'
 import { CategoryFilter } from '../../components/category_filter/CategoryFilter'
 import { SafeTouch } from '../../components/safe_touch/SafeTouch'
-import { Colors } from '../../Constants'
+import { Colors, NetworkConfig } from '../../Constants'
 import { Dimension, GlobalStyles } from '../../GlobalStyles'
 import { MinimalProduct } from '../../models/MinimalProduct'
 import { Product } from '../../models/Product'
@@ -138,7 +138,10 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
 
                 <View style={Styles.mediumSpacer} />
 
-                <Image style={Styles.image} source={{ uri: this.props.AppState.getStore()?.picture }} />
+                <Image
+                    style={Styles.image}
+                    source={{ uri: NetworkConfig.localServerPictureBaseUrl + this.props.AppState.getStore()?.picture }}
+                />
 
                 <View style={Styles.largeSpacer} />
 
@@ -294,7 +297,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
             <View style={style}>
                 <MinimalProductCard
                     onPress={onPress}
-                    image={event.item.picture}
+                    image={NetworkConfig.localServerPictureBaseUrl + event.item.picture}
                     title={event.item.productName}
                     price={event.item.price}
                 />

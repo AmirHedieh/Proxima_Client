@@ -5,7 +5,7 @@ import Swiper from 'react-native-swiper'
 import { DomainViewModel } from '../../classes/DomainViewModel'
 import { BaseText } from '../../components/base_text/BaseText'
 import { RTLAwareView } from '../../components/rtl_aware/RTLAwareView'
-import { Colors } from '../../Constants'
+import { Colors, NetworkConfig } from '../../Constants'
 import { NavigationActions } from '../../NavigationActions'
 import { Localization } from '../../text_process/Localization'
 import { BaseScene, IBaseSceneState } from '../base_scene/BaseScene'
@@ -82,7 +82,13 @@ export class ProductScene extends BaseScene<IProductSceneProps, IBaseSceneState>
     private renderPictures(): JSX.Element[] {
         const pictures: JSX.Element[] = []
         for (const element of this.props.AppState.getCurrentProduct().pictures) {
-            pictures.push(<Image key={element} source={{ uri: element }} style={Styles.image} />)
+            pictures.push(
+                <Image
+                    key={element}
+                    source={{ uri: NetworkConfig.localServerPictureBaseUrl + element }}
+                    style={Styles.image}
+                />
+            )
         }
         return pictures
     }

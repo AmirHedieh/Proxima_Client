@@ -3,12 +3,13 @@ import * as React from 'react'
 import { ImageBackground, View } from 'react-native'
 import { BackButton } from '../../components/back_button/BackButton'
 import { BaseText } from '../../components/base_text/BaseText'
+import { NetworkConfig } from '../../Constants'
+import { GlobalStyles } from '../../GlobalStyles'
 import { IMinimalProduct } from '../../models/MinimalProduct'
 import { NavigationActions } from '../../NavigationActions'
 import { Localization } from '../../text_process/Localization'
 import { BaseScene, IBaseSceneState } from '../base_scene/BaseScene'
 import { Styles } from './MinimalProductSceneStyles'
-import { GlobalStyles } from '../../GlobalStyles'
 
 export interface IMinimalProductSceneProps extends IMinimalProduct {}
 
@@ -18,7 +19,10 @@ export class MinimalProductScene extends BaseScene<IMinimalProductSceneProps, IB
     public renderSafe(): JSX.Element {
         return (
             <View style={Styles.root}>
-                <ImageBackground style={Styles.image} source={{ uri: this.props.picture }}>
+                <ImageBackground
+                    style={Styles.image}
+                    source={{ uri: NetworkConfig.localServerPictureBaseUrl + this.props.picture }}
+                >
                     <BackButton style={Styles.backButton} onPress={this.onBackPress} />
                 </ImageBackground>
                 <View style={Styles.bottomContainer}>
