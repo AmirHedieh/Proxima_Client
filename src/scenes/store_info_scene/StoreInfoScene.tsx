@@ -309,6 +309,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
         return (
             <CategoryFilter
                 categories={this.props.AppState.getCategoryList()}
+                fetchData={this.props.AppState.fetchProducts}
                 ref={(ref) => (this.categoryTabRef = ref)}
             />
         )
