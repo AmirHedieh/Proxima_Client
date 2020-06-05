@@ -47,4 +47,9 @@ export class DomainViewModel {
     public getStore() {
         return this.appEngine.store
     }
+
+    // to be used in infinite scroll
+    public getLastFetchedCategory() {
+        return this.appEngine.fetchData.category
+    }
 }

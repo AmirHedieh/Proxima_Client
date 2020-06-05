@@ -92,6 +92,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
     }
 
     private renderContainer(): JSX.Element {
+        // console.log('rendering container', this.props.AppState.getDetectionState())
         switch (this.props.AppState.getDetectionState()) {
             case 'NO_STORE_NO_BEACON':
                 return this.renderSearching()
@@ -283,7 +284,9 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                 initialNumToRender={12}
                 numColumns={2}
                 // tslint:disable-next-line: jsx-no-lambda
-                onEndReached={() => this.props.AppState.fetchProducts({ category: null })}
+                onEndReached={() =>
+                    this.props.AppState.fetchProducts({ category: this.props.AppState.getLastFetchedCategory() })
+                }
                 onEndReachedThreshold={0.5}
             />
         )
