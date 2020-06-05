@@ -41,7 +41,6 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
     }
     private infoIconSize: number = 29 * Dimension.scaleX
     private categoryTabRef: CategoryFilter = null
-    private showCategoryTab: boolean = false // prevent initial render of category tab
 
     public renderSafe(): JSX.Element {
         return (
@@ -55,9 +54,6 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
         )
     }
 
-    protected sceneDidMount(): void {
-        this.showCategoryTab = true // after initial render(scene mounted), categories tab can be shown
-    }
     protected onBackPress(): boolean {
         NavigationActions.pop()
         return true
@@ -307,7 +303,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
     }
 
     private renderCategoryTab(): JSX.Element {
-        if (this.showCategoryTab === false) {
+        if (this.isSceneMounted === false || this.props.AppState.getDetectionState() !== 'FOUND_STORE_NO_BEACON') {
             return null
         }
         return (
