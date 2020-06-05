@@ -3,7 +3,6 @@ import { BackHandler, Keyboard, StatusBar, View } from 'react-native'
 import { CustomDialog } from '../../components/custom_dialog/CustomDialog'
 import { LoadingDialog } from '../../components/loading_dialog/LoadingDialog'
 import { OkDialog } from '../../components/ok_dialog/OkDialog'
-import { PasswordDialog } from '../../components/passwordDialog/PasswordDialog'
 import { ScrollSelectDialog } from '../../components/scroll_select_dialog/ScrollSelectDialog'
 import { SelectDialog } from '../../components/select_dialog/SelectDialog'
 import { YesNoDialog } from '../../components/yes_no_dialog/YesNoDialog'
@@ -33,7 +32,6 @@ export abstract class BaseScene<
     protected selectDialog: SelectDialog
     protected scrollSelectDialog: ScrollSelectDialog
     protected loadingDialog: LoadingDialog
-    protected passwordDialog: PasswordDialog
     protected customDialog: CustomDialog
     protected dismissKeyboardOnMount = true
     protected hideStatusBarAndroid = false
@@ -125,7 +123,6 @@ export abstract class BaseScene<
                 <SelectDialog ref={(ref: SelectDialog) => (this.selectDialog = ref)} />
                 <ScrollSelectDialog ref={(ref: ScrollSelectDialog) => (this.scrollSelectDialog = ref)} />
                 <LoadingDialog ref={(ref: LoadingDialog) => (this.loadingDialog = ref)} />
-                <PasswordDialog ref={(ref: PasswordDialog) => (this.passwordDialog = ref)} />
                 <CustomDialog ref={(ref) => (this.customDialog = ref)} />
             </>
         )
