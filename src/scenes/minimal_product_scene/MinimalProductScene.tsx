@@ -1,15 +1,17 @@
+const LottieView = require('lottie-react-native')
 import { inject, observer } from 'mobx-react'
 import * as React from 'react'
 import { ImageBackground, View } from 'react-native'
 import { BackButton } from '../../components/back_button/BackButton'
 import { BaseText } from '../../components/base_text/BaseText'
 import { NetworkConfig } from '../../Constants'
-import { GlobalStyles } from '../../GlobalStyles'
 import { IMinimalProduct } from '../../models/MinimalProduct'
 import { NavigationActions } from '../../NavigationActions'
 import { Localization } from '../../text_process/Localization'
 import { BaseScene, IBaseSceneState } from '../base_scene/BaseScene'
 import { Styles } from './MinimalProductSceneStyles'
+
+const ScanAnimation = require('resources/animations/ripple_blue.json')
 
 export interface IMinimalProductSceneProps extends IMinimalProduct {}
 
@@ -33,7 +35,15 @@ export class MinimalProductScene extends BaseScene<IMinimalProductSceneProps, IB
                             'moneyUnit'
                         )}`}
                     />
-                    <View style={GlobalStyles.spacer} />
+                    <View style={{ width: '100%', flex: 1 }}>
+                        <LottieView
+                            source={ScanAnimation}
+                            autoPlay={true}
+                            loop={true}
+                            hardwareAccelerationAndroid={true}
+                            resizeMode={'contain'}
+                        />
+                    </View>
                     <BaseText style={Styles.noteTitle} text={Localization.translate('noteTitleMinimalProductScene')} />
                     <BaseText
                         style={Styles.noteMessage}
