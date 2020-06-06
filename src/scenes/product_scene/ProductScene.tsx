@@ -38,7 +38,9 @@ export class ProductScene extends BaseScene<IProductSceneProps, IBaseSceneState>
                     <View style={Styles.superSmallSpacer} />
                     <BaseText
                         style={Styles.price}
-                        text={`${this.props.AppState.getCurrentProduct().price} ${Localization.translate('moneyUnit')}`}
+                        text={`${Localization.formatNumberToPrice(
+                            this.props.AppState.getCurrentProduct().price
+                        )} ${Localization.translate('moneyUnit')}`}
                     />
                     <View style={Styles.superSmallSpacer} />
                     <View style={Styles.largeSpacer} />
