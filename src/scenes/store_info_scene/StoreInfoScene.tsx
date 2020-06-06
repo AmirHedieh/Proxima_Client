@@ -42,7 +42,6 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
     }
     private infoIconSize: number = 29 * Dimension.scaleX
     private categoryTabRef: CategoryFilter = null
-    private callOnCategoryScrollEnd: boolean = false
 
     public renderSafe(): JSX.Element {
         return (
