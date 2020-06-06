@@ -55,6 +55,10 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
         )
     }
 
+    protected sceneDidMount(): void {
+        this.categoryTabRef.tabAnimatable.fadeOutRight(10)
+    }
+
     protected onBackPress(): boolean {
         NavigationActions.pop()
         return true
@@ -338,9 +342,6 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
     }
 
     private renderCategoryTab(): JSX.Element {
-        if (this.isSceneMounted === false || this.props.AppState.getDetectionState() !== 'FOUND_STORE_NO_BEACON') {
-            return null
-        }
         return (
             <CategoryFilter
                 categories={this.props.AppState.getCategoryList()}
@@ -349,6 +350,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
             />
         )
     }
+
     private onAppInfoTabPress = () => {
         this.setState({
             isShowingAppInfo: !this.state.isShowingAppInfo
