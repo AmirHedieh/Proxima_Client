@@ -49,7 +49,7 @@ export class DomainViewModel {
     }
 
     // to be used in infinite scroll
-    public getLastFetchedCategory() {
-        return this.appEngine.fetchData.category
+    public getFetchData() {
+        return this.appEngine.fetchData
     }
 }

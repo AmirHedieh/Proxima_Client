@@ -21,7 +21,8 @@ import { Localization } from '../../text_process/Localization'
 import { BaseScene } from '../base_scene/BaseScene'
 import { Styles } from './StoreInfoSceneStyles'
 
-const Animation = require('resources/animations/1115-ripple.json')
+const ScanAnimation = require('resources/animations/1115-ripple.json')
+const LoadingAnimation = require('resources/animations/51-preloader.json')
 
 interface IProductSceneProps {
     AppState?: DomainViewModel
@@ -41,6 +42,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
     }
     private infoIconSize: number = 29 * Dimension.scaleX
     private categoryTabRef: CategoryFilter = null
+    private callOnCategoryScrollEnd: boolean = false
 
     public renderSafe(): JSX.Element {
         return (
@@ -108,7 +110,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                     <View style={Styles.animationContainer}>
                         <LottieView
                             style={Styles.animation}
-                            source={Animation}
+                            source={ScanAnimation}
                             autoPlay={true}
                             loop={true}
                             hardwareAccelerationAndroid={true}
@@ -271,23 +273,40 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
     }
 
     private renderProductList(): JSX.Element {
+        if (this.props.AppState.getFetchData().isLoadingCategory) {
+            return (
+                <LottieView
+                    style={Styles.animation}
+                    source={LoadingAnimation}
+                    autoPlay={true}
+                    loop={true}
+                    hardwareAccelerationAndroid={true}
+                    resizeMode={'contain'}
+                />
+            )
+        }
         const products = []
         for (const element of this.props.AppState.getProductList().values()) {
             products.push(element)
+        }
+        const onEndReached = ({ distanceFromEnd }) => {
+            if (distanceFromEnd < 0) {
+                return
+            }
+            this.props.AppState.fetchProducts({ category: this.props.AppState.getFetchData().category })
         }
         return (
             <FlatList
                 contentContainerStyle={Styles.productsTabFlatListContainer}
                 data={products}
+                refreshing={true}
                 renderItem={this.renderProductFlatListItem}
                 keyExtractor={Product.keyExtractor}
                 initialNumToRender={12}
                 numColumns={2}
+                onEndReached={onEndReached}
                 // tslint:disable-next-line: jsx-no-lambda
-                onEndReached={() =>
-                    this.props.AppState.fetchProducts({ category: this.props.AppState.getLastFetchedCategory() })
-                }
-                onEndReachedThreshold={0.5}
+                onEndReachedThreshold={0.2}
             />
         )
     }

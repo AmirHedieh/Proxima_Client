@@ -11,9 +11,16 @@ import { DetectionState } from '../Types'
 import { BeaconDetector, IBeaconDetector } from './BeaconDetector'
 import { BeaconEngine } from './BeaconEngine'
 
-const fetchDataInitialValue = {
+interface IFetchData {
+    minimalProductsOffset: number
+    category: number
+    isLoadingCategory: boolean
+}
+
+const fetchDataInitialValue: IFetchData = {
     minimalProductsOffset: 0,
-    category: null
+    category: null,
+    isLoadingCategory: false
 }
 export class AppEngine {
     @observable public store: Store = null
@@ -21,8 +28,7 @@ export class AppEngine {
     @observable public categories: Map<number, Category> = new Map<number, Category>()
     @observable public currentProduct: Product = null
     @observable public detectionState: DetectionState = 'NO_STORE_NO_BEACON'
-
-    public fetchData = fetchDataInitialValue
+    @observable public fetchData = fetchDataInitialValue
 
     private beaconDetector: IBeaconDetector = null
     private beaconEngine: BeaconEngine = null
@@ -52,6 +58,7 @@ export class AppEngine {
 
     public emitMinimalProductFetch = (params: { category: number }) => {
         if (params.category !== this.fetchData.category) {
+            this.fetchData.isLoadingCategory = true // set loading true when _new_ category is fetched
             this.fetchData.minimalProductsOffset = 0
             this.fetchData.category = params.category
             this.products = new Map<number, MinimalProduct>()
@@ -109,6 +116,7 @@ export class AppEngine {
             this.categories.set(category.id, category)
         }
         await this.beaconEngine.startDetecting()
+        this.emitMajorChange(1)
     }
 
     private onMajorChange = (response: CustomResponse) => {
@@ -144,11 +152,12 @@ export class AppEngine {
             this.detectionState = 'FOUND_STORE_FOUND_BEACON'
             return
         }
-        this.detectionState = 'FOUND_STORE_NO_BEACON'
+        // this.detectionState = 'FOUND_STORE_NO_BEACON'
         this.currentProduct = null
     }
 
     private onGetProducts = (response: CustomResponse) => {
+        this.fetchData.isLoadingCategory = false
         for (const element of response.getData().products) {
             this.fetchData.minimalProductsOffset++
             const product = new MinimalProduct(element)
