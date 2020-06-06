@@ -20,6 +20,7 @@ export const Fa = {
     expandingTabTitleStoreInfoScene: 'محصولات',
     searchingTitleStoreInfoScene: 'جستجوی نزدیک‌ترین فروشگاه',
     goToStoreBottomTabStoreInfoScene: 'به نزدیکی یک فروشگاه بروید',
+    noProductFoundInCategoryStoreInfoScene: 'محصولی یافت نشد',
 
     /** MinimalProductScene */
     noteTitleMinimalProductScene: 'توجه',

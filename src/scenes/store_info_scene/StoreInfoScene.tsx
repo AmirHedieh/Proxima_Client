@@ -285,6 +285,17 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                 />
             )
         }
+        if (
+            this.props.AppState.getFetchData().isLoadingCategory === false &&
+            this.props.AppState.getProductList().size === 0
+        ) {
+            return (
+                <BaseText
+                    style={{ color: '#000' }}
+                    text={Localization.translate('noProductFoundInCategoryStoreInfoScene')}
+                />
+            )
+        }
         const products = []
         for (const element of this.props.AppState.getProductList().values()) {
             products.push(element)

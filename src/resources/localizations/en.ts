@@ -20,6 +20,7 @@ export const En = {
     expandingTabTitleStoreInfoScene: 'Products',
     searchingTitleStoreInfoScene: 'Searching closest store',
     goToStoreBottomTabStoreInfoScene: 'Get close to an store',
+    noProductFoundInCategoryStoreInfoScene: 'No product found',
 
     /** MinimalProductScene */
     noteTitleMinimalProductScene: 'Note',
