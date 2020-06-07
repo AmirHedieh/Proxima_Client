@@ -133,7 +133,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                         position: 'absolute',
                         top: 0,
                         width: '100%',
-                        height: Dimension.deviceHeight * 0.3,
+                        height: Dimension.deviceHeight,
                         backgroundColor: Colors.primaryMedium
                     }}
                 >
@@ -177,9 +177,6 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
     }
 
     private renderProductsExpandingTab() {
-        if (this.props.AppState.getDetectionState() === 'NO_STORE_NO_BEACON') {
-            return null
-        }
         return (
             <Animatable.View
                 ref={(ref) => (this.productsTabRef = ref)}
@@ -246,7 +243,6 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                 initialNumToRender={12}
                 numColumns={2}
                 onEndReached={this.onEndReached}
-                // tslint:disable-next-line: jsx-no-lambda
                 onEndReachedThreshold={0.2}
             />
         )

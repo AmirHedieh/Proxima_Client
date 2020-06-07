@@ -3,6 +3,7 @@ import { View } from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { BaseText } from '../../components/base_text/BaseText'
 import { RTLAwareView } from '../../components/rtl_aware/RTLAwareView'
+import { Colors } from '../../Constants'
 import { Dimension } from '../../GlobalStyles'
 import { Localization } from '../../text_process/Localization'
 import { Styles } from './AppInfoCardStyles'
@@ -10,7 +11,7 @@ import { Styles } from './AppInfoCardStyles'
 export const AppInfoCard: React.FunctionComponent = () => {
     return (
         <View style={Styles.root}>
-            <MaterialIcon name='weekend' size={58 * Dimension.scaleX} />
+            <MaterialIcon name='weekend' size={58 * Dimension.scaleX} color={Colors.primaryMedium} />
             <View style={Styles.largeSpacer} />
             <BaseText text={Localization.translate('wannaGetThisApplicationAppInfoCard')} />
             <View style={Styles.mediumSpacer} />
