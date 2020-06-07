@@ -6,14 +6,8 @@ import { RTLAwareView } from '../../components/rtl_aware/RTLAwareView'
 import { Dimension } from '../../GlobalStyles'
 import { Localization } from '../../text_process/Localization'
 import { Styles } from './AppInfoCardStyles'
-interface IProductCardProps {
-    image: string
-    title: string
-    price: number
-    onPress: () => void
-}
 
-export const AppInfoCard: React.FunctionComponent<IProductCardProps> = (props: IProductCardProps) => {
+export const AppInfoCard: React.FunctionComponent = () => {
     return (
         <View style={Styles.root}>
             <MaterialIcon name='weekend' size={58 * Dimension.scaleX} />
