@@ -12,14 +12,19 @@ interface IProductCardProps {
     onPress: () => void
 }
 
-export const MinimalProductCard: React.FunctionComponent<IProductCardProps> = (props: IProductCardProps) => {
-    return (
-        <SafeTouch onPress={props.onPress} style={Styles.root}>
-            <Image style={Styles.image} source={{ uri: props.image }} />
-            <View style={Styles.bottomContainer}>
-                <BaseText style={Styles.title} text={props.title} />
-                <BaseText style={Styles.price} text={`${Localization.formatNumberToPrice(props.price)} تومان`} />
-            </View>
-        </SafeTouch>
-    )
+export class MinimalProductCard<IProps extends IProductCardProps> extends React.PureComponent<IProps> {
+    public render() {
+        return (
+            <SafeTouch onPress={this.props.onPress} style={Styles.root}>
+                <Image style={Styles.image} source={{ uri: this.props.image }} />
+                <View style={Styles.bottomContainer}>
+                    <BaseText style={Styles.title} text={this.props.title} />
+                    <BaseText
+                        style={Styles.price}
+                        text={`${Localization.formatNumberToPrice(this.props.price)} تومان`}
+                    />
+                </View>
+            </SafeTouch>
+        )
+    }
 }
