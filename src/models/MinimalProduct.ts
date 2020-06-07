@@ -12,6 +12,10 @@ export interface IMinimalProduct {
     price: number
 }
 export class MinimalProduct implements IMinimalProduct {
+    public static keyExtractor(product: MinimalProduct): string {
+        return String(product.id)
+    }
+
     public id: number
     public productName: string
     public picture: string
