@@ -115,7 +115,11 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
     }
 
     private renderStoreInfo(): JSX.Element {
-        return <StoreInfo {...this.props.AppState.getStore()} />
+        return (
+            <View style={{ paddingBottom: 2 * expandingTabCollapsedHeight }}>
+                <StoreInfo {...this.props.AppState.getStore()} />
+            </View>
+        )
     }
 
     private renderProductsExpandingTabBackground(): JSX.Element {
