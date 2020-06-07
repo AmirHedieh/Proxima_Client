@@ -1,10 +1,8 @@
 const LottieView = require('lottie-react-native')
 import { inject, observer } from 'mobx-react'
 import * as React from 'react'
-import { FlatList, Image, ScrollView, View } from 'react-native'
+import { FlatList, Image, View } from 'react-native'
 import * as Animatable from 'react-native-animatable'
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome'
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { DomainViewModel } from '../../classes/DomainViewModel'
 import { BaseText } from '../../components/base_text/BaseText'
@@ -17,13 +15,13 @@ import { Product } from '../../models/Product'
 import { NavigationActions } from '../../NavigationActions'
 import { AppInfoCard } from '../../RFC/AppInfoCard/AppInfoCard'
 import { MinimalProductCard } from '../../RFC/MinimalProductCard/MinimalProductCard'
+import { SearchingStore } from '../../RFC/SearchingStore/SearchingStore'
+import { StoreInfo } from '../../RFC/StoreInfo/StoreInfo'
 import { SceneParams } from '../../SceneParams'
 import { Localization } from '../../text_process/Localization'
 import { BaseScene } from '../base_scene/BaseScene'
 import { Styles } from './StoreInfoSceneStyles'
-import { StoreInfo } from '../../RFC/StoreInfo/StoreInfo'
 
-const ScanAnimation = require('resources/animations/1115-ripple.json')
 const LoadingAnimation = require('resources/animations/51-preloader.json')
 
 interface IProductSceneProps {
@@ -109,34 +107,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
     }
 
     private renderSearching(): JSX.Element {
-        return (
-            <View style={Styles.searchingContainer}>
-                <View style={Styles.animationAndTextContainer}>
-                    <View style={Styles.animationContainer}>
-                        <LottieView
-                            style={Styles.animation}
-                            source={ScanAnimation}
-                            autoPlay={true}
-                            loop={true}
-                            hardwareAccelerationAndroid={true}
-                            resizeMode={'contain'}
-                        />
-                    </View>
-                    <View style={Styles.mediumSpacer} />
-                    <BaseText
-                        style={Styles.searchingTitle}
-                        text={Localization.translate('searchingTitleStoreInfoScene')}
-                    />
-                </View>
-                <View style={Styles.searchingBottomTab}>
-                    <MaterialIcon name={'directions-walk'} size={30} />
-                    <BaseText
-                        style={Styles.searchingBottomTabTitle}
-                        text={Localization.translate('goToStoreBottomTabStoreInfoScene')}
-                    />
-                </View>
-            </View>
-        )
+        return <SearchingStore />
     }
 
     private renderStoreInfo(): JSX.Element {

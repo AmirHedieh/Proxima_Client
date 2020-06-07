@@ -1,0 +1,45 @@
+import { StyleSheet } from 'react-native'
+import { Colors } from '../../Constants'
+import { Dimension, Fonts, FontSizes } from '../../GlobalStyles'
+
+export const Styles = StyleSheet.create({
+    searchingContainer: {
+        flex: 1
+    },
+    animationAndTextContainer: {
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: Dimension.deviceHeight
+    },
+    animationContainer: {
+        width: 240,
+        height: 240,
+        borderRadius: 240,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 2,
+        borderColor: '#000'
+    },
+    animation: {
+        width: 180 * Dimension.scaleX,
+        height: 180 * Dimension.scaleY
+    },
+    searchingTitle: {
+        fontSize: FontSizes.h2,
+        fontFamily: Fonts.persian.vazirBold,
+        color: Colors.black
+    },
+    /** height: 8 */
+    smallSpacer: {
+        height: 8 * Dimension.scaleY
+    },
+    /** height: 16 */
+    mediumSpacer: {
+        height: 16 * Dimension.scaleY
+    },
+    /** height: 24 */
+    largeSpacer: {
+        height: 24 * Dimension.scaleY
+    }
+})
