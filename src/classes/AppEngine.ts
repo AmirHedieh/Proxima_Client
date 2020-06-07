@@ -56,6 +56,10 @@ export class AppEngine {
         return this.beaconEngine.init()
     }
 
+    public stopDetecting(): Promise<boolean> {
+        return this.beaconEngine.stopDetecting()
+    }
+
     public emitMinimalProductFetch = (params: { category: number }) => {
         if (params.category !== this.fetchData.category) {
             this.fetchData.isLoadingCategory = true // set loading true when _new_ category is fetched

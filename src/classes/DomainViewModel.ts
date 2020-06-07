@@ -28,6 +28,10 @@ export class DomainViewModel {
         return this.appEngine.products.size
     }
 
+    public stopDetecting() {
+        return this.appEngine.stopDetecting()
+    }
+
     public getProductList() {
         return this.appEngine.products
     }

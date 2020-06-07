@@ -64,10 +64,12 @@ export class HomeScene extends BaseScene<IHomeSceneProps, IHomeSceneState> {
         this.checkRequirements()
     }
 
-    protected sceneWillUnmount() {
+    protected async sceneWillUnmount() {
         this.netManager.unSubscribe()
         this.bluetoothManager.unSubscribe()
         this.locationManager.unSubscribe()
+
+        await this.props.AppState.stopDetecting()
     }
 
     protected renderSafe(): JSX.Element {
