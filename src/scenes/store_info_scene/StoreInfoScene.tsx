@@ -107,7 +107,11 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
     }
 
     private renderSearching(): JSX.Element {
-        return <SearchingStore />
+        return (
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <SearchingStore />
+            </View>
+        )
     }
 
     private renderStoreInfo(): JSX.Element {
