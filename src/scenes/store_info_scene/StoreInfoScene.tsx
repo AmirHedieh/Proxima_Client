@@ -215,26 +215,16 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                 />
             )
         }
-        const products = []
-        for (const element of this.props.AppState.getProductList().values()) {
-            products.push(element)
-        }
-        const onEndReached = ({ distanceFromEnd }) => {
-            if (distanceFromEnd < 0) {
-                return
-            }
-            this.props.AppState.fetchProducts({ category: this.props.AppState.getFetchData().category })
-        }
         return (
             <FlatList
                 contentContainerStyle={Styles.productsTabFlatListContainer}
-                data={products}
+                data={[...this.props.AppState.getProductList().values()]}
                 refreshing={true}
                 renderItem={this.renderProductFlatListItem}
-                keyExtractor={Product.keyExtractor}
+                keyExtractor={MinimalProduct.keyExtractor}
                 initialNumToRender={12}
                 numColumns={2}
-                onEndReached={onEndReached}
+                onEndReached={this.onEndReached}
                 // tslint:disable-next-line: jsx-no-lambda
                 onEndReachedThreshold={0.2}
             />
@@ -255,6 +245,13 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                 />
             </View>
         )
+    }
+
+    private onEndReached = ({ distanceFromEnd }) => {
+        if (distanceFromEnd < 0) {
+            return
+        }
+        this.props.AppState.fetchProducts({ category: this.props.AppState.getFetchData().category })
     }
 
     private renderCategoryTab(): JSX.Element {
