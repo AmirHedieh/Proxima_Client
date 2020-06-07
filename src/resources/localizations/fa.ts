@@ -31,5 +31,11 @@ export const Fa = {
     clothMaterialProductScene: 'پوشش',
 
     /** CategoryFilter */
-    noMoreCategoriesCategoryFilter: 'دسته‌بندی دیگری موجود نیست'
+    noMoreCategoriesCategoryFilter: 'دسته‌بندی دیگری موجود نیست',
+
+    /** AppInfoCard */
+    wannaGetThisApplicationAppInfoCard: 'آیا مایل به تهیه محصول هستید؟',
+    phoneNumberAppInfoCard: 'تلفن',
+    mobileNumberAppInfoCard: 'همراه',
+    whyThisApplicationAppInfoCard: 'چرا پراکسیما'
 }

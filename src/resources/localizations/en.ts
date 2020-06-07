@@ -31,5 +31,11 @@ export const En = {
     clothMaterialProductScene: 'Cloth',
 
     /** CategoryFilter */
-    noMoreCategoriesCategoryFilter: 'No More Category'
+    noMoreCategoriesCategoryFilter: 'No More Category',
+
+    /** AppInfoCard */
+    wannaGetThisApplicationAppInfoCard: 'Wanna get this product?',
+    phoneNumberAppInfoCard: 'Phone',
+    mobileNumberAppInfoCard: 'Mobile',
+    whyThisApplicationAppInfoCard: 'Why proxima'
 }

@@ -1,6 +1,23 @@
 import { StyleSheet } from 'react-native'
+import { Dimension } from '../../GlobalStyles'
 
-const borderRadius: number = 25
-const width: number = 140
-
-export const Styles = StyleSheet.create({})
+export const Styles = StyleSheet.create({
+    root: {
+        alignItems: 'center'
+    },
+    rowContainer: {
+        alignItems: 'center'
+    },
+    /** height: 8 */
+    smallSpacer: {
+        height: 8 * Dimension.scaleY
+    },
+    /** height: 16 */
+    mediumSpacer: {
+        height: 16 * Dimension.scaleY
+    },
+    /** height: 24 */
+    largeSpacer: {
+        height: 24 * Dimension.scaleY
+    }
+})
