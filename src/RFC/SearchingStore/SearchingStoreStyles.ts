@@ -5,8 +5,7 @@ import { Dimension, Fonts, FontSizes } from '../../GlobalStyles'
 export const Styles = StyleSheet.create({
     root: {
         alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#d09'
+        justifyContent: 'center'
     },
     animationContainer: {
         width: 240,
