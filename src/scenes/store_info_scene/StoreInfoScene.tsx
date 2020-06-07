@@ -15,6 +15,7 @@ import { Dimension, GlobalStyles } from '../../GlobalStyles'
 import { MinimalProduct } from '../../models/MinimalProduct'
 import { Product } from '../../models/Product'
 import { NavigationActions } from '../../NavigationActions'
+import { AppInfoCard } from '../../RFC/AppInfoCard/AppInfoCard'
 import { MinimalProductCard } from '../../RFC/MinimalProductCard'
 import { SceneParams } from '../../SceneParams'
 import { Localization } from '../../text_process/Localization'
@@ -75,7 +76,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                         : Styles.appInfoTabCollapsedContainer
                 ]}
             >
-                {this.state.isShowingAppInfo ? <BaseText text='app info' /> : null}
+                {this.state.isShowingAppInfo ? <AppInfoCard /> : null}
                 {this.state.isShowingAppInfo ? <View style={GlobalStyles.spacer} /> : null}
                 <SafeTouch
                     style={[
