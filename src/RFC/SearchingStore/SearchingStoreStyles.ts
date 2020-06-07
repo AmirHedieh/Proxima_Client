@@ -3,14 +3,10 @@ import { Colors } from '../../Constants'
 import { Dimension, Fonts, FontSizes } from '../../GlobalStyles'
 
 export const Styles = StyleSheet.create({
-    searchingContainer: {
-        flex: 1
-    },
-    animationAndTextContainer: {
-        width: '100%',
+    root: {
         alignItems: 'center',
         justifyContent: 'center',
-        height: Dimension.deviceHeight
+        backgroundColor: '#d09'
     },
     animationContainer: {
         width: 240,
@@ -25,7 +21,7 @@ export const Styles = StyleSheet.create({
         width: 180 * Dimension.scaleX,
         height: 180 * Dimension.scaleY
     },
-    searchingTitle: {
+    title: {
         fontSize: FontSizes.h2,
         fontFamily: Fonts.persian.vazirBold,
         color: Colors.black
