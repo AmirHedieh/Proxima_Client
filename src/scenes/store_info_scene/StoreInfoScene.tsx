@@ -21,6 +21,7 @@ import { SceneParams } from '../../SceneParams'
 import { Localization } from '../../text_process/Localization'
 import { BaseScene } from '../base_scene/BaseScene'
 import { Styles } from './StoreInfoSceneStyles'
+import { StoreInfo } from '../../RFC/StoreInfo/StoreInfo'
 
 const ScanAnimation = require('resources/animations/1115-ripple.json')
 const LoadingAnimation = require('resources/animations/51-preloader.json')
@@ -41,7 +42,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
         isShowingAppInfo: false,
         isShowingProducts: false
     }
-    private infoIconSize: number = 29 * Dimension.scaleX
+
     private categoryTabRef: CategoryFilter = null
 
     public renderSafe(): JSX.Element {
@@ -139,68 +140,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
     }
 
     private renderStoreInfo(): JSX.Element {
-        return (
-            <ScrollView contentContainerStyle={Styles.centerScrollViewContainer}>
-                <BaseText style={Styles.name} text={this.props.AppState.getStore()?.storeName} />
-
-                <View style={Styles.mediumSpacer} />
-
-                <Image
-                    style={Styles.image}
-                    source={{ uri: NetworkConfig.localServerPictureBaseUrl + this.props.AppState.getStore()?.picture }}
-                />
-
-                <View style={Styles.largeSpacer} />
-
-                <View style={Styles.rowCenterView}>
-                    <MaterialIcon name='home' size={this.infoIconSize} />
-                    <View style={GlobalStyles.spacer} />
-                    <BaseText text={this.props.AppState.getStore()?.address} />
-                </View>
-
-                <View style={Styles.smallSpacer} />
-
-                <View style={Styles.rowCenterView}>
-                    <MaterialIcon name='phone' size={this.infoIconSize} />
-                    <View style={GlobalStyles.spacer} />
-                    <BaseText style={Styles.phoneNumber} text={this.props.AppState.getStore()?.phoneNumber} />
-                </View>
-
-                <View style={Styles.mediumSpacer} />
-
-                <BaseText style={Styles.info} text={this.props.AppState.getStore()?.info} />
-
-                <View style={Styles.mediumSpacer} />
-
-                {this.props.AppState.getStore()?.whatsapp && (
-                    <View style={Styles.rowCenterView}>
-                        <FontAwesomeIcon name='whatsapp' size={this.infoIconSize} />
-                        <View style={GlobalStyles.spacer} />
-                        <BaseText style={Styles.contactText} text={this.props.AppState.getStore()?.whatsapp} />
-                    </View>
-                )}
-
-                <View style={Styles.smallSpacer} />
-
-                {this.props.AppState.getStore()?.instagram && (
-                    <View style={Styles.rowCenterView}>
-                        <FontAwesomeIcon name='instagram' size={this.infoIconSize} />
-                        <View style={GlobalStyles.spacer} />
-                        <BaseText style={Styles.contactText} text={this.props.AppState.getStore()?.instagram} />
-                    </View>
-                )}
-
-                <View style={Styles.smallSpacer} />
-
-                {this.props.AppState.getStore()?.telegram && (
-                    <View style={Styles.rowCenterView}>
-                        <FontAwesome5 name='telegram-plane' size={this.infoIconSize} />
-                        <View style={GlobalStyles.spacer} />
-                        <BaseText style={Styles.contactText} text={this.props.AppState.getStore()?.telegram} />
-                    </View>
-                )}
-            </ScrollView>
-        )
+        return <StoreInfo {...this.props.AppState.getStore()} />
     }
 
     private renderProductsExpandingTabBackground(): JSX.Element {
