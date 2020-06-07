@@ -49,7 +49,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                 {this.renderAppInfoTab()}
                 {this.renderContainer()}
                 {this.renderProductsExpandingTabBackground()}
-                {this.renderProductsExpandingTab()}
+                {this.renderBottomTab()}
                 {this.renderCategoryTab()}
             </View>
         )
@@ -108,7 +108,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
 
     private renderSearching(): JSX.Element {
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#df0' }}>
                 <SearchingStore />
             </View>
         )
@@ -149,6 +149,27 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
             )
         }
         return null
+    }
+
+    private renderBottomTab(): JSX.Element {
+        switch (this.props.AppState.getDetectionState()) {
+            case 'NO_STORE_NO_BEACON':
+                return this.renderWalkToStoreTab()
+            case 'FOUND_STORE_NO_BEACON':
+                return this.renderProductsExpandingTab()
+        }
+    }
+
+    private renderWalkToStoreTab() {
+        return (
+            <View style={Styles.searchingBottomTab}>
+                <MaterialIcon name={'directions-walk'} size={30} />
+                <BaseText
+                    style={Styles.searchingBottomTabTitle}
+                    text={Localization.translate('goToStoreBottomTabStoreInfoScene')}
+                />
+            </View>
+        )
     }
 
     private renderProductsExpandingTab() {

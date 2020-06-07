@@ -109,8 +109,6 @@ export const Styles = StyleSheet.create({
         paddingRight: 28 * Dimension.scaleX,
         paddingLeft: 25 * Dimension.scaleX,
         alignItems: 'center',
-        position: 'absolute',
-        bottom: 0,
         backgroundColor: Colors.creamLight,
         borderTopLeftRadius: expandingTabBigRadius,
         borderTopRightRadius: expandingTabSmallRadius
