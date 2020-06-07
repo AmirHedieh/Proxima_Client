@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
-import { Colors } from '../Constants'
-import { Dimension, Fonts, FontSizes, GlobalStyles } from '../GlobalStyles'
+import { Colors } from '../../Constants'
+import { Dimension, Fonts, FontSizes, GlobalStyles } from '../../GlobalStyles'
 
 const borderRadius: number = 25
 const width: number = 140

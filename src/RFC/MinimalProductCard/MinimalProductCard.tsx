@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { Image, View } from 'react-native'
-import { BaseText } from '../components/base_text/BaseText'
-import { SafeTouch } from '../components/safe_touch/SafeTouch'
-import { Localization } from '../text_process/Localization'
+import { BaseText } from '../../components/base_text/BaseText'
+import { SafeTouch } from '../../components/safe_touch/SafeTouch'
+import { Localization } from '../../text_process/Localization'
 import { Styles } from './MinimalProductCardStyles'
 
 interface IProductCardProps {
