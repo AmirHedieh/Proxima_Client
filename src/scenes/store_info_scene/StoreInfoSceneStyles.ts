@@ -2,8 +2,8 @@ import { StyleSheet } from 'react-native'
 import { Colors } from '../../Constants'
 import { Dimension, Fonts, FontSizes } from '../../GlobalStyles'
 
-const expandingTabExpandedHeight: number = 560 * Dimension.scaleY
-const expandingTabCollapsedHeight: number = 72 * Dimension.scaleY
+export const expandingTabExpandedHeight: number = 560 * Dimension.scaleY
+export const expandingTabCollapsedHeight: number = 72 * Dimension.scaleY
 
 const expandingTabBigRadius = 48 * Dimension.scaleX
 const expandingTabSmallRadius = 12 * Dimension.scaleX
@@ -53,6 +53,8 @@ export const Styles = StyleSheet.create({
     },
     productsTabContainer: {
         width: '100%',
+        height: expandingTabExpandedHeight,
+        translateY: expandingTabExpandedHeight - expandingTabCollapsedHeight,
         position: 'absolute',
         bottom: 0,
         backgroundColor: Colors.creamLight,
@@ -73,10 +75,10 @@ export const Styles = StyleSheet.create({
         justifyContent: 'center'
     },
     productsTabSafeTouchExpanded: {
-        height: 40 * Dimension.scaleY
+        height: 32 * Dimension.scaleY
     },
     productsTabSafeTouchCollapsed: {
-        flex: 1
+        height: expandingTabCollapsedHeight
     },
     expandingTabCollapsedTitle: {
         fontFamily: Fonts.persian.vazirBold
@@ -96,32 +98,9 @@ export const Styles = StyleSheet.create({
         paddingTop: 4 * Dimension.scaleY,
         paddingBottom: 16 * Dimension.scaleY
     },
-    searchingContainer: {
-        flex: 1
-    },
-    animationAndTextContainer: {
-        width: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: Dimension.deviceHeight - 2 * expandingTabCollapsedHeight - Dimension.statusBarHeight
-    },
-    animationContainer: {
-        width: 240,
-        height: 240,
-        borderRadius: 240,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth: 2,
-        borderColor: '#000'
-    },
     animation: {
         width: 180 * Dimension.scaleX,
         height: 180 * Dimension.scaleY
-    },
-    searchingTitle: {
-        fontSize: FontSizes.h2,
-        fontFamily: Fonts.persian.vazirBold,
-        color: Colors.black
     },
     searchingBottomTab: {
         flexDirection: 'row',

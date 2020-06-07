@@ -11,7 +11,6 @@ import { SafeTouch } from '../../components/safe_touch/SafeTouch'
 import { Colors, NetworkConfig } from '../../Constants'
 import { Dimension, GlobalStyles } from '../../GlobalStyles'
 import { MinimalProduct } from '../../models/MinimalProduct'
-import { Product } from '../../models/Product'
 import { NavigationActions } from '../../NavigationActions'
 import { AppInfoCard } from '../../RFC/AppInfoCard/AppInfoCard'
 import { MinimalProductCard } from '../../RFC/MinimalProductCard/MinimalProductCard'
@@ -20,7 +19,7 @@ import { StoreInfo } from '../../RFC/StoreInfo/StoreInfo'
 import { SceneParams } from '../../SceneParams'
 import { Localization } from '../../text_process/Localization'
 import { BaseScene } from '../base_scene/BaseScene'
-import { Styles } from './StoreInfoSceneStyles'
+import { expandingTabCollapsedHeight, expandingTabExpandedHeight, Styles } from './StoreInfoSceneStyles'
 
 const LoadingAnimation = require('resources/animations/51-preloader.json')
 
@@ -42,6 +41,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
     }
 
     private categoryTabRef: CategoryFilter = null
+    private productsTabRef = null
 
     public renderSafe(): JSX.Element {
         return (
@@ -157,13 +157,9 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
         }
         return (
             <Animatable.View
-                transition={'height'}
-                style={[
-                    Styles.productsTabContainer,
-                    this.state.isShowingProducts
-                        ? Styles.productsTabExpandedContainer
-                        : Styles.productsTabCollapsedContainer
-                ]}
+                ref={(ref) => (this.productsTabRef = ref)}
+                useNativeDriver={true}
+                style={Styles.productsTabContainer}
             >
                 <SafeTouch
                     style={[
@@ -186,7 +182,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                         />
                     )}
                 </SafeTouch>
-                {this.state.isShowingProducts ? this.renderProductList() : null}
+                {this.renderProductList()}
             </Animatable.View>
         )
     }
@@ -281,6 +277,18 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                 } else {
                     this.categoryTabRef.tabAnimatable.fadeOutRight(200)
                 }
+                this.productsTabRef.animate({
+                    0: {
+                        translateY: this.state.isShowingProducts
+                            ? expandingTabExpandedHeight - expandingTabCollapsedHeight
+                            : 0
+                    },
+                    1: {
+                        translateY: this.state.isShowingProducts
+                            ? 0
+                            : expandingTabExpandedHeight - expandingTabCollapsedHeight
+                    }
+                })
             }
         )
     }
