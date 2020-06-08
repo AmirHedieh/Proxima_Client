@@ -40,6 +40,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
         isShowingProducts: false
     }
 
+    private categoryTabRef: CategoryFilter = null
     private productsTabRef = null
 
     public renderSafe(): JSX.Element {
@@ -267,11 +268,9 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
     }
 
     private renderCategoryTab(): JSX.Element {
-        if (this.state.isShowingProducts === false) {
-            return null
-        }
         return (
             <CategoryFilter
+                ref={(ref) => (this.categoryTabRef = ref)}
                 categories={this.props.AppState.getCategoryList()}
                 fetchData={this.props.AppState.fetchProducts}
             />
@@ -290,6 +289,11 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                 isShowingProducts: !this.state.isShowingProducts
             },
             () => {
+                if (this.state.isShowingProducts) {
+                    this.categoryTabRef.show()
+                } else {
+                    this.categoryTabRef.hide()
+                }
                 this.productsTabRef.animate({
                     0: {
                         translateY: this.state.isShowingProducts

@@ -15,12 +15,14 @@ interface IProps {
     fetchData: (params: { category: number }) => void
 }
 interface IState {
+    isVisible: boolean
     isOpen: boolean
     selectedCategory: number
 }
 
 export class CategoryFilter<IPassedProps extends IProps> extends React.Component<IPassedProps, IState> {
     public state: IState = {
+        isVisible: false,
         isOpen: false,
         selectedCategory: null
     }
@@ -29,7 +31,22 @@ export class CategoryFilter<IPassedProps extends IProps> extends React.Component
         <MaterialIcon name='chevron-right' size={40 * Dimension.scaleX} color={Colors.creamLight} />
     )
 
+    public show(): void {
+        this.setState({
+            isVisible: true
+        })
+    }
+
+    public async hide(): Promise<void> {
+        this.setState({
+            isVisible: false
+        })
+    }
+
     public render(): JSX.Element {
+        if (this.state.isVisible === false) {
+            return null
+        }
         return (
             <Animatable.View
                 transition={['height', 'width']}
