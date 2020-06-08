@@ -104,7 +104,13 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
 
     private renderSearching(): JSX.Element {
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <View
+                style={{
+                    height: Dimension.deviceHeight - 2 * expandingTabCollapsedHeight - Dimension.statusBarHeight,
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}
+            >
                 <SearchingStore />
             </View>
         )
@@ -112,7 +118,11 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
 
     private renderStoreInfo(): JSX.Element {
         return (
-            <View style={{ paddingBottom: 2 * expandingTabCollapsedHeight }}>
+            <View
+                style={{
+                    height: Dimension.deviceHeight - 2 * expandingTabCollapsedHeight - Dimension.statusBarHeight
+                }}
+            >
                 <StoreInfo {...this.props.AppState.getStore()} />
             </View>
         )
