@@ -6,7 +6,7 @@ export const Styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 28 * Dimension.scaleX,
         paddingTop: 16 * Dimension.scaleY,
-        paddingBottom: 33 * Dimension.scaleY
+        paddingBottom: 32 * Dimension.scaleY
     },
     name: {
         fontSize: FontSizes.h2,
