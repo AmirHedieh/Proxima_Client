@@ -85,9 +85,11 @@ export class CategoryFilter<IPassedProps extends IProps> extends React.Component
             return (
                 <View style={Styles.expandedContainer}>
                     <SafeTouch onPress={this.onIconPress}>{this.collapseIcon}</SafeTouch>
-                    {this.renderCategoriesFlatList(
-                        [...this.props.categories.values()].filter((item) => item.parent == null)
-                    )}
+                    <View style={[Styles.expandedContainer, { paddingLeft: 0, paddingRight: 8 * Dimension.scaleX }]}>
+                        {this.renderCategoriesFlatList(
+                            [...this.props.categories.values()].filter((item) => item.parent == null)
+                        )}
+                    </View>
                 </View>
             )
         } else if (this.state.selectedCategory) {
