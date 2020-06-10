@@ -54,7 +54,9 @@ export class BeaconEngine {
         const majorHistogram = this.majorHistogram(sortedBeacons)
         const sortedHistogram = majorHistogram.sort((a, b) => b.repeat - a.repeat)
         this.processMajor(sortedHistogram, sortedBeacons)
-        this.processMinor(sortedBeacons)
+        if (this.major && this.major !== -1) {
+            this.processMinor(sortedBeacons)
+        }
     }
 
     private processMajor(sortedHistogram: IMajorHistogram[], sortedBeacons: IBeacon[]) {
