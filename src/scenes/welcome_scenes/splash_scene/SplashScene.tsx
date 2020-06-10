@@ -9,21 +9,7 @@ import { Fonts, Dimension } from '../../../GlobalStyles'
 import { NavigationActions } from '../../../NavigationActions'
 import { SceneParams } from '../../../SceneParams'
 
-interface IState {
-    fadeValue: Animated.Value
-}
-export class SplashScreen extends BaseScene<null, IState> {
-    public state: IState = {
-        fadeValue: new Animated.Value(0)
-    }
-
-    protected sceneDidMount() {
-        Animated.timing(this.state.fadeValue, {
-            toValue: 1,
-            duration: 1500,
-            useNativeDriver: true
-        }).start()
-    }
+export class SplashScreen extends BaseScene<null, null> {
     protected renderSafe(): JSX.Element {
         return (
             <View
