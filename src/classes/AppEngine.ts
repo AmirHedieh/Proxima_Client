@@ -75,12 +75,12 @@ export class AppEngine {
     }
 
     private emitMajorChange = (major) => {
-        // console.log('emit major', major)
+        console.log('emit major', major)
         this.socketManager.majorChange({ major })
     }
 
     private emitMinorChange = (minor) => {
-        // console.log('emit minor: ', minor)
+        console.log('emit minor: ', minor)
         this.socketManager.minorChange({ minor })
     }
 
@@ -120,11 +120,11 @@ export class AppEngine {
             this.categories.set(category.id, category)
         }
         await this.beaconEngine.startDetecting()
-        this.emitMajorChange(1)
+        // this.emitMajorChange(1)
     }
 
     private onMajorChange = (response: CustomResponse) => {
-        // console.log('major from server', response)
+        console.log('major from server', response)
         if (response.getData().store) {
             console.log('received store')
             this.store = new Store(response.getData().store)
@@ -141,7 +141,7 @@ export class AppEngine {
 
         this.detectionState = 'NO_STORE_NO_BEACON'
         this.products = new Map<number, MinimalProduct>()
-        // console.log(`''''${this.detectionState}'''''`)
+        console.log(`''''${this.detectionState}'''''`)
         setTimeout(() => {
             this.fetchData.minimalProductsOffset = null
             this.fetchData.category = null
@@ -150,13 +150,13 @@ export class AppEngine {
     }
 
     private onMinorChange = (response: CustomResponse) => {
-        // console.log('minor from server', response)
+        console.log('minor from server', response)
         if (response.getData().product) {
             this.currentProduct = new Product(response.getData().product)
             this.detectionState = 'FOUND_STORE_FOUND_BEACON'
             return
         }
-        // this.detectionState = 'FOUND_STORE_NO_BEACON'
+        this.detectionState = 'FOUND_STORE_NO_BEACON'
         this.currentProduct = null
     }
 
