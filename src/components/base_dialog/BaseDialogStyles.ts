@@ -5,7 +5,7 @@ import { Dimension } from '../../GlobalStyles'
 export const Styles = StyleSheet.create({
     contentContainerStyle: {
         width: Dimension.deviceWidth,
-        height: 360 * Dimension.scaleX,
+        height: 360 * Dimension.scaleY,
         minHeight: Dimension.deviceHeight * 0.4,
         maxHeight: Dimension.deviceHeight * 0.7,
         borderTopLeftRadius: 48 * Dimension.scaleX,

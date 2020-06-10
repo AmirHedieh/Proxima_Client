@@ -257,7 +257,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
     // it seems flatList item doesn't observe changes, so maybe it wont be reactive
     private renderProductFlatListItem = (event: { item: MinimalProduct; index }) => {
         const onPress = () => SceneParams.MinimalProductScene.navigate({ ...event.item })
-        const style = event.index % 2 === 1 ? { marginTop: 24 * Dimension.scaleX } : null
+        const style = event.index % 2 === 1 ? { marginTop: 24 * Dimension.scaleY } : null
         return (
             <View style={style}>
                 <MinimalProductCard

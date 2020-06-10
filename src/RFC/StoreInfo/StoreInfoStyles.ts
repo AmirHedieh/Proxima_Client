@@ -31,7 +31,7 @@ export const Styles = StyleSheet.create({
         width: '100%'
     },
     contactText: {
-        fontFamily: Fonts.persian.vazirMedium,
+        fontFamily: Fonts.persian.vazirBold,
         fontSize: FontSizes.h2
     },
     /** height: 8 */

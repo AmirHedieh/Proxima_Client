@@ -2,8 +2,8 @@ import { StyleSheet } from 'react-native'
 import { Colors } from '../../Constants'
 import { Dimension, Fonts, FontSizes, GlobalStyles } from '../../GlobalStyles'
 
-const borderRadius: number = 25
-const width: number = 140
+const borderRadius: number = 25 * Dimension.scaleX
+const width: number = 140 * Dimension.scaleX
 
 export const Styles = StyleSheet.create({
     root: {
@@ -11,7 +11,7 @@ export const Styles = StyleSheet.create({
     },
     image: {
         width,
-        height: 105 * Dimension.scaleX,
+        height: 105 * Dimension.scaleY,
         borderTopRightRadius: borderRadius,
         borderTopLeftRadius: borderRadius
     },
@@ -20,7 +20,7 @@ export const Styles = StyleSheet.create({
         borderBottomRightRadius: borderRadius,
         borderBottomLeftRadius: borderRadius,
         paddingHorizontal: 12 * Dimension.scaleX,
-        paddingVertical: 12 * Dimension.scaleX,
+        paddingVertical: 12 * Dimension.scaleY,
         backgroundColor: Colors.pureWhite,
         ...GlobalStyles.shadow
     },

@@ -18,12 +18,12 @@ export const AppInfoCard: React.FunctionComponent = () => {
             <RTLAwareView style={Styles.rowContainer}>
                 <BaseText text={`${Localization.translate('phoneNumberAppInfoCard')} : 021-5058086`} />
                 <View style={{ width: Styles.smallSpacer.height }} />
-                <MaterialIcon name='phone' size={24} />
+                <MaterialIcon name='phone' size={24 * Dimension.scaleX} />
             </RTLAwareView>
             <RTLAwareView style={Styles.rowContainer}>
                 <BaseText text={`${Localization.translate('mobileNumberAppInfoCard')} : 09905226632`} />
                 <View style={{ width: Styles.smallSpacer.height }} />
-                <MaterialIcon name='phone' size={24} />
+                <MaterialIcon name='phone' size={24 * Dimension.scaleX} />
             </RTLAwareView>
             <View style={Styles.largeSpacer} />
             <BaseText text={Localization.translate('whyThisApplicationAppInfoCard')} />
