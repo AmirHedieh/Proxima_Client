@@ -54,9 +54,7 @@ export class BeaconEngine {
         const majorHistogram = this.majorHistogram(sortedBeacons)
         const sortedHistogram = majorHistogram.sort((a, b) => b.repeat - a.repeat)
         this.processMajor(sortedHistogram, sortedBeacons)
-        if (this.major && this.major !== -1) {
-            this.processMinor(sortedBeacons)
-        }
+        this.processMinor(sortedBeacons)
     }
 
     private processMajor(sortedHistogram: IMajorHistogram[], sortedBeacons: IBeacon[]) {
@@ -83,7 +81,9 @@ export class BeaconEngine {
     }
 
     private processMinor(sortedBeacons: IBeacon[]): void {
-        console.log(sortedBeacons)
+        if (sortedBeacons.length) {
+            console.log(sortedBeacons[0].rssi)
+        }
         if (sortedBeacons.length === 0 || Math.abs(sortedBeacons[0].rssi) > 70) {
             this.minorRepeatDetector.addToData(null)
         } else {
