@@ -22,18 +22,13 @@ export const Styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    iconContainer: {
-        width: 160 * Dimension.scaleY,
-        height: 160 * Dimension.scaleY,
-        borderRadius: 160 * Dimension.scaleY,
-        borderWidth: 4 * Dimension.scaleX,
-        borderColor: Colors.black,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
     buttonContainer: {
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    image: {
+        width: 240 * Dimension.scaleX,
+        height: 160 * Dimension.scaleY
     }
 })

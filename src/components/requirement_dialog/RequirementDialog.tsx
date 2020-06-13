@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View } from 'react-native'
+import { Image, View } from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { Colors } from '../../Constants'
 import { Dimension, GlobalStyles } from '../../GlobalStyles'
@@ -9,6 +9,8 @@ import { BaseText } from '../base_text/BaseText'
 import { NormalButton } from '../normal_button/NormalButton'
 import { RTLAwareView } from '../rtl_aware/RTLAwareView'
 import { Styles } from './RequirementDialogStyles'
+
+const image = require('../../resources/images/connection.png')
 
 interface IRequirementDialogState extends IBaseDialogState {
     message: string
@@ -76,9 +78,7 @@ export class RequirementDialog extends BaseDialog<IBaseDialogProps, IRequirement
                     </View>
                 )}
                 <View style={Styles.bottomContainer}>
-                    <View style={Styles.iconContainer}>
-                        <MaterialIcon name={this.state.icon} size={80 * Dimension.scaleX} color={Colors.creamMedium2} />
-                    </View>
+                    <Image style={Styles.image} source={image} />
                 </View>
             </View>
         )
