@@ -126,7 +126,6 @@ export class AppEngine {
     private onMajorChange = (response: CustomResponse) => {
         console.log('major from server', response)
         if (response.getData().store) {
-            console.log('received store')
             this.store = new Store(response.getData().store)
             console.log('this.store', this.store)
             this.detectionState = 'FOUND_STORE_NO_BEACON'
@@ -156,8 +155,18 @@ export class AppEngine {
             this.detectionState = 'FOUND_STORE_FOUND_BEACON'
             return
         }
-        this.detectionState = 'FOUND_STORE_NO_BEACON'
-        this.currentProduct = null
+        /** codes reach here if product is null */
+        // user was not in store
+        if (this.detectionState === 'NO_STORE_NO_BEACON') {
+            this.currentProduct = null
+            return
+        }
+        // user was in store and was near beacon
+        if (this.detectionState === 'FOUND_STORE_FOUND_BEACON') {
+            this.detectionState = 'FOUND_STORE_NO_BEACON'
+            this.currentProduct = null
+            return
+        }
     }
 
     private onGetProducts = (response: CustomResponse) => {
