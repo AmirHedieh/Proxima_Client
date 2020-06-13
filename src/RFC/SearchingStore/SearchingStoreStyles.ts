@@ -8,17 +8,17 @@ export const Styles = StyleSheet.create({
         justifyContent: 'center'
     },
     animationContainer: {
-        width: 240,
-        height: 240,
-        borderRadius: 240,
+        width: 240 * Dimension.scaleX,
+        height: 240 * Dimension.scaleY,
+        borderRadius: 240 * Dimension.scaleX,
         alignItems: 'center',
         justifyContent: 'center',
-        borderWidth: 2,
+        borderWidth: 4 * Dimension.scaleX,
         borderColor: '#000'
     },
-    animation: {
-        width: 180 * Dimension.scaleX,
-        height: 180 * Dimension.scaleY
+    image: {
+        width: 160 * Dimension.scaleX,
+        height: 122.5 * Dimension.scaleY
     },
     title: {
         fontSize: FontSizes.h2,
