@@ -1,13 +1,12 @@
 import * as React from 'react'
-import { View, Animated } from 'react-native'
+import { View } from 'react-native'
 import * as Animatable from 'react-native-animatable'
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { BaseText } from '../../../components/base_text/BaseText'
-import { BaseScene } from '../../base_scene/BaseScene'
 import { Colors } from '../../../Constants'
-import { Fonts, Dimension } from '../../../GlobalStyles'
+import { Dimension, Fonts } from '../../../GlobalStyles'
 import { NavigationActions } from '../../../NavigationActions'
 import { SceneParams } from '../../../SceneParams'
+import { BaseScene } from '../../base_scene/BaseScene'
 
 const image = require('../../../resources/images/logo_trans.png')
 export class SplashScreen extends BaseScene<null, null> {
