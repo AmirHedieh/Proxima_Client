@@ -7,7 +7,7 @@ export const Styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    animationContainer: {
+    container: {
         width: 240 * Dimension.scaleX,
         height: 240 * Dimension.scaleY,
         borderRadius: 240 * Dimension.scaleX,

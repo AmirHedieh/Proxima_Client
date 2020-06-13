@@ -10,7 +10,7 @@ const storeImage = require('../../resources/images/store.png')
 export const SearchingStore: React.FunctionComponent = () => {
     return (
         <View style={Styles.root}>
-            <View style={Styles.animationContainer}>
+            <View style={Styles.container}>
                 <Image style={Styles.image} source={storeImage} />
             </View>
             <View style={Styles.mediumSpacer} />
