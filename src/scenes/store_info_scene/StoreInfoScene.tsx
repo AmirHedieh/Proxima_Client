@@ -173,7 +173,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
     private renderWalkToStoreTab() {
         return (
             <View style={Styles.searchingBottomTab}>
-                <MaterialIcon name={'directions-walk'} size={30} />
+                <MaterialIcon name={'directions-walk'} size={30} color={Colors.primaryMedium} />
                 <BaseText
                     style={Styles.searchingBottomTabTitle}
                     text={Localization.translate('goToStoreBottomTabStoreInfoScene')}
