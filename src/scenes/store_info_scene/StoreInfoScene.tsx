@@ -85,7 +85,10 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                     {this.state.isShowingAppInfo ? (
                         <Image source={require('../../resources/images/arrow_up.png')} />
                     ) : (
-                        <MaterialIcon name='weekend' size={55 * Dimension.scaleX} color={Colors.primaryMedium} />
+                        <Image
+                            style={{ width: 52.5, height: 52 }}
+                            source={require('../../resources/images/logo_transparent.png')}
+                        />
                     )}
                 </SafeTouch>
             </Animatable.View>
