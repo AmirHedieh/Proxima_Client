@@ -1,6 +1,6 @@
 import { inject, observer } from 'mobx-react'
 import * as React from 'react'
-import { Linking, View } from 'react-native'
+import { BackHandler, Linking, View } from 'react-native'
 // @ts-ignore
 import AndroidOpenSettings from 'react-native-android-open-settings'
 import { BluetoothManager, IBluetoothManager } from '../../classes/BluetoothManager'
@@ -81,6 +81,7 @@ export class HomeScene extends BaseScene<IHomeSceneProps, IHomeSceneState> {
         )
     }
     protected onBackPress(): boolean {
+        BackHandler.exitApp()
         return true
     }
     private async checkRequirements() {
