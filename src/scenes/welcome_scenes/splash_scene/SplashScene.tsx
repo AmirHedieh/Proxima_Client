@@ -9,15 +9,20 @@ import { Fonts, Dimension } from '../../../GlobalStyles'
 import { NavigationActions } from '../../../NavigationActions'
 import { SceneParams } from '../../../SceneParams'
 
+const image = require('../../../resources/images/logo_trans.png')
 export class SplashScreen extends BaseScene<null, null> {
     protected renderSafe(): JSX.Element {
         return (
             <View
                 style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: Colors.creamMedium }}
             >
-                <Animatable.View animation={'fadeIn'} useNativeDriver={true} duration={2000}>
-                    <MaterialIcon name='weekend' size={64 * Dimension.scaleX} color={Colors.primaryMedium} />
-                </Animatable.View>
+                <Animatable.Image
+                    source={image}
+                    style={{ width: 196 * Dimension.scaleX, height: 196 * Dimension.scaleX }}
+                    animation={'fadeIn'}
+                    useNativeDriver={true}
+                    duration={2000}
+                />
                 <Animatable.View
                     animation={'fadeIn'}
                     useNativeDriver={true}
