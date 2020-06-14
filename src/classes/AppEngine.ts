@@ -1,4 +1,4 @@
-import { observable } from 'mobx'
+import { autorun, observable } from 'mobx'
 import { EnvironmentVariables } from '../Constants'
 import { Category } from '../models/Category'
 import { MinimalProduct } from '../models/MinimalProduct'
@@ -10,6 +10,7 @@ import { UserIdStorage } from '../storage/UserIdStorage'
 import { DetectionState } from '../Types'
 import { BeaconDetector, IBeaconDetector } from './BeaconDetector'
 import { BeaconEngine } from './BeaconEngine'
+import { INavigationHandler, NavigationHandler } from './NavigationHandler'
 
 interface IFetchData {
     minimalProductsOffset: number
@@ -24,18 +25,34 @@ const fetchDataInitialValue: IFetchData = {
 }
 export class AppEngine {
     @observable public store: Store = null
+
+    // @observable public store: Store = new Store({
+    //     id: 1,
+    //     name: 'shamoort',
+    //     information: 'thebest info',
+    //     address: 'janat abad',
+    //     whatsappContact: '0990266232',
+    //     telegramContact: '@amas_legend',
+    //     instagramContact: 'amas_darkness',
+    //     picture: null,
+    //     phoneNumber: '09905226632'
+    // })
     @observable public products: Map<number, MinimalProduct> = new Map<number, MinimalProduct>()
     @observable public categories: Map<number, Category> = new Map<number, Category>()
     @observable public currentProduct: Product = null
     @observable public detectionState: DetectionState = 'NO_STORE_NO_BEACON'
     @observable public fetchData = fetchDataInitialValue
 
+    private navHandler: INavigationHandler = null
     private beaconDetector: IBeaconDetector = null
     private beaconEngine: BeaconEngine = null
     private userId: string = null
     private socketManager: SocketManager = SocketManager.getInstance()
 
     public constructor() {
+        this.navHandler = new NavigationHandler(this.detectionState)
+        autorun(() => this.navHandler.navigate(this.detectionState))
+
         this.beaconDetector = new BeaconDetector()
         this.beaconEngine = new BeaconEngine(this.beaconDetector)
 
@@ -120,7 +137,7 @@ export class AppEngine {
             this.categories.set(category.id, category)
         }
         await this.beaconEngine.startDetecting()
-        // this.emitMajorChange(1)
+        this.emitMajorChange(1)
     }
 
     private onMajorChange = (response: CustomResponse) => {
