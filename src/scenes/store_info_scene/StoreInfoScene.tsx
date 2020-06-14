@@ -53,7 +53,9 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
     }
 
     protected onBackPress(): boolean {
-        NavigationActions.pop()
+        if (this.state.isShowingProducts) {
+            this.onProductTabPress()
+        }
         return true
     }
 
