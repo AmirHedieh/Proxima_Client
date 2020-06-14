@@ -25,18 +25,6 @@ const fetchDataInitialValue: IFetchData = {
 }
 export class AppEngine {
     @observable public store: Store = null
-
-    // @observable public store: Store = new Store({
-    //     id: 1,
-    //     name: 'shamoort',
-    //     information: 'thebest info',
-    //     address: 'janat abad',
-    //     whatsappContact: '0990266232',
-    //     telegramContact: '@amas_legend',
-    //     instagramContact: 'amas_darkness',
-    //     picture: null,
-    //     phoneNumber: '09905226632'
-    // })
     @observable public products: Map<number, MinimalProduct> = new Map<number, MinimalProduct>()
     @observable public categories: Map<number, Category> = new Map<number, Category>()
     @observable public currentProduct: Product = null
