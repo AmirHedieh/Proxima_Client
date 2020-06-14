@@ -26,7 +26,7 @@ export class SplashScreen extends BaseScene<null, null> {
                     animation={'fadeIn'}
                     useNativeDriver={true}
                     duration={2000}
-                    onAnimationEnd={() => NavigationActions.reset(SceneParams.HomeScene.name)}
+                    onAnimationEnd={() => NavigationActions.reset(SceneParams.LookingStoreScene.name)}
                 >
                     <BaseText
                         text='پراکسیما'
