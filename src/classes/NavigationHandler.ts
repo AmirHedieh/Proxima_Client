@@ -13,7 +13,6 @@ export class NavigationHandler implements INavigationHandler {
     }
 
     public navigate(detectionState: DetectionState) {
-        NavigationActions.popTo(SceneParams.SplashScreen.name)
         switch (detectionState) {
             case 'NO_STORE_NO_BEACON': {
                 NavigationActions.popTo(SceneParams.LookingStoreScene.name)
@@ -24,9 +23,7 @@ export class NavigationHandler implements INavigationHandler {
                 break
             }
             case 'FOUND_STORE_FOUND_BEACON': {
-                NavigationActions.push('fake', {
-                    detectionState: 'Store is found'
-                })
+                SceneParams.ProductScene.navigate()
                 break
             }
         }
