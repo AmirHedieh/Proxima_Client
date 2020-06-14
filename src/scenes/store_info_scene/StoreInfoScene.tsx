@@ -1,10 +1,11 @@
 const LottieView = require('lottie-react-native')
 import { inject, observer } from 'mobx-react'
 import * as React from 'react'
-import { FlatList, Image, View } from 'react-native'
+import { Animated, FlatList, Image, View } from 'react-native'
 import * as Animatable from 'react-native-animatable'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { DomainViewModel } from '../../classes/DomainViewModel'
+import { AppInfoTab } from '../../components/app_info_tab/AppInfoTab'
 import { BaseText } from '../../components/base_text/BaseText'
 import { CategoryFilter } from '../../components/category_filter/CategoryFilter'
 import { SafeTouch } from '../../components/safe_touch/SafeTouch'
@@ -12,16 +13,12 @@ import { Colors, NetworkConfig } from '../../Constants'
 import { Dimension, GlobalStyles } from '../../GlobalStyles'
 import { MinimalProduct } from '../../models/MinimalProduct'
 import { NavigationActions } from '../../NavigationActions'
-import { AppInfoCard } from '../../RFC/AppInfoCard/AppInfoCard'
 import { MinimalProductCard } from '../../RFC/MinimalProductCard/MinimalProductCard'
-import { SearchingStore } from '../../RFC/SearchingStore/SearchingStore'
 import { StoreInfo } from '../../RFC/StoreInfo/StoreInfo'
 import { SceneParams } from '../../SceneParams'
 import { Localization } from '../../text_process/Localization'
 import { BaseScene } from '../base_scene/BaseScene'
 import { expandingTabCollapsedHeight, expandingTabExpandedHeight, Styles } from './StoreInfoSceneStyles'
-import { StaticImages } from '../../StaticImages'
-import { AppInfoTab } from '../../components/app_info_tab/AppInfoTab'
 
 const LoadingAnimation = require('resources/animations/51-preloader.json')
 
@@ -31,13 +28,11 @@ interface IProductSceneProps {
 
 interface IProductSceneState {
     isShowingProducts: boolean
-    // translateYValue: numb
 }
 
 @inject('AppState')
 @observer
 export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneState> {
-    // public productTabTranslateYDifference: number = expandingTabExpandedHeight - expandingTabCollapsedHeight
     public state: IProductSceneState = {
         isShowingProducts: false
     }
@@ -49,8 +44,8 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
         return (
             <View style={Styles.root}>
                 {this.renderStoreInfo()}
-                {/* {this.renderProductsExpandingTabBackground()} */}
                 <AppInfoTab />
+                {this.renderProductsExpandingTabBackground()}
                 {this.renderProductsExpandingTab()}
                 {this.renderCategoryTab()}
             </View>
@@ -92,7 +87,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                 >
                     <View style={Styles.productsTabBackgroundContainer}>
                         <Animatable.View animation={'fadeInLeft'} useNativeDriver={true}>
-                            <MaterialIcon name='weekend' size={42} color={Colors.black} />
+                            <MaterialIcon name='weekend' size={42 * Dimension.scaleX} color={Colors.black} />
                         </Animatable.View>
                         <View style={GlobalStyles.spacer} />
                         <Animatable.View animation={'fadeInRight'} useNativeDriver={true}>
