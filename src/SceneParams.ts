@@ -19,5 +19,11 @@ export const SceneParams = {
         navigate: (params: IMinimalProductSceneProps) => {
             NavigationActions.push(SceneParams.MinimalProductScene.name, params)
         }
+    },
+    LookingStoreScene: {
+        name: 'LookingStoreScene',
+        navigate: () => {
+            NavigationActions.push(SceneParams.LookingStoreScene.name)
+        }
     }
 }

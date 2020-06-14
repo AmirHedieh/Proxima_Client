@@ -11,6 +11,7 @@ import { stores } from './mobx/RootStore'
 import { SceneParams } from './SceneParams'
 import { FakeScene } from './scenes/FakeScene/FakeScene'
 import { HomeScene } from './scenes/home_scene/HomeScene'
+import { LookingStoreScene } from './scenes/LookingStoreScene.tsx/LookingStoreScene'
 import { MinimalProductScene } from './scenes/minimal_product_scene/MinimalProductScene'
 import { SplashScreen } from './scenes/welcome_scenes/splash_scene/SplashScene'
 import { Localization } from './text_process/Localization'
@@ -39,9 +40,10 @@ I18nManager.forceRTL(false)
 
 const scenes = Actions.create(
     <Scene key='root' hideNavBar={true} transitionConfig={animate}>
-        <Scene initial={true} key={SceneParams.SplashScreen.name} component={SplashScreen} />
+        <Scene initial={false} key={SceneParams.SplashScreen.name} component={SplashScreen} />
         <Scene key={SceneParams.HomeScene.name} component={HomeScene} />
         <Scene key={SceneParams.MinimalProductScene.name} component={MinimalProductScene} />
+        <Scene initial={true} key={SceneParams.LookingStoreScene.name} component={LookingStoreScene} />
         <Scene key={'fake'} component={FakeScene} />
     </Scene>
 )
