@@ -25,5 +25,11 @@ export const SceneParams = {
         navigate: () => {
             NavigationActions.push(SceneParams.LookingStoreScene.name)
         }
+    },
+    StoreInfoScene: {
+        name: 'StoreInfoScene',
+        navigate: () => {
+            NavigationActions.push(SceneParams.StoreInfoScene.name)
+        }
     }
 }
