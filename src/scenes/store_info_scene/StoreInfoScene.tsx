@@ -21,6 +21,7 @@ import { Localization } from '../../text_process/Localization'
 import { BaseScene } from '../base_scene/BaseScene'
 import { expandingTabCollapsedHeight, expandingTabExpandedHeight, Styles } from './StoreInfoSceneStyles'
 import { StaticImages } from '../../StaticImages'
+import { AppInfoTab } from '../../components/app_info_tab/AppInfoTab'
 
 const LoadingAnimation = require('resources/animations/51-preloader.json')
 
@@ -29,15 +30,15 @@ interface IProductSceneProps {
 }
 
 interface IProductSceneState {
-    isShowingAppInfo: boolean
     isShowingProducts: boolean
+    // translateYValue: numb
 }
 
 @inject('AppState')
 @observer
 export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneState> {
+    // public productTabTranslateYDifference: number = expandingTabExpandedHeight - expandingTabCollapsedHeight
     public state: IProductSceneState = {
-        isShowingAppInfo: false,
         isShowingProducts: false
     }
 
@@ -47,10 +48,10 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
     public renderSafe(): JSX.Element {
         return (
             <View style={Styles.root}>
-                {this.renderAppInfoTab()}
-                {this.renderContainer()}
-                {this.renderProductsExpandingTabBackground()}
-                {this.renderBottomTab()}
+                {this.renderStoreInfo()}
+                {/* {this.renderProductsExpandingTabBackground()} */}
+                <AppInfoTab />
+                {this.renderProductsExpandingTab()}
                 {this.renderCategoryTab()}
             </View>
         )
@@ -61,67 +62,12 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
         return true
     }
 
-    private renderAppInfoTab() {
-        return (
-            <Animatable.View
-                transition={'height'}
-                style={[
-                    Styles.appInfoTabContainer,
-                    this.state.isShowingAppInfo
-                        ? Styles.appInfoTabExpandedContainer
-                        : Styles.appInfoTabCollapsedContainer
-                ]}
-            >
-                {this.state.isShowingAppInfo ? <AppInfoCard /> : null}
-                {this.state.isShowingAppInfo ? <View style={GlobalStyles.spacer} /> : null}
-                <SafeTouch
-                    style={[
-                        Styles.appInfoTabSafeTouch,
-                        this.state.isShowingAppInfo
-                            ? Styles.appInfoTabSafeTouchExpanded
-                            : Styles.appInfoTabSafeTouchCollapsed
-                    ]}
-                    onPress={this.onAppInfoTabPress}
-                >
-                    {this.state.isShowingAppInfo ? (
-                        <Image source={StaticImages.upArrow} />
-                    ) : (
-                        <Image style={{ width: 52.5, height: 52 }} source={StaticImages.logoTransparent} />
-                    )}
-                </SafeTouch>
-            </Animatable.View>
-        )
-    }
-
-    private renderContainer(): JSX.Element {
-        // console.log('rendering container', this.props.AppState.getDetectionState())
-        switch (this.props.AppState.getDetectionState()) {
-            case 'NO_STORE_NO_BEACON':
-                return this.renderSearching()
-            case 'FOUND_STORE_NO_BEACON':
-                return this.renderStoreInfo()
-        }
-    }
-
-    private renderSearching(): JSX.Element {
-        return (
-            <View
-                style={{
-                    height: Dimension.deviceHeight - 2 * expandingTabCollapsedHeight - Dimension.statusBarHeight,
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}
-            >
-                <SearchingStore />
-            </View>
-        )
-    }
-
     private renderStoreInfo(): JSX.Element {
         return (
             <View
                 style={{
-                    height: Dimension.deviceHeight - 2 * expandingTabCollapsedHeight - Dimension.statusBarHeight
+                    flex: 1,
+                    paddingVertical: Dimension.collapsedTabHeight
                 }}
             >
                 <StoreInfo {...this.props.AppState.getStore()} />
@@ -160,27 +106,6 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
             )
         }
         return null
-    }
-
-    private renderBottomTab(): JSX.Element {
-        switch (this.props.AppState.getDetectionState()) {
-            case 'NO_STORE_NO_BEACON':
-                return this.renderWalkToStoreTab()
-            case 'FOUND_STORE_NO_BEACON':
-                return this.renderProductsExpandingTab()
-        }
-    }
-
-    private renderWalkToStoreTab() {
-        return (
-            <View style={Styles.searchingBottomTab}>
-                <MaterialIcon name={'directions-walk'} size={30} color={Colors.primaryMedium} />
-                <BaseText
-                    style={Styles.searchingBottomTabTitle}
-                    text={Localization.translate('goToStoreBottomTabStoreInfoScene')}
-                />
-            </View>
-        )
     }
 
     private renderProductsExpandingTab() {
@@ -286,12 +211,6 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                 fetchData={this.props.AppState.fetchProducts}
             />
         )
-    }
-
-    private onAppInfoTabPress = () => {
-        this.setState({
-            isShowingAppInfo: !this.state.isShowingAppInfo
-        })
     }
 
     private onProductTabPress = () => {
