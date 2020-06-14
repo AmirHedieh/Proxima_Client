@@ -1,6 +1,6 @@
 import { Provider } from 'mobx-react'
 import * as React from 'react'
-import { FlatList, I18nManager, Linking, ScrollView, YellowBox } from 'react-native'
+import { I18nManager, Linking, YellowBox } from 'react-native'
 // @ts-ignore
 import AndroidOpenSettings from 'react-native-android-open-settings'
 import { Actions, Router, Scene } from 'react-native-router-flux'
@@ -15,7 +15,7 @@ import { MinimalProductScene } from './scenes/minimal_product_scene/MinimalProdu
 import { SplashScreen } from './scenes/welcome_scenes/splash_scene/SplashScene'
 import { Localization } from './text_process/Localization'
 import { PermissionsHandler } from './utils/PermissionsHandler'
-const animate = () => Animations.zoomIn()
+const animate = () => Animations.fromRight()
 
 // React native itself uses is mounted ,So for avoiding this warning popup every time I added this suppressor
 // React native 0.55.4 is currently migrating to a new React API.
