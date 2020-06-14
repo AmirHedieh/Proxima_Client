@@ -1,19 +1,19 @@
 import { Provider } from 'mobx-react'
 import * as React from 'react'
-import { FlatList, I18nManager, ScrollView, YellowBox, Linking } from 'react-native'
+import { FlatList, I18nManager, Linking, ScrollView, YellowBox } from 'react-native'
+// @ts-ignore
+import AndroidOpenSettings from 'react-native-android-open-settings'
 import { Actions, Router, Scene } from 'react-native-router-flux'
 import { Animations } from './Animations'
+import { RequirementDialog } from './components/requirement_dialog/RequirementDialog'
+import { EnvironmentVariables } from './Constants'
 import { stores } from './mobx/RootStore'
 import { SceneParams } from './SceneParams'
 import { FakeScene } from './scenes/FakeScene/FakeScene'
 import { HomeScene } from './scenes/home_scene/HomeScene'
 import { MinimalProductScene } from './scenes/minimal_product_scene/MinimalProductScene'
 import { SplashScreen } from './scenes/welcome_scenes/splash_scene/SplashScene'
-import { RequirementDialog } from './components/requirement_dialog/RequirementDialog'
 import { Localization } from './text_process/Localization'
-// @ts-ignore
-import AndroidOpenSettings from 'react-native-android-open-settings'
-import { EnvironmentVariables } from './Constants'
 import { PermissionsHandler } from './utils/PermissionsHandler'
 const animate = () => Animations.zoomIn()
 
@@ -33,21 +33,6 @@ YellowBox.ignoreWarnings([
     'Warning: NetInfo has',
     'Warning: Slider has'
 ])
-
-if (ScrollView.defaultProps == null) {
-    ScrollView.defaultProps = {}
-}
-ScrollView.defaultProps.keyboardShouldPersistTaps = 'handled'
-ScrollView.defaultProps.bounces = false
-ScrollView.defaultProps.scrollEventThrottle = 15
-
-if (FlatList.defaultProps == null) {
-    FlatList.defaultProps = {}
-}
-FlatList.defaultProps.initialNumToRender = 10
-FlatList.defaultProps.maxToRenderPerBatch = 10
-FlatList.defaultProps.scrollEventThrottle = 15
-FlatList.defaultProps.bounces = false
 
 I18nManager.allowRTL(false)
 I18nManager.forceRTL(false)
