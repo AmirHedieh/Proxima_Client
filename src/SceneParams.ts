@@ -31,5 +31,11 @@ export const SceneParams = {
         navigate: () => {
             NavigationActions.push(SceneParams.StoreInfoScene.name)
         }
+    },
+    ProductScene: {
+        name: 'ProductScene',
+        navigate: () => {
+            NavigationActions.push(SceneParams.ProductScene.name)
+        }
     }
 }

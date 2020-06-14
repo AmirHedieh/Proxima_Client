@@ -13,6 +13,7 @@ import { FakeScene } from './scenes/FakeScene/FakeScene'
 import { HomeScene } from './scenes/home_scene/HomeScene'
 import { LookingStoreScene } from './scenes/LookingStoreScene.tsx/LookingStoreScene'
 import { MinimalProductScene } from './scenes/minimal_product_scene/MinimalProductScene'
+import { ProductScene } from './scenes/product_scene/ProductScene'
 import { StoreInfoScene } from './scenes/store_info_scene/StoreInfoScene'
 import { SplashScreen } from './scenes/welcome_scenes/splash_scene/SplashScene'
 import { Localization } from './text_process/Localization'
@@ -46,6 +47,7 @@ const scenes = Actions.create(
         <Scene key={SceneParams.MinimalProductScene.name} component={MinimalProductScene} />
         <Scene key={SceneParams.LookingStoreScene.name} component={LookingStoreScene} />
         <Scene key={SceneParams.StoreInfoScene.name} component={StoreInfoScene} />
+        <Scene key={SceneParams.ProductScene.name} component={ProductScene} />
         <Scene key={'fake'} component={FakeScene} />
     </Scene>
 )
