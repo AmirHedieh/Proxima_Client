@@ -60,8 +60,8 @@ export const Dimension = {
     logoImageHeight: 32 * scaleX,
     toolbarHeight: 56 * scaleX,
     toolbarIcon: 40 * scaleX,
-    messageBarHeight: 32 * scaleX,
-    homeSceneTabBarHeight: 56 * scaleX
+    messageBarHeight: 32 * scaleY,
+    collapsedTabHeight: 72 * scaleY
 }
 
 export const FontSizes = {
