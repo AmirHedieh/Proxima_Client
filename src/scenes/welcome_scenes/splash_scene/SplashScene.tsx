@@ -17,7 +17,7 @@ export class SplashScreen extends BaseScene<null, null> {
             >
                 <Animatable.Image
                     source={StaticImages.logoTransparent}
-                    style={{ width: 196 * Dimension.scaleX, height: 196 * Dimension.scaleX }}
+                    style={{ width: 199 * Dimension.scaleX, height: 196 * Dimension.scaleX }}
                     animation={'fadeIn'}
                     useNativeDriver={true}
                     duration={2000}
