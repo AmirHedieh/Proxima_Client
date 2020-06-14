@@ -3,14 +3,13 @@ import { Image, View } from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { Colors } from '../../Constants'
 import { Dimension, GlobalStyles } from '../../GlobalStyles'
+import { StaticImages } from '../../StaticImages'
 import { CommonValidator } from '../../utils/Validator'
 import { BaseDialog, IBaseDialogProps, IBaseDialogState } from '../base_dialog/BaseDialog'
 import { BaseText } from '../base_text/BaseText'
 import { NormalButton } from '../normal_button/NormalButton'
 import { RTLAwareView } from '../rtl_aware/RTLAwareView'
 import { Styles } from './RequirementDialogStyles'
-
-const image = require('../../resources/images/connection.png')
 
 interface IRequirementDialogState extends IBaseDialogState {
     message: string
@@ -78,7 +77,7 @@ export class RequirementDialog extends BaseDialog<IBaseDialogProps, IRequirement
                     </View>
                 )}
                 <View style={Styles.bottomContainer}>
-                    <Image style={Styles.image} source={image} />
+                    <Image style={Styles.image} source={StaticImages.connection} />
                 </View>
             </View>
         )
