@@ -2,8 +2,8 @@ import { StyleSheet } from 'react-native'
 import { Colors } from '../../Constants'
 import { Dimension } from '../../GlobalStyles'
 
-export const fullTabHeight: number = 472 * Dimension.scaleY
-export const collapsedTabHeight: number = 72 * Dimension.scaleY
+export const fullTabHeight: number = 507 * Dimension.scaleY
+export const collapsedTabHeight: number = Dimension.collapsedTabHeight
 
 export const Styles = StyleSheet.create({
     root: {
