@@ -10,14 +10,15 @@ export const Styles = StyleSheet.create({
         width: '100%',
         height: fullTabHeight,
         position: 'absolute',
-        backgroundColor: Colors.creamLight
+        backgroundColor: Colors.creamLight,
+        borderBottomRightRadius: 48 * Dimension.scaleX,
+        borderBottomLeftRadius: 12 * Dimension.scaleX
     },
     safeTouch: {
         width: '100%',
         height: collapsedTabHeight,
         justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#d09'
+        alignItems: 'center'
     },
     logoImage: {
         width: 52.5 * Dimension.scaleX,
