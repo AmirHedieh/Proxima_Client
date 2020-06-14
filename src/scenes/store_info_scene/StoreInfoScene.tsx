@@ -20,6 +20,7 @@ import { SceneParams } from '../../SceneParams'
 import { Localization } from '../../text_process/Localization'
 import { BaseScene } from '../base_scene/BaseScene'
 import { expandingTabCollapsedHeight, expandingTabExpandedHeight, Styles } from './StoreInfoSceneStyles'
+import { StaticImages } from '../../StaticImages'
 
 const LoadingAnimation = require('resources/animations/51-preloader.json')
 
@@ -83,12 +84,9 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                     onPress={this.onAppInfoTabPress}
                 >
                     {this.state.isShowingAppInfo ? (
-                        <Image source={require('../../resources/images/arrow_up.png')} />
+                        <Image source={StaticImages.upArrow} />
                     ) : (
-                        <Image
-                            style={{ width: 52.5, height: 52 }}
-                            source={require('../../resources/images/logo_transparent.png')}
-                        />
+                        <Image style={{ width: 52.5, height: 52 }} source={StaticImages.logoTransparent} />
                     )}
                 </SafeTouch>
             </Animatable.View>

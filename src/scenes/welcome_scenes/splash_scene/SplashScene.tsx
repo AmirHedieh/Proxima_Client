@@ -6,9 +6,9 @@ import { Colors } from '../../../Constants'
 import { Dimension, Fonts } from '../../../GlobalStyles'
 import { NavigationActions } from '../../../NavigationActions'
 import { SceneParams } from '../../../SceneParams'
+import { StaticImages } from '../../../StaticImages'
 import { BaseScene } from '../../base_scene/BaseScene'
 
-const image = require('../../../resources/images/logo_trans.png')
 export class SplashScreen extends BaseScene<null, null> {
     protected renderSafe(): JSX.Element {
         return (
@@ -16,7 +16,7 @@ export class SplashScreen extends BaseScene<null, null> {
                 style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: Colors.creamMedium }}
             >
                 <Animatable.Image
-                    source={image}
+                    source={StaticImages.logoTransparent}
                     style={{ width: 196 * Dimension.scaleX, height: 196 * Dimension.scaleX }}
                     animation={'fadeIn'}
                     useNativeDriver={true}
