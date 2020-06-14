@@ -18,6 +18,9 @@ export interface IProductSceneProps {
 @observer
 export class ProductScene extends BaseScene<IProductSceneProps, IBaseSceneState> {
     protected renderSafe(): JSX.Element {
+        if (this.props.AppState.getCurrentProduct() == null) {
+            return null
+        }
         return (
             <ScrollView>
                 <Swiper
