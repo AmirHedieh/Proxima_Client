@@ -51,3 +51,7 @@ export const NetworkConfig = {
     maxConcurrentConnections: 1,
     localServerPictureBaseUrl: 'http://194.5.205.176:80/pictures'
 }
+
+export const GlobalStaticData = {
+    initialDuration: 2000 // ms
+}
