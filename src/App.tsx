@@ -6,7 +6,7 @@ import AndroidOpenSettings from 'react-native-android-open-settings'
 import { Actions, Router, Scene } from 'react-native-router-flux'
 import { Animations } from './Animations'
 import { RequirementDialog } from './components/requirement_dialog/RequirementDialog'
-import { EnvironmentVariables } from './Constants'
+import { EnvironmentVariables, GlobalStaticData } from './Constants'
 import { stores } from './mobx/RootStore'
 import { SceneParams } from './SceneParams'
 import { FakeScene } from './scenes/FakeScene/FakeScene'
@@ -55,10 +55,12 @@ const scenes = Actions.create(
 export class App extends React.Component {
     private requirementDialog: RequirementDialog = null
 
-    public async componentDidMount() {
-        stores.AppState.init()
-        await stores.ConnectionStore.init(this.checkRequirements)
-        this.checkRequirements()
+    public componentDidMount() {
+        setTimeout(async () => {
+            stores.AppState.init()
+            await stores.ConnectionStore.init(this.checkRequirements)
+            this.checkRequirements()
+        }, GlobalStaticData.initialDuration) // start app engine after splash done
     }
 
     public render() {

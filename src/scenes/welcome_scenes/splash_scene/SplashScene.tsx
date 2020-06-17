@@ -2,7 +2,7 @@ import * as React from 'react'
 import { View } from 'react-native'
 import * as Animatable from 'react-native-animatable'
 import { BaseText } from '../../../components/base_text/BaseText'
-import { Colors } from '../../../Constants'
+import { Colors, GlobalStaticData } from '../../../Constants'
 import { Dimension, Fonts } from '../../../GlobalStyles'
 import { NavigationActions } from '../../../NavigationActions'
 import { SceneParams } from '../../../SceneParams'
@@ -20,12 +20,12 @@ export class SplashScreen extends BaseScene<null, null> {
                     style={{ width: 199 * Dimension.scaleX, height: 196 * Dimension.scaleX }}
                     animation={'fadeIn'}
                     useNativeDriver={true}
-                    duration={2000}
+                    duration={GlobalStaticData.initialDuration}
                 />
                 <Animatable.View
                     animation={'fadeIn'}
                     useNativeDriver={true}
-                    duration={2000}
+                    duration={GlobalStaticData.initialDuration}
                     onAnimationEnd={() => NavigationActions.reset(SceneParams.LookingStoreScene.name)}
                 >
                     <BaseText
