@@ -1,4 +1,4 @@
-import { autorun, observable } from 'mobx'
+import { computed, observable, reaction } from 'mobx'
 import { EnvironmentVariables } from '../Constants'
 import { Category } from '../models/Category'
 import { MinimalProduct } from '../models/MinimalProduct'
@@ -39,8 +39,10 @@ export class AppEngine {
 
     public constructor() {
         this.navHandler = new NavigationHandler(this.detectionState)
-        autorun(() => this.navHandler.navigate(this.detectionState))
-
+        reaction(
+            () => this.detectionState,
+            () => this.navHandler.navigate(this.detectionState)
+        )
         this.beaconDetector = new BeaconDetector()
         this.beaconEngine = new BeaconEngine(this.beaconDetector)
 
@@ -125,7 +127,6 @@ export class AppEngine {
             this.categories.set(category.id, category)
         }
         await this.beaconEngine.startDetecting()
-        this.emitMajorChange(1)
     }
 
     private onMajorChange = (response: CustomResponse) => {
