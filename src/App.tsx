@@ -57,10 +57,9 @@ export class App extends React.Component {
 
     public componentDidMount() {
         setTimeout(async () => {
-            stores.AppState.init()
             await stores.ConnectionStore.init(this.checkRequirements)
             this.checkRequirements()
-        }, GlobalStaticData.initialDuration) // start app engine after splash done
+        }, GlobalStaticData.initialDuration) // show dialogs after splash loading time
     }
 
     public render() {

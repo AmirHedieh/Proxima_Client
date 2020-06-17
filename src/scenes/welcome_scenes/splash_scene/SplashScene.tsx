@@ -4,12 +4,16 @@ import * as Animatable from 'react-native-animatable'
 import { BaseText } from '../../../components/base_text/BaseText'
 import { Colors, GlobalStaticData } from '../../../Constants'
 import { Dimension, Fonts } from '../../../GlobalStyles'
+import { stores } from '../../../mobx/RootStore'
 import { NavigationActions } from '../../../NavigationActions'
 import { SceneParams } from '../../../SceneParams'
 import { StaticImages } from '../../../StaticImages'
 import { BaseScene } from '../../base_scene/BaseScene'
 
 export class SplashScreen extends BaseScene<null, null> {
+    public componentWillUnmount() {
+        stores.AppState.init() // init app engine
+    }
     protected renderSafe(): JSX.Element {
         return (
             <View
