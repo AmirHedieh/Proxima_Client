@@ -27,7 +27,13 @@ export class AppInfoTab extends React.Component<{}, IState> {
                     {this.state.isExpanded ? (
                         <Image source={StaticImages.upArrow} />
                     ) : (
-                        <Image style={Styles.logoImage} source={StaticImages.logoTransparent} />
+                        <View style={Styles.logoImageContainer}>
+                            <Image
+                                resizeMode={'contain'}
+                                style={Styles.logoImage}
+                                source={StaticImages.logoTransparent}
+                            />
+                        </View>
                     )}
                 </SafeTouch>
             </Animated.View>

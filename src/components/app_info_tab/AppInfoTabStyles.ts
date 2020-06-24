@@ -20,8 +20,13 @@ export const Styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    logoImage: {
-        width: 52.5 * Dimension.scaleX,
+    logoImageContainer: {
+        width: 52 * Dimension.scaleX,
         height: 52 * Dimension.scaleY
+    },
+    logoImage: {
+        alignSelf: 'center',
+        height: '100%',
+        width: '100%'
     }
 })
