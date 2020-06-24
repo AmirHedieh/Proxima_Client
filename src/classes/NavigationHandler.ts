@@ -6,10 +6,10 @@ export interface INavigationHandler {
     navigate: (state: string) => void
 }
 export class NavigationHandler implements INavigationHandler {
-    private previousState: DetectionState = null
+    private currentState: DetectionState = null
 
     constructor(initialState: DetectionState) {
-        this.previousState = initialState
+        this.currentState = initialState
     }
 
     public navigate(detectionState: DetectionState) {
@@ -19,6 +19,10 @@ export class NavigationHandler implements INavigationHandler {
                 break
             }
             case 'FOUND_STORE_NO_BEACON': {
+                if (this.currentState === 'FOUND_STORE_FOUND_BEACON') {
+                    NavigationActions.pop()
+                    break
+                }
                 SceneParams.StoreInfoScene.navigate()
                 break
             }
@@ -27,5 +31,6 @@ export class NavigationHandler implements INavigationHandler {
                 break
             }
         }
+        this.currentState = detectionState
     }
 }
