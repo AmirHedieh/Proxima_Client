@@ -1,9 +1,25 @@
 import { StyleSheet } from 'react-native'
-import { Dimension } from '../../GlobalStyles'
+import { Dimension, Fonts, FontSizes } from '../../GlobalStyles'
 
 export const Styles = StyleSheet.create({
     root: {
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingVertical: 16 * Dimension.scaleY
+    },
+    wannaAppText: {
+        fontSize: FontSizes.h2,
+        fontFamily: Fonts.persian.vazirMedium
+    },
+    phoneText: {
+        fontFamily: Fonts.persian.vazirMedium
+    },
+    whyAppText: {
+        fontSize: FontSizes.h2,
+        fontFamily: Fonts.persian.vazirBold
+    },
+    infoText: {
+        fontFamily: Fonts.persian.vazirMedium,
+        textAlign: 'center'
     },
     rowContainer: {
         alignItems: 'center'
@@ -19,5 +35,14 @@ export const Styles = StyleSheet.create({
     /** height: 24 */
     largeSpacer: {
         height: 24 * Dimension.scaleY
+    },
+    logoImageContainer: {
+        width: 52 * Dimension.scaleX,
+        height: 52 * Dimension.scaleY
+    },
+    logoImage: {
+        alignSelf: 'center',
+        height: '100%',
+        width: '100%'
     }
 })
