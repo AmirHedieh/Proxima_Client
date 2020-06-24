@@ -19,13 +19,16 @@ export class SplashScreen extends BaseScene<null, null> {
             <View
                 style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: Colors.creamMedium }}
             >
-                <Animatable.Image
-                    source={StaticImages.logoTransparent}
-                    style={{ width: 199 * Dimension.scaleX, height: 196 * Dimension.scaleX }}
-                    animation={'fadeIn'}
-                    useNativeDriver={true}
-                    duration={GlobalStaticData.initialDuration}
-                />
+                <View style={{ width: 196 * Dimension.scaleX, height: 196 * Dimension.scaleX }}>
+                    <Animatable.Image
+                        resizeMode={'contain'}
+                        source={StaticImages.logoTransparent}
+                        style={{ alignSelf: 'center', height: '100%', width: '100%' }}
+                        animation={'fadeIn'}
+                        useNativeDriver={true}
+                        duration={GlobalStaticData.initialDuration}
+                    />
+                </View>
                 <Animatable.View
                     animation={'fadeIn'}
                     useNativeDriver={true}
