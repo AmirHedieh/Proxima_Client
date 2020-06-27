@@ -1,9 +1,8 @@
 const LottieView = require('lottie-react-native')
 import { inject, observer } from 'mobx-react'
 import * as React from 'react'
-import { Animated, FlatList, Image, View } from 'react-native'
+import { FlatList, Image, View } from 'react-native'
 import * as Animatable from 'react-native-animatable'
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { DomainViewModel } from '../../classes/DomainViewModel'
 import { AppInfoTab } from '../../components/app_info_tab/AppInfoTab'
 import { BaseText } from '../../components/base_text/BaseText'
@@ -12,10 +11,10 @@ import { SafeTouch } from '../../components/safe_touch/SafeTouch'
 import { Colors, NetworkConfig } from '../../Constants'
 import { Dimension, GlobalStyles } from '../../GlobalStyles'
 import { MinimalProduct } from '../../models/MinimalProduct'
-import { NavigationActions } from '../../NavigationActions'
 import { MinimalProductCard } from '../../RFC/MinimalProductCard/MinimalProductCard'
 import { StoreInfo } from '../../RFC/StoreInfo/StoreInfo'
 import { SceneParams } from '../../SceneParams'
+import { StaticImages } from '../../StaticImages'
 import { Localization } from '../../text_process/Localization'
 import { BaseScene } from '../base_scene/BaseScene'
 import { expandingTabCollapsedHeight, expandingTabExpandedHeight, Styles } from './StoreInfoSceneStyles'
@@ -88,8 +87,16 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                     }}
                 >
                     <View style={Styles.productsTabBackgroundContainer}>
-                        <Animatable.View animation={'fadeInLeft'} useNativeDriver={true}>
-                            <MaterialIcon name='weekend' size={42 * Dimension.scaleX} color={Colors.black} />
+                        <Animatable.View
+                            animation={'fadeInLeft'}
+                            useNativeDriver={true}
+                            style={{ width: 52 * Dimension.scaleX, height: 52 * Dimension.scaleX }}
+                        >
+                            <Image
+                                source={StaticImages.logoTransparentBright}
+                                resizeMode={'contain'}
+                                style={{ alignSelf: 'center', height: '100%', width: '100%' }}
+                            />
                         </Animatable.View>
                         <View style={GlobalStyles.spacer} />
                         <Animatable.View animation={'fadeInRight'} useNativeDriver={true}>
