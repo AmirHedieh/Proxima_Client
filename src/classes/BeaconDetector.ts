@@ -1,4 +1,4 @@
-import { DeviceEventEmitter } from 'react-native'
+import { DeviceEventEmitter, EmitterSubscription } from 'react-native'
 // @ts-ignore
 import Beacons from 'react-native-beacons-manager'
 import { EnvironmentVariables } from '../Constants'
@@ -8,11 +8,13 @@ export interface IBeaconDetector {
     onBeaconFetch: (data: IBeacon[]) => void
     startDetecting: (region?: string) => Promise<boolean>
     stopDetecting: (region?: string) => Promise<boolean>
-    init: (period: number) => void
+    init: () => void
 }
 export class BeaconDetector implements IBeaconDetector {
     public onBeaconFetch: (data: IBeacon[]) => void = null
+    private subscription: EmitterSubscription = null
     constructor() {
+        Beacons.setForegroundScanPeriod(500)
         if (EnvironmentVariables.isIos) {
             this.configForIOS()
         } else {
@@ -22,7 +24,9 @@ export class BeaconDetector implements IBeaconDetector {
     public async startDetecting(region: string): Promise<boolean> {
         try {
             await Beacons.startRangingBeaconsInRegion(region)
-            DeviceEventEmitter.addListener('beaconsDidRange', (data) => this.onBeaconDidRange(data.beacons))
+            this.subscription = DeviceEventEmitter.addListener('beaconsDidRange', (data) =>
+                this.onBeaconDidRange(data.beacons)
+            )
             return true
         } catch (err) {
             Logger.log(`Beacons ranging not started, error: ${err.message}`)
@@ -33,14 +37,15 @@ export class BeaconDetector implements IBeaconDetector {
     public async stopDetecting(region: string): Promise<boolean> {
         try {
             await Beacons.stopRangingBeaconsInRegion(region)
+            this.subscription.remove()
             return true
         } catch (err) {
             Logger.log(`Beacons ranging not started, error: ${err.message}`)
         }
         return false
     }
-    public init(period: number): void {
-        Beacons.setForegroundScanPeriod(period)
+    public init(): void {
+        // nothing todo
     }
     public addListener(type: string, callback: () => void) {
         DeviceEventEmitter.addListener(type, callback)
