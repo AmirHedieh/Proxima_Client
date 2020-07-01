@@ -62,6 +62,10 @@ export class App extends React.Component {
         }, GlobalStaticData.initialDuration) // show dialogs after splash loading time
     }
 
+    public componentWillUnmount() {
+        stores.AppState.stopDetecting()
+    }
+
     public render() {
         return (
             <Provider {...stores}>
