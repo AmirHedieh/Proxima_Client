@@ -31,7 +31,7 @@ export class BeaconEngine {
     }
 
     public init(): void {
-        this.beaconDetector.init(500)
+        this.beaconDetector.init()
         this.beaconDetector.onBeaconFetch = (beacons) => {
             this.beacons = beacons
             this.processLoop()
@@ -82,7 +82,7 @@ export class BeaconEngine {
 
     private processMinor(sortedBeacons: IBeacon[]): void {
         if (sortedBeacons.length) {
-            console.log(sortedBeacons[0].rssi)
+            // console.log(sortedBeacons[0].rssi)
         }
         if (sortedBeacons.length === 0 || Math.abs(sortedBeacons[0].rssi) > 70) {
             this.minorRepeatDetector.addToData(null)
