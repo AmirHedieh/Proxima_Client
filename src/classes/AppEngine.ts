@@ -1,4 +1,4 @@
-import { computed, observable, reaction } from 'mobx'
+import { observable, reaction } from 'mobx'
 import { EnvironmentVariables } from '../Constants'
 import { Category } from '../models/Category'
 import { MinimalProduct } from '../models/MinimalProduct'
@@ -133,9 +133,7 @@ export class AppEngine {
         console.log('major from server', response)
         if (response.getData().store) {
             this.store = new Store(response.getData().store)
-            console.log('this.store', this.store)
             this.detectionState = 'FOUND_STORE_NO_BEACON'
-            console.log('state changed')
             // reset previous fetch data & fetched products
             this.fetchData = fetchDataInitialValue
             this.products = new Map<number, MinimalProduct>()
@@ -143,15 +141,10 @@ export class AppEngine {
             this.emitMinimalProductFetch({ category: null })
             return
         }
-
         this.detectionState = 'NO_STORE_NO_BEACON'
         this.products = new Map<number, MinimalProduct>()
-        console.log(`''''${this.detectionState}'''''`)
-        setTimeout(() => {
-            this.fetchData.minimalProductsOffset = null
-            this.fetchData.category = null
-            this.store = null
-        }, 3000)
+        this.fetchData = fetchDataInitialValue
+        this.store = null
     }
 
     private onMinorChange = (response: CustomResponse) => {
