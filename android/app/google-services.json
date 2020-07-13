@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "392701463993",
+    "firebase_url": "https://proxima-client.firebaseio.com",
+    "project_id": "proxima-client",
+    "storage_bucket": "proxima-client.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:392701463993:android:3a51c974807e501f44ba68",
+        "android_client_info": {
+          "package_name": "com.beacon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "392701463993-tch7a0914kvjdltlq7e34u000nl7b3qs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhOgKPdldPhl1ouayrsKdJ56SAWXaaggw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "392701463993-tch7a0914kvjdltlq7e34u000nl7b3qs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
