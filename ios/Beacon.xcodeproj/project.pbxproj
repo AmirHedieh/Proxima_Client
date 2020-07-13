@@ -71,6 +71,7 @@
 		4C0E802AC14C4E9798B6EB4F /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C02080D5494A4D698181FB1F /* Octicons.ttf */; };
 		6C615BF1D67D4412964D3BE4 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC12875535E84FEA85AEC465 /* SimpleLineIcons.ttf */; };
 		FB9423A9AD1D42C8A736819E /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB723FB880C84F0690653F71 /* Zocial.ttf */; };
+		694F28C072544BD18470FAD4 /* libRNFBApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FB77E40CF1B4138A85C1B45 /* libRNFBApp.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -416,6 +417,8 @@
 		C02080D5494A4D698181FB1F /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		EC12875535E84FEA85AEC465 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		EB723FB880C84F0690653F71 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D1028B7386174F76BE9B5FE7 /* RNFBApp.xcodeproj */ = {isa = PBXFileReference; name = "RNFBApp.xcodeproj"; path = "../node_modules/@react-native-firebase/app/ios/RNFBApp.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		6FB77E40CF1B4138A85C1B45 /* libRNFBApp.a */ = {isa = PBXFileReference; name = "libRNFBApp.a"; path = "libRNFBApp.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -452,6 +455,7 @@
 				A5047B750E5146AC9147CC32 /* libBleManager.a in Frameworks */,
 				8462DB1F49B04BB6844A5D30 /* libRNConnectivityStatus.a in Frameworks */,
 				679F8453781041298FFE3CC5 /* libRNVectorIcons.a in Frameworks */,
+				694F28C072544BD18470FAD4 /* libRNFBApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -650,6 +654,7 @@
 				0E76B8D40A4D4F2387209748 /* BleManager.xcodeproj */,
 				100E8EBE98514262AB517315 /* RNConnectivityStatus.xcodeproj */,
 				0EE78B4BC7354585B05AE937 /* RNVectorIcons.xcodeproj */,
+				D1028B7386174F76BE9B5FE7 /* RNFBApp.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1338,6 +1343,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1347,6 +1353,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-ble-manager\ios",
 					"$(SRCROOT)\..\node_modules\react-native-connectivity-status\ios",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
+					"$(SRCROOT)\..\node_modules\@react-native-firebase\app\ios\RNFBApp",
 				);
 			};
 			name = Debug;
@@ -1378,6 +1385,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1387,6 +1395,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-ble-manager\ios",
 					"$(SRCROOT)\..\node_modules\react-native-connectivity-status\ios",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
+					"$(SRCROOT)\..\node_modules\@react-native-firebase\app\ios\RNFBApp",
 				);
 			};
 			name = Release;
@@ -1415,6 +1424,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-ble-manager\ios",
 					"$(SRCROOT)\..\node_modules\react-native-connectivity-status\ios",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
+					"$(SRCROOT)\..\node_modules\@react-native-firebase\app\ios\RNFBApp",
 				);
 			};
 			name = Debug;
@@ -1442,6 +1452,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-ble-manager\ios",
 					"$(SRCROOT)\..\node_modules\react-native-connectivity-status\ios",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
+					"$(SRCROOT)\..\node_modules\@react-native-firebase\app\ios\RNFBApp",
 				);
 			};
 			name = Release;
@@ -1481,6 +1492,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1490,6 +1502,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-ble-manager\ios",
 					"$(SRCROOT)\..\node_modules\react-native-connectivity-status\ios",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
+					"$(SRCROOT)\..\node_modules\@react-native-firebase\app\ios\RNFBApp",
 				);
 			};
 			name = Debug;
@@ -1529,6 +1542,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1538,6 +1552,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-ble-manager\ios",
 					"$(SRCROOT)\..\node_modules\react-native-connectivity-status\ios",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
+					"$(SRCROOT)\..\node_modules\@react-native-firebase\app\ios\RNFBApp",
 				);
 			};
 			name = Release;
@@ -1576,6 +1591,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1585,6 +1601,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-ble-manager\ios",
 					"$(SRCROOT)\..\node_modules\react-native-connectivity-status\ios",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
+					"$(SRCROOT)\..\node_modules\@react-native-firebase\app\ios\RNFBApp",
 				);
 			};
 			name = Debug;
@@ -1623,6 +1640,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1632,6 +1650,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-ble-manager\ios",
 					"$(SRCROOT)\..\node_modules\react-native-connectivity-status\ios",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
+					"$(SRCROOT)\..\node_modules\@react-native-firebase\app\ios\RNFBApp",
 				);
 			};
 			name = Release;
