@@ -3,6 +3,7 @@ package com.beacon;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import io.invertase.firebase.messaging.ReactNativeFirebaseMessagingPackage;
 import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.nearit.connectivity.RNConnectivityStatusPackage;
@@ -31,6 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactNativeFirebaseMessagingPackage(),
             new ReactNativeFirebaseAppPackage(),
             new VectorIconsPackage(),
             new RNConnectivityStatusPackage(),
