@@ -43,6 +43,27 @@ export const GlobalStyles = {
         justifyContent: 'center',
         minWidth: 24 * scaleX,
         minHeight: 24 * scaleX
+    },
+    /** height: 4 */
+    superSmallSpacer: {
+        height: 4 * scaleY
+    },
+    /** height: 8 */
+    smallSpacer: {
+        height: 8 * scaleY
+    },
+    /** height: 16 */
+    mediumSpacer: {
+        height: 16 * scaleY
+    },
+    /** height: 24 */
+    largeSpacer: {
+        height: 24 * scaleY
+    },
+    separatorY: {
+        width: '100%',
+        height: 1 * scaleY,
+        backgroundColor: Colors.creamMedium2
     }
 }
 
