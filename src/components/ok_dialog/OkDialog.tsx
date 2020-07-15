@@ -21,7 +21,6 @@ export class OkDialog extends BaseDialog<IBaseDialogProps, IOkDialogState> {
         isVisible: false,
         isCancellable: true
     }
-    protected contentContainerStyle = Styles.centerContainerStyle
     private onOkButtonPressedCallback: () => void = null
     public constructor(props: IBaseDialogProps) {
         super(props)
@@ -31,6 +30,7 @@ export class OkDialog extends BaseDialog<IBaseDialogProps, IOkDialogState> {
             this.hide = this.hide.bind(this)
             this.onPressEvent = this.onPressEvent.bind(this)
         }
+        this.contentContainerStyle = Styles.baseDialog
     }
     public show(params: {
         title: string
@@ -60,7 +60,7 @@ export class OkDialog extends BaseDialog<IBaseDialogProps, IOkDialogState> {
         // this is used to divide ReactNative Touchable and ScrollView Touching
         const onStartShouldSetResponder = () => true
         return (
-            <View style={Styles.mainContainerStyle}>
+            <View style={Styles.centerContainerStyle}>
                 <BaseText style={Styles.titleStyle} text={this.state.title} />
                 <View style={Styles.messageContainerStyle}>
                     <ScrollView>
@@ -69,7 +69,6 @@ export class OkDialog extends BaseDialog<IBaseDialogProps, IOkDialogState> {
                         </View>
                     </ScrollView>
                 </View>
-                <View style={Styles.buttonsSpacer} />
                 <View style={Styles.buttonContainerStyle}>
                     <NormalButton onPress={this.onPressEvent} text={this.state.buttonText} isFilled={false} />
                 </View>
