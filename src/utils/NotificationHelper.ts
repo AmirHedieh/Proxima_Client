@@ -1,8 +1,8 @@
 import messaging from '@react-native-firebase/messaging'
 import { AsyncStorage } from 'react-native'
 import { OkDialog } from '../components/ok_dialog/OkDialog'
-import { HttpManager } from '../network/HttpManager'
 
+// TODO: to show image in IOS, some actions must be done
 export class NotificationHelper {
     public static setNotification(okDialogRef: OkDialog) {
         this.okDialogRef = okDialogRef
@@ -27,13 +27,15 @@ export class NotificationHelper {
         messaging().onMessage((remoteMessage) => {
             console.log('on message', remoteMessage)
             const { title, body } = remoteMessage.notification
-            this.showNotification(title, body)
+            const imageUrl = remoteMessage.data.imageUrl
+            this.showNotification(title, body, imageUrl)
         })
         // If your app is in background, you can listen for when a notification is clicked
         messaging().onNotificationOpenedApp((remoteMessage) => {
             console.log('on notif opened', remoteMessage)
             const { title, body } = remoteMessage.notification
-            this.showNotification(title, body)
+            const imageUrl = remoteMessage.data.imageUrl
+            this.showNotification(title, body, imageUrl)
         })
 
         // If your app is closed, you can check if it was opened by a notification being clicked
@@ -41,7 +43,8 @@ export class NotificationHelper {
         if (initialRemoteMessage) {
             console.log('initial remote', initialRemoteMessage)
             const { title, body } = initialRemoteMessage.notification
-            this.showNotification(title, body)
+            const imageUrl = initialRemoteMessage.data.imageUrl
+            this.showNotification(title, body, imageUrl)
         }
     }
 
@@ -54,10 +57,11 @@ export class NotificationHelper {
         }
     }
 
-    private static async showNotification(title: string, body: string) {
+    private static async showNotification(title: string, body: string, imageUrl: string) {
         this.okDialogRef.show({
             title,
-            message: body
+            message: body,
+            imageUrl
         })
     }
 
