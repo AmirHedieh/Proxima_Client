@@ -1,37 +1,39 @@
 import { StyleSheet } from 'react-native'
 import { Colors } from '../../Constants'
-import { Dimension, FontSizes } from '../../GlobalStyles'
+import { Dimension, Fonts, FontSizes } from '../../GlobalStyles'
 
 export const Styles = StyleSheet.create({
-    mainContainerStyle: {
-        minWidth: Dimension.deviceWidth * 0.6,
-        minHeight: Dimension.deviceHeight * 0.5
+    baseDialog: {
+        height: 256 * Dimension.scaleY,
+        minHeight: Dimension.deviceHeight * 0.2,
+        maxHeight: Dimension.deviceHeight * 0.5
     },
     centerContainerStyle: {
-        backgroundColor: Colors.milky,
-        paddingBottom: 0 * Dimension.scaleX,
-        paddingHorizontal: 4 * Dimension.scaleX
+        paddingVertical: 16 * Dimension.scaleY,
+        paddingHorizontal: 4 * Dimension.scaleX,
+        alignItems: 'center'
     },
     titleStyle: {
         textAlign: 'center',
         color: Colors.greenDark,
         fontSize: FontSizes.h2,
-        marginBottom: 8 * Dimension.scaleX
+        fontFamily: Fonts.persian.vazirMedium
     },
     messageContainerStyle: {
-        maxHeight: 281 * Dimension.scaleX
+        width: '100%',
+        height: 120 * Dimension.scaleY
     },
     messageTextStyle: {
-        paddingVertical: 16 * Dimension.scaleX,
         paddingHorizontal: 12 * Dimension.scaleX,
         fontSize: FontSizes.h3
     },
-    buttonsSpacer: {
-        height: 64 * Dimension.scaleX
+    buttonContainer: {
+        width: '100%'
     },
-    buttonsContainerStyle: {
-        justifyContent: 'flex-end',
-        position: 'absolute',
-        bottom: 0
+    buttonText: {
+        color: Colors.primaryMedium
+    },
+    buttonSpacer: {
+        width: 8 * Dimension.scaleX
     }
 })

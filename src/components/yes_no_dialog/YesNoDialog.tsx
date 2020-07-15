@@ -1,9 +1,10 @@
 import * as React from 'react'
 import { ScrollView, View } from 'react-native'
+import { GlobalStyles } from '../../GlobalStyles'
 import { CommonValidator } from '../../utils/Validator'
 import { BaseDialog, IBaseDialogProps, IBaseDialogState } from '../base_dialog/BaseDialog'
 import { BaseText } from '../base_text/BaseText'
-import { NormalButton } from '../normal_button/NormalButton'
+import { RoundButton } from '../round_button/RoundButton'
 import { RTLAwareView } from '../rtl_aware/RTLAwareView'
 import { Styles } from './YesNoDialogStyles'
 
@@ -28,9 +29,10 @@ export class YesNoDialog extends BaseDialog<IBaseDialogProps, IYesNoDialogState>
 
     constructor(props: IBaseDialogProps) {
         super(props)
-        this.contentContainerStyle = Styles.centerContainerStyle
         this.show = this.show.bind(this)
         this.hide = this.hide.bind(this)
+
+        this.contentContainerStyle = Styles.baseDialog
     }
 
     public show(params: {
@@ -68,8 +70,9 @@ export class YesNoDialog extends BaseDialog<IBaseDialogProps, IYesNoDialogState>
         // this is used to divide ReactNative Touchable and ScrollView Touching
         const onStartShouldSetResponder = () => true
         return (
-            <View style={Styles.mainContainerStyle}>
+            <View style={Styles.centerContainerStyle}>
                 <BaseText style={Styles.titleStyle} text={this.state.title} />
+                <View style={GlobalStyles.smallSpacer} />
                 <View style={Styles.messageContainerStyle}>
                     <ScrollView>
                         <View onStartShouldSetResponder={onStartShouldSetResponder}>
@@ -77,13 +80,20 @@ export class YesNoDialog extends BaseDialog<IBaseDialogProps, IYesNoDialogState>
                         </View>
                     </ScrollView>
                 </View>
-                <View style={Styles.buttonsSpacer} />
-                <View style={Styles.buttonsContainerStyle}>
-                    <RTLAwareView reverseJustifyContent={true}>
-                        <NormalButton onPress={onYesButtonPressed} text={this.state.yesButtonText} isFilled={false} />
-                        <NormalButton onPress={onNoButtonPressed} text={this.state.noButtonText} isFilled={false} />
-                    </RTLAwareView>
-                </View>
+                <View style={GlobalStyles.smallSpacer} />
+                <RTLAwareView style={Styles.buttonContainer} reverseJustifyContent={true}>
+                    <RoundButton
+                        textStyle={Styles.buttonText}
+                        onPress={onYesButtonPressed}
+                        text={this.state.yesButtonText}
+                    />
+                    <View style={Styles.buttonSpacer} />
+                    <RoundButton
+                        textStyle={Styles.buttonText}
+                        onPress={onNoButtonPressed}
+                        text={this.state.noButtonText}
+                    />
+                </RTLAwareView>
             </View>
         )
     }
