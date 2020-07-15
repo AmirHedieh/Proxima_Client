@@ -33,7 +33,7 @@ export class SplashScreen extends BaseScene<null, null> {
                     animation={'fadeIn'}
                     useNativeDriver={true}
                     duration={GlobalStaticData.initialDuration}
-                    onAnimationEnd={() => NavigationActions.reset(SceneParams.LookingStoreScene.name)}
+                    onAnimationEnd={this.onAnimationEnd}
                 >
                     <BaseText
                         text='پراکسیما'
@@ -45,4 +45,8 @@ export class SplashScreen extends BaseScene<null, null> {
     }
 
     protected onBackPress(): void {}
+
+    private onAnimationEnd = () => {
+        NavigationActions.reset(SceneParams.LookingStoreScene.name)
+    }
 }
