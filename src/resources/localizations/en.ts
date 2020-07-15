@@ -3,6 +3,9 @@ export const En = {
     /** common */
     error: 'Error',
     moneyUnit: 'Toman',
+    OK: 'Ok',
+    yes: 'Yes',
+    no: 'No',
 
     /** HomeScene */
     // requirements S

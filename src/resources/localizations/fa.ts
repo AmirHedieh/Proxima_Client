@@ -3,6 +3,9 @@ export const Fa = {
     /** common */
     error: 'خطا',
     moneyUnit: 'تومان',
+    OK: 'باشه',
+    yes: 'بله',
+    no: 'خیر',
 
     /** HomeScene */
     // requirements S
