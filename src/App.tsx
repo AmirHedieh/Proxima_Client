@@ -5,6 +5,7 @@ import { I18nManager, Linking, YellowBox } from 'react-native'
 import AndroidOpenSettings from 'react-native-android-open-settings'
 import { Actions, Router, Scene } from 'react-native-router-flux'
 import { Animations } from './Animations'
+import { OkDialog } from './components/ok_dialog/OkDialog'
 import { RequirementDialog } from './components/requirement_dialog/RequirementDialog'
 import { EnvironmentVariables, GlobalStaticData } from './Constants'
 import { stores } from './mobx/RootStore'
@@ -17,6 +18,7 @@ import { ProductScene } from './scenes/product_scene/ProductScene'
 import { StoreInfoScene } from './scenes/store_info_scene/StoreInfoScene'
 import { SplashScreen } from './scenes/welcome_scenes/splash_scene/SplashScene'
 import { Localization } from './text_process/Localization'
+import { NotificationHelper } from './utils/NotificationHelper'
 import { PermissionsHandler } from './utils/PermissionsHandler'
 const animate = () => Animations.fromRight()
 
@@ -54,11 +56,13 @@ const scenes = Actions.create(
 
 export class App extends React.Component {
     private requirementDialog: RequirementDialog = null
+    private okDialog: OkDialog = null
 
     public componentDidMount() {
         setTimeout(async () => {
             await stores.ConnectionStore.init(this.checkRequirements)
             this.checkRequirements()
+            NotificationHelper.setNotification(this.okDialog)
         }, GlobalStaticData.initialDuration) // show dialogs after splash loading time
     }
 
@@ -70,6 +74,7 @@ export class App extends React.Component {
         return (
             <Provider {...stores}>
                 <RequirementDialog ref={(ref) => (this.requirementDialog = ref)} />
+                <OkDialog ref={(ref) => (this.okDialog = ref)} />
                 <Router scenes={scenes} />
             </Provider>
         )
