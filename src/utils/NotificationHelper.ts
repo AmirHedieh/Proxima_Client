@@ -1,9 +1,12 @@
 import messaging from '@react-native-firebase/messaging'
 import { AsyncStorage } from 'react-native'
 import { OkDialog } from '../components/ok_dialog/OkDialog'
+import { CustomResponse } from '../network/CustomResponse'
+import { SocketManager } from '../network/SocketManager'
 
 // TODO: to show image in IOS, some actions must be done
 export class NotificationHelper {
+    public static onTokenSetUnSubscriber: () => void = null
     public static setNotification(okDialogRef: OkDialog) {
         this.okDialogRef = okDialogRef
         this.checkPermission()
@@ -69,15 +72,17 @@ export class NotificationHelper {
         const firebaseToken = await messaging().getToken()
         const savedToken = await AsyncStorage.getItem('fcmToken')
         if (!savedToken || savedToken !== firebaseToken) {
-            // const response = await HttpManager.getInstance().updateNotificationToken({
-            //     notification_token: firebaseToken
-            // })
-            // if (!response.isSuccessful()) {
-            //     Logger.log(`could not update token\n ${response.getMessage()}`)
-            //     return
-            // }
-            // await AsyncStorage.setItem('fcmToken', firebaseToken)
+            SocketManager.getInstance().onTokenSet(this.onTokenSet)
+            SocketManager.getInstance().setToken({ token: firebaseToken })
         }
+    }
+
+    private static onTokenSet = async (response: CustomResponse) => {
+        if (response.isSuccessful()) {
+            await AsyncStorage.setItem('fcmToken', response.getData().token)
+            return
+        }
+        return console.log(`could not update token\n ${response.getMessage()}`)
     }
 
     private static async requestPermission() {

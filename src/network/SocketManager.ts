@@ -83,4 +83,15 @@ export class SocketManager {
             callback(customResponse)
         })
     }
+
+    public setToken(params: { token: string }) {
+        this.socket.emit('tokenSet', params)
+    }
+
+    public onTokenSet(callback: (result: CustomResponse) => void) {
+        this.socket.on('tokenSet', (response) => {
+            const customResponse = new CustomResponse(response)
+            callback(customResponse)
+        })
+    }
 }
