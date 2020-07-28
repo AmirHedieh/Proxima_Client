@@ -2,17 +2,19 @@ import * as React from 'react'
 import { View } from 'react-native'
 import * as Animatable from 'react-native-animatable'
 import { BaseText } from '../../../components/base_text/BaseText'
-import { Colors, GlobalStaticData } from '../../../Constants'
+import { Colors } from '../../../Constants'
 import { Dimension, Fonts } from '../../../GlobalStyles'
 import { stores } from '../../../mobx/RootStore'
 import { NavigationActions } from '../../../NavigationActions'
 import { SceneParams } from '../../../SceneParams'
 import { StaticImages } from '../../../StaticImages'
+import { EVENTS, ListenerManager } from '../../../utils/ListenerManager'
 import { BaseScene } from '../../base_scene/BaseScene'
 
 export class SplashScreen extends BaseScene<null, null> {
     public componentWillUnmount() {
         stores.AppState.init() // init app engine
+        ListenerManager.getInstance().emitEvent(EVENTS.SplashProcessFinish)
     }
     protected renderSafe(): JSX.Element {
         return (
@@ -26,13 +28,13 @@ export class SplashScreen extends BaseScene<null, null> {
                         style={{ alignSelf: 'center', height: '100%', width: '100%' }}
                         animation={'fadeIn'}
                         useNativeDriver={true}
-                        duration={GlobalStaticData.initialDuration}
+                        duration={2000}
                     />
                 </View>
                 <Animatable.View
                     animation={'fadeIn'}
                     useNativeDriver={true}
-                    duration={GlobalStaticData.initialDuration}
+                    duration={2000}
                     onAnimationEnd={this.onAnimationEnd}
                 >
                     <BaseText
