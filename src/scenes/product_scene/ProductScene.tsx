@@ -79,6 +79,7 @@ export class ProductScene extends BaseScene<IProductSceneProps, IBaseSceneState>
     }
 
     protected onBackPress() {
+        NavigationActions.pop()
         return true
     }
 
