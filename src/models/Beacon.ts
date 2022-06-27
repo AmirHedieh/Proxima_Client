@@ -3,12 +3,14 @@ export interface IBeacon {
     major: number
     minor: number
     rssi: number
+    distance: number
 }
 export interface IRawBeacon {
     uuid: string
     major: number
     minor: number
     rssi: number
+    distance: number
 }
 
 export class BeaconFactory {
@@ -17,7 +19,8 @@ export class BeaconFactory {
             uuid: beacon.uuid,
             major: beacon.major,
             minor: beacon.minor,
-            rssi: beacon.rssi
+            rssi: beacon.rssi,
+            distance: beacon.distance
         }
     }
 }
