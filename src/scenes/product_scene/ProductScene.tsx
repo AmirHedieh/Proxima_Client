@@ -6,6 +6,7 @@ import { DomainViewModel } from '../../classes/DomainViewModel'
 import { BaseText } from '../../components/base_text/BaseText'
 import { RTLAwareView } from '../../components/rtl_aware/RTLAwareView'
 import { Colors, NetworkConfig } from '../../Constants'
+import { NavigationActions } from '../../NavigationActions'
 import { Localization } from '../../text_process/Localization'
 import { BaseScene, IBaseSceneState } from '../base_scene/BaseScene'
 import { Styles } from './ProductSceneStyles'
@@ -79,6 +80,7 @@ export class ProductScene extends BaseScene<IProductSceneProps, IBaseSceneState>
     }
 
     protected onBackPress() {
+        this.props.AppState.resetMinor()
         NavigationActions.pop()
         return true
     }

@@ -18,8 +18,8 @@ export class BeaconEngine {
 
     public constructor(beaconDetector: IBeaconDetector) {
         this.beaconDetector = beaconDetector
-        this.majorRepeatDetector = new RepeatDetector(4)
-        this.minorRepeatDetector = new RepeatDetector(4)
+        this.majorRepeatDetector = new RepeatDetector(3)
+        this.minorRepeatDetector = new RepeatDetector(2)
     }
 
     public getActiveMajor(): number {
@@ -48,9 +48,13 @@ export class BeaconEngine {
         return this.beaconDetector.stopDetecting('')
     }
 
+    public resetMinor(): void {
+        this.minor = -1
+    }
+
     private processLoop(): void {
         const sortedBeacons: IBeacon[] = this.sortByRSSI(this.beacons)
-        console.log(sortedBeacons)
+        // console.log(sortedBeacons.map((item) => item.minor))
         const majorHistogram = this.majorHistogram(sortedBeacons)
         const sortedHistogram = majorHistogram.sort((a, b) => b.repeat - a.repeat)
         this.processMajor(sortedHistogram, sortedBeacons)
@@ -58,7 +62,7 @@ export class BeaconEngine {
     }
 
     private processMajor(sortedHistogram: IMajorHistogram[], sortedBeacons: IBeacon[]) {
-        if (sortedHistogram.length === 0 || Math.abs(sortedBeacons[0].rssi) > 85) {
+        if (sortedHistogram.length === 0 || Math.abs(sortedBeacons[0].rssi) > 90) {
             this.majorRepeatDetector.addToData(null)
         } else if (sortedHistogram.length === 1) {
             this.majorRepeatDetector.addToData(sortedHistogram[0].major)
@@ -82,14 +86,21 @@ export class BeaconEngine {
 
     private processMinor(sortedBeacons: IBeacon[]): void {
         if (sortedBeacons.length) {
-            // console.log(sortedBeacons[0].rssi)
+            // let str = ''
+            // for (const element of sortedBeacons) {
+            //     str += element.minor + ': ' + element.rssi + ' | '
+            // }
+            console.log(sortedBeacons[0].rssi)
         }
-        if (sortedBeacons.length === 0 || Math.abs(sortedBeacons[0].rssi) > 70) {
+        if (sortedBeacons.length === 0 || Math.abs(sortedBeacons[0].rssi) >= 60) {
             this.minorRepeatDetector.addToData(null)
         } else {
             this.minorRepeatDetector.addToData(sortedBeacons[0].minor)
         }
         if (this.minorRepeatDetector.isDataRepeated().isRepeated) {
+            if (this.minorRepeatDetector.isDataRepeated().repeatedValue === null) {
+                return
+            }
             if (this.minor !== this.minorRepeatDetector.isDataRepeated().repeatedValue) {
                 if (this.onMinorChange) {
                     this.minor = this.minorRepeatDetector.isDataRepeated().repeatedValue

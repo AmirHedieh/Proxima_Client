@@ -1,5 +1,6 @@
 import { action, computed } from 'mobx'
 import { MinimalProduct } from '../models/MinimalProduct'
+import { DetectionState } from '../Types'
 import { AppEngine } from './AppEngine'
 
 export class DomainViewModel {
@@ -32,6 +33,10 @@ export class DomainViewModel {
         return this.appEngine.stopDetecting()
     }
 
+    public resetMinor(): void {
+        return this.appEngine.resetMinor()
+    }
+
     public getProductList() {
         return this.appEngine.products
     }
@@ -44,7 +49,7 @@ export class DomainViewModel {
         return this.appEngine.currentProduct
     }
 
-    public getDetectionState() {
+    public getDetectionState(): DetectionState {
         return this.appEngine.detectionState
     }
 
