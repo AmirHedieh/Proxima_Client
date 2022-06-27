@@ -45,13 +45,9 @@ export const Colors = {
 export const NetworkConfig = {
     // server ip: 194.5.205.176:4000
     // server picture ip: 194.5.205.176:80/pictures
-    apiBaseUrl: 'http://192.168.1.7:4000/',
+    apiBaseUrl: 'http://194.5.205.176:4000/',
     maxRetry: 3,
     httpRequestTimeout: 5000,
     maxConcurrentConnections: 1,
-    localServerPictureBaseUrl: 'http://192.168.1.7:80/fpdPics'
-}
-
-export const GlobalStaticData = {
-    initialDuration: 2000 // ms
+    localServerPictureBaseUrl: 'http://194.5.205.176:80/fpdPics'
 }
