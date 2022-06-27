@@ -6,6 +6,7 @@ export const Fa = {
     OK: 'باشه',
     yes: 'بله',
     no: 'خیر',
+    appName: 'پراکسیما',
 
     /** HomeScene */
     // requirements S

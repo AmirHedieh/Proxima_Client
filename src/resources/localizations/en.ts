@@ -6,6 +6,7 @@ export const En = {
     OK: 'Ok',
     yes: 'Yes',
     no: 'No',
+    appName: 'Proxima',
 
     /** HomeScene */
     // requirements S

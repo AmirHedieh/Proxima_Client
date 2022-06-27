@@ -8,6 +8,7 @@ import { stores } from '../../../mobx/RootStore'
 import { NavigationActions } from '../../../NavigationActions'
 import { SceneParams } from '../../../SceneParams'
 import { StaticImages } from '../../../StaticImages'
+import { Localization } from '../../../text_process/Localization'
 import { EVENTS, ListenerManager } from '../../../utils/ListenerManager'
 import { BaseScene } from '../../base_scene/BaseScene'
 
@@ -38,7 +39,7 @@ export class SplashScreen extends BaseScene<null, null> {
                     onAnimationEnd={this.onAnimationEnd}
                 >
                     <BaseText
-                        text='پراکسیما'
+                        text={Localization.translate('appName')}
                         style={{ fontFamily: Fonts.persian.vazirMedium, fontSize: 32 * Dimension.scaleX }}
                     />
                 </Animatable.View>
