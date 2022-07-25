@@ -13,10 +13,20 @@ import { EVENTS, ListenerManager } from '../../../utils/ListenerManager'
 import { BaseScene } from '../../base_scene/BaseScene'
 
 export class SplashScreen extends BaseScene<null, null> {
+
+    protected async sceneDidMount() {
+        await this.init()
+    }
+
     public componentWillUnmount() {
         stores.AppState.init() // init app engine
         ListenerManager.getInstance().emitEvent(EVENTS.SplashProcessFinish)
     }
+
+    protected async init(): Promise<void> {
+        await stores.AppState.startDetecting()
+    }
+
     protected renderSafe(): JSX.Element {
         return (
             <View
