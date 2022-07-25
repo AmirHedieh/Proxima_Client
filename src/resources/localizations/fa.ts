@@ -25,6 +25,9 @@ export const Fa = {
     searchingTitleStoreInfoScene: 'جستجوی نزدیک‌ترین فروشگاه',
     goToStoreBottomTabStoreInfoScene: 'به نزدیکی یک فروشگاه بروید',
     noProductFoundInCategoryStoreInfoScene: 'محصولی یافت نشد',
+    editStoreInfoStoreInfoScene: 'ویرایش',
+    informationStoreInfoScene: 'اطلاعات',
+    noPictureStoreInfoScene: 'بدون عکس',
 
     /** MinimalProductScene */
     noteTitleMinimalProductScene: 'توجه',
