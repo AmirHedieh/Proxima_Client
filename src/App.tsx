@@ -46,9 +46,9 @@ I18nManager.forceRTL(false)
 const scenes = Actions.create(
     <Scene key='root' hideNavBar={true} transitionConfig={animate}>
         <Scene initial={true} key={SceneParams.SplashScreen.name} component={SplashScreen} />
+        <Scene key={SceneParams.LookingStoreScene.name} component={LookingStoreScene} />
         <Scene key={SceneParams.HomeScene.name} component={HomeScene} />
         <Scene key={SceneParams.MinimalProductScene.name} component={MinimalProductScene} />
-        <Scene key={SceneParams.LookingStoreScene.name} component={LookingStoreScene} />
         <Scene key={SceneParams.StoreInfoScene.name} component={StoreInfoScene} />
         <Scene key={SceneParams.ProductScene.name} component={ProductScene} />
         <Scene key={'fake'} component={FakeScene} />
