@@ -16,6 +16,7 @@ export const Colors = {
     red: '#f00',
     green: '#0f0',
     blue: '#00f',
+    blueDark: '#00008b',
     black: '#000',
     lightGray: '#ddd',
     mediumGray: '#7d7d7d',
@@ -27,11 +28,13 @@ export const Colors = {
     greenDark: '#388E3C',
     pureWhite: '#ffffff',
     grayContent: '#424242',
+    yellow: '#FFD700',
     yellowLight: '#f2dc83',
     // primary
-    creamLight: '#FFE7D4',
+    creamLight: '#ffead9',
     creamMedium: '#FFCDA3',
     creamMedium2: '#df9659',
+    creamMedium3: '#ffb87d',
     creamDark: '#B2855E',
     // secondary
     primaryLight: '#3C4159',
@@ -45,9 +48,10 @@ export const Colors = {
 export const NetworkConfig = {
     // server ip: 194.5.205.176:4000
     // server picture ip: 194.5.205.176:80/pictures
-    apiBaseUrl: 'http://194.5.205.176:4000/',
+    apiBaseUrl: 'http://192.168.1.4:8000/api/v1/',
+    httpAPIBaseUrl: 'http://192.168.1.4:8000/api/v1/',
     maxRetry: 3,
-    httpRequestTimeout: 5000,
+    httpRequestTimeout: 2000,
     maxConcurrentConnections: 1,
-    localServerPictureBaseUrl: 'http://194.5.205.176:80/fpdPics'
+    localServerPictureBaseUrl: 'http://192.168.1.4:8000/storage/'
 }
