@@ -8,12 +8,14 @@ import { Colors } from '../../Constants'
 interface IBaseTextProps {
     text: string
     style?: StyleType
+    numberOfLine: number
 }
 
 export class BaseText extends React.PureComponent<IBaseTextProps> {
     public static defaultProps: IBaseTextProps = {
         text: '',
-        style: null
+        style: null,
+        numberOfLine: null
     }
     public render(): JSX.Element {
         const firstChar = this.props.text !== '' && this.props.text != null ? this.props.text[0] : 'ا'
@@ -21,6 +23,6 @@ export class BaseText extends React.PureComponent<IBaseTextProps> {
         const fontSize = FontSizes.h3
         const color = Colors.primaryMedium
         const style = [{ fontFamily, fontSize, color }, this.props.style]
-        return <Text style={style}>{String(this.props.text)}</Text>
+        return <Text numberOfLines={this.props.numberOfLine} style={style}>{String(this.props.text)}</Text>
     }
 }
