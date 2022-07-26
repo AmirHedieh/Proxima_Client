@@ -65,6 +65,7 @@ export class BeaconDetector implements IBeaconDetector {
         Beacons.requestAlwaysAuthorization()
     }
     private configForAndroid() {
+        Beacons.setRssiFilter(Beacons.ARMA_RSSI_FILTER, 0.1)
         Beacons.detectIBeacons()
     }
 }
