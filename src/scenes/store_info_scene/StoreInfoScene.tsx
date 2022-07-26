@@ -36,8 +36,10 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
         isShowingProducts: false
     }
 
-    private categoryTabRef: CategoryFilter = null
+    // private categoryTabRef: CategoryFilter = null
     private productsTabRef = null
+
+    private beacons: any[]  = []
 
     public renderSafe(): JSX.Element {
         return (
@@ -46,7 +48,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                 <AppInfoTab />
                 {this.renderProductsExpandingTabBackground()}
                 {this.renderProductsExpandingTab()}
-                {this.renderCategoryTab()}
+                {/* {this.renderCategoryTab()} */}
             </View>
         )
     }
@@ -66,9 +68,25 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                     paddingVertical: Dimension.collapsedTabHeight
                 }}
             >
+                {this.renderBeacons()}
                 <StoreInfo {...this.props.AppState.getStore()} />
             </View>
         )
+    }
+
+    private renderBeacons() {
+        const views = []
+        for (const element of this.props.AppState.getBeacons()) {
+            this.beacons[`key${element.major}${element.minor}`] = element
+        }
+        for (const key in this.beacons) {
+            views.push (
+                <View style={{marginTop: 16}}>
+                    <BaseText text={`${this.beacons[key].major} ${this.beacons[key].minor} --> ${this.beacons[key].rssi} || ${this.beacons[key].distance}`}/>
+                </View>
+            )
+        }
+        return views
     }
 
     private renderProductsExpandingTabBackground(): JSX.Element {
@@ -207,15 +225,15 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
         this.props.AppState.fetchProducts({ category: this.props.AppState.getFetchData().category })
     }
 
-    private renderCategoryTab(): JSX.Element {
-        return (
-            <CategoryFilter
-                ref={(ref) => (this.categoryTabRef = ref)}
-                categories={this.props.AppState.getCategoryList()}
-                fetchData={this.props.AppState.fetchProducts}
-            />
-        )
-    }
+    // private renderCategoryTab(): JSX.Element {
+    //     return (
+    //         <CategoryFilter
+    //             ref={(ref) => (this.categoryTabRef = ref)}
+    //             categories={this.props.AppState.getCategoryList()}
+    //             fetchData={this.props.AppState.fetchProducts}
+    //         />
+    //     )
+    // }
 
     private onProductTabPress = () => {
         this.setState(
