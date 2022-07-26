@@ -1,14 +1,11 @@
 import { observable, reaction } from 'mobx'
-import { EnvironmentVariables } from '../Constants'
+import { IBeacon } from '../models/Beacon'
 import { Category } from '../models/Category'
 import { MinimalProduct } from '../models/MinimalProduct'
 import { Museum } from '../models/Museum'
 import { Product } from '../models/Product'
-import { Store } from '../models/Store'
 import { CustomResponse } from '../network/CustomResponse'
 import { HttpManager } from '../network/HttpManager'
-import { SocketManager } from '../network/SocketManager'
-import { UserIdStorage } from '../storage/UserIdStorage'
 import { DetectionState } from '../Types'
 import { BeaconDetector, IBeaconDetector } from './BeaconDetector'
 import { BeaconEngine } from './BeaconEngine'
@@ -30,13 +27,13 @@ export class AppEngine {
     @observable public products: Map<number, MinimalProduct> = new Map<number, MinimalProduct>()
     @observable public categories: Map<number, Category> = new Map<number, Category>()
     @observable public currentProduct: Product = null
+    @observable public beacons: IBeacon[] = []
     @observable public detectionState: DetectionState = 'NO_STORE_NO_BEACON'
     @observable public fetchData = fetchDataInitialValue
 
     private navHandler: INavigationHandler = null
     private beaconDetector: IBeaconDetector = null
     private beaconEngine: BeaconEngine = null
-    private userId: string = null
     // private socketManager: SocketManager = SocketManager.getInstance()
 
     public constructor() {
@@ -56,13 +53,17 @@ export class AppEngine {
         // this.socketManager.onMajorChange(this.onMajorChange)
         // this.socketManager.onMinorChange(this.onMinorChange)
         // this.socketManager.onGetProducts(this.onGetProducts)
-
+        this.beaconEngine.onBeaconsUpdate = this.onBeaconsUpdate
         this.beaconEngine.onMajorChange = this.majorChange
         this.beaconEngine.onMinorChange = this.minorChange
     }
 
     public init(): void {
         return this.beaconEngine.init()
+    }
+
+    public onBeaconsUpdate = (beacons: IBeacon[]): void => {
+        this.beacons = beacons
     }
 
     public startDetecting(): Promise<boolean> {
@@ -77,69 +78,8 @@ export class AppEngine {
         return this.beaconEngine.resetMinor()
     }
 
-    public emitMinimalProductFetch = (params: { category: number }) => {
-        if (params.category !== this.fetchData.category) {
-            this.fetchData.isLoadingCategory = true // set loading true when _new_ category is fetched
-            this.fetchData.minimalProductsOffset = 0
-            this.fetchData.category = params.category
-            this.products = new Map<number, MinimalProduct>()
-        }
-        this.socketManager.getProduct({
-            category: params.category,
-            offset: this.fetchData.minimalProductsOffset,
-            limit: 10
-        })
-    }
-
-    private emitMajorChange = (major) => {
-        console.log('emit major', major)
-        this.socketManager.majorChange({ major })
-    }
-
-    private emitMinorChange = (minor) => {
-        console.log('emit minor: ', minor)
-        this.socketManager.minorChange({ minor })
-    }
-
-    private onConnect = async () => {
-        console.log('connected')
-        const userId = await UserIdStorage.get()
-        if (userId) {
-            // authorize
-            this.userId = userId
-            this.socketManager.authorize({ id: userId })
-        } else {
-            this.socketManager.register()
-        }
-    }
-
-    private onReconnect = () => {
-        console.log('Reconnected')
-    }
-
-    private onDisconnect = async () => {
-        console.log('Disconnected')
-        await this.beaconEngine.stopDetecting()
-    }
-
-    private onRegister = async (response: CustomResponse) => {
-        await UserIdStorage.set(response.getData().id)
-        this.userId = response.getData().id
-    }
-
-    private onStaticData = async (response: CustomResponse) => {
-        if (EnvironmentVariables.version !== response.getData().version) {
-            console.log('app needs to update')
-        }
-
-        for (const element of response.getData().categories) {
-            const category = new Category(element)
-            this.categories.set(category.id, category)
-        }
-        await this.beaconEngine.startDetecting()
-    }
-
     private majorChange = async (major: number) => {
+        console.log('called')
         if (major) {
             console.log('sending "get museum" major', major)
             const response = await HttpManager.getInstance().getMuseum({
@@ -148,6 +88,7 @@ export class AppEngine {
             console.log('get museum response', response)
             if (response.isSuccessful && response.getData()) {
                 console.log('Museum created, Navigating...')
+                this.beaconEngine.isMajorReady = true
                 this.store = new Museum(response.getData())
                 this.detectionState = 'FOUND_STORE_NO_BEACON'
                 return
@@ -163,7 +104,7 @@ export class AppEngine {
             museumId: major,
             productId: minor
         })
-        console.log('get museum response', response)
+        console.log('get product response', response)
         if (response.getData()) {
             this.currentProduct = new Product(response.getData())
             this.detectionState = 'FOUND_STORE_FOUND_BEACON'
@@ -182,44 +123,19 @@ export class AppEngine {
             return
         }
     }
-
-    private onMajorChange = (response: CustomResponse) => {
-        console.log('major from server', response)
-        if (response.getData().store) {
-            this.store = new Museum(response.getData().store)
-            this.detectionState = 'FOUND_STORE_NO_BEACON'
-            // reset previous fetch data & fetched products
-            this.fetchData = fetchDataInitialValue
+    
+    public emitMinimalProductFetch = (params: { category: number }) => {
+        if (params.category !== this.fetchData.category) {
+            this.fetchData.isLoadingCategory = true // set loading true when _new_ category is fetched
+            this.fetchData.minimalProductsOffset = 0
+            this.fetchData.category = params.category
             this.products = new Map<number, MinimalProduct>()
-            // fetch first products
-            this.emitMinimalProductFetch({ category: null })
-            return
         }
-        this.detectionState = 'NO_STORE_NO_BEACON'
-        this.products = new Map<number, MinimalProduct>()
-        this.fetchData = fetchDataInitialValue
-        this.store = null
-    }
-
-    private onMinorChange = (response: CustomResponse) => {
-        console.log('minor from server', response)
-        if (response.getData().product) {
-            this.currentProduct = new Product(response.getData().product)
-            this.detectionState = 'FOUND_STORE_FOUND_BEACON'
-            return
-        }
-        /** codes reach here if product is null */
-        // user was not in store
-        if (this.detectionState === 'NO_STORE_NO_BEACON') {
-            this.currentProduct = null
-            return
-        }
-        // user was in store and was near beacon
-        if (this.detectionState === 'FOUND_STORE_FOUND_BEACON') {
-            this.detectionState = 'FOUND_STORE_NO_BEACON'
-            this.currentProduct = null
-            return
-        }
+        this.socketManager.getProduct({
+            category: params.category,
+            offset: this.fetchData.minimalProductsOffset,
+            limit: 10
+        })
     }
 
     private onGetProducts = (response: CustomResponse) => {
