@@ -9,6 +9,8 @@ interface IMajorHistogram {
 export class BeaconEngine {
     public onMajorChange: (major: number) => void = null
     public onMinorChange: (major:number, minor: number) => void = null
+    public onBeaconsUpdate: (beacons: IBeacon[]) => void = null
+    public isMajorReady: boolean = false // a boolean to avoid major, minor data fetch collision(when Major is fetched, minor can be handled)
     private beaconDetector: IBeaconDetector = null
     private beacons: IBeacon[] = []
     private major: number = -1
@@ -18,8 +20,8 @@ export class BeaconEngine {
 
     public constructor(beaconDetector: IBeaconDetector) {
         this.beaconDetector = beaconDetector
-        this.majorRepeatDetector = new RepeatDetector(6)
-        this.minorRepeatDetector = new RepeatDetector(2)
+        this.majorRepeatDetector = new RepeatDetector(5)
+        this.minorRepeatDetector = new RepeatDetector(3)
     }
 
     public getActiveMajor(): number {
@@ -34,6 +36,7 @@ export class BeaconEngine {
         this.beaconDetector.init()
         this.beaconDetector.onBeaconFetch = (beacons) => {
             this.beacons = beacons
+            this.onBeaconsUpdate(beacons)
             this.processLoop()
         }
     }
@@ -53,20 +56,53 @@ export class BeaconEngine {
     }
 
     private processLoop(): void {
-        const sortedBeacons: IBeacon[] = this.sortByRSSI(this.beacons)
+        const sortedBeacons: IBeacon[] = this.sortByDistance(this.beacons)
         // console.log(sortedBeacons.map((item) => item.minor))
         const majorHistogram = this.majorHistogram(sortedBeacons)
+        // const closestBeacon = this.sortByDistance(this.beacons)[0]
+        // console.log('closest Beacon', closestBeacon)
         const sortedHistogram = majorHistogram.sort((a, b) => b.repeat - a.repeat)
         this.processMajor(sortedHistogram, sortedBeacons)
-        this.processMinor(sortedBeacons)
+        if (this.major) {
+            this.processMinor(sortedBeacons)
+        } else {
+            console.log('not in If')
+        }
+        console.log('major detector', this.majorRepeatDetector.data)
+        console.log('minor detector', this.minorRepeatDetector.data)
+        // this.processMajor2(closestBeacon)
+        // this.processMinor2(closestBeacon)
     }
 
+    // private processMajor2(closestBeacon: IBeacon): void {
+    //     if (closestBeacon && closestBeacon.distance < 10) {
+    //         if (this.major === closestBeacon.major) {
+    //             return
+    //         }
+    //         this.major = closestBeacon.major
+    //         this.onMajorChange(this.major)
+    //     }
+    // }
+
+    // private processMinor2(closestBeacon: IBeacon): void {
+    //     if (closestBeacon && closestBeacon.distance < 2.5) {
+    //         if (this.minor === closestBeacon.minor) {
+    //             return
+    //         }
+    //         this.minor = closestBeacon.minor
+    //         this.onMinorChange(this.major, this.minor)
+    //     }
+    // }
+
     private processMajor(sortedHistogram: IMajorHistogram[], sortedBeacons: IBeacon[]) {
-        // console.log(sortedHistogram, sortedBeacons)
-        if (sortedHistogram.length === 0 || Math.abs(sortedBeacons[0].rssi) > 90) {
+        const values = []
+        for (const element of sortedBeacons) {
+            values.push(element.distance)
+        }
+        console.log(values)
+        if (sortedHistogram.length === 0 || Math.abs(sortedBeacons[0].distance) > 5) {
             this.majorRepeatDetector.addToData(null)
         } else if (sortedHistogram.length === 1) {
-            // console.log('in')
             this.majorRepeatDetector.addToData(sortedHistogram[0].major)
         } else {
             if (sortedHistogram[0].repeat === sortedHistogram[1].repeat) {
@@ -76,10 +112,12 @@ export class BeaconEngine {
             }
         }
         if (this.majorRepeatDetector.isDataRepeated().isRepeated) {
-            // console.log('repeated')
             if (this.major !== this.majorRepeatDetector.isDataRepeated().repeatedValue) {
                 if (this.onMajorChange) {
                     this.major = this.majorRepeatDetector.isDataRepeated().repeatedValue
+                    if (this.major === null) {
+                        this.isMajorReady = false
+                    }
                     // console.log('major changed', this.major)
                     // console.log('on major change called', this.major)
                     this.onMajorChange(this.major)
@@ -96,7 +134,7 @@ export class BeaconEngine {
             // }
             // console.log(sortedBeacons)
         }
-        if (sortedBeacons.length === 0 || Math.abs(sortedBeacons[0].rssi) >= 60) {
+        if (sortedBeacons.length === 0 || Math.abs(sortedBeacons[0].distance) > 1) {
             this.minorRepeatDetector.addToData(null)
         } else {
             this.minorRepeatDetector.addToData(sortedBeacons[0].minor)
@@ -106,7 +144,8 @@ export class BeaconEngine {
                 return
             }
             if (this.minor !== this.minorRepeatDetector.isDataRepeated().repeatedValue) {
-                if (this.onMinorChange) {
+                if (this.onMinorChange && this.isMajorReady) {
+                    console.log('minor changed')
                     this.minor = this.minorRepeatDetector.isDataRepeated().repeatedValue
                     this.onMinorChange(this.major, this.minor)
                 }
@@ -139,5 +178,10 @@ export class BeaconEngine {
 
     private sortByRSSI(beacons: IBeacon[]) {
         return beacons.sort((a, b) => b.rssi - a.rssi).slice(0, 4)
+    }
+
+    private sortByDistance(beacons: IBeacon[]) {
+        // console.log('beacons', beacons)
+        return beacons.sort((a, b) => a.distance - b.distance)
     }
 }

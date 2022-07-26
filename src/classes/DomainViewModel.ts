@@ -41,6 +41,10 @@ export class DomainViewModel {
         return this.appEngine.resetMinor()
     }
 
+    public getBeacons() {
+        return this.appEngine.beacons
+    }
+
     public getProductList() {
         return this.appEngine.products
     }

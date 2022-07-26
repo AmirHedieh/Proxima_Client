@@ -5,6 +5,7 @@ interface IRepeated {
 
 export class RepeatDetector {
     private data: number[] = []
+    private nullDataCounter: number = 0
     private numberOfRepeats: number = 0
 
     public constructor(numberOfRepeats: number) {
@@ -16,6 +17,11 @@ export class RepeatDetector {
     }
 
     public addToData(value: number) {
+        if (value === null) {
+            this.nullDataCounter++
+            return
+        }
+        this.nullDataCounter = 0 // reset null count as a beacon was ranged
         if (this.data.length < this.numberOfRepeats) {
             this.data.unshift(value)
         } else {
@@ -25,6 +31,12 @@ export class RepeatDetector {
     }
 
     public isDataRepeated(): IRepeated {
+        if (this.nullDataCounter >= 3 * this.numberOfRepeats) { // null repeated by multiple times of required repeat number
+            return {
+                isRepeated: true,
+                repeatedValue: null
+            }
+        }
         if (this.data.length < this.numberOfRepeats) {
             return {
                 isRepeated: false,
