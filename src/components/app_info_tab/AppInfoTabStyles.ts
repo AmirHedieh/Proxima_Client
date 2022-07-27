@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 import { Colors } from '../../Constants'
-import { Dimension } from '../../GlobalStyles'
+import { Dimension, FontSizes } from '../../GlobalStyles'
 
 export const fullTabHeight: number = 507 * Dimension.scaleY
 export const collapsedTabHeight: number = Dimension.collapsedTabHeight
@@ -28,5 +28,8 @@ export const Styles = StyleSheet.create({
         alignSelf: 'center',
         height: '100%',
         width: '100%'
+    },
+    title: {
+        fontSize: FontSizes.h2
     }
 })

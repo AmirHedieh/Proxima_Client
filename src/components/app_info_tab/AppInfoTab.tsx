@@ -3,15 +3,19 @@ import { Animated, Image, View } from 'react-native'
 import { GlobalStyles } from '../../GlobalStyles'
 import { AppInfoCard } from '../../RFC/AppInfoCard/AppInfoCard'
 import { StaticImages } from '../../StaticImages'
+import { BaseText } from '../base_text/BaseText'
 import { SafeTouch } from '../safe_touch/SafeTouch'
 import { collapsedTabHeight, fullTabHeight, Styles } from './AppInfoTabStyles'
 
+interface IProps {
+    title?: string
+}
 interface IState {
     isExpanded: boolean
     value: Animated.Value
 }
 
-export class AppInfoTab extends React.Component<{}, IState> {
+export class AppInfoTab extends React.Component<IProps, IState> {
     public transformYDifference: number = -(fullTabHeight - collapsedTabHeight)
     public state: IState = {
         isExpanded: false,
@@ -26,17 +30,28 @@ export class AppInfoTab extends React.Component<{}, IState> {
                 <SafeTouch style={Styles.safeTouch} onPress={this.onPress}>
                     {this.state.isExpanded ? (
                         <Image source={StaticImages.upArrow} />
-                    ) : (
-                        <View style={Styles.logoImageContainer}>
-                            <Image
-                                resizeMode={'contain'}
-                                style={Styles.logoImage}
-                                source={StaticImages.logoTransparent}
-                            />
-                        </View>
-                    )}
+                    ) : 
+                        this.renderClosedTabData()
+                    }
                 </SafeTouch>
             </Animated.View>
+        )
+    }
+
+    private renderClosedTabData = () => {
+        if (!this.props.title) {
+            return (
+                <View style={Styles.logoImageContainer}>
+                    <Image
+                        resizeMode={'contain'}
+                        style={Styles.logoImage}
+                        source={StaticImages.logoTransparent}
+                    />
+                </View>
+            )
+        }
+        return (
+            <BaseText style={Styles.title} text={this.props.title}/>
         )
     }
 
