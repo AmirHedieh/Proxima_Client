@@ -37,7 +37,8 @@ YellowBox.ignoreWarnings([
     'Warning: ViewPagerAndroid',
     'Warning: Async Storage',
     'Warning: NetInfo has',
-    'Warning: Slider has'
+    'Warning: Slider has',
+    'Remote debugger'
 ])
 
 I18nManager.allowRTL(false)
