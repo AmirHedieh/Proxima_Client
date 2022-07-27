@@ -118,5 +118,24 @@ export const Styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: FontSizes.h3,
         fontFamily: Fonts.persian.vazirBold
+    },
+    bottomTabContainer: {
+        flexDirection: 'row',
+        width: '100%',
+        height: Dimension.collapsedTabHeight,
+        position: 'absolute',
+        bottom: 0,
+        paddingRight: 28 * Dimension.scaleX,
+        paddingLeft: 25 * Dimension.scaleX,
+        alignItems: 'center',
+        backgroundColor: Colors.creamLight,
+        borderTopLeftRadius: 48 * Dimension.scaleX,
+        borderTopRightRadius: 12 * Dimension.scaleX
+    },
+    bottomTabTitle: {
+        flex: 1,
+        textAlign: 'center',
+        fontSize: FontSizes.h3,
+        fontFamily: Fonts.persian.vazirBold
     }
 })
