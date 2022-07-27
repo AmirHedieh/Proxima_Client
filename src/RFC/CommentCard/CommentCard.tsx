@@ -10,10 +10,7 @@ import { Styles } from './CommentCardStyles'
 interface IProductCardProps {
     commentor: string
     text: string
-    onPress: () => void
 }
-
-const infoIconSize: number = 30 * Dimension.scaleX
 
 export const CommentCard: React.FunctionComponent<IProductCardProps> = (props: IProductCardProps): JSX.Element => {
         return (
@@ -26,11 +23,6 @@ export const CommentCard: React.FunctionComponent<IProductCardProps> = (props: I
                     <ScrollView nestedScrollEnabled={true}>
                         <BaseText style={Styles.text} text={props.text}/>
                     </ScrollView>
-                    <View style={GlobalStyles.spacer}/>
-                    <View style={Styles.horizontalSeparator}/>
-                    <SafeTouch onPress={props.onPress} style={Styles.deleteButton}>
-                        <MaterialIcon name='delete' size={infoIconSize} />
-                    </SafeTouch>
                 </RTLAwareView>
             </View>
         )

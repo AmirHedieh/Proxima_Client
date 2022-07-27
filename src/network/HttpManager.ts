@@ -114,6 +114,15 @@ export class HttpManager {
         )
     }
 
+    public createComment = async (urlParams: { museumId: number, productId: number }, params: {
+        commentor: string,
+        text: string,
+    }): Promise<CustomResponse> => {
+        return new CustomResponse(
+            await this.axiosNoToken.post(`museums/${urlParams.museumId}/products/${urlParams.productId}/comments/`, params)
+        )
+    }
+
     public getComments = async (urlParams: { museumId: number, productId: number, commentId?: number }): Promise<CustomResponse> => {
         var url = `museums/${urlParams.museumId}/products/${urlParams.productId}/comments/`
         if (urlParams.commentId) {

@@ -5,13 +5,13 @@ export const Styles = StyleSheet.create({
     labeledContainer: {
         width: Dimension.fullSizeMenuItemWidth
     },
-    innerContainer: {
-    },
+    innerContainer: {},
     editText: {
         width: Dimension.fullSizeMenuItemWidth,
         height: Dimension.baseContainerHeight,
         paddingVertical: 8 * Dimension.scaleX,
         paddingHorizontal: 14 * Dimension.scaleX,
-        fontSize: FontSizes.h3
+        fontSize: FontSizes.h3,
+        textAlign: 'center'
     }
 })

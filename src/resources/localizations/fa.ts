@@ -1,12 +1,19 @@
 // tslint:disable: max-line-length
 export const Fa = {
     /** common */
+    appName: 'پراکسیما',
+    success: 'موفق',
     error: 'خطا',
     moneyUnit: 'تومان',
     OK: 'باشه',
+    warning: 'توجه',
+    invalid: 'نامعتبر',
     yes: 'بله',
     no: 'خیر',
-    appName: 'پراکسیما',
+    select: 'انتخاب',
+    confirm: 'تایید',
+    from: 'از',
+    to: 'تا',
 
     /** HomeScene */
     // requirements S
@@ -44,5 +51,16 @@ export const Fa = {
     wannaGetThisApplicationAppInfoCard: 'آیا مایل به تهیه محصول هستید؟',
     phoneNumberAppInfoCard: 'تلفن',
     mobileNumberAppInfoCard: 'همراه',
-    whyThisApplicationAppInfoCard: 'چرا پراکسیما'
+    whyThisApplicationAppInfoCard: 'چرا پراکسیما',
+
+     /** Comments Scene */
+     tabTitleCommentsScene: 'نظرات',
+     noCommentCommentsScene: 'بدون نظر',
+     createCommentCommentsScene: 'ثبت نظر',
+     successCreateCommentCommentsScene: 'نظر شما با موفقیت ثبت شد',
+     commentorCommentCommentsScene: 'نام',
+     commentorPlaceHolderCommentCommentsScene: 'نام خود را اینجا وارد کنید',
+     textPlaceHolderCommentCommentsScene: 'متن نظر خود را اینجا بنویسید',
+     textCommentsScene: 'متن نظر',
+     
 }

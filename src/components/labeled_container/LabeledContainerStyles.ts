@@ -12,22 +12,19 @@ export const Styles = StyleSheet.create({
         marginBottom: 2 * Dimension.scaleX,
         fontSize: FontSizes.extraSmall,
         fontFamily: Fonts.persian.vazirBold,
-        backgroundColor: Colors.milky,
-        color: Colors.greenDark,
         zIndex: 1
     },
     innerContainerStyle: {
         // height: '100%',
         justifyContent: 'center',
-        backgroundColor: Colors.cardGray,
+        backgroundColor: Colors.pureWhite,
         // paddingHorizontal: 16 * Dimension.scaleX,
-        borderRadius: 4 * Dimension.scaleX,
+        borderRadius: 36 * Dimension.scaleX
         // width: 280 * Dimension.scaleX,
         // height: 48 * Dimension.scaleX,
-        ...GlobalStyles.shadow
+        // ...GlobalStyles.shadow
     },
     errorStyle: {
-        backgroundColor: Colors.milky,
         marginHorizontal: 14 * Dimension.scaleX,
         fontSize: FontSizes.extraSmall,
         color: Colors.red,

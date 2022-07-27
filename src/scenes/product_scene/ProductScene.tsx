@@ -16,6 +16,7 @@ import { CommonValidator } from '../../utils/Validator'
 import { BaseScene, IBaseSceneState } from '../base_scene/BaseScene'
 import { Styles } from './ProductSceneStyles'
 import { Dimension } from '../../GlobalStyles'
+import { SceneParams } from '../../SceneParams'
 
 export interface IProductSceneProps {
     AppState?: DomainViewModel
@@ -105,15 +106,25 @@ export class ProductScene extends BaseScene<IProductSceneProps, IState> {
 
     protected onBackPress() {
         this.props.AppState.resetMinor()
-        NavigationHandler.pop()
+        NavigationActions.pop()
         return true
     }
 
     private renderOptionsPart(): JSX.Element {
         return (
             <RTLAwareView style={Styles.optionsContainer}>
-                <SafeTouch style={Styles.optionSafeTouch}>
-                    <MaterialIcon name='comment' size={32 * Dimension.scaleX} color={Colors.creamDark} />
+                <SafeTouch
+                    onPress={() => SceneParams.CommentsScene.navigate({
+                        museumId: this.props.AppState.getStore().id,
+                        productId: this.props.AppState.getCurrentProduct().id
+                    })}
+                    style={Styles.optionSafeTouch}
+                >
+                    <MaterialIcon
+                        name='comment'
+                        size={32 * Dimension.scaleX}
+                        color={Colors.creamDark}
+                    />
                 </SafeTouch> 
 
                 <View style={Styles.optionsButtonDivider} />
