@@ -6,7 +6,6 @@ import * as Animatable from 'react-native-animatable'
 import { DomainViewModel } from '../../classes/DomainViewModel'
 import { AppInfoTab } from '../../components/app_info_tab/AppInfoTab'
 import { BaseText } from '../../components/base_text/BaseText'
-import { CategoryFilter } from '../../components/category_filter/CategoryFilter'
 import { SafeTouch } from '../../components/safe_touch/SafeTouch'
 import { Colors, NetworkConfig } from '../../Constants'
 import { Dimension, GlobalStyles } from '../../GlobalStyles'
@@ -68,7 +67,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                     paddingVertical: Dimension.collapsedTabHeight
                 }}
             >
-                {this.renderBeacons()}
+                {/* {this.renderBeacons()} */}
                 <StoreInfo {...this.props.AppState.getStore()} />
             </View>
         )
@@ -120,7 +119,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                         <Animatable.View animation={'fadeInRight'} useNativeDriver={true}>
                             <BaseText
                                 style={Styles.productsTabBackgroundTitle}
-                                text={this.props.AppState.getStore()?.storeName}
+                                text={this.props.AppState.getStore()?.name}
                             />
                         </Animatable.View>
                     </View>
