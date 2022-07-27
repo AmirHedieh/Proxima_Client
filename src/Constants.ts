@@ -51,7 +51,7 @@ export const NetworkConfig = {
     apiBaseUrl: 'http://192.168.1.4:8000/api/v1/',
     httpAPIBaseUrl: 'http://192.168.1.4:8000/api/v1/',
     maxRetry: 3,
-    httpRequestTimeout: 2000,
+    httpRequestTimeout: 5000,
     maxConcurrentConnections: 1,
     localServerPictureBaseUrl: 'http://192.168.1.4:8000/storage/'
 }
