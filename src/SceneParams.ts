@@ -1,4 +1,5 @@
 import { NavigationActions } from './NavigationActions'
+import { ICommentsSceneProps } from './scenes/comments_scene/CommentsScene'
 import { IMinimalProductSceneProps } from './scenes/minimal_product_scene/MinimalProductScene'
 
 export const SceneParams = {
@@ -37,5 +38,11 @@ export const SceneParams = {
         navigate: () => {
             NavigationActions.push(SceneParams.ProductScene.name)
         }
-    }
+    },
+    CommentsScene: {
+        name: 'CommentsScene',
+        navigate: (params: ICommentsSceneProps) => {
+            NavigationActions.push(SceneParams.CommentsScene.name, params)
+        }
+    },
 }

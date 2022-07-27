@@ -10,8 +10,8 @@ import { RequirementDialog } from './components/requirement_dialog/RequirementDi
 import { EnvironmentVariables } from './Constants'
 import { stores } from './mobx/RootStore'
 import { SceneParams } from './SceneParams'
+import { CommentsScene } from './scenes/comments_scene/CommentsScene'
 import { FakeScene } from './scenes/FakeScene/FakeScene'
-import { HomeScene } from './scenes/home_scene/HomeScene'
 import { LookingStoreScene } from './scenes/LookingStoreScene.tsx/LookingStoreScene'
 import { MinimalProductScene } from './scenes/minimal_product_scene/MinimalProductScene'
 import { ProductScene } from './scenes/product_scene/ProductScene'
@@ -51,6 +51,7 @@ const scenes = Actions.create(
         <Scene key={SceneParams.MinimalProductScene.name} component={MinimalProductScene} />
         <Scene key={SceneParams.StoreInfoScene.name} component={StoreInfoScene} />
         <Scene key={SceneParams.ProductScene.name} component={ProductScene} />
+        <Scene key={SceneParams.CommentsScene.name} component={CommentsScene} />
         <Scene key={'fake'} component={FakeScene} />
     </Scene>
 )
