@@ -3,16 +3,19 @@ import * as React from 'react'
 import { Image, ScrollView, View } from 'react-native'
 import Swiper from 'react-native-swiper'
 import { DomainViewModel } from '../../classes/DomainViewModel'
+import { NavigationHandler } from '../../classes/NavigationHandler'
 import { BaseText } from '../../components/base_text/BaseText'
 import { RTLAwareView } from '../../components/rtl_aware/RTLAwareView'
 import { SafeTouch } from '../../components/safe_touch/SafeTouch'
 import { Colors, NetworkConfig } from '../../Constants'
 import { NavigationActions } from '../../NavigationActions'
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { AttributeCard } from '../../RFC/AttributeCard/AttributeCard'
 import { Localization } from '../../text_process/Localization'
 import { CommonValidator } from '../../utils/Validator'
 import { BaseScene, IBaseSceneState } from '../base_scene/BaseScene'
 import { Styles } from './ProductSceneStyles'
+import { Dimension } from '../../GlobalStyles'
 
 export interface IProductSceneProps {
     AppState?: DomainViewModel
@@ -25,12 +28,15 @@ interface IState extends IBaseSceneState {
 @inject('AppState')
 @observer
 export class ProductScene extends BaseScene<IProductSceneProps, IState> {
+    private beacons: any[]  = []
+
     protected renderSafe(): JSX.Element {
         if (this.props.AppState.getCurrentProduct() == null) {
             return null
         }
         return (
             <View style={Styles.root}>
+                {/* {this.renderBeacons()} */}
                 <ScrollView>
                     <Swiper
                         containerStyle={Styles.swiper}
@@ -77,14 +83,52 @@ export class ProductScene extends BaseScene<IProductSceneProps, IState> {
                         {this.renderDescription()}
                     </View>
                 </ScrollView>
+                {this.renderOptionsPart()}
             </View>
         )
     }
 
+    private renderBeacons() {
+        const views = []
+        for (const element of this.props.AppState.getBeacons()) {
+            this.beacons[`key${element.major}${element.minor}`] = element
+        }
+        for (const key in this.beacons) {
+            views.push (
+                <View style={{marginTop: 16}}>
+                    <BaseText text={`${this.beacons[key].major} ${this.beacons[key].minor} --> ${this.beacons[key].rssi} || ${this.beacons[key].distance}`}/>
+                </View>
+            )
+        }
+        return views
+    }
+
     protected onBackPress() {
         this.props.AppState.resetMinor()
-        NavigationActions.pop()
+        NavigationHandler.pop()
         return true
+    }
+
+    private renderOptionsPart(): JSX.Element {
+        return (
+            <RTLAwareView style={Styles.optionsContainer}>
+                <SafeTouch style={Styles.optionSafeTouch}>
+                    <MaterialIcon name='comment' size={32 * Dimension.scaleX} color={Colors.creamDark} />
+                </SafeTouch> 
+
+                <View style={Styles.optionsButtonDivider} />
+
+                <SafeTouch style={Styles.optionSafeTouch}>
+                    <MaterialIcon name='photo-library' size={32 * Dimension.scaleX} color={Colors.creamDark} />
+                </SafeTouch>
+
+                <View style={Styles.optionsButtonDivider} />
+
+                <SafeTouch style={Styles.optionSafeTouch}>
+                    <MaterialIcon name='video-library' size={32 * Dimension.scaleX} color={Colors.creamDark} />
+                </SafeTouch>
+            </RTLAwareView>
+        )
     }
 
     private renderAttributes(): JSX.Element[] {

@@ -2,6 +2,8 @@ import { StyleSheet } from 'react-native'
 import { Colors } from '../../Constants'
 import { Dimension, Fonts, FontSizes, GlobalStyles } from '../../GlobalStyles'
 
+const bottomTabHeightOffset: number = 16 * Dimension.scaleY
+
 export const Styles = StyleSheet.create({
     backButton: {
         position: 'absolute',
@@ -28,7 +30,7 @@ export const Styles = StyleSheet.create({
     root: {
         flex: 1,
         backgroundColor: Colors.milky,
-        paddingBottom: Dimension.collapsedTabHeight
+        paddingBottom: Dimension.collapsedTabHeight + bottomTabHeightOffset
     },
     swiper: {
         width: '100%',
@@ -87,25 +89,22 @@ export const Styles = StyleSheet.create({
     },
     optionsContainer: {
         width: '100%',
-        height: Dimension.collapsedTabHeight,
+        height: Dimension.collapsedTabHeight - bottomTabHeightOffset,
         backgroundColor: Colors.creamLight,
         position: 'absolute',
         alignItems: 'center',
         bottom: 0
     },
-    optionsButtonSafeTouch: {
+    optionSafeTouch: {
         flex: 1,
+        flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center'
     },
     optionsButtonDivider: {
         width: 1 * Dimension.scaleX,
-        height: Dimension.collapsedTabHeight - 16 * Dimension.scaleY,
+        height: Dimension.collapsedTabHeight - bottomTabHeightOffset - 16 * Dimension.scaleY,
         backgroundColor: Colors.creamMedium2
-    },
-    optionsButtonText: {
-        fontSize: FontSizes.h2,
-        fontFamily: Fonts.persian.vazirMedium
     },
     expandCollapseText: {
         color: Colors.creamDark,
