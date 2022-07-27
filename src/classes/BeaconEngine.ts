@@ -127,22 +127,17 @@ export class BeaconEngine {
     }
 
     private processMinor(sortedBeacons: IBeacon[]): void {
-        if (sortedBeacons.length) {
-            // let str = ''
-            // for (const element of sortedBeacons) {
-            //     str += element.minor + ': ' + element.rssi + ' | '
-            // }
-            // console.log(sortedBeacons)
-        }
-        if (sortedBeacons.length === 0 || Math.abs(sortedBeacons[0].distance) > 1) {
+        if (sortedBeacons.length === 0 || Math.abs(sortedBeacons[0].distance) > 0.75) {
+            console.log('added null')
             this.minorRepeatDetector.addToData(null)
         } else {
             this.minorRepeatDetector.addToData(sortedBeacons[0].minor)
         }
+        console.log(this.minorRepeatDetector.isDataRepeated())
         if (this.minorRepeatDetector.isDataRepeated().isRepeated) {
-            if (this.minorRepeatDetector.isDataRepeated().repeatedValue === null) {
-                return
-            }
+            // if (this.minorRepeatDetector.isDataRepeated().repeatedValue === null) {
+            //     return
+            // }
             if (this.minor !== this.minorRepeatDetector.isDataRepeated().repeatedValue) {
                 if (this.onMinorChange && this.isMajorReady) {
                     console.log('minor changed')

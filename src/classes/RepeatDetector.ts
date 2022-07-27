@@ -16,6 +16,11 @@ export class RepeatDetector {
         this.numberOfRepeats = numberOfRepeats
     }
 
+    public reset(): void {
+        this.data = []
+        this.nullDataCounter = 0
+    }
+
     public addToData(value: number) {
         if (value === null) {
             this.nullDataCounter++

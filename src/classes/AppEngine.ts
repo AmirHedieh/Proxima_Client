@@ -96,9 +96,24 @@ export class AppEngine {
         }
         this.detectionState = 'NO_STORE_NO_BEACON'
         this.store = null
+        this.currentProduct = null
     }
 
     private minorChange = async (major:number, minor: number) => {
+        console.log('minor', minor)
+        if (minor === null) {
+            // user was in store and was near beacon
+            if (this.detectionState === 'FOUND_STORE_FOUND_BEACON') {
+                this.detectionState = 'FOUND_STORE_NO_BEACON'
+                this.currentProduct = null
+            }
+            // user was not in store
+            if (this.detectionState === 'NO_STORE_NO_BEACON') {
+                this.currentProduct = null
+            }
+            return
+        }
+        console.log(this.detectionState)
         console.log('sending "get product" minor', minor)
         const response = await HttpManager.getInstance().getProducts({
             museumId: major,
@@ -108,18 +123,6 @@ export class AppEngine {
         if (response.getData()) {
             this.currentProduct = new Product(response.getData())
             this.detectionState = 'FOUND_STORE_FOUND_BEACON'
-            return
-        }
-        /** codes reach here if product is null */
-        // user was not in store
-        if (this.detectionState === 'NO_STORE_NO_BEACON') {
-            this.currentProduct = null
-            return
-        }
-        // user was in store and was near beacon
-        if (this.detectionState === 'FOUND_STORE_FOUND_BEACON') {
-            this.detectionState = 'FOUND_STORE_NO_BEACON'
-            this.currentProduct = null
             return
         }
     }
