@@ -35,6 +35,7 @@ export const Fa = {
     editStoreInfoStoreInfoScene: 'ویرایش',
     informationStoreInfoScene: 'اطلاعات',
     noPictureStoreInfoScene: 'بدون عکس',
+    getCloseToItemStoreInfoScene: 'به نزدیکی آیتم ها بروید',
 
     /** MinimalProductScene */
     noteTitleMinimalProductScene: 'توجه',
