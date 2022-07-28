@@ -19,7 +19,17 @@ const infoIconSize: number = 29 * Dimension.scaleX
 interface IProps extends IMuseum {
 }
 export const StoreInfo: React.FunctionComponent<IProps> = (props: IProps): JSX.Element => {
-    const onWebsitePress = () => {
+    const onPhoneNumberPress = () => {
+        const url = `tel:${props.phoneNumber}`
+        Linking.canOpenURL(url).then(supported => {
+          if (supported) {
+            Linking.openURL(url);
+          } else {
+            console.warn("Don't know how to open URI: " + url);
+          }
+        });
+    }
+      const onWebsitePress = () => {
         const url = `https://${props.website}`
         Linking.canOpenURL(url).then(supported => {
           if (supported) {
@@ -68,11 +78,11 @@ export const StoreInfo: React.FunctionComponent<IProps> = (props: IProps): JSX.E
 
             <View style={Styles.smallSpacer} />
 
-            <View style={Styles.rowCenterView}>
+            <SafeTouch style={Styles.rowCenterView} onPress={onPhoneNumberPress}>
                 <MaterialIcon name='phone' size={infoIconSize} />
                 <View style={GlobalStyles.spacer} />
                 <BaseText style={Styles.phoneNumber} text={props.phoneNumber} />
-            </View>
+            </SafeTouch>
 
             <View style={Styles.mediumSpacer} />
 

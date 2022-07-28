@@ -58,7 +58,7 @@ export class StoreInfoScene extends BaseScene<IProductSceneProps, IProductSceneS
                     paddingVertical: Dimension.collapsedTabHeight
                 }}
             >
-                {/* {this.renderBeacons()} */}
+                {this.renderBeacons()}
                 <StoreInfo {...this.props.AppState.getStore()} />
             </View>
         )
