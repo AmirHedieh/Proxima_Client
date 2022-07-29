@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { Animated, FlatList, Image, ScrollView, View } from 'react-native'
+import { inject, observer } from 'mobx-react'
+import { FlatList, Image, View } from 'react-native'
 import { NavigationActions } from '../../NavigationActions'
 import { Localization } from '../../text_process/Localization'
 import { BaseScene } from '../base_scene/BaseScene'
@@ -16,12 +17,13 @@ import { RTLAwareView } from '../../components/rtl_aware/RTLAwareView'
 import { SafeTouch } from '../../components/safe_touch/SafeTouch'
 import { Dimension } from '../../GlobalStyles'
 import { Colors } from '../../Constants'
-import { EditText } from '../../components/edit_text/EditText'
 import * as Animatable from 'react-native-animatable'
+import { DomainViewModel } from '../../classes/DomainViewModel'
 
 export interface ICommentsSceneProps {
     museumId: number,
-    productId: number
+    productId: number,
+    AppState?: DomainViewModel
 }
 interface IState {
     comments: Comment[]
@@ -29,6 +31,8 @@ interface IState {
     textError: string
     isTabExpanded: boolean
 }
+@inject('AppState')
+@observer
 export class CommentsScene extends BaseScene<ICommentsSceneProps, IState> {
     private productsTabRef = null
     private flatListRef = null
@@ -42,8 +46,12 @@ export class CommentsScene extends BaseScene<ICommentsSceneProps, IState> {
         isTabExpanded: false,
     }
     
-    public async componentDidMount(): Promise<void> {
+    protected async sceneDidMount(): Promise<void> {
         await this.getComments()
+    }
+
+    protected async sceneWillUnmount(): Promise<void> {
+        await this.props.AppState.startDetecting()
     }
 
     protected renderSafe(): JSX.Element {

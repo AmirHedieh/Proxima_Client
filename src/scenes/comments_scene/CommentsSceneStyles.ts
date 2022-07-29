@@ -17,7 +17,7 @@ export const Styles = StyleSheet.create({
     },
     flatList: {
         // flex: 1
-        // paddingBottom: 32 * Dimension.scaleY
+        paddingBottom: 32 * Dimension.scaleY
     },
     flatListContainer: {
         flex: 1,

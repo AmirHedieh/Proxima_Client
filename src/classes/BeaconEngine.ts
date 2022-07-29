@@ -42,8 +42,8 @@ export class BeaconEngine {
     }
 
     public startDetecting(): Promise<boolean> {
-        this.major = -1
-        this.minor = -1
+        // this.major = -1
+        // this.minor = -1
         return this.beaconDetector.startDetecting('')
     }
 

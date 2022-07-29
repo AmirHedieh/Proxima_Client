@@ -37,7 +37,7 @@ export class ProductScene extends BaseScene<IProductSceneProps, IState> {
         }
         return (
             <View style={Styles.root}>
-                {/* {this.renderBeacons()} */}
+                {this.renderBeacons()}
                 <ScrollView>
                     <Swiper
                         containerStyle={Styles.swiper}
@@ -114,10 +114,14 @@ export class ProductScene extends BaseScene<IProductSceneProps, IState> {
         return (
             <RTLAwareView style={Styles.optionsContainer}>
                 <SafeTouch
-                    onPress={() => SceneParams.CommentsScene.navigate({
-                        museumId: this.props.AppState.getStore().id,
-                        productId: this.props.AppState.getCurrentProduct().id
-                    })}
+                    onPress={() => {
+                            SceneParams.CommentsScene.navigate({
+                                museumId: this.props.AppState.getStore().id,
+                                productId: this.props.AppState.getCurrentProduct().id
+                            })
+                            this.props.AppState.stopDetecting()
+                        }
+                    }
                     style={Styles.optionSafeTouch}
                 >
                     <MaterialIcon
