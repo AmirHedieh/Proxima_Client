@@ -265,10 +265,8 @@ export class CommentsScene extends BaseScene<ICommentsSceneProps, IState> {
         try {
             this.loadingDialog.show()
             const response = await HttpManager.getInstance().getComments({
-                // museumId: this.props.museumId,
-                // productId: this.props.productId
-                museumId: 1,
-                productId: 4
+                museumId: this.props.museumId,
+                productId: this.props.productId
             })
             console.log(response)
             this.loadingDialog.hide()
