@@ -7,6 +7,7 @@ import { Product } from '../models/Product'
 import { CustomResponse } from '../network/CustomResponse'
 import { HttpManager } from '../network/HttpManager'
 import { DetectionState } from '../Types'
+import { CommonValidator } from '../utils/Validator'
 import { BeaconDetector, IBeaconDetector } from './BeaconDetector'
 import { BeaconEngine } from './BeaconEngine'
 import { INavigationHandler, NavigationHandler } from './NavigationHandler'
@@ -83,7 +84,7 @@ export class AppEngine {
         if (major) {
             console.log('sending "get museum" major', major)
             const response = await HttpManager.getInstance().getMuseum({
-                museumId: major
+                museumId: major //considering major & museim_Id are identical(the same)
             })
             console.log('get museum response', response)
             if (response.isSuccessful && response.getData()) {
@@ -115,13 +116,24 @@ export class AppEngine {
         }
         console.log(this.detectionState)
         console.log('sending "get product" minor', minor)
-        const response = await HttpManager.getInstance().getProducts({
-            museumId: major,
-            productId: minor
+        const beaconResponse = await HttpManager.getInstance().getBeacons({ // get beacon data
+            major,
+            minor
         })
-        console.log('get product response', response)
-        if (response.getData()) {
-            this.currentProduct = new Product(response.getData())
+        if (CommonValidator.isEmptyArray(beaconResponse.getData())) {
+            // no beacon with major, minor was found in back-end
+            console.log(`No Beacon with major: ${major} minor: ${minor} found`)
+            this.resetMinor()
+            return
+        } 
+        const beacon = beaconResponse.getData()[0]
+        const productResponse = await HttpManager.getInstance().getProducts({ // get corresponding product data
+            museumId: major,
+            productId: beacon.product_id
+        })
+        console.log('get product response', productResponse)
+        if (productResponse.getData()) {
+            this.currentProduct = new Product(productResponse.getData())
             this.detectionState = 'FOUND_STORE_FOUND_BEACON'
             return
         }

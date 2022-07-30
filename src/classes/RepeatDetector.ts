@@ -36,7 +36,7 @@ export class RepeatDetector {
     }
 
     public isDataRepeated(): IRepeated {
-        if (this.nullDataCounter >= 3 * this.numberOfRepeats) { // null repeated by multiple times of required repeat number
+        if (this.nullDataCounter > 3 * this.numberOfRepeats) { // null repeated by multiple times of required repeat number
             return {
                 isRepeated: true,
                 repeatedValue: null

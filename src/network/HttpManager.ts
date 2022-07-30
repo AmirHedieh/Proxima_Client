@@ -165,6 +165,14 @@ export class HttpManager {
         )
     }
 
+    
+    public getBeacons = async (params: { major?: number, minor?: number }): Promise<CustomResponse> => {
+        return new CustomResponse(
+            await this.axiosNoToken.get(`beacons`, params)
+        )
+    }
+
+
     // public uploadPhoto = async (data: FormData): Promise<CustomResponse> => {
     //     return new CustomResponse(await this.axiosFileUploader.post('http/v1.0/common/file/picture', data))
     // }
