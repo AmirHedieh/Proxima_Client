@@ -18,6 +18,7 @@ export const Styles = StyleSheet.create({
         fontFamily: Fonts.persian.vazirBold
     },
     infoText: {
+        paddingHorizontal: 16 * Dimension.scaleX,
         fontFamily: Fonts.persian.vazirMedium,
         textAlign: 'center'
     },

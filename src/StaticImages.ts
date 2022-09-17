@@ -5,4 +5,5 @@ export class StaticImages {
     public static upArrow = require('resources/images/arrow_up.png')
     public static connection = require('resources/images/connection.png')
     public static store = require('resources/images/store.png')
+    public static museum = require('resources/images/museum.png')
 }

@@ -29,8 +29,8 @@ export const Fa = {
     /** Store info scene */
     topBarTitleStoreInfoScene: 'پراکسیما',
     expandingTabTitleStoreInfoScene: 'محصولات',
-    searchingTitleStoreInfoScene: 'جستجوی نزدیک‌ترین فروشگاه',
-    goToStoreBottomTabStoreInfoScene: 'به نزدیکی یک فروشگاه بروید',
+    searchingTitleStoreInfoScene: 'جستجوی نزدیک‌ترین موزه',
+    goToStoreBottomTabStoreInfoScene: 'به نزدیکی یک موزه بروید',
     noProductFoundInCategoryStoreInfoScene: 'محصولی یافت نشد',
     editStoreInfoStoreInfoScene: 'ویرایش',
     informationStoreInfoScene: 'اطلاعات',
@@ -39,17 +39,17 @@ export const Fa = {
 
     /** MinimalProductScene */
     noteTitleMinimalProductScene: 'توجه',
-    noteMessageMinimalProductScene: 'برای مشاهده اطلاعات کامل محصول، به نزدیکی آن بروید.',
+    noteMessageMinimalProductScene: 'برای مشاهده اطلاعات کامل آیتم به نزدیکی آن بروید.',
 
     /** ProductScene */
-    bodyMaterialProductScene: 'بدنه',
-    clothMaterialProductScene: 'پوشش',
+    creatorProductScene: 'سازنده/هنرمند',
+    creationTimeProductScene: 'زمان ساخت',
 
     /** CategoryFilter */
     noMoreCategoriesCategoryFilter: 'دسته‌بندی دیگری موجود نیست',
 
     /** AppInfoCard */
-    wannaGetThisApplicationAppInfoCard: 'آیا مایل به تهیه محصول هستید؟',
+    wannaGetThisApplicationAppInfoCard: 'آیا مایل به تهیه سامانه هستید؟',
     phoneNumberAppInfoCard: 'تلفن',
     mobileNumberAppInfoCard: 'همراه',
     whyThisApplicationAppInfoCard: 'چرا پراکسیما',
@@ -63,5 +63,7 @@ export const Fa = {
      commentorPlaceHolderCommentCommentsScene: 'نام خود را اینجا وارد کنید',
      textPlaceHolderCommentCommentsScene: 'متن نظر خود را اینجا بنویسید',
      textCommentsScene: 'متن نظر',
+
+
      
 }
