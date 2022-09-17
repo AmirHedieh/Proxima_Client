@@ -67,7 +67,7 @@ export const Styles = StyleSheet.create({
         color: Colors.creamMedium2
     },
     creationTimeText: {
-        fontSize: FontSizes.h1,
+        fontSize: FontSizes.h2,
         paddingHorizontal: 8 * Dimension.scaleX
     },
     mediumHorizontalSpacer: {
@@ -84,7 +84,7 @@ export const Styles = StyleSheet.create({
         color: Colors.creamMedium2,
     },
     creatorText: {
-        fontSize: FontSizes.h1,
+        fontSize: FontSizes.h2,
         paddingHorizontal: 8 * Dimension.scaleX
     },
     optionsContainer: {

@@ -13,12 +13,13 @@ export const Styles = StyleSheet.create({
         borderRadius: 240 * Dimension.scaleX,
         alignItems: 'center',
         justifyContent: 'center',
+        paddingBottom: 20,
         borderWidth: 4 * Dimension.scaleX,
         borderColor: Colors.black
     },
     image: {
         width: 160 * Dimension.scaleX,
-        height: 122.5 * Dimension.scaleY
+        height: 180 * Dimension.scaleY
     },
     title: {
         fontSize: FontSizes.h2,

@@ -37,7 +37,7 @@ export class ProductScene extends BaseScene<IProductSceneProps, IState> {
         }
         return (
             <View style={Styles.root}>
-                {this.renderBeacons()}
+                {/* {this.renderBeacons()} */}
                 <ScrollView>
                     <Swiper
                         containerStyle={Styles.swiper}
@@ -194,6 +194,7 @@ export class ProductScene extends BaseScene<IProductSceneProps, IState> {
     private renderPictures(): JSX.Element[] {
         const pictures: JSX.Element[] = []
         for (const element of this.props.AppState.getCurrentProduct().pictures) {
+            console.log(element.url)
             pictures.push(
                 <Image
                     key={element.id}

@@ -17,7 +17,7 @@ export class SearchingStore extends React.Component {
                     iterationCount={'infinite'}
                     useNativeDriver={true}
                 >
-                    <Image style={Styles.image} source={StaticImages.store} />
+                    <Image style={Styles.image} source={StaticImages.museum} />
                 </Animatable.View>
                 <View style={Styles.mediumSpacer} />
                 <BaseText style={Styles.title} text={Localization.translate('searchingTitleStoreInfoScene')} />
